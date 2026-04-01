@@ -1326,6 +1326,25 @@ S.t6=`<div class="card">
 </svg>
 </div>
 
+
+<h3>🚨 نظام المقاطعة (Interrupt System) — تفاعلي</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">انقر على أي جهاز لترى كيف تُرسَل المقاطعة وكيف يُعالجها CPU خطوة بخطوة</p>
+<div class="inter-box">
+  <div class="inter-title">⚡ محاكي نظام المقاطعة — Interrupt System</div>
+  <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem">
+    <span style="font-size:.75rem;color:#94a3b8;align-self:center">اختر الجهاز المُسبّب للمقاطعة:</span>
+    <button class="btn btn-pu" onclick="irqFire('keyboard')">⌨️ كيبورد</button>
+    <button class="btn btn-gr" onclick="irqFire('disk')">💾 قرص صلب</button>
+    <button class="btn btn-or" onclick="irqFire('network')">📡 شبكة</button>
+    <button class="btn btn-yl" onclick="irqFire('timer')">⏱️ مؤقت</button>
+    <button class="btn btn-yl" onclick="irqReset()">↺ إعادة</button>
+  </div>
+  <canvas id="irqCanvas" width="620" height="260"
+    style="background:#0a0f1e;border-radius:8px;max-width:100%;border:1px solid #1f2937"></canvas>
+  <div id="irq-info" style="margin-top:.4rem;background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:.5rem;font-size:.78rem;min-height:40px;color:#e2e8f0">
+    👆 انقر على أي جهاز لرؤية كيف تعمل المقاطعة
+  </div>
+</div>
 <div class="cb g"><div class="lb gr">⭐ DMA — الوصول المباشر للذاكرة</div>
 بدون DMA: الجهاز → CPU → RAM (CPU مشغول!)<br>
 مع DMA: الجهاز → RAM مباشرة (CPU حر للعمل بمهام أخرى) ← أسرع وأكفأ!
@@ -1485,133 +1504,247 @@ S.quiz=`<div class="card">
 
 
 S.tg=`<div class="card">
-<h2 style="color:#f87171">🎮 ألعاب تعليمية — راجع المنهج بالمرح!</h2>
-<div class="tip" style="border-color:#f87171;background:rgba(248,113,113,.04)">
-🏆 5 ألعاب تفاعلية تغطي كامل مفاهيم نظم التشغيل — العب وتعلم في نفس الوقت!
+<h2 style="color:#f87171">🎮 ألعاب تعليمية شاملة — 15 لعبة تغطي كامل المقرر!</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem;margin-bottom:.7rem">
+  <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:6px;padding:.4rem;font-size:.72rem;color:#f87171;text-align:center">⚙️ CPU & Memory<br><span style="color:#64748b">5 ألعاب</span></div>
+  <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:6px;padding:.4rem;font-size:.72rem;color:#34d399;text-align:center">🔗 العمليات & IPC<br><span style="color:#64748b">5 ألعاب</span></div>
+  <div style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:6px;padding:.4rem;font-size:.72rem;color:#818cf8;text-align:center">💾 I/O & OS بنية<br><span style="color:#64748b">5 ألعاب</span></div>
 </div>
 
-<!-- ════════ GAME 1: Boot Sequence ════════ -->
-<div class="inter-box" style="margin-top:1.2rem">
-<div class="inter-title">⚡ لعبة 1 — رتّب مراحل الإقلاع!</div>
-<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">انقر على المراحل بالترتيب الصحيح من الأول للأخير: من لحظة الضغط على زر التشغيل حتى سطح المكتب</p>
-<div id="bs-score" style="font-size:.78rem;color:#fbbf24;margin-bottom:.4rem">النقاط: 0 | الصح: 0 | الخطأ: 0</div>
-<div id="bs-cards" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem"></div>
-<div id="bs-done" style="display:flex;gap:.4rem;flex-wrap:wrap;min-height:42px;background:rgba(52,211,153,.05);border:1px dashed rgba(52,211,153,.3);border-radius:8px;padding:.3rem;margin-bottom:.4rem">
-  <span style="font-size:.72rem;color:#334155;align-self:center">الترتيب الصحيح ←</span>
-</div>
-<div class="btn-row">
-  <button class="btn btn-gr" onclick="bsStart()">🔀 خلط جديد</button>
-  <button class="btn btn-yl" onclick="bsReset()">↺ إعادة</button>
-</div>
-<div id="bs-msg" style="font-size:.78rem;min-height:22px;margin-top:.3rem"></div>
-</div>
+<!-- ═══ CPU & MEMORY ═══════════════════════════════════════════ -->
+<div style="font-size:.78rem;font-weight:800;color:#f87171;margin:.7rem 0 .3rem;border-bottom:1px solid rgba(248,113,113,.2);padding-bottom:.2rem">⚙️ CPU والذاكرة</div>
 
-<!-- ════════ GAME 2: Concept Match ════════ -->
-<div class="inter-box" style="margin-top:1.2rem">
-<div class="inter-title">🃏 لعبة 2 — طابق المفهوم مع تعريفه!</div>
-<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">انقر على المصطلح ثم على تعريفه المناسب — أسرع 8 مطابقات تفوز!</p>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-  <div id="cm-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | متبقي: 8</div>
-  <div id="cm-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱ 60s</div>
-  <button class="btn btn-gr" onclick="cmStart()">▶ ابدأ</button>
-    <button class="btn btn-yl" onclick="cmStart()">↺ إعادة</button>
-    <button class="btn btn-re" onclick="cmStop()">⏹ إيقاف</button>
-</div>
-<div id="cm-board" style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem"></div>
-<div id="cm-msg" style="font-size:.78rem;min-height:20px;margin-top:.3rem;color:#34d399"></div>
-</div>
+<!-- GAME 1: Boot Sequence -->
+<div class="inter-box"><div class="inter-title">⚡ 1 — رتّب مراحل الإقلاع!</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">انقر المراحل من الأول للأخير: Power On → Desktop</p>
+<div id="bs-score" style="font-size:.75rem;color:#fbbf24;margin-bottom:.3rem">نقاط: 0</div>
+<div id="bs-cards" style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.4rem"></div>
+<div id="bs-done" style="display:flex;gap:.3rem;flex-wrap:wrap;min-height:36px;background:rgba(52,211,153,.05);border:1px dashed rgba(52,211,153,.3);border-radius:6px;padding:.25rem"><span style="font-size:.68rem;color:#334155;align-self:center">الترتيب الصحيح ←</span></div>
+<div class="btn-row" style="margin-top:.4rem"><button class="btn btn-gr" onclick="bsStart()">🔀 ابدأ</button><button class="btn btn-yl" onclick="bsReset()">↺</button><button class="btn btn-re" onclick="bsStop()">⏹</button></div>
+<div id="bs-msg" style="font-size:.74rem;min-height:18px;margin-top:.2rem"></div></div>
 
-<!-- ════════ GAME 3: True/False Blitz ════════ -->
-<div class="inter-box" style="margin-top:1.2rem">
-<div class="inter-title">⚡ لعبة 3 — صح أم خطأ؟ (Blitz!)</div>
-<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">8 ثوانٍ لكل سؤال — صح أم خطأ؟ 15 سؤال عن نظم التشغيل</p>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-  <div id="tf-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 / 15</div>
-  <div id="tf-timer" style="font-size:1.1rem;color:#f87171;font-weight:900">⏱</div>
-  <div id="tf-num" style="font-size:.75rem;color:#94a3b8">السؤال: -</div>
+<!-- GAME 2: CPU Cycle -->
+<div class="inter-box"><div class="inter-title">🔬 2 — دورة CPU: Fetch→Decode→Execute</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">اضغط الخطوات بالترتيب الصحيح لتنفيذ التعليمة</p>
+<div id="cpu-score" style="font-size:.75rem;color:#fbbf24;margin-bottom:.3rem">نقاط: 0 | تعليمة: 0/5</div>
+<div id="cpu-inst" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:6px;padding:.4rem;text-align:center;font-family:monospace;font-size:.8rem;color:#fbbf24;margin-bottom:.4rem;direction:ltr;min-height:36px">اضغط ابدأ!</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;margin-bottom:.4rem">
+  <button id="cpu-btn0" onclick="cpuStep(0)" class="btn" disabled style="padding:.45rem .1rem;background:rgba(248,113,113,.1);border:2px solid rgba(248,113,113,.3);color:#f87171;border-radius:7px;font-size:.72rem;font-weight:800;font-family:inherit">📥 Fetch<br><span style="font-size:.6rem;color:#64748b;font-weight:400">جلب</span></button>
+  <button id="cpu-btn1" onclick="cpuStep(1)" class="btn" disabled style="padding:.45rem .1rem;background:rgba(251,146,60,.1);border:2px solid rgba(251,146,60,.3);color:#fb923c;border-radius:7px;font-size:.72rem;font-weight:800;font-family:inherit">🔍 Decode<br><span style="font-size:.6rem;color:#64748b;font-weight:400">فك ترميز</span></button>
+  <button id="cpu-btn2" onclick="cpuStep(2)" class="btn" disabled style="padding:.45rem .1rem;background:rgba(52,211,153,.1);border:2px solid rgba(52,211,153,.3);color:#34d399;border-radius:7px;font-size:.72rem;font-weight:800;font-family:inherit">⚡ Execute<br><span style="font-size:.6rem;color:#64748b;font-weight:400">تنفيذ</span></button>
+  <button id="cpu-btn3" onclick="cpuStep(3)" class="btn" disabled style="padding:.45rem .1rem;background:rgba(129,140,248,.1);border:2px solid rgba(129,140,248,.3);color:#818cf8;border-radius:7px;font-size:.72rem;font-weight:800;font-family:inherit">💾 Write<br><span style="font-size:.6rem;color:#64748b;font-weight:400">حفظ</span></button>
 </div>
-<div id="tf-q" style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:8px;padding:.7rem;font-size:.85rem;margin-bottom:.5rem;min-height:48px;text-align:center;color:#e2e8f0">
-  اضغط "ابدأ" للبدء!
-</div>
-<div style="display:flex;gap:.6rem;justify-content:center;margin-bottom:.4rem">
-  <button class="btn btn-gr" id="btn-true" onclick="tfAnswer(true)" disabled style="font-size:1rem;padding:.5rem 2rem">✅ صح</button>
-  <button class="btn btn-re" id="btn-false" onclick="tfAnswer(false)" disabled style="font-size:1rem;padding:.5rem 2rem">❌ خطأ</button>
-</div>
-<div class="btn-row"><button class="btn btn-pu" onclick="tfStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="tfStart()">↺ إعادة</button><button class="btn btn-re" onclick="tfStop()">⏹ إيقاف</button></div>
-<div id="tf-feedback" style="font-size:.78rem;min-height:20px;margin-top:.2rem;text-align:center"></div>
-</div>
+<div id="cpu-pipeline" style="display:flex;gap:.25rem;background:#0d1117;border-radius:5px;padding:.35rem;align-items:center;margin-bottom:.25rem"></div>
+<div class="btn-row"><button class="btn btn-gr" onclick="cpuStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="cpuStart()">↺</button><button class="btn btn-re" onclick="cpuStop()">⏹</button></div>
+<div id="cpu-msg" style="font-size:.73rem;text-align:center;min-height:18px;color:#34d399"></div></div>
 
-<!-- ════════ GAME 4: OS Type Detective ════════ -->
-<div class="inter-box" style="margin-top:1.2rem">
-<div class="inter-title">🕵️ لعبة 4 — حدّد نوع نظام التشغيل!</div>
-<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">اقرأ الوصف وحدد هل هو: Batch / Time Sharing / Real-Time / Distributed / Multiprocessor</p>
-<div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
-  <div id="os-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | جولة: 0/10</div>
-  <button class="btn btn-gr" onclick="osStart()">▶ ابدأ</button>
-    <button class="btn btn-yl" onclick="osStart()">↺ إعادة</button>
-    <button class="btn btn-re" onclick="osStop()">⏹ إيقاف</button>
+<!-- GAME 3: Stack Push/Pop -->
+<div class="inter-box"><div class="inter-title">📚 3 — المكدس (Stack) — LIFO!</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">شاهد مبدأ Last-In First-Out — ادفع وسحب من المكدس وتوقع القيمة الموجودة في القمة!</p>
+<div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap">
+  <input id="stk-val" type="number" value="42" min="0" max="99" style="width:55px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:5px;padding:.25rem .4rem;font-size:.8rem;text-align:center"/>
+  <button class="btn btn-gr" onclick="stkPush()">📥 PUSH</button>
+  <button class="btn btn-or" onclick="stkPop()">📤 POP</button>
+  <button class="btn btn-pu" onclick="stkPeek()">👁️ PEEK</button>
+  <button class="btn btn-yl" onclick="stkReset()">↺</button>
+  <span id="stk-ptr" style="font-size:.75rem;color:#94a3b8">SP = -1 (فارغ)</span>
 </div>
-<div id="os-scenario" style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:.7rem;font-size:.85rem;min-height:52px;margin-bottom:.4rem;color:#e2e8f0;text-align:center">
-  اضغط "ابدأ" لبدء اللعبة!
+<div style="display:flex;gap:.5rem;align-items:flex-end">
+  <div id="stk-visual" style="display:flex;flex-direction:column-reverse;gap:3px;min-width:80px;min-height:160px;background:#0d1117;border:1px solid #334155;border-radius:8px;padding:4px;align-items:center;justify-content:flex-start"></div>
+  <div style="flex:1">
+    <div id="stk-info" style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:6px;padding:.5rem;font-size:.75rem;min-height:80px;color:#e2e8f0">اضغط PUSH لإضافة عنصر للمكدس!</div>
+    <div id="stk-challenge" style="margin-top:.4rem;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:6px;padding:.4rem;font-size:.74rem;min-height:36px"></div>
+  </div>
 </div>
-<div id="os-choices" style="display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;margin-bottom:.4rem"></div>
-<div id="os-msg" style="font-size:.78rem;min-height:20px;text-align:center"></div>
-</div>
+<div id="stk-msg" style="font-size:.74rem;margin-top:.3rem;color:#34d399;min-height:18px"></div></div>
 
-<!-- ════════ GAME 5: Memory Survivor ════════ -->
-<div class="inter-box" style="margin-top:1.2rem">
-<div class="inter-title">🧠 لعبة 5 — أنقذ الذاكرة! (Memory Survivor)</div>
-<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">العمليات تصل باستمرار وتحتاج ذاكرة — اضغط "احرر" قبل امتلاء الذاكرة! لكل 10 ثوانٍ تعيش تحصل على نقطة</p>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-  <div id="ms-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | مستوى: 1</div>
-  <div id="ms-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱ 0s</div>
+<!-- GAME 4: Memory Allocation -->
+<div class="inter-box"><div class="inter-title">📦 4 — لعبة تخصيص الذاكرة (Fragmentation)</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">خصّص ذاكرة للعمليات — شاهد التجزئة الداخلية والخارجية!</p>
+<div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem">
+  <span style="font-size:.74rem;color:#94a3b8">خوارزمية:</span>
+  <button class="btn btn-gr" id="ma-ff" onclick="setMemAlgo('ff')" style="border-width:2px">First Fit</button>
+  <button class="btn btn-pu" id="ma-bf" onclick="setMemAlgo('bf')">Best Fit</button>
+  <button class="btn btn-or" id="ma-wf" onclick="setMemAlgo('wf')">Worst Fit</button>
+</div>
+<div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.4rem">
+  <button class="btn btn-gr" onclick="maAlloc(1)">➕ صغير (100MB)</button>
+  <button class="btn btn-yl" onclick="maAlloc(2)">➕ متوسط (200MB)</button>
+  <button class="btn btn-or" onclick="maAlloc(3)">➕ كبير (300MB)</button>
+  <button class="btn btn-re" onclick="maFree()">🗑️ حرر عشوائية</button>
+  <button class="btn btn-yl" onclick="maReset()">↺</button>
+</div>
+<div id="ma-grid" style="display:flex;gap:2px;height:50px;border:1px solid #1f2937;border-radius:6px;overflow:hidden;background:#0d1117;padding:3px"></div>
+<div id="ma-legend" style="display:flex;gap:.3rem;flex-wrap:wrap;font-size:.68rem;margin:.3rem 0"></div>
+<div id="ma-stats" style="font-size:.74rem;color:#94a3b8;background:rgba(0,0,0,.3);border-radius:5px;padding:.3rem;font-family:monospace"></div></div>
+
+<!-- GAME 5: Memory Survivor -->
+<div class="inter-box"><div class="inter-title">🧠 5 — أنقذ الذاكرة! (Memory Survivor)</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">أطول ما تصمد = نقاط أكثر — احرر ذاكرة قبل الامتلاء!</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;flex-wrap:wrap;gap:.3rem">
+  <div id="ms-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0</div>
+  <div id="ms-timer" style="font-size:.8rem;color:#f87171;font-weight:800">⏱ 0s</div>
   <div class="btn-row" style="margin:0">
     <button class="btn btn-gr" onclick="msStart()">▶ ابدأ</button>
-    <button class="btn btn-re" onclick="msFree()">🗑️ احرر عملية</button>
-    <button class="btn btn-yl" onclick="msRestart()">↺ إعادة</button>
-    <button class="btn btn-re" onclick="msStop()">⏹ إيقاف</button>
+    <button class="btn btn-re" onclick="msFree()">🗑️ احرر</button>
+    <button class="btn btn-yl" onclick="msRestart()">↺</button>
+    <button class="btn btn-re" onclick="msStop()">⏹</button>
   </div>
 </div>
-<canvas id="msCanvas" width="580" height="130" style="background:#0a0f1e;border-radius:8px;max-width:100%;border:1px solid #1f2937"></canvas>
-<div id="ms-msg" style="font-size:.78rem;min-height:20px;margin-top:.3rem;color:#34d399;text-align:center"></div>
-</div>
+<canvas id="msCanvas" width="580" height="120" style="background:#0a0f1e;border-radius:7px;max-width:100%"></canvas>
+<div id="ms-msg" style="font-size:.74rem;min-height:18px;margin-top:.25rem;color:#34d399;text-align:center"></div></div>
 
-<!-- ════════ GAME 6: CPU Fetch-Decode-Execute ════════ -->
-<div class="inter-box" style="margin-top:1.2rem">
-<div class="inter-title">🔬 لعبة 6 — دورة المعالج: Fetch → Decode → Execute</div>
-<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">اضغط على كل خطوة بالترتيب الصحيح لتُنفّذ التعليمة. 5 تعليمات مختلفة. تعلّم كيف CPU يُنفّذ كل أمر!</p>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.3rem">
-  <div id="cpu-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | تعليمة: 0/5</div>
+<!-- ═══ العمليات & IPC ════════════════════════════════════════ -->
+<div style="font-size:.78rem;font-weight:800;color:#34d399;margin:.8rem 0 .3rem;border-bottom:1px solid rgba(52,211,153,.2);padding-bottom:.2rem">🔗 العمليات والتواصل بين العمليات</div>
+
+<!-- GAME 6: Process State Quiz -->
+<div class="inter-box"><div class="inter-title">🔄 6 — أين تذهب العملية؟ (حالات العملية)</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">اقرأ الوضع وحدد الحالة الجديدة للعملية. 10 سؤال، 5 ثوانٍ لكل سؤال!</p>
+<div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+  <div id="ps-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0 | جولة: 0/10</div>
+  <div id="ps-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱</div>
+  <button class="btn btn-gr" onclick="psStart()">▶ ابدأ</button>
+</div>
+<div id="ps-scenario" style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:7px;padding:.6rem;text-align:center;font-size:.82rem;color:#e2e8f0;min-height:44px;margin-bottom:.4rem">اضغط ابدأ!</div>
+<div id="ps-choices" style="display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;margin-bottom:.3rem"></div>
+<div id="ps-msg" style="font-size:.74rem;text-align:center;min-height:18px"></div></div>
+
+<!-- GAME 7: Semaphore P/V -->
+<div class="inter-box"><div class="inter-title">🔒 7 — Semaphore P() و V() — امنع التضارب!</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">3 عمليات تريد الدخول للمنطقة الحرجة — طبّق P() و V() لمنع Race Condition!</p>
+<div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem">
+  <span style="font-size:.75rem;color:#fbbf24">Semaphore: <b id="sem-val" style="font-size:1rem">1</b></span>
+  <button class="btn btn-gr" onclick="semOp('P',0)">P() على P1 (Wait)</button>
+  <button class="btn btn-or" onclick="semOp('P',1)">P() على P2</button>
+  <button class="btn btn-pu" onclick="semOp('P',2)">P() على P3</button>
+  <button class="btn btn-re" onclick="semOp('V',-1)">V() (Signal)</button>
+  <button class="btn btn-yl" onclick="semReset()">↺</button>
+</div>
+<canvas id="semCanvas" width="580" height="150" style="background:#0a0f1e;border-radius:7px;max-width:100%"></canvas>
+<div id="sem-msg" style="font-size:.74rem;margin-top:.3rem;min-height:18px;color:#e2e8f0"></div></div>
+
+<!-- GAME 8: Producer Consumer -->
+<div class="inter-box"><div class="inter-title">🏭 8 — المنتج والمستهلك (Producer-Consumer)</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">أنتج واستهلك من Buffer مشترك — جرّب مع وبدون تزامن!</p>
+<div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem">
+  <button class="btn btn-gr" onclick="pcProduce()" id="btn-produce">📦 أنتج</button>
+  <button class="btn btn-pu" onclick="pcConsume()" id="btn-consume">🛒 استهلك</button>
+  <button class="btn btn-or" onclick="pcToggleSync()" id="btn-sync" style="border-width:2px">🔒 تزامن: مُفعّل</button>
+  <button class="btn btn-yl" onclick="pcReset()">↺</button>
+  <span id="pc-status" style="font-size:.74rem;color:#34d399">Buffer: 0/5</span>
+</div>
+<div style="display:flex;gap:.5rem;align-items:center;justify-content:center;margin-bottom:.3rem">
+  <div style="text-align:center;font-size:.7rem;color:#34d399"><div style="font-size:1.1rem">🏭</div>P أنتج: <span id="pc-prod-count">0</span></div>
+  <div id="pc-buffer" style="display:flex;gap:3px;background:#0d1117;border:2px solid #334155;border-radius:7px;padding:.35rem;min-width:160px;height:42px;align-items:center"></div>
+  <div style="text-align:center;font-size:.7rem;color:#818cf8"><div style="font-size:1.1rem">🛒</div>C استهلك: <span id="pc-cons-count">0</span></div>
+</div>
+<div id="pc-log" style="background:#000;border-radius:5px;padding:.35rem;font-size:.68rem;font-family:monospace;max-height:70px;overflow-y:auto;color:#94a3b8">انتظار...</div></div>
+
+<!-- GAME 9: System Call Tracer -->
+<div class="inter-box"><div class="inter-title">📞 9 — تتبع System Call</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">من الـ App إلى العتاد — رتّب خطوات System Call بالترتيب الصحيح!</p>
+<div id="sc-score" style="font-size:.75rem;color:#fbbf24;margin-bottom:.3rem">نقاط: 0 | جولة: 0/5</div>
+<div id="sc-call" style="background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:6px;padding:.4rem;text-align:center;font-family:monospace;color:#38bdf8;font-size:.8rem;margin-bottom:.4rem;min-height:32px">اضغط ابدأ!</div>
+<div id="sc-cards" style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.3rem"></div>
+<div id="sc-done" style="display:flex;gap:.3rem;flex-wrap:wrap;min-height:32px;background:rgba(56,189,248,.04);border:1px dashed rgba(56,189,248,.2);border-radius:6px;padding:.25rem;margin-bottom:.25rem"><span style="font-size:.68rem;color:#334155;align-self:center">الترتيب ←</span></div>
+<div class="btn-row"><button class="btn btn-gr" onclick="scStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="scStart()">↺</button></div>
+<div id="sc-msg" style="font-size:.74rem;min-height:18px;margin-top:.2rem"></div></div>
+
+<!-- GAME 10: Pipe Direction -->
+<div class="inter-box"><div class="inter-title">🚰 10 — صح أم خطأ في الأنابيب؟</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">لكل سؤال، قرر: هل هذا صحيح عن Ordinary Pipe أم Named Pipe؟</p>
+<div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+  <div id="pipe-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0 | سؤال: 0/8</div>
+  <button class="btn btn-gr" onclick="pipeQStart()">▶ ابدأ</button>
+</div>
+<div id="pipe-q" style="background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2);border-radius:7px;padding:.55rem;text-align:center;font-size:.82rem;color:#e2e8f0;min-height:44px;margin-bottom:.4rem">اضغط ابدأ!</div>
+<div style="display:flex;gap:.5rem;justify-content:center;margin-bottom:.3rem">
+  <button class="btn btn-or" onclick="pipeQAns('ordinary')" id="btn-pipe-ord" disabled style="font-size:.85rem;padding:.4rem 1.2rem">🔧 Ordinary Pipe</button>
+  <button class="btn btn-pu" onclick="pipeQAns('named')" id="btn-pipe-named" disabled style="font-size:.85rem;padding:.4rem 1.2rem">📛 Named Pipe</button>
+  <button class="btn btn-gr" onclick="pipeQAns('both')" id="btn-pipe-both" disabled style="font-size:.85rem;padding:.4rem 1.2rem">✅ كلاهما</button>
+  <button class="btn btn-re" onclick="pipeQAns('none')" id="btn-pipe-none" disabled style="font-size:.85rem;padding:.4rem 1.2rem">❌ لا شيء</button>
+</div>
+<div id="pipe-msg" style="font-size:.74rem;text-align:center;min-height:18px"></div></div>
+
+<!-- ═══ I/O & بنية OS ════════════════════════════════════════ -->
+<div style="font-size:.78rem;font-weight:800;color:#818cf8;margin:.8rem 0 .3rem;border-bottom:1px solid rgba(129,140,248,.2);padding-bottom:.2rem">💾 I/O والمقاطعة وبنية OS</div>
+
+<!-- GAME 11: Interrupt Handler -->
+<div class="inter-box"><div class="inter-title">🚨 11 — معالجة المقاطعة! (Interrupt Handler)</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">مقاطعات تصل باستمرار — رتّب خطوات معالجتها بالترتيب الصحيح!</p>
+<div id="irq-score" style="font-size:.75rem;color:#fbbf24;margin-bottom:.3rem">نقاط: 0 | جولة: 0/5</div>
+<div id="irq-event" style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:7px;padding:.45rem;text-align:center;font-size:.8rem;color:#f87171;margin-bottom:.4rem;min-height:32px">اضغط ابدأ!</div>
+<div id="irq-cards" style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.3rem"></div>
+<div id="irq-done" style="display:flex;gap:.3rem;flex-wrap:wrap;min-height:32px;background:rgba(248,113,113,.04);border:1px dashed rgba(248,113,113,.2);border-radius:6px;padding:.25rem;margin-bottom:.25rem"><span style="font-size:.68rem;color:#334155;align-self:center">الترتيب ←</span></div>
+<div class="btn-row"><button class="btn btn-gr" onclick="irqGameStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="irqGameStart()">↺</button></div>
+<div id="irq-gmsg" style="font-size:.74rem;min-height:18px;margin-top:.2rem"></div></div>
+
+<!-- GAME 12: Kernel Mode vs User Mode -->
+<div class="inter-box"><div class="inter-title">🔑 12 — Kernel Mode أم User Mode؟</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">كل عملية تعمل في أحد الوضعين — صنّف كل عملية بسرعة!</p>
+<div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+  <div id="km-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0 | سؤال: 0/12</div>
+  <button class="btn btn-gr" onclick="kmStart()">▶ ابدأ</button>
+</div>
+<div id="km-op" style="background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:7px;padding:.6rem;text-align:center;font-size:.88rem;font-weight:700;color:#e2e8f0;min-height:44px;margin-bottom:.4rem">اضغط ابدأ!</div>
+<div style="display:flex;gap:.6rem;justify-content:center;margin-bottom:.3rem">
+  <button class="btn btn-re" onclick="kmAns('kernel')" id="btn-kernel" disabled style="font-size:.85rem;padding:.5rem 1.5rem">🔒 Kernel Mode</button>
+  <button class="btn btn-gr" onclick="kmAns('user')" id="btn-user" disabled style="font-size:.85rem;padding:.5rem 1.5rem">👤 User Mode</button>
+</div>
+<div id="km-msg" style="font-size:.74rem;text-align:center;min-height:18px"></div></div>
+
+<!-- GAME 13: Buffer Manager -->
+<div class="inter-box"><div class="inter-title">📋 13 — إدارة الـ Buffer المحلي!</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">البيانات تتدفق للـ Buffer — اقرأ قبل الفيضان (Overflow)! شاهد كيف يُدير OS الـ Local Buffer!</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;flex-wrap:wrap;gap:.3rem">
+  <div id="buf-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0 | بيانات مقروءة: 0</div>
+  <div id="buf-status" style="font-size:.75rem;color:#34d399">Buffer: 0/8</div>
   <div class="btn-row" style="margin:0">
-    <button class="btn btn-gr" onclick="cpuStart()">▶ ابدأ</button>
-    <button class="btn btn-yl" onclick="cpuStart()">↺ إعادة</button>
-    <button class="btn btn-re" onclick="cpuStop()">⏹ إيقاف</button>
+    <button class="btn btn-gr" onclick="bufStart()">▶ ابدأ</button>
+    <button class="btn btn-pu" onclick="bufRead()">📖 اقرأ (Read)</button>
+    <button class="btn btn-yl" onclick="bufStop()">⏹</button>
   </div>
 </div>
-<div id="cpu-inst" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:.55rem;text-align:center;font-family:monospace;font-size:.82rem;color:#fbbf24;margin-bottom:.5rem;min-height:42px;direction:ltr">
-  اضغط "ابدأ" لبدء تنفيذ التعليمات!
+<canvas id="bufCanvas" width="580" height="120" style="background:#0a0f1e;border-radius:7px;max-width:100%"></canvas>
+<div id="buf-msg" style="font-size:.74rem;min-height:18px;margin-top:.25rem;color:#94a3b8;text-align:center"></div></div>
+
+<!-- GAME 14: OS Type Detective -->
+<div class="inter-box"><div class="inter-title">🕵️ 14 — حدّد نوع نظام التشغيل!</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">اقرأ السيناريو وحدد: Batch / Time Sharing / Real-Time / Distributed / Multiprocessor</p>
+<div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+  <div id="os-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0 | جولة: 0/10</div>
+  <div class="btn-row" style="margin:0"><button class="btn btn-gr" onclick="osStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="osStart()">↺</button><button class="btn btn-re" onclick="osStop()">⏹</button></div>
 </div>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.5rem">
-  <button id="cpu-btn0" onclick="cpuStep(0)" class="btn" disabled
-    style="padding:.6rem .2rem;background:rgba(248,113,113,.1);border:2px solid rgba(248,113,113,.3);color:#f87171;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
-    📥 Fetch<br><span style="font-size:.62rem;font-weight:400;color:#64748b">جلب من RAM</span>
-  </button>
-  <button id="cpu-btn1" onclick="cpuStep(1)" class="btn" disabled
-    style="padding:.6rem .2rem;background:rgba(251,146,60,.1);border:2px solid rgba(251,146,60,.3);color:#fb923c;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
-    🔍 Decode<br><span style="font-size:.62rem;font-weight:400;color:#64748b">فك التشفير</span>
-  </button>
-  <button id="cpu-btn2" onclick="cpuStep(2)" class="btn" disabled
-    style="padding:.6rem .2rem;background:rgba(52,211,153,.1);border:2px solid rgba(52,211,153,.3);color:#34d399;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
-    ⚡ Execute<br><span style="font-size:.62rem;font-weight:400;color:#64748b">التنفيذ في ALU</span>
-  </button>
-  <button id="cpu-btn3" onclick="cpuStep(3)" class="btn" disabled
-    style="padding:.6rem .2rem;background:rgba(129,140,248,.1);border:2px solid rgba(129,140,248,.3);color:#818cf8;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
-    💾 Write-back<br><span style="font-size:.62rem;font-weight:400;color:#64748b">حفظ النتيجة</span>
-  </button>
+<div id="os-scenario" style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.3);border-radius:7px;padding:.55rem;text-align:center;font-size:.82rem;min-height:44px;color:#e2e8f0;margin-bottom:.4rem">اضغط ابدأ!</div>
+<div id="os-choices" style="display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-bottom:.25rem"></div>
+<div id="os-msg" style="font-size:.74rem;text-align:center;min-height:18px"></div></div>
+
+<!-- GAME 15: Mega True/False Quiz -->
+<div class="inter-box"><div class="inter-title">⚡ 15 — Blitz: صح أم خطأ في OS؟</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">8 ثوانٍ لكل سؤال — 15 سؤال شامل عن كامل المقرر!</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+  <div id="tf-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0/15</div>
+  <div id="tf-timer" style="font-size:1rem;color:#f87171;font-weight:900">⏱</div>
+  <div id="tf-num" style="font-size:.72rem;color:#94a3b8">-</div>
 </div>
-<div id="cpu-pipeline" style="display:flex;gap:.3rem;margin-bottom:.4rem;background:#0d1117;border-radius:6px;padding:.4rem;align-items:center"></div>
-<div id="cpu-msg" style="font-size:.78rem;text-align:center;min-height:22px;color:#34d399"></div>
+<div id="tf-q" style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:7px;padding:.6rem;font-size:.82rem;margin-bottom:.4rem;min-height:44px;text-align:center;color:#e2e8f0">اضغط ابدأ!</div>
+<div style="display:flex;gap:.6rem;justify-content:center;margin-bottom:.3rem">
+  <button class="btn btn-gr" id="btn-true" onclick="tfAnswer(true)" disabled style="font-size:.95rem;padding:.4rem 1.8rem">✅ صح</button>
+  <button class="btn btn-re" id="btn-false" onclick="tfAnswer(false)" disabled style="font-size:.95rem;padding:.4rem 1.8rem">❌ خطأ</button>
 </div>
+<div class="btn-row"><button class="btn btn-pu" onclick="tfStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="tfStart()">↺</button><button class="btn btn-re" onclick="tfStop()">⏹</button></div>
+<div id="tf-feedback" style="font-size:.74rem;min-height:18px;margin-top:.2rem;text-align:center"></div></div>
+
+<!-- Concept Match (kept compact) -->
+<div class="inter-box"><div class="inter-title">🃏 16 — طابق المفهوم!</div>
+<p style="font-size:.75rem;color:#94a3b8;margin-bottom:.4rem">انقر مصطلح ثم تعريفه — 8 أزواج في 60 ثانية!</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+  <div id="cm-score" style="font-size:.75rem;color:#fbbf24">نقاط: 0 | متبقي: 8</div>
+  <div id="cm-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱ 60s</div>
+  <div class="btn-row" style="margin:0"><button class="btn btn-gr" onclick="cmStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="cmStart()">↺</button><button class="btn btn-re" onclick="cmStop()">⏹</button></div>
+</div>
+<div id="cm-board" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem"></div>
+<div id="cm-msg" style="font-size:.74rem;min-height:18px;margin-top:.3rem;color:#34d399"></div></div>
 
 </div>`;
 
@@ -3431,6 +3564,565 @@ function cpuStop(){
   const inst=document.getElementById('cpu-inst');if(inst)inst.textContent='تم الإيقاف. اضغط "ابدأ" من جديد.';
 }
 
+
+// ═══════════════════════════════════════════════════════════
+// INTERRUPT DIAGRAM (Tab 6)
+// ═══════════════════════════════════════════════════════════
+const IRQ_DEVS={
+  keyboard:{name:'⌨️ كيبورد',col:'#818cf8',irq:'IRQ 1',isr:'Keyboard ISR',steps:['ضغطة مفتاح تولّد إشارة كهربائية','Interrupt Controller (PIC) يستقبل الإشارة على خط IRQ 1','يُرسل INTR للـ CPU','CPU يُنهي التعليمة الحالية','يحفظ PC وFlags في Stack','يقفز للـ ISR: يقرأ الكود من Keyboard Controller','يُخزّن الحرف في Keyboard Buffer','يعود للعملية الأصلية']},
+  disk:{name:'💾 قرص صلب',col:'#34d399',irq:'IRQ 14/15',isr:'Disk ISR',steps:['عملية القراءة/الكتابة اكتملت في SSD/HDD','DMA Controller يُرسل مقاطعة للـ CPU','CPU يحفظ حالته الحالية','يُنفّذ Disk ISR','ينقل البيانات من DMA Buffer للـ RAM','يُنبّه العملية المنتظرة أن البيانات جاهزة','يعود للجدولة']},
+  network:{name:'📡 شبكة',col:'#38bdf8',irq:'IRQ 9/10',isr:'Network ISR',steps:['حزمة بيانات وصلت للـ Network Interface Card','NIC يُرسل مقاطعة للـ CPU','CPU يُنهي تعليمته الحالية','يحفظ Context في Stack','يُنفّذ Network ISR','ينسخ الحزمة من NIC Buffer للـ Socket Buffer (Local Buffer)','يُنبّه البرنامج المنتظر للبيانات','يعود للعملية']},
+  timer:{name:'⏱️ مؤقت',col:'#fbbf24',irq:'IRQ 0',isr:'Timer ISR',steps:['Timer Chip يُطلق إشارة كل 10ms','هذه أهم مقاطعة! تُتيح Multitasking','CPU يوقف العملية الحالية','يحفظ كامل Context في PCB','OS Scheduler يختار العملية التالية','يُحمّل Context العملية الجديدة','يبدأ تنفيذها — هذا هو Time Sharing!']}
+};
+let irqAnim=null,irqStep=0;
+function irqFire(dev){
+  if(irqAnim)clearInterval(irqAnim);
+  const d=IRQ_DEVS[dev];
+  irqStep=0;
+  const info=document.getElementById('irq-info');
+  const cv=document.getElementById('irqCanvas');
+  if(!cv)return;
+  irqDrawStep(cv,d,0);
+  if(info)info.innerHTML=`<b style="color:${d.col}">${d.name} — ${d.irq}</b> | ISR: <code>${d.isr}</code><br><span style="color:#94a3b8;font-size:.72rem">الخطوة 1/${d.steps.length}: ${d.steps[0]}</span>`;
+  irqAnim=setInterval(()=>{
+    irqStep++;
+    if(irqStep>=d.steps.length){clearInterval(irqAnim);irqAnim=null;return;}
+    irqDrawStep(cv,d,irqStep);
+    const i2=document.getElementById('irq-info');
+    if(i2)i2.innerHTML=`<b style="color:${d.col}">${d.name} — ${d.irq}</b><br><span style="color:#94a3b8;font-size:.72rem">الخطوة ${irqStep+1}/${d.steps.length}: ${d.steps[irqStep]}</span>`;
+  },1200);
+}
+function irqDrawStep(cv,d,step){
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  // Zones: Device | PIC | CPU | ISR
+  const zones=[
+    {x:10,y:20,w:100,h:180,label:'الجهاز',col:d.col},
+    {x:130,y:30,w:110,h:160,label:'Interrupt Controller',col:'#fb923c'},
+    {x:260,y:20,w:150,h:180,label:'CPU + Stack',col:'#fbbf24'},
+    {x:430,y:20,w:160,h:180,label:'ISR + Buffer',col:'#818cf8'},
+  ];
+  zones.forEach(z=>{
+    ctx.fillStyle=z.col+'11';ctx.strokeStyle=z.col+'55';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(z.x,z.y,z.w,z.h,8);ctx.fill();ctx.stroke();
+    ctx.fillStyle=z.col;ctx.font='bold 8.5px system-ui';ctx.textAlign='center';
+    ctx.fillText(z.label,z.x+z.w/2,z.y+14);
+  });
+  // Device
+  ctx.font='28px system-ui';ctx.textAlign='center';ctx.fillText(d.name.split(' ')[0],60,110);
+  ctx.fillStyle=d.col;ctx.font='8px system-ui';ctx.fillText(d.irq,60,135);
+  // PIC
+  ctx.fillStyle='#fb923c';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+  ctx.fillText('PIC/APIC',185,80);
+  const irqLines=['IRQ 0 (Timer)','IRQ 1 (Keyboard)','IRQ 9 (Network)','IRQ 14 (Disk)'];
+  irqLines.forEach((l,i)=>{
+    const active=l.includes(d.irq.split(' ')[0]);
+    ctx.fillStyle=active&&step>0?d.col:'#334155';ctx.font='7px monospace';ctx.textAlign='left';
+    ctx.fillText(l,133,100+i*18);
+  });
+  // CPU
+  ctx.fillStyle='#fbbf24';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+  ctx.fillText('CPU',335,80);
+  const cpuStates=['Running Process A','⚠️ INTERRUPT!','Save Context','Execute ISR','Restore + Return'];
+  const activeState=step<1?0:step<2?1:step<4?2:step<6?3:4;
+  cpuStates.forEach((s,i)=>{
+    const on=i===activeState;
+    ctx.fillStyle=on?'#fbbf24':on?'#fbbf24':'#334155';
+    ctx.font=on?'bold 8px system-ui':'7.5px system-ui';ctx.textAlign='center';
+    ctx.fillText(s,335,100+i*20);
+  });
+  // ISR box
+  ctx.fillStyle='#818cf8';ctx.font='bold 8.5px system-ui';ctx.textAlign='center';
+  ctx.fillText(d.isr,510,80);
+  if(step>=3){
+    ctx.fillStyle='rgba(129,140,248,.2)';ctx.strokeStyle='#818cf8';ctx.lineWidth=1;
+    ctx.beginPath();ctx.roundRect(435,90,150,60,6);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#94a3b8';ctx.font='7.5px system-ui';ctx.textAlign='center';
+    ctx.fillText('Local Buffer',510,108);
+    ctx.fillStyle='#34d399';ctx.font='7px monospace';
+    const bytes=Array(Math.min(step-2,8)).fill('').map((_,i)=>`0x${(i*16+step*4).toString(16).padStart(2,'0')}`);
+    ctx.fillText(bytes.slice(-3).join(' '),510,125);
+  }
+  // Animated arrow showing current step
+  const arrows=[[60,100,130,110],[240,95,260,95],[410,95,430,95]];
+  if(step>0&&step<=arrows.length){
+    const arr=arrows[step-1];
+    ctx.strokeStyle=d.col;ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(arr[0],arr[1]);ctx.lineTo(arr[2],arr[3]);
+    ctx.stroke();
+    ctx.fillStyle=d.col;
+    const angle=Math.atan2(arr[3]-arr[1],arr[2]-arr[0]);
+    ctx.beginPath();ctx.moveTo(arr[2],arr[3]);
+    ctx.lineTo(arr[2]-10*Math.cos(angle-0.4),arr[3]-10*Math.sin(angle-0.4));
+    ctx.lineTo(arr[2]-10*Math.cos(angle+0.4),arr[3]-10*Math.sin(angle+0.4));
+    ctx.closePath();ctx.fill();
+  }
+  // Step indicator bottom
+  ctx.fillStyle='#64748b';ctx.font='8px system-ui';ctx.textAlign='center';
+  ctx.fillText(`الخطوة ${step+1}/${d.steps.length}: ${d.steps[step]}`,w/2,h-10);
+}
+function irqReset(){
+  if(irqAnim)clearInterval(irqAnim);irqAnim=null;irqStep=0;
+  const cv=document.getElementById('irqCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const info=document.getElementById('irq-info');
+  if(info)info.innerHTML='👆 انقر على أي جهاز لرؤية كيف تعمل المقاطعة';
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 6: Process State Scenarios
+// ═══════════════════════════════════════════════════════════
+const PS_QS=[
+  {s:'العملية تنتظر CPU في قائمة الانتظار',states:['New','Ready','Running','Waiting','Terminated'],a:'Ready',e:'تنتظر دورها على CPU = Ready State'},
+  {s:'المعالج يُنفّذ تعليمات هذه العملية الآن',states:['New','Ready','Running','Waiting','Terminated'],a:'Running',e:'CPU يُنفّذها حالياً = Running State'},
+  {s:'العملية طلبت قراءة ملف من القرص وتنتظر النتيجة',states:['New','Ready','Running','Waiting','Terminated'],a:'Waiting',e:'تنتظر I/O event = Waiting/Blocked State'},
+  {s:'تم إنشاء العملية للتو بواسطة fork()',states:['New','Ready','Running','Waiting','Terminated'],a:'New',e:'لحظة الإنشاء = New State'},
+  {s:'استدعت العملية exit() وانتهى تنفيذها',states:['New','Ready','Running','Waiting','Terminated'],a:'Terminated',e:'انتهت = Terminated State'},
+  {s:'الجدولة انتزعت CPU من العملية (Preemption)',states:['New','Ready','Running','Waiting','Terminated'],a:'Ready',e:'بعد Preemption ترجع للـ Ready queue'},
+  {s:'اكتمل I/O الذي كانت تنتظره العملية',states:['New','Ready','Running','Waiting','Terminated'],a:'Ready',e:'بعد اكتمال I/O → Ready (لا تعود Running مباشرة)'},
+  {s:'عملية Zombie: انتهت لكن الأب لم ينفذ wait()',states:['New','Ready','Running','Waiting','Terminated'],a:'Terminated',e:'Zombie = Terminated state بانتظار الأب'},
+  {s:'OS يختار العملية من Ready Queue ويُعطيها CPU',states:['New','Ready','Running','Waiting','Terminated'],a:'Running',e:'Dispatch = Ready → Running'},
+  {s:'عملية Orphan: أبوها انتهى قبلها وتبناها init',states:['New','Ready','Running','Waiting','Terminated'],a:'Running',e:'الأيتام يكملون تنفيذهم تحت init'},
+];
+let psIdx=0,psScore=0,psTmr=null,psSecs=5,psActive=false,psQueue=[];
+function psStart(){
+  psActive=true;psIdx=0;psScore=0;
+  psQueue=[...PS_QS].sort(()=>Math.random()-.5).slice(0,10);
+  psShowQ();
+}
+function psShowQ(){
+  if(psIdx>=psQueue.length){psEnd();return;}
+  const q=psQueue[psIdx];
+  const s=document.getElementById('ps-scenario');if(s)s.textContent=q.s;
+  const sc=document.getElementById('ps-score');if(sc)sc.textContent=`نقاط: ${psScore} | جولة: ${psIdx+1}/10`;
+  const m=document.getElementById('ps-msg');if(m)m.textContent='';
+  const ch=document.getElementById('ps-choices');
+  if(ch)ch.innerHTML=q.states.map(st=>`
+    <button onclick="psAns('${st}')"
+      style="padding:.3rem .7rem;background:rgba(129,140,248,.1);border:2px solid rgba(129,140,248,.3);border-radius:7px;cursor:pointer;font-size:.78rem;font-weight:700;color:#818cf8;font-family:inherit;transition:.15s"
+      onmouseenter="this.style.background='rgba(129,140,248,.3)'" onmouseleave="this.style.background='rgba(129,140,248,.1)'">
+      ${st}
+    </button>`).join('');
+  psSecs=5;
+  if(psTmr)clearInterval(psTmr);
+  psTmr=setInterval(()=>{
+    psSecs--;
+    const t=document.getElementById('ps-timer');
+    if(t){t.textContent=`⏱ ${psSecs}s`;t.style.color=psSecs<3?'#f87171':'#fbbf24';}
+    if(psSecs<=0){clearInterval(psTmr);psAns(null);}
+  },1000);
+}
+function psAns(ans){
+  if(!psActive)return;
+  clearInterval(psTmr);
+  const q=psQueue[psIdx];
+  const m=document.getElementById('ps-msg');
+  if(ans===q.a){psScore+=10;if(m)m.innerHTML=`<span style="color:#34d399">✅ صح! +10 — ${q.e}</span>`;}
+  else{if(m)m.innerHTML=`<span style="color:#f87171">❌ الجواب: ${q.a} — ${q.e}</span>`;}
+  psIdx++;
+  const sc=document.getElementById('ps-score');if(sc)sc.textContent=`نقاط: ${psScore} | جولة: ${psIdx}/10`;
+  if(document.getElementById('ps-scenario'))setTimeout(psShowQ,1500);
+}
+function psEnd(){
+  psActive=false;clearInterval(psTmr);
+  const s=document.getElementById('ps-scenario');
+  if(s)s.innerHTML=`<b style="color:#fbbf24">🏆 انتهت اللعبة! نقاطك: ${psScore}/100</b>`;
+  const ch=document.getElementById('ps-choices');if(ch)ch.innerHTML='';
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 7: Stack Push/Pop
+// ═══════════════════════════════════════════════════════════
+let stkStack=[];
+const STK_MAX=8;
+const STK_COLS=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24','#38bdf8','#a78bfa','#ec4899'];
+function stkPush(){
+  const inp=document.getElementById('stk-val');
+  const val=parseInt(inp?.value||'0');
+  if(stkStack.length>=STK_MAX){
+    const m=document.getElementById('stk-msg');
+    if(m)m.innerHTML='<span style="color:#f87171">⚠️ Stack Overflow! المكدس ممتلئ — لا يمكن إضافة المزيد</span>';
+    return;
+  }
+  stkStack.push(val);
+  if(inp){inp.value=Math.floor(Math.random()*99)+1;}
+  stkRender('PUSH','push: '+val+' → Stack[SP='+( stkStack.length-1)+'] = '+val);
+}
+function stkPop(){
+  if(!stkStack.length){
+    const m=document.getElementById('stk-msg');
+    if(m)m.innerHTML='<span style="color:#f87171">⚠️ Stack Underflow! المكدس فارغ</span>';
+    return;
+  }
+  const val=stkStack.pop();
+  stkRender('POP','pop: ← '+val+' أُخذ من القمة | SP الآن = '+(stkStack.length-1));
+}
+function stkPeek(){
+  if(!stkStack.length){const m=document.getElementById('stk-msg');if(m)m.innerHTML='<span style="color:#f87171">المكدس فارغ</span>';return;}
+  const val=stkStack[stkStack.length-1];
+  const m=document.getElementById('stk-msg');
+  if(m)m.innerHTML=`<span style="color:#38bdf8">👁️ PEEK: القمة = ${val} | SP = ${stkStack.length-1} (لم تُحذف)</span>`;
+}
+function stkRender(op,desc){
+  const vis=document.getElementById('stk-visual');
+  const ptr=document.getElementById('stk-ptr');
+  const info=document.getElementById('stk-info');
+  const msg=document.getElementById('stk-msg');
+  if(vis){
+    vis.innerHTML=stkStack.map((v,i)=>`
+      <div style="width:64px;height:28px;border-radius:4px;
+        background:${STK_COLS[i%STK_COLS.length]}22;
+        border:${i===stkStack.length-1?'2px':'1px'} solid ${STK_COLS[i%STK_COLS.length]};
+        display:flex;align-items:center;justify-content:space-between;padding:0 6px;
+        font-size:.72rem;color:${STK_COLS[i%STK_COLS.length]};font-family:monospace;font-weight:700">
+        <span>[${i}]</span><span>${v}</span>${i===stkStack.length-1?'<span style="font-size:.6rem">← SP</span>':''}
+      </div>`).join('')+'<div style="font-size:.65rem;color:#334155;margin-top:3px;text-align:center">Stack Base (0)</div>';
+  }
+  if(ptr)ptr.textContent=`SP = ${stkStack.length-1} | Size = ${stkStack.length}/${STK_MAX}`;
+  if(info)info.innerHTML=`<b style="color:#38bdf8">${op} تمت:</b><br><code style="color:#94a3b8;font-size:.72rem">${desc}</code><br><br>
+    <span style="color:#64748b;font-size:.72rem">💡 LIFO = Last In, First Out: آخر ما أُضيف هو أول ما يُأخذ. الاستخدام: استدعاء الدوال، تتبع عناوين الإرجاع</span>`;
+  if(msg&&op!=='POP')msg.textContent='';
+}
+function stkReset(){stkStack=[];const v=document.getElementById('stk-visual');if(v)v.innerHTML='<div style="font-size:.68rem;color:#334155;text-align:center;margin-top:2rem">المكدس فارغ</div>';
+  const p=document.getElementById('stk-ptr');if(p)p.textContent='SP = -1 (فارغ)';
+  const i=document.getElementById('stk-info');if(i)i.innerHTML='اضغط PUSH لإضافة عنصر!';
+  const m=document.getElementById('stk-msg');if(m)m.textContent='';}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 9: System Call Tracer
+// ═══════════════════════════════════════════════════════════
+const SC_CALLS=[
+  {name:'open("/etc/passwd", O_RDONLY)',steps:['App تستدعي open()','CPU يُنفّذ TRAP/INT','ينتقل لـ Kernel Mode','OS يتحقق من الصلاحيات','يفتح الملف ويُعيد File Descriptor','يعود لـ User Mode'],correct:['App → open()','TRAP → Kernel','يتحقق الصلاحيات','يفتح الملف','يُعيد FD','User Mode']},
+  {name:'fork() — إنشاء عملية ابن',steps:['App تستدعي fork()','TRAP يدخل Kernel Mode','OS ينسخ PCB الأب','يُنشئ عملية جديدة','يُعيد PID=0 للابن, PID>0 للأب','يضيف للـ Ready Queue'],correct:['fork() → TRAP','Kernel Mode','ينسخ PCB','عملية جديدة','PID للأب والابن','يضيف للـ Ready Queue']},
+  {name:'write(fd, buffer, 1024)',steps:['App تستدعي write()','System Call Handler','يتحقق FD صالح','ينسخ من User Buffer → Kernel Buffer','يُجدول كتابة للـ I/O','يعود بعدد البايتات المكتوبة'],correct:['write() → Handler','System Call Handler','يتحقق FD','User Buffer → Kernel Buffer','يُجدول I/O','يُعيد عدد البايتات']},
+];
+let scIdx=0,scScore=0,scNext=0,scQueue=[],scCall=null;
+function scStart(){
+  scIdx=0;scScore=0;
+  scQueue=[...SC_CALLS].sort(()=>Math.random()-.5);
+  scShowCall();
+}
+function scShowCall(){
+  if(scIdx>=scQueue.length){
+    const s=document.getElementById('sc-call');if(s)s.innerHTML=`<b style="color:#fbbf24">🏆 نقاطك: ${scScore}</b>`;
+    return;
+  }
+  scCall=scQueue[scIdx];scNext=0;
+  const c=document.getElementById('sc-call');if(c)c.textContent=scCall.name;
+  const sc_=document.getElementById('sc-score');if(sc_)sc_.textContent=`نقاط: ${scScore} | جولة: ${scIdx+1}/${scQueue.length}`;
+  document.getElementById('sc-done').innerHTML='<span style="font-size:.68rem;color:#334155;align-self:center">الترتيب ←</span>';
+  document.getElementById('sc-msg').textContent='انقر خطوات System Call بالترتيب الصحيح!';
+  const shuffled=[...scCall.correct].sort(()=>Math.random()-.5);
+  document.getElementById('sc-cards').innerHTML=shuffled.map((s,i)=>`
+    <div onclick="scPick(${i},'${s.replace(/'/g,"\\'")}')"
+      style="padding:.28rem .55rem;background:rgba(56,189,248,.1);border:1.5px solid rgba(56,189,248,.3);border-radius:6px;cursor:pointer;font-size:.73rem;color:#38bdf8;font-family:inherit;transition:.15s"
+      onmouseenter="this.style.borderColor='#38bdf8'" onmouseleave="this.style.borderColor='rgba(56,189,248,.3)'">${s}</div>`).join('');
+}
+function scPick(i,val){
+  const correct=scCall.correct[scNext];
+  const cards=document.getElementById('sc-cards');
+  const done=document.getElementById('sc-done');
+  const msg=document.getElementById('sc-msg');
+  const el=cards?.children[i];
+  if(val===correct){
+    scScore+=8;scNext++;
+    if(done)done.innerHTML+=`<div style="padding:.2rem .45rem;background:rgba(56,189,248,.15);border:1px solid #38bdf8;border-radius:5px;font-size:.7rem;color:#38bdf8">${scNext}. ${val}</div>`;
+    if(el)el.remove();
+    if(msg)msg.innerHTML=`<span style="color:#34d399">✅ صح! +8</span>`;
+    if(scNext===scCall.correct.length){scIdx++;setTimeout(scShowCall,1000);}
+  } else {
+    if(el){el.style.borderColor='#ef4444';el.style.background='rgba(239,68,68,.15)';setTimeout(()=>{el.style.borderColor='rgba(56,189,248,.3)';el.style.background='rgba(56,189,248,.1)';},700);}
+    if(msg)msg.innerHTML=`<span style="color:#f87171">❌ الخطوة الصحيحة الآن: "${correct}"</span>`;
+  }
+  const sc_=document.getElementById('sc-score');if(sc_)sc_.textContent=`نقاط: ${scScore} | جولة: ${scIdx+1}/${scQueue.length}`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 10: Pipe Quiz
+// ═══════════════════════════════════════════════════════════
+const PIPE_QS=[
+  {q:'يتطلب علاقة أب-ابن (Parent-Child)',a:'ordinary'},
+  {q:'يبقى في نظام الملفات بعد انتهاء العمليات',a:'named'},
+  {q:'يختفي عند انتهاء العمليتين',a:'ordinary'},
+  {q:'يمكن لأي عمليتين استخدامه بدون علاقة خاصة',a:'named'},
+  {q:'أحادي الاتجاه فقط (Unidirectional)',a:'ordinary'},
+  {q:'له اسم في نظام الملفات مثل /tmp/mypipe',a:'named'},
+  {q:'يُستخدم في الـ Shell: ls | grep',a:'ordinary'},
+  {q:'ثنائي الاتجاه (Bidirectional)',a:'named'},
+];
+let pqIdx=0,pqScore=0,pqQueue=[];
+function pipeQStart(){
+  pqIdx=0;pqScore=0;pqQueue=[...PIPE_QS].sort(()=>Math.random()-.5);
+  pipeQShowQ();
+  ['btn-pipe-ord','btn-pipe-named','btn-pipe-both','btn-pipe-none'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=false;});
+}
+function pipeQShowQ(){
+  if(pqIdx>=pqQueue.length){
+    const q=document.getElementById('pipe-q');if(q)q.innerHTML=`<b style="color:#fbbf24">🏆 انتهت! نقاطك: ${pqScore}/${pqQueue.length*10}</b>`;
+    ['btn-pipe-ord','btn-pipe-named','btn-pipe-both','btn-pipe-none'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=true;});
+    return;
+  }
+  const q=document.getElementById('pipe-q');if(q)q.textContent=pqQueue[pqIdx].q;
+  const s=document.getElementById('pipe-score');if(s)s.textContent=`نقاط: ${pqScore} | سؤال: ${pqIdx+1}/8`;
+  document.getElementById('pipe-msg').textContent='';
+}
+function pipeQAns(ans){
+  const q=pqQueue[pqIdx];
+  const msg=document.getElementById('pipe-msg');
+  if(ans===q.a){
+    pqScore+=10;
+    if(msg)msg.innerHTML=`<span style="color:#34d399">✅ صح! +10</span>`;
+  } else {
+    if(msg)msg.innerHTML=`<span style="color:#f87171">❌ الجواب: ${q.a==='ordinary'?'Ordinary Pipe':'Named Pipe'}</span>`;
+  }
+  pqIdx++;
+  const s=document.getElementById('pipe-score');if(s)s.textContent=`نقاط: ${pqScore} | سؤال: ${pqIdx}/8`;
+  if(document.getElementById('pipe-q'))setTimeout(pipeQShowQ,1000);
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 11: Interrupt Sort Game
+// ═══════════════════════════════════════════════════════════
+const IRQ_STEPS_CORRECT=['جهاز يُرسل إشارة','PIC يستقبل الإشارة','يُرسل INTR للـ CPU','CPU يُنهي تعليمته','CPU يحفظ Context','CPU يُنفّذ ISR','CPU يعود للعملية'];
+let irqGIdx=0,irqGScore=0,irqGNext=0,irqGShuffled=[];
+function irqGameStart(){
+  irqGIdx=0;irqGScore=0;
+  const events=['⌨️ ضغطة مفتاح (Keyboard IRQ1)','💾 اكتملت قراءة القرص (Disk IRQ14)','📡 وصلت حزمة شبكة (Network IRQ9)'];
+  irqGShow(events[Math.floor(Math.random()*3)]);
+}
+function irqGShow(event){
+  irqGNext=0;
+  irqGShuffled=[...IRQ_STEPS_CORRECT].sort(()=>Math.random()-.5);
+  const ev=document.getElementById('irq-event');if(ev)ev.textContent='🚨 مقاطعة: '+event;
+  document.getElementById('irq-done').innerHTML='<span style="font-size:.68rem;color:#334155;align-self:center">الترتيب ←</span>';
+  document.getElementById('irq-gmsg').textContent='رتّب خطوات معالجة المقاطعة!';
+  const sc=document.getElementById('irq-score');if(sc)sc.textContent=`نقاط: ${irqGScore} | جولة: ${irqGIdx+1}/5`;
+  const cards=document.getElementById('irq-cards');
+  if(cards)cards.innerHTML=irqGShuffled.map((s,i)=>`
+    <div onclick="irqGPick(${i},'${s.replace(/'/g,"\\'")}')"
+      style="padding:.28rem .55rem;background:rgba(248,113,113,.1);border:1.5px solid rgba(248,113,113,.3);border-radius:6px;cursor:pointer;font-size:.73rem;color:#f87171;font-family:inherit"
+      onmouseenter="this.style.borderColor='#f87171'" onmouseleave="this.style.borderColor='rgba(248,113,113,.3)'">${s}</div>`).join('');
+}
+function irqGPick(i,val){
+  const correct=IRQ_STEPS_CORRECT[irqGNext];
+  const cards=document.getElementById('irq-cards');
+  const done=document.getElementById('irq-done');
+  const msg=document.getElementById('irq-gmsg');
+  const el=cards?.children[i];
+  if(val===correct){
+    irqGScore+=5;irqGNext++;
+    if(done)done.innerHTML+=`<div style="padding:.2rem .4rem;background:rgba(248,113,113,.15);border:1px solid #f87171;border-radius:5px;font-size:.7rem;color:#f87171">${irqGNext}. ${val}</div>`;
+    if(el)el.remove();
+    if(msg)msg.innerHTML='<span style="color:#34d399">✅ صح!</span>';
+    if(irqGNext===IRQ_STEPS_CORRECT.length){
+      irqGIdx++;
+      const sc=document.getElementById('irq-score');if(sc)sc.textContent=`نقاط: ${irqGScore} | جولة: ${irqGIdx}/5`;
+      if(irqGIdx>=5){const ev=document.getElementById('irq-event');if(ev)ev.innerHTML=`<b style="color:#fbbf24">🏆 أنجزت 5 مقاطعات! نقاطك: ${irqGScore}</b>`;}
+      else{const ev2=document.getElementById('irq-event');if(ev2)setTimeout(()=>irqGameStart(),1000);}
+    }
+  } else {
+    if(el){el.style.borderColor='#ef4444';el.style.background='rgba(239,68,68,.2)';setTimeout(()=>{el.style.borderColor='rgba(248,113,113,.3)';el.style.background='rgba(248,113,113,.1)';},600);}
+    if(msg)msg.innerHTML=`<span style="color:#f87171">❌ الصحيح: "${correct}"</span>`;
+    irqGScore=Math.max(0,irqGScore-2);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 12: Kernel Mode vs User Mode
+// ═══════════════════════════════════════════════════════════
+const KM_OPS=[
+  {op:'printf("Hello")',a:'user',e:'printf = مكتبة User Space'},
+  {op:'معالجة Interrupt',a:'kernel',e:'Interrupt Handler = Kernel Mode'},
+  {op:'الوصول لمتغير محلي في الـ Stack',a:'user',e:'متغيرات محلية = User Space'},
+  {op:'تخصيص صفحة ذاكرة جديدة للعملية',a:'kernel',e:'إدارة الذاكرة = Kernel Mode'},
+  {op:'malloc(1024)',a:'user',e:'malloc = User Space (يستدعي sbrk/mmap من الـ kernel لاحقاً)'},
+  {op:'كتابة ملف على القرص',a:'kernel',e:'I/O Operations = Kernel Mode'},
+  {op:'حلقة for لحساب مجموع',a:'user',e:'الحسابات البسيطة = User Mode'},
+  {op:'تغيير جداول الـ Page Table',a:'kernel',e:'Page Table = هياكل Kernel'},
+  {op:'open() System Call',a:'kernel',e:'System Calls تعمل في Kernel Mode'},
+  {op:'قراءة من متغير عام في البرنامج',a:'user',e:'المتغيرات العامة = User Space'},
+  {op:'تبديل السياق بين عمليتين (Context Switch)',a:'kernel',e:'Context Switch = عملية Kernel حصرية'},
+  {op:'استدعاء دالة sin() من مكتبة math',a:'user',e:'دوال المكتبات القياسية = User Space'},
+];
+let kmIdx=0,kmScore=0,kmQueue=[],kmActive=false;
+function kmStart(){
+  kmIdx=0;kmScore=0;kmActive=true;
+  kmQueue=[...KM_OPS].sort(()=>Math.random()-.5);
+  kmShowQ();
+  ['btn-kernel','btn-user'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=false;});
+}
+function kmShowQ(){
+  if(kmIdx>=kmQueue.length){
+    const o=document.getElementById('km-op');if(o)o.innerHTML=`<b style="color:#fbbf24">🏆 نقاطك: ${kmScore}/${kmQueue.length*10}</b>`;
+    ['btn-kernel','btn-user'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=true;});
+    return;
+  }
+  const q=kmQueue[kmIdx];
+  const o=document.getElementById('km-op');if(o)o.textContent=q.op;
+  const s=document.getElementById('km-score');if(s)s.textContent=`نقاط: ${kmScore} | سؤال: ${kmIdx+1}/12`;
+  const m=document.getElementById('km-msg');if(m)m.textContent='';
+}
+function kmAns(ans){
+  if(!kmActive)return;
+  const q=kmQueue[kmIdx];
+  const m=document.getElementById('km-msg');
+  if(ans===q.a){kmScore+=10;if(m)m.innerHTML=`<span style="color:#34d399">✅ صح! ${q.e}</span>`;}
+  else{if(m)m.innerHTML=`<span style="color:#f87171">❌ ${q.a==='kernel'?'Kernel':'User'} Mode — ${q.e}</span>`;}
+  kmIdx++;
+  const s=document.getElementById('km-score');if(s)s.textContent=`نقاط: ${kmScore} | سؤال: ${kmIdx}/12`;
+  if(document.getElementById('km-op'))setTimeout(kmShowQ,1400);
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 13: Buffer Manager
+// ═══════════════════════════════════════════════════════════
+const BUF_MAX=8;
+let bufData=[],bufScore=0,bufRead2=0,bufInterval2=null,bufTimer2=null,bufTime2=0,bufRunning=false;
+function bufStart(){
+  bufData=[];bufScore=0;bufRead2=0;bufTime2=0;bufRunning=true;
+  if(bufInterval2)clearInterval(bufInterval2);
+  if(bufTimer2)clearInterval(bufTimer2);
+  bufInterval2=setInterval(()=>{
+    if(!bufRunning)return;
+    if(bufData.length>=BUF_MAX){
+      bufRunning=false;clearInterval(bufInterval2);clearInterval(bufTimer2);
+      const m=document.getElementById('buf-msg');
+      if(m)m.innerHTML='<span style="color:#f87171">💥 Buffer Overflow! البيانات تكدست! — OS يجب أن يُدير Local Buffer بكفاءة</span>';
+      return;
+    }
+    bufData.push({id:bufData.length,col:['#818cf8','#34d399','#fb923c','#38bdf8'][bufData.length%4]});
+    bufScore++;bufRender();
+  },900-Math.min(bufScore*15,600));
+  bufTimer2=setInterval(()=>{
+    bufTime2++;
+    const t=document.getElementById('buf-status');
+    if(t)t.textContent=`Buffer: ${bufData.length}/${BUF_MAX} | وقت: ${bufTime2}s`;
+  },1000);
+}
+function bufRead(){
+  if(!bufData.length){const m=document.getElementById('buf-msg');if(m)m.innerHTML='<span style="color:#818cf8">Buffer فارغ — لا بيانات للقراءة</span>';return;}
+  bufData.shift();bufRead2++;
+  const m=document.getElementById('buf-msg');
+  if(m)m.innerHTML=`<span style="color:#34d399">✅ قرأ OS بيانات من Buffer | قراءات: ${bufRead2}</span>`;
+  bufRender();
+}
+function bufStop(){bufRunning=false;if(bufInterval2)clearInterval(bufInterval2);if(bufTimer2)clearInterval(bufTimer2);}
+function bufRender(){
+  const cv=document.getElementById('bufCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  // Labels
+  ctx.fillStyle='#94a3b8';ctx.font='8.5px system-ui';ctx.textAlign='left';
+  ctx.fillText('📡 Input Stream',10,20);
+  ctx.textAlign='right';ctx.fillText('💾 OS reads from Buffer',w-10,20);
+  // Buffer box
+  ctx.fillStyle='rgba(30,40,30,.5)';ctx.strokeStyle='#334155';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.roundRect(10,30,w-20,60,8);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#475569';ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText(`Local Buffer (${BUF_MAX} slots)`,w/2,50);
+  // Buffer slots
+  const slotW=(w-40)/BUF_MAX;
+  for(let i=0;i<BUF_MAX;i++){
+    const d=bufData[i];
+    ctx.fillStyle=d?d.col+'33':'rgba(20,30,20,.5)';
+    ctx.strokeStyle=d?d.col:'#1f2937';ctx.lineWidth=1;
+    ctx.beginPath();ctx.roundRect(20+i*slotW,38,slotW-4,44,4);ctx.fill();ctx.stroke();
+    if(d){ctx.fillStyle=d.col;ctx.font='bold 8px monospace';ctx.textAlign='center';ctx.fillText('D'+d.id,20+i*slotW+slotW/2,64);}
+  }
+  // Danger
+  const danger=bufData.length/BUF_MAX;
+  const dc=danger>.75?'#f87171':danger>.5?'#fbbf24':'#34d399';
+  ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.roundRect(10,98,w-20,12,4);ctx.fill();
+  ctx.fillStyle=dc;ctx.beginPath();ctx.roundRect(10,98,(w-20)*danger,12,4);ctx.fill();
+  ctx.fillStyle=dc;ctx.font='8px system-ui';ctx.textAlign='left';
+  ctx.fillText(danger>=1?'💥 OVERFLOW!':danger>.75?'⚠️ Buffer امتلأ تقريباً!':'✅ Buffer بخير',12,108);
+  const sc=document.getElementById('buf-score');if(sc)sc.textContent=`نقاط: ${bufScore} | بيانات مقروءة: ${bufRead2}`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME 11 IRQ Interrupt Simulator - init
+// ═══════════════════════════════════════════════════════════
+// Semaphore game draw
+function semDraw(){
+  const cv=document.getElementById('semCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  // 3 Processes
+  const procs=[
+    {id:0,name:'P1',state:semStates[0],col:'#818cf8'},
+    {id:1,name:'P2',state:semStates[1],col:'#34d399'},
+    {id:2,name:'P3',state:semStates[2],col:'#fb923c'},
+  ];
+  const semV=semVal;
+  // Critical Section box
+  ctx.fillStyle='rgba(248,113,113,.1)';ctx.strokeStyle='#f87171';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(240,30,140,120,10);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#f87171';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+  ctx.fillText('🔒 Critical Section',310,50);
+  ctx.fillStyle='#64748b';ctx.font='8px system-ui';
+  ctx.fillText('(منطقة حرجة)',310,64);
+  // Semaphore indicator
+  ctx.fillStyle=semV>0?'rgba(52,211,153,.2)':'rgba(248,113,113,.2)';
+  ctx.strokeStyle=semV>0?'#34d399':'#f87171';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(420,50,160,60,8);ctx.fill();ctx.stroke();
+  ctx.fillStyle=semV>0?'#34d399':'#f87171';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+  ctx.fillText('Semaphore = '+semV,500,80);
+  ctx.fillStyle='#94a3b8';ctx.font='8px system-ui';
+  ctx.fillText(semV>0?'متاح — يمكن الدخول':'مغلق — انتظر!',500,96);
+  // Processes
+  procs.forEach((p,i)=>{
+    const py=20+i*45;
+    const isIn=p.state==='inside';
+    const isWait=p.state==='waiting';
+    ctx.fillStyle=isIn?p.col+'33':isWait?'rgba(251,191,36,.15)':'rgba(30,30,50,.5)';
+    ctx.strokeStyle=isIn?p.col:isWait?'#fbbf24':'#334155';ctx.lineWidth=isIn?2:1;
+    ctx.beginPath();ctx.roundRect(10,py,100,35,7);ctx.fill();ctx.stroke();
+    ctx.fillStyle=p.col;ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText(p.name,60,py+16);
+    ctx.fillStyle='#94a3b8';ctx.font='7.5px system-ui';
+    ctx.fillText(isIn?'داخل CS':isWait?'⏳ ينتظر':'جاهز',60,py+28);
+    if(isIn){
+      ctx.strokeStyle=p.col;ctx.lineWidth=1.5;ctx.setLineDash([3,2]);
+      ctx.beginPath();ctx.moveTo(110,py+17);ctx.lineTo(240,75+i*5);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  });
+  ctx.fillStyle='#64748b';ctx.font='8px system-ui';ctx.textAlign='center';
+  ctx.fillText('P() = Wait (تقليل Semaphore) | V() = Signal (زيادة Semaphore)',w/2,h-8);
+}
+let semVal=1,semStates=['ready','ready','ready'];
+function semOp(op,pid){
+  const msg=document.getElementById('sem-msg');
+  if(op==='P'){
+    if(semVal>0){
+      semVal--;semStates[pid]='inside';
+      if(msg)msg.innerHTML=`<span style="color:#34d399">✅ P${pid+1} نفّذت P() — Semaphore=${semVal} — دخلت Critical Section</span>`;
+    } else {
+      semStates[pid]='waiting';
+      if(msg)msg.innerHTML=`<span style="color:#f87171">⚠️ P${pid+1} نفّذت P() — Semaphore=${semVal} — BLOCKED! تنتظر</span>`;
+    }
+    const sv=document.getElementById('sem-val');if(sv)sv.textContent=semVal;
+  } else {
+    const inside=semStates.findIndex(s=>s==='inside');
+    if(inside>=0){semStates[inside]='ready';semVal++;}
+    else semVal=Math.min(semVal+1,1);
+    const waiting=semStates.findIndex(s=>s==='waiting');
+    if(waiting>=0&&semVal>0){semVal--;semStates[waiting]='inside';}
+    if(msg)msg.innerHTML=`<span style="color:#38bdf8">✅ V() — Semaphore=${semVal} — Critical Section متاحة</span>`;
+    const sv=document.getElementById('sem-val');if(sv)sv.textContent=semVal;
+  }
+  semDraw();
+}
+function semReset(){semVal=1;semStates=['ready','ready','ready'];
+  const sv=document.getElementById('sem-val');if(sv)sv.textContent=1;
+  const m=document.getElementById('sem-msg');if(m)m.textContent='';
+  semDraw();
+}
+
+// ═══════════════════════════════════════════════════════════
+// UPDATE initInteractives for new games
+// ═══════════════════════════════════════════════════════════
+
 // ── render ──
 function render(){
   cleanupGames();
@@ -3868,7 +4560,8 @@ function initInteractives(){
   if(cur==='t4'){initPipeCanvas();pcRender();}
   if(cur==='t5'){maReset();}
   if(cur==='t6'){fbRender();}
-  if(cur==='tg'){bsStart();}
+  if(cur==='tg'){bsStart();setTimeout(()=>{semDraw();},100);}
+  if(cur==='t6'){fbRender();irqReset();}
 }
 
 render();
