@@ -125,170 +125,15 @@ S.t1=`<div class="card">
 </div>
 <div class="ez">لما تضغط على لعبة في جوالك — الجوال لا يفهم "لعبة"، يفهم فقط أرقاماً (0 و1). نظام التشغيل هو الذي يترجم ضغطتك إلى لغة الجهاز. بدونه = الجهاز بلا فائدة مثل سيارة بدون محرك!</div>
 
-<h3>🖥️ تصور حقيقي: مكونات الحاسب من الداخل</h3>
-<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">الصورة أدناه توضح مكونات الحاسب الحقيقية وأين يعمل نظام التشغيل</p>
-<div class="diagram">
-<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
-
-  <!-- Motherboard base -->
-  <rect x="10" y="10" width="740" height="400" rx="14" fill="#0d1117" stroke="#1e3a2a" stroke-width="3"/>
-  <rect x="10" y="10" width="740" height="400" rx="14" fill="none" stroke="#22543d" stroke-width="1" stroke-dasharray="6,3"/>
-  <text x="375" y="32" text-anchor="middle" fill="#22543d" font-size="11" font-weight="bold">اللوحة الرئيسية — Motherboard</text>
-
-  <!-- PCIe slot traces (green lines like real PCB) -->
-  <line x1="30" y1="380" x2="720" y2="380" stroke="#1a3a1a" stroke-width="2"/>
-  <line x1="30" y1="50" x2="720" y2="50" stroke="#1a3a1a" stroke-width="2"/>
-  <line x1="30" y1="50" x2="30" y2="380" stroke="#1a3a1a" stroke-width="2"/>
-  <line x1="720" y1="50" x2="720" y2="380" stroke="#1a3a1a" stroke-width="2"/>
-
-  <!-- CPU Socket area -->
-  <rect x="35" y="60" width="175" height="175" rx="10" fill="#111827" stroke="#fbbf24" stroke-width="2"/>
-  <rect x="50" y="75" width="145" height="145" rx="6" fill="#1a1500" stroke="#fbbf24" stroke-width="1.5"/>
-  <!-- CPU chip -->
-  <rect x="65" y="90" width="115" height="115" rx="4" fill="#0f0f00" stroke="#fb923c" stroke-width="2.5"/>
-  <text x="122" y="135" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">المعالج</text>
-  <text x="122" y="150" text-anchor="middle" fill="#fb923c" font-size="9">CPU</text>
-  <text x="122" y="165" text-anchor="middle" fill="#94a3b8" font-size="8">Core i7 / Ryzen</text>
-  <!-- CPU pin dots -->
-  <g fill="#fbbf24" opacity=".5">
-    <circle cx="78" cy="103" r="2"/><circle cx="90" cy="103" r="2"/><circle cx="102" cy="103" r="2"/>
-    <circle cx="78" cy="193" r="2"/><circle cx="90" cy="193" r="2"/><circle cx="102" cy="193" r="2"/>
-    <circle cx="68" cy="115" r="2"/><circle cx="68" cy="127" r="2"/><circle cx="68" cy="139" r="2"/>
-    <circle cx="175" cy="115" r="2"/><circle cx="175" cy="127" r="2"/><circle cx="175" cy="139" r="2"/>
-  </g>
-  <!-- CPU cores mini -->
-  <rect x="75" y="112" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
-  <text x="86" y="127" text-anchor="middle" fill="#fb923c" font-size="8">Core 1</text>
-  <rect x="102" y="112" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
-  <text x="113" y="127" text-anchor="middle" fill="#fb923c" font-size="8">Core 2</text>
-  <rect x="129" y="112" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
-  <text x="140" y="127" text-anchor="middle" fill="#fb923c" font-size="8">Core 3</text>
-  <rect x="75" y="140" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
-  <text x="86" y="155" text-anchor="middle" fill="#fb923c" font-size="8">Core 4</text>
-  <rect x="102" y="140" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
-  <text x="113" y="155" text-anchor="middle" fill="#fb923c" font-size="8">Cache</text>
-  <rect x="129" y="140" width="22" height="22" rx="2" fill="#152215" stroke="#34d399" stroke-width="1"/>
-  <text x="140" y="155" text-anchor="middle" fill="#34d399" font-size="7">Register</text>
-  <text x="122" y="198" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">يُنفّذ كل الأوامر</text>
-  <text x="122" y="228" text-anchor="middle" fill="#94a3b8" font-size="8">⬆️ CPU Socket</text>
-
-  <!-- RAM Slots -->
-  <rect x="230" y="60" width="50" height="170" rx="6" fill="#0d1a2e" stroke="#818cf8" stroke-width="2"/>
-  <rect x="235" y="68" width="40" height="154" rx="4" fill="#0a1020" stroke="#818cf8" stroke-width="1"/>
-  <!-- RAM chips on stick -->
-  <g fill="#1e2a4a" stroke="#818cf8" stroke-width=".8">
-    <rect x="238" y="72" width="34" height="14" rx="2"/>
-    <rect x="238" y="90" width="34" height="14" rx="2"/>
-    <rect x="238" y="108" width="34" height="14" rx="2"/>
-    <rect x="238" y="126" width="34" height="14" rx="2"/>
-    <rect x="238" y="144" width="34" height="14" rx="2"/>
-    <rect x="238" y="162" width="34" height="14" rx="2"/>
-    <rect x="238" y="180" width="34" height="14" rx="2"/>
-  </g>
-  <text x="255" y="218" text-anchor="middle" fill="#818cf8" font-size="9" font-weight="bold">RAM</text>
-  <text x="255" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">16 GB</text>
-
-  <!-- Second RAM slot -->
-  <rect x="288" y="60" width="50" height="170" rx="6" fill="#0d1a2e" stroke="#818cf8" stroke-width="1.5"/>
-  <rect x="293" y="68" width="40" height="154" rx="4" fill="#0a1020" stroke="#818cf8" stroke-width="1"/>
-  <g fill="#1e2a4a" stroke="#818cf8" stroke-width=".8">
-    <rect x="296" y="72" width="34" height="14" rx="2"/>
-    <rect x="296" y="90" width="34" height="14" rx="2"/>
-    <rect x="296" y="108" width="34" height="14" rx="2"/>
-    <rect x="296" y="126" width="34" height="14" rx="2"/>
-    <rect x="296" y="144" width="34" height="14" rx="2"/>
-  </g>
-  <text x="313" y="218" text-anchor="middle" fill="#818cf8" font-size="9" font-weight="bold">RAM</text>
-  <text x="313" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">16 GB</text>
-
-  <!-- SSD/NVMe slot -->
-  <rect x="355" y="60" width="160" height="55" rx="8" fill="#0d1a1a" stroke="#34d399" stroke-width="2"/>
-  <rect x="363" y="68" width="144" height="39" rx="4" fill="#0a1515" stroke="#34d399" stroke-width="1"/>
-  <g fill="#1a2e2e" stroke="#34d399" stroke-width=".8">
-    <rect x="368" y="73" width="22" height="24" rx="2"/>
-    <rect x="395" y="73" width="22" height="24" rx="2"/>
-    <rect x="422" y="73" width="22" height="24" rx="2"/>
-    <rect x="449" y="73" width="22" height="24" rx="2"/>
-    <rect x="476" y="73" width="22" height="24" rx="2"/>
-  </g>
-  <text x="435" y="108" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">SSD NVMe — القرص الصلب السريع</text>
-  <text x="435" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">يُخزّن نظام التشغيل والملفات</text>
-
-  <!-- GPU slot -->
-  <rect x="355" y="135" width="340" height="80" rx="8" fill="#1a0d2e" stroke="#a78bfa" stroke-width="2"/>
-  <rect x="363" y="143" width="180" height="64" rx="4" fill="#120a22" stroke="#a78bfa" stroke-width="1"/>
-  <g fill="#1e1030" stroke="#a78bfa" stroke-width=".8">
-    <rect x="370" y="150" width="28" height="44" rx="2"/>
-    <rect x="403" y="150" width="28" height="44" rx="2"/>
-    <rect x="436" y="150" width="28" height="44" rx="2"/>
-    <rect x="469" y="150" width="28" height="44" rx="2"/>
-    <rect x="502" y="150" width="28" height="44" rx="2"/>
-  </g>
-  <!-- GPU fans -->
-  <circle cx="580" cy="175" r="28" fill="#150d20" stroke="#a78bfa" stroke-width="1.5"/>
-  <circle cx="580" cy="175" r="18" fill="#1a0d28" stroke="#818cf8" stroke-width="1"/>
-  <text x="580" y="179" text-anchor="middle" fill="#a78bfa" font-size="11">🌀</text>
-  <circle cx="650" cy="175" r="22" fill="#150d20" stroke="#a78bfa" stroke-width="1.5"/>
-  <circle cx="650" cy="175" r="14" fill="#1a0d28" stroke="#818cf8" stroke-width="1"/>
-  <text x="650" y="179" text-anchor="middle" fill="#a78bfa" font-size="10">🌀</text>
-  <text x="530" y="228" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">بطاقة الشاشة — GPU</text>
-  <text x="530" y="240" text-anchor="middle" fill="#94a3b8" font-size="8">تعالج الصور والألعاب والذكاء الاصطناعي</text>
-
-  <!-- Power connector -->
-  <rect x="35" y="255" width="90" height="60" rx="6" fill="#1a0a0a" stroke="#f87171" stroke-width="2"/>
-  <text x="80" y="278" text-anchor="middle" fill="#f87171" font-size="8" font-weight="bold">موصّل الطاقة</text>
-  <text x="80" y="292" text-anchor="middle" fill="#f87171" font-size="8">Power</text>
-  <text x="80" y="308" text-anchor="middle" fill="#94a3b8" font-size="7">ATX 24-pin</text>
-  <g fill="#330000" stroke="#f87171" stroke-width=".6">
-    <rect x="41" y="262" width="8" height="10" rx="1"/>
-    <rect x="53" y="262" width="8" height="10" rx="1"/>
-    <rect x="65" y="262" width="8" height="10" rx="1"/>
-    <rect x="77" y="262" width="8" height="10" rx="1"/>
-    <rect x="89" y="262" width="8" height="10" rx="1"/>
-    <rect x="101" y="262" width="8" height="10" rx="1"/>
-  </g>
-
-  <!-- BIOS chip -->
-  <rect x="145" y="255" width="68" height="40" rx="5" fill="#1a1500" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="179" y="270" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="bold">BIOS/UEFI</text>
-  <text x="179" y="284" text-anchor="middle" fill="#94a3b8" font-size="7">يُشغّل الكمبيوتر</text>
-  <text x="179" y="294" text-anchor="middle" fill="#94a3b8" font-size="7">عند الإقلاع</text>
-
-  <!-- USB/IO ports -->
-  <rect x="225" y="255" width="120" height="60" rx="6" fill="#0a0a1a" stroke="#38bdf8" stroke-width="2"/>
-  <text x="285" y="272" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">منافذ I/O</text>
-  <g fill="#0a1530" stroke="#38bdf8" stroke-width=".8">
-    <rect x="233" y="278" width="20" height="14" rx="2"/><text x="243" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">USB</text>
-    <rect x="258" y="278" width="20" height="14" rx="2"/><text x="268" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">USB</text>
-    <rect x="283" y="278" width="20" height="14" rx="2"/><text x="293" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">HDMI</text>
-    <rect x="308" y="278" width="28" height="14" rx="2"/><text x="322" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">Ethernet</text>
-  </g>
-  <text x="285" y="310" text-anchor="middle" fill="#94a3b8" font-size="7">تتحكم بها طبقة I/O في OS</text>
-
-  <!-- OS Layer label -->
-  <rect x="355" y="255" width="340" height="100" rx="8" fill="rgba(129,140,248,.06)" stroke="rgba(129,140,248,.4)" stroke-width="2" stroke-dasharray="6,3"/>
-  <text x="525" y="278" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">🧠 نظام التشغيل يُدير كل هذا!</text>
-  <text x="525" y="298" text-anchor="middle" fill="#e2e8f0" font-size="9">يتحكم في CPU ← يُجدول المهام</text>
-  <text x="525" y="314" text-anchor="middle" fill="#e2e8f0" font-size="9">يُدير RAM ← يُوزّع الذاكرة</text>
-  <text x="525" y="330" text-anchor="middle" fill="#e2e8f0" font-size="9">يُخاطب SSD ← يحفظ الملفات</text>
-  <text x="525" y="346" text-anchor="middle" fill="#e2e8f0" font-size="9">يتحكم في GPU ← عرض الصور</text>
-
-  <!-- Data bus lines -->
-  <line x1="210" y1="150" x2="230" y2="150" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
-  <line x1="338" y1="150" x2="355" y2="150" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
-  <text x="340" y="155" text-anchor="middle" fill="#fbbf24" font-size="7">BUS</text>
-
-  <!-- Legend -->
-  <rect x="35" y="335" width="290" height="55" rx="8" fill="rgba(0,0,0,.3)" stroke="#1f2937"/>
-  <text x="180" y="352" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">مفتاح الألوان</text>
-  <circle cx="50" cy="365" r="4" fill="#fbbf24"/><text x="58" y="368" fill="#fbbf24" font-size="8">المعالج CPU</text>
-  <circle cx="110" cy="365" r="4" fill="#818cf8"/><text x="118" y="368" fill="#818cf8" font-size="8">الذاكرة RAM</text>
-  <circle cx="170" cy="365" r="4" fill="#34d399"/><text x="178" y="368" fill="#34d399" font-size="8">القرص SSD</text>
-  <circle cx="230" cy="365" r="4" fill="#a78bfa"/><text x="238" y="368" fill="#a78bfa" font-size="8">الشاشة GPU</text>
-  <circle cx="50" cy="381" r="4" fill="#f87171"/><text x="58" y="384" fill="#f87171" font-size="8">الطاقة Power</text>
-  <circle cx="110" cy="381" r="4" fill="#38bdf8"/><text x="118" y="384" fill="#38bdf8" font-size="8">المنافذ I/O</text>
-  <circle cx="170" cy="381" r="4" fill="#fbbf24"/><text x="178" y="384" fill="#fbbf24" font-size="8">ناقل البيانات BUS</text>
-</svg>
+<h3>🖥️ مكونات الحاسب — انقر على أي مكوّن لتعرف دوره!</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">اللوحة الرئيسية (Motherboard) تربط جميع المكونات — انقر على كل مكوّن لتعرف كيف يتعامل معه نظام التشغيل</p>
+<div class="inter-box" style="padding:.6rem">
+<canvas id="hwCanvas" width="720" height="380"
+  style="background:#0a0e18;border-radius:10px;max-width:100%;cursor:pointer;display:block;margin:0 auto"
+  onclick="hwCanvasClick(event)" onmousemove="hwCanvasHover(event)" onmouseleave="hwCanvasLeave()"></canvas>
+<div id="hw-panel" style="margin-top:.6rem;background:rgba(0,0,0,.4);border-radius:10px;padding:.8rem;min-height:80px;border:1px solid #1f2937">
+  <div style="color:#475569;font-size:.8rem;text-align:center">👆 انقر على أي مكوّن لرؤية تفاصيله ودور نظام التشغيل معه</div>
+</div>
 </div>
 
 
@@ -1669,6 +1514,8 @@ S.tg=`<div class="card">
   <div id="cm-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | متبقي: 8</div>
   <div id="cm-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱ 60s</div>
   <button class="btn btn-gr" onclick="cmStart()">▶ ابدأ</button>
+    <button class="btn btn-yl" onclick="cmStart()">↺ إعادة</button>
+    <button class="btn btn-re" onclick="cmStop()">⏹ إيقاف</button>
 </div>
 <div id="cm-board" style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem"></div>
 <div id="cm-msg" style="font-size:.78rem;min-height:20px;margin-top:.3rem;color:#34d399"></div>
@@ -1690,7 +1537,7 @@ S.tg=`<div class="card">
   <button class="btn btn-gr" id="btn-true" onclick="tfAnswer(true)" disabled style="font-size:1rem;padding:.5rem 2rem">✅ صح</button>
   <button class="btn btn-re" id="btn-false" onclick="tfAnswer(false)" disabled style="font-size:1rem;padding:.5rem 2rem">❌ خطأ</button>
 </div>
-<div class="btn-row"><button class="btn btn-pu" onclick="tfStart()">▶ ابدأ</button></div>
+<div class="btn-row"><button class="btn btn-pu" onclick="tfStart()">▶ ابدأ</button><button class="btn btn-yl" onclick="tfStart()">↺ إعادة</button><button class="btn btn-re" onclick="tfStop()">⏹ إيقاف</button></div>
 <div id="tf-feedback" style="font-size:.78rem;min-height:20px;margin-top:.2rem;text-align:center"></div>
 </div>
 
@@ -1701,6 +1548,8 @@ S.tg=`<div class="card">
 <div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
   <div id="os-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | جولة: 0/10</div>
   <button class="btn btn-gr" onclick="osStart()">▶ ابدأ</button>
+    <button class="btn btn-yl" onclick="osStart()">↺ إعادة</button>
+    <button class="btn btn-re" onclick="osStop()">⏹ إيقاف</button>
 </div>
 <div id="os-scenario" style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:.7rem;font-size:.85rem;min-height:52px;margin-bottom:.4rem;color:#e2e8f0;text-align:center">
   اضغط "ابدأ" لبدء اللعبة!
@@ -1719,11 +1568,49 @@ S.tg=`<div class="card">
   <div class="btn-row" style="margin:0">
     <button class="btn btn-gr" onclick="msStart()">▶ ابدأ</button>
     <button class="btn btn-re" onclick="msFree()">🗑️ احرر عملية</button>
-    <button class="btn btn-yl" onclick="msStop()">⏹ إيقاف</button>
+    <button class="btn btn-yl" onclick="msRestart()">↺ إعادة</button>
+    <button class="btn btn-re" onclick="msStop()">⏹ إيقاف</button>
   </div>
 </div>
 <canvas id="msCanvas" width="580" height="130" style="background:#0a0f1e;border-radius:8px;max-width:100%;border:1px solid #1f2937"></canvas>
 <div id="ms-msg" style="font-size:.78rem;min-height:20px;margin-top:.3rem;color:#34d399;text-align:center"></div>
+</div>
+
+<!-- ════════ GAME 6: CPU Fetch-Decode-Execute ════════ -->
+<div class="inter-box" style="margin-top:1.2rem">
+<div class="inter-title">🔬 لعبة 6 — دورة المعالج: Fetch → Decode → Execute</div>
+<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">اضغط على كل خطوة بالترتيب الصحيح لتُنفّذ التعليمة. 5 تعليمات مختلفة. تعلّم كيف CPU يُنفّذ كل أمر!</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.3rem">
+  <div id="cpu-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | تعليمة: 0/5</div>
+  <div class="btn-row" style="margin:0">
+    <button class="btn btn-gr" onclick="cpuStart()">▶ ابدأ</button>
+    <button class="btn btn-yl" onclick="cpuStart()">↺ إعادة</button>
+    <button class="btn btn-re" onclick="cpuStop()">⏹ إيقاف</button>
+  </div>
+</div>
+<div id="cpu-inst" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:.55rem;text-align:center;font-family:monospace;font-size:.82rem;color:#fbbf24;margin-bottom:.5rem;min-height:42px;direction:ltr">
+  اضغط "ابدأ" لبدء تنفيذ التعليمات!
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.5rem">
+  <button id="cpu-btn0" onclick="cpuStep(0)" class="btn" disabled
+    style="padding:.6rem .2rem;background:rgba(248,113,113,.1);border:2px solid rgba(248,113,113,.3);color:#f87171;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
+    📥 Fetch<br><span style="font-size:.62rem;font-weight:400;color:#64748b">جلب من RAM</span>
+  </button>
+  <button id="cpu-btn1" onclick="cpuStep(1)" class="btn" disabled
+    style="padding:.6rem .2rem;background:rgba(251,146,60,.1);border:2px solid rgba(251,146,60,.3);color:#fb923c;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
+    🔍 Decode<br><span style="font-size:.62rem;font-weight:400;color:#64748b">فك التشفير</span>
+  </button>
+  <button id="cpu-btn2" onclick="cpuStep(2)" class="btn" disabled
+    style="padding:.6rem .2rem;background:rgba(52,211,153,.1);border:2px solid rgba(52,211,153,.3);color:#34d399;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
+    ⚡ Execute<br><span style="font-size:.62rem;font-weight:400;color:#64748b">التنفيذ في ALU</span>
+  </button>
+  <button id="cpu-btn3" onclick="cpuStep(3)" class="btn" disabled
+    style="padding:.6rem .2rem;background:rgba(129,140,248,.1);border:2px solid rgba(129,140,248,.3);color:#818cf8;border-radius:8px;font-size:.76rem;font-weight:800;font-family:inherit;text-align:center">
+    💾 Write-back<br><span style="font-size:.62rem;font-weight:400;color:#64748b">حفظ النتيجة</span>
+  </button>
+</div>
+<div id="cpu-pipeline" style="display:flex;gap:.3rem;margin-bottom:.4rem;background:#0d1117;border-radius:6px;padding:.4rem;align-items:center"></div>
+<div id="cpu-msg" style="font-size:.78rem;text-align:center;min-height:22px;color:#34d399"></div>
 </div>
 
 </div>`;
@@ -3139,6 +3026,411 @@ function cleanupGames(){
   if(typeof msRunning!=='undefined')msRunning=false;
   if(typeof cmSelectedId!=='undefined'){cmSelectedId='';cmSelectedPair=-1;}
 }
+
+// ════════════════════════════════════════════════════════════════
+// INTERACTIVE HARDWARE DIAGRAM
+// ════════════════════════════════════════════════════════════════
+const HW_DATA={
+  cpu:{
+    bounds:[18,28,208,235],col:'#fbbf24',label:'CPU',
+    name:'المعالج (CPU) — Central Processing Unit',
+    icon:'⚙️',
+    os:'OS يُجدول وقت CPU بين العمليات (Process Scheduling) · يُخصص Quantum زمني لكل عملية',
+    spec:'Intel Core i7 / AMD Ryzen · 4-16 نواة · 3-5 GHz',
+    detail:'يُنفّذ جميع التعليمات عبر دورة: Fetch → Decode → Execute. يحتوي على أنوية (Cores) للتوازي، Cache للتسريع، Registers للبيانات الآنية.',
+    cycle:['① جلب التعليمة (Fetch) من RAM','② فك التشفير (Decode)','③ التنفيذ (Execute)','④ الكتابة (Write-back)'],
+  },
+  ram:{
+    bounds:[215,28,340,248],col:'#818cf8',label:'RAM',
+    name:'الذاكرة العشوائية (RAM)',
+    icon:'🧠',
+    os:'OS يُخصص مناطق RAM للعمليات · يُدير Virtual Memory · يُحرك الصفحات للـ SSD عند الامتلاء (Swap)',
+    spec:'DDR4/DDR5 · 16-64 GB · سرعة 3200-6400 MHz',
+    detail:'تخزين مؤقت وسريع للبيانات الجاري تنفيذها. متطايرة (Volatile) = تُمحى عند إطفاء الجهاز. CPU يصلها أسرع من SSD بـ 1000 مرة.',
+    cycle:['① OS يخصص منطقة (malloc)','② العملية تكتب/تقرأ','③ OS يراقب الاستخدام','④ عند الامتلاء → Swap to SSD'],
+  },
+  ssd:{
+    bounds:[350,28,525,100],col:'#34d399',label:'SSD NVMe',
+    name:'القرص الصلب السريع (SSD NVMe)',
+    icon:'💾',
+    os:'OS يُخزّن ملفات النظام والبيانات · يُدير نظام الملفات (File System) · DMA ينقل البيانات بدون CPU',
+    spec:'NVMe PCIe 4.0 · 500GB-4TB · 7000 MB/s',
+    detail:'تخزين دائم (Non-Volatile) يبقى بعد الإطفاء. NVMe عبر PCIe أسرع من SATA بـ 7 مرات. OS يضع kernel + boot files هنا.',
+    cycle:['① OS يطلب قراءة ملف','② DMA ينقل من SSD','③ البيانات تُحمل في RAM','④ CPU ينفذها من RAM'],
+  },
+  gpu:{
+    bounds:[350,112,700,205],col:'#a78bfa',label:'GPU',
+    name:'بطاقة الشاشة (GPU)',
+    icon:'🎮',
+    os:'OS يُخصص ذاكرة VRAM للرسومات · GPU Driver يترجم الأوامر · GPU يُعالج مستقلاً بعدة آلاف نواة',
+    spec:'NVIDIA/AMD · 8-24 GB VRAM · آلاف النوى المتوازية',
+    detail:'معالج متخصص للرسومات والحسابات المتوازية. يُستخدم في الألعاب، تشغيل الفيديو، والذكاء الاصطناعي. يعمل موازياً مع CPU.',
+    cycle:['① App تطلب رسم عبر OpenGL/DirectX','② Driver يترجم للـ GPU','③ GPU يُعالج بالنوى المتوازية','④ النتيجة تُعرض على الشاشة'],
+  },
+  power:{
+    bounds:[18,248,115,325],col:'#f87171',label:'Power',
+    name:'مصدر الطاقة (PSU)',
+    icon:'⚡',
+    os:'OS يُراقب مستوى الطاقة عبر ACPI · يُدير توفير الطاقة (Power Management) · Sleep/Hibernate/Shutdown',
+    spec:'ATX 650-1000W · 80+ Gold certified',
+    detail:'يحول التيار المتردد (220V AC) إلى تيار مستمر (3.3V, 5V, 12V). OS يتحكم في حالات الطاقة: Full Power, Sleep, Hibernate, Shutdown.',
+    cycle:['① كهرباء 220V تدخل','② PSU يحولها لـ 12V/5V/3.3V','③ كل مكوّن يأخذ ما يحتاج','④ OS يضبط حالة الطاقة'],
+  },
+  bios:{
+    bounds:[125,248,215,302],col:'#fbbf24',label:'BIOS',
+    name:'BIOS / UEFI — أول كود يعمل',
+    icon:'🔍',
+    os:'BIOS يعمل قبل OS · يُنفذ POST · يُحدد Boot Device · يُسلّم التحكم للـ Bootloader',
+    spec:'UEFI 2.x · Flash ROM 16-32MB · يعمل خلال ثوانٍ',
+    detail:'أول برنامج يعمل عند الضغط على زر التشغيل. يفحص المكونات (POST)، يبحث عن Bootloader في SSD، ويُسلّمه التحكم لتحميل OS.',
+    cycle:['① Power On → BIOS يعمل فوراً','② POST: يفحص CPU/RAM/GPU','③ يبحث عن Bootloader في SSD','④ يُسلّم التحكم → OS يُحمَّل'],
+  },
+  io:{
+    bounds:[220,248,355,325],col:'#38bdf8',label:'I/O',
+    name:'منافذ الإدخال والإخراج (I/O)',
+    icon:'🔌',
+    os:'طبقة I/O في OS تُدير جميع المنافذ · Device Drivers تترجم الأوامر · Interrupt يُنبّه OS عند وصول بيانات',
+    spec:'USB 3.0/3.2/4 · HDMI 2.1 · Ethernet 1-10 Gbps',
+    detail:'كل جهاز متصل (كيبورد، شاشة، شبكة) يتواصل مع OS عبر Driver خاص. عند ضغط مفتاح → Interrupt يُرسَل → OS يتوقف ويعالجه.',
+    cycle:['① جهاز (كيبورد) يُرسل Interrupt','② CPU يتوقف من مهمته','③ OS يعالج الحدث (ISR)','④ يعود للمهمة الأصلية'],
+  },
+  bus:{
+    bounds:[18,112,215,242],col:'#fbbf24',label:'BUS',
+    name:'ناقل البيانات (System Bus)',
+    icon:'🚌',
+    os:'OS يُدير جدولة الـ BUS · يمنع التعارض · DMA يستخدمه مستقلاً لنقل البيانات',
+    spec:'PCIe 5.0 · DMI · System Bus 64-bit',
+    detail:'الطريق الرئيسي لنقل البيانات بين المكونات. يتكون من: Data Bus (البيانات)، Address Bus (العنوان)، Control Bus (التحكم).',
+    cycle:['① CPU يضع عنوان على Address Bus','② البيانات تنتقل على Data Bus','③ Control Bus يُنظّم الاتجاه','④ المكوّن المستهدف يستلم'],
+  },
+};
+let hwHighlight=null;
+function hwInitCanvas(){
+  const cv=document.getElementById('hwCanvas');
+  if(!cv)return;
+  hwDraw(cv,null);
+}
+function hwDraw(cv,hov){
+  const ctx=cv.getContext('2d');
+  const w=cv.width,h=cv.height;
+  ctx.clearRect(0,0,w,h);
+  // Motherboard background
+  ctx.fillStyle='#0a0e18';ctx.fillRect(0,0,w,h);
+  // PCB grid lines
+  ctx.strokeStyle='rgba(30,50,30,.35)';ctx.lineWidth=1;
+  for(let x=0;x<w;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=28){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+  // Motherboard border
+  ctx.strokeStyle='#1e3a2a';ctx.lineWidth=3;ctx.setLineDash([]);
+  ctx.strokeRect(5,5,w-10,h-10);
+  ctx.strokeStyle='#22543d';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+  ctx.strokeRect(5,5,w-10,h-10);ctx.setLineDash([]);
+  ctx.fillStyle='#22543d';ctx.font='bold 11px system-ui';ctx.textAlign='center';
+  ctx.fillText('اللوحة الرئيسية — Motherboard',w/2,22);
+
+  // BUS traces
+  ctx.strokeStyle='#fbbf2455';ctx.lineWidth=2;ctx.setLineDash([5,3]);
+  ctx.beginPath();ctx.moveTo(210,140);ctx.lineTo(350,140);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(210,60);ctx.lineTo(350,60);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#fbbf24';ctx.font='bold 8px system-ui';ctx.textAlign='center';
+  ctx.fillText('BUS',280,130);
+
+  // Draw all components
+  Object.entries(HW_DATA).forEach(([id,d])=>{
+    const [x1,y1,x2,y2]=d.bounds;
+    const isHov=hov===id||hwHighlight===id;
+    ctx.save();
+    // Glow on hover
+    if(isHov){ctx.shadowColor=d.col;ctx.shadowBlur=18;}
+    // Component bg
+    const alpha=isHov?.25:.1;
+    ctx.fillStyle=d.col+(Math.round(alpha*255).toString(16).padStart(2,'0'));
+    ctx.strokeStyle=isHov?d.col:d.col+'99';
+    ctx.lineWidth=isHov?2.5:1.5;
+    ctx.beginPath();ctx.roundRect(x1,y1,x2-x1,y2-y1,8);ctx.fill();ctx.stroke();
+    ctx.shadowBlur=0;
+    // Content per component
+    drawHwComp(ctx,id,d,x1,y1,x2,y2,isHov);
+    ctx.restore();
+  });
+
+  // Click hint at bottom
+  if(!hwHighlight){
+    ctx.fillStyle='rgba(100,116,139,.7)';ctx.font='8.5px system-ui';ctx.textAlign='center';
+    ctx.fillText('👆 انقر على أي مكوّن للتفاصيل',w/2,h-8);
+  }
+}
+function drawHwComp(ctx,id,d,x1,y1,x2,y2,isHov){
+  const cx=(x1+x2)/2,cy=(y1+y2)/2,cw=x2-x1,ch=y2-y1;
+  ctx.fillStyle=d.col;ctx.textAlign='center';
+  if(id==='cpu'){
+    // CPU - cores grid + label
+    ctx.font='bold 10px system-ui';ctx.fillText('⚙️ المعالج (CPU)',cx,y1+16);
+    ctx.font='8px system-ui';ctx.fillStyle='#94a3b8';ctx.fillText('Intel Core i7 / AMD Ryzen',cx,y1+27);
+    // 6 cores in 2×3 grid
+    const cores=[['Core 1','#fb923c'],['Core 2','#fb923c'],['Core 3','#fb923c'],
+                  ['Core 4','#fb923c'],['Cache','#34d399'],['Registers','#38bdf8']];
+    const gx=x1+14,gy=y1+38,bw=50,bh=36,gap=4;
+    cores.forEach((c,i)=>{
+      const col=i%3,row=Math.floor(i/3);
+      const bx=gx+col*(bw+gap),by=gy+row*(bh+gap);
+      ctx.fillStyle=c[1]+'22';ctx.strokeStyle=c[1];ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.roundRect(bx,by,bw,bh,4);ctx.fill();ctx.stroke();
+      ctx.fillStyle=c[1];ctx.font='bold 8px system-ui';ctx.textAlign='center';
+      ctx.fillText(c[0],bx+bw/2,by+bh/2+3);
+    });
+    // FDE cycle label
+    ctx.fillStyle=d.col;ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText('Fetch → Decode → Execute',cx,y2-22);
+    ctx.fillStyle='#64748b';ctx.font='7.5px system-ui';
+    ctx.fillText('CPU Socket',cx,y2-10);
+  } else if(id==='ram'){
+    // Two RAM sticks
+    ctx.font='bold 10px system-ui';ctx.fillStyle=d.col;ctx.textAlign='center';
+    ctx.fillText('🧠 RAM',cx,y1+14);
+    const sticks=[x1+5,x1+65];
+    sticks.forEach(sx=>{
+      ctx.fillStyle='#0a1020';ctx.strokeStyle=d.col;ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.roundRect(sx,y1+20,48,185,5);ctx.fill();ctx.stroke();
+      for(let i=0;i<7;i++){
+        ctx.fillStyle='#1e2a4a';ctx.strokeStyle=d.col+'88';ctx.lineWidth=.8;
+        ctx.beginPath();ctx.roundRect(sx+6,y1+26+i*22,36,14,2);ctx.fill();ctx.stroke();
+      }
+    });
+    ctx.fillStyle=d.col;ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText('16 GB',x1+29,y2-8);
+    ctx.fillText('16 GB',x1+89,y2-8);
+  } else if(id==='ssd'){
+    ctx.font='bold 10px system-ui';ctx.fillStyle=d.col;ctx.textAlign='center';
+    ctx.fillText('💾 SSD NVMe — القرص الصلب السريع',cx,y1+18);
+    // Chips
+    for(let i=0;i<5;i++){
+      ctx.fillStyle='#1a2e2e';ctx.strokeStyle=d.col;ctx.lineWidth=.8;
+      ctx.beginPath();ctx.roundRect(x1+14+i*30,y1+24,24,28,3);ctx.fill();ctx.stroke();
+    }
+    ctx.fillStyle='#64748b';ctx.font='8px system-ui';
+    ctx.fillText('يُخزّن OS والملفات | 7000 MB/s',cx,y2-6);
+  } else if(id==='gpu'){
+    ctx.font='bold 11px system-ui';ctx.fillStyle=d.col;ctx.textAlign='center';
+    ctx.fillText('🎮 بطاقة الشاشة — GPU',cx,y1+16);
+    // Shader cores grid
+    for(let i=0;i<5;i++){
+      ctx.fillStyle='#1e1030';ctx.strokeStyle=d.col;ctx.lineWidth=.8;
+      ctx.beginPath();ctx.roundRect(x1+12+i*35,y1+24,28,48,3);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#64748b';ctx.font='6px system-ui';
+      ctx.fillText('Shader\nCores',x1+26+i*35,y1+46);
+    }
+    // Fans
+    [x2-90,x2-45].forEach(fx=>{
+      ctx.fillStyle='#150d20';ctx.strokeStyle=d.col;ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.arc(fx,cy,24,0,Math.PI*2);ctx.fill();ctx.stroke();
+      ctx.fillStyle=d.col;ctx.font='16px system-ui';ctx.textAlign='center';
+      ctx.fillText('🌀',fx,cy+6);
+    });
+    ctx.fillStyle='#64748b';ctx.font='8px system-ui';ctx.textAlign='center';
+    ctx.fillText('آلاف النوى المتوازية | VRAM 8-24GB',cx,y2-6);
+  } else if(id==='power'){
+    ctx.font='bold 9px system-ui';ctx.fillStyle=d.col;ctx.textAlign='center';
+    ctx.fillText('⚡ مصدر الطاقة',cx,y1+15);
+    ctx.font='7.5px system-ui';ctx.fillText('Power — ATX',cx,y1+26);
+    for(let i=0;i<6;i++){
+      ctx.fillStyle='#330000';ctx.strokeStyle=d.col;ctx.lineWidth=.7;
+      ctx.beginPath();ctx.roundRect(x1+8+i*14,y1+34,10,12,2);ctx.fill();ctx.stroke();
+    }
+    ctx.fillStyle='#64748b';ctx.font='7.5px system-ui';
+    ctx.fillText('24-pin | 650-1000W',cx,y2-8);
+  } else if(id==='bios'){
+    ctx.font='bold 9px system-ui';ctx.fillStyle=d.col;ctx.textAlign='center';
+    ctx.fillText('🔍 BIOS/UEFI',cx,y1+16);
+    ctx.fillStyle='#94a3b8';ctx.font='7.5px system-ui';
+    ctx.fillText('أول كود يعمل',cx,y1+28);
+    ctx.fillText('عند الإقلاع',cx,y1+38);
+    ctx.fillText('POST + Boot',cx,y2-8);
+  } else if(id==='io'){
+    ctx.font='bold 9px system-ui';ctx.fillStyle=d.col;ctx.textAlign='center';
+    ctx.fillText('🔌 منافذ I/O',cx,y1+14);
+    const ports=[['USB',x1+14],['USB',x1+44],['HDMI',x1+74],['LAN',x1+108]];
+    ports.forEach(([lbl,px])=>{
+      ctx.fillStyle='#0a1530';ctx.strokeStyle=d.col;ctx.lineWidth=.8;
+      ctx.beginPath();ctx.roundRect(px,y1+22,28,18,2);ctx.fill();ctx.stroke();
+      ctx.fillStyle=d.col;ctx.font='7px system-ui';ctx.textAlign='center';
+      ctx.fillText(lbl,px+14,y1+34);
+    });
+    ctx.fillStyle='#64748b';ctx.font='7.5px system-ui';ctx.textAlign='center';
+    ctx.fillText('Interrupt عند وصول بيانات',cx,y2-8);
+  } else if(id==='bus'){
+    // BUS label (overlay area)
+    // Just a small badge, the BUS connects things
+  }
+}
+function hwGetComp(e){
+  const cv=document.getElementById('hwCanvas');
+  if(!cv)return null;
+  const r=cv.getBoundingClientRect();
+  const sx=cv.width/r.width,sy=cv.height/r.height;
+  const x=(e.clientX-r.left)*sx,y=(e.clientY-r.top)*sy;
+  for(const [id,d] of Object.entries(HW_DATA)){
+    const [x1,y1,x2,y2]=d.bounds;
+    if(x>=x1&&x<=x2&&y>=y1&&y<=y2)return id;
+  }
+  return null;
+}
+function hwCanvasClick(e){
+  const id=hwGetComp(e);
+  if(!id)return;
+  hwHighlight=id;
+  const cv=document.getElementById('hwCanvas');
+  if(cv)hwDraw(cv,id);
+  const d=HW_DATA[id];
+  const panel=document.getElementById('hw-panel');
+  if(!panel)return;
+  panel.innerHTML=`
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+      <span style="font-size:1.4rem">${d.icon}</span>
+      <div>
+        <div style="font-size:.88rem;font-weight:800;color:${d.col}">${d.name}</div>
+        <div style="font-size:.72rem;color:#64748b">${d.spec}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+      <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.5rem;border-right:3px solid ${d.col}">
+        <div style="font-size:.72rem;color:${d.col};font-weight:700;margin-bottom:.2rem">🧠 دور نظام التشغيل:</div>
+        <div style="font-size:.75rem;color:#e2e8f0">${d.os}</div>
+      </div>
+      <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:.5rem;border-right:3px solid #64748b">
+        <div style="font-size:.72rem;color:#94a3b8;font-weight:700;margin-bottom:.2rem">📋 كيف يعمل؟</div>
+        <div style="font-size:.75rem;color:#e2e8f0">${d.detail}</div>
+      </div>
+    </div>
+    <div style="margin-top:.4rem;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.2);border-radius:8px;padding:.4rem">
+      <div style="font-size:.72rem;color:#fbbf24;font-weight:700;margin-bottom:.2rem">⭐ دورة العمل:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.3rem">
+        ${d.cycle.map(s=>`<span style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:5px;padding:.1rem .4rem;font-size:.7rem;color:#e2e8f0">${s}</span>`).join('→')}
+      </div>
+    </div>
+  `;
+}
+function hwCanvasHover(e){
+  const id=hwGetComp(e);
+  const cv=document.getElementById('hwCanvas');
+  if(!cv)return;
+  cv.style.cursor=id?'pointer':'default';
+  hwDraw(cv,id);
+}
+function hwCanvasLeave(){
+  const cv=document.getElementById('hwCanvas');
+  if(cv){cv.style.cursor='default';hwDraw(cv,hwHighlight);}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GAME STOP/RESTART additions
+// ═══════════════════════════════════════════════════════════════
+function bsStop(){if(typeof bsShuffled!=='undefined'){bsReset();}}
+function cmStop(){if(cmTimer)clearInterval(cmTimer);cmTimer=null;cmSelectedId='';cmSelectedPair=-1;
+  const b=document.getElementById('cm-board');if(b)b.innerHTML='';
+  const m=document.getElementById('cm-msg');if(m)m.textContent='';
+  const t=document.getElementById('cm-timer');if(t)t.textContent='⏱ 60s';
+  const s=document.getElementById('cm-score');if(s)s.textContent='نقاط: 0 | متبقي: 8';
+}
+function tfStop(){if(tfTimer)clearInterval(tfTimer);tfTimer=null;tfActive=false;
+  const bt=document.getElementById('btn-true'),bf=document.getElementById('btn-false');
+  if(bt)bt.disabled=true;if(bf)bf.disabled=true;
+  const q=document.getElementById('tf-q');if(q)q.textContent='تم الإيقاف. اضغط "ابدأ" من جديد.';
+  const t=document.getElementById('tf-timer');if(t)t.textContent='⏱';
+}
+function osStop(){if(typeof osActive!=='undefined')osActive=false;
+  const ch=document.getElementById('os-choices');if(ch)ch.innerHTML='';
+  const s=document.getElementById('os-scenario');if(s)s.textContent='تم الإيقاف. اضغط "ابدأ" من جديد.';
+}
+function msRestart(){msStop();setTimeout(()=>msStart(),100);}
+
+
+// ════════════════════════════════════════════════════════════════
+// GAME 6: CPU Fetch-Decode-Execute Cycle
+// ════════════════════════════════════════════════════════════════
+const CPU_INSTS=[
+  {inst:'ADD R1, R2, R3',explain:'① Fetch: RAM[PC]→IR ② Decode: R2+R3 ③ Execute: ALU يجمع ④ Write: R1=نتيجة',ops:['جلب ADD من RAM إلى IR','فك الترميز: نوع=حساب، معاملات=R2,R3','ALU يُجري الجمع','نتيجة الجمع تُكتب في R1']},
+  {inst:'LOAD R4, [0xFF00]',explain:'① Fetch ② Decode: قراءة ذاكرة ③ Execute: اقرأ عنوان 0xFF00 ④ Write: R4',ops:['جلب LOAD من RAM','فك الترميز: نوع=قراءة ذاكرة','الوصول لعنوان 0xFF00 في RAM','تحميل القيمة في R4']},
+  {inst:'MUL R5, R1, R4',explain:'① Fetch ② Decode: ضرب ③ Execute: ALU يضرب ④ Write: R5',ops:['جلب MUL من RAM','فك الترميز: نوع=ضرب، R1×R4','ALU يُجري الضرب (أبطأ من الجمع)','النتيجة في R5 + تحديث Flags']},
+  {inst:'JMP 0x200',explain:'① Fetch ② Decode: قفز ③ Execute: PC=0x200 ④ لا Write-back',ops:['جلب JMP من RAM','فك الترميز: نوع=قفز غير مشروط','تحديث PC=0x200 مباشرة','لا حاجة لـ Write-back (تغيير في PC فقط)']},
+  {inst:'CMP R1, R6',explain:'① Fetch ② Decode: مقارنة ③ Execute: ALU يطرح ④ Write: Flags فقط',ops:['جلب CMP من RAM','فك الترميز: مقارنة R1 مع R6','ALU يطرح (R1-R6) دون حفظ النتيجة','يُحدّث Flags فقط: Zero, Negative, Overflow']},
+];
+let cpuInst=0,cpuPhase=0,cpuScore=0,cpuActive=false,cpuPipeline=[];
+function cpuStart(){
+  cpuInst=0;cpuPhase=0;cpuScore=0;cpuPipeline=[];cpuActive=true;
+  cpuShowInst();
+}
+function cpuShowInst(){
+  if(cpuInst>=CPU_INSTS.length){cpuEnd();return;}
+  const inst=CPU_INSTS[cpuInst];
+  cpuPhase=0;
+  const iEl=document.getElementById('cpu-inst');
+  if(iEl)iEl.innerHTML=`<b style="color:#fbbf24">التعليمة ${cpuInst+1}: </b><code style="color:#38bdf8;font-size:.9rem">${inst.inst}</code><br><span style="font-size:.72rem;color:#94a3b8">${inst.explain}</span>`;
+  // Enable all buttons
+  for(let i=0;i<4;i++){const b=document.getElementById('cpu-btn'+i);if(b)b.disabled=false;}
+  const msg=document.getElementById('cpu-msg');if(msg)msg.textContent='اضغط الخطوات بالترتيب الصحيح: Fetch → Decode → Execute → Write-back';
+  cpuRenderPipeline();
+}
+function cpuStep(phase){
+  if(!cpuActive)return;
+  const msg=document.getElementById('cpu-msg');
+  const inst=CPU_INSTS[cpuInst];
+  if(phase===cpuPhase){
+    // Correct!
+    cpuScore+=5;cpuPipeline.push({phase,ok:true,label:['Fetch','Decode','Execute','Write-back'][phase]});
+    if(msg)msg.innerHTML=`<span style="color:#34d399">✅ صح! ${inst.ops[phase]} (+5 نقاط)</span>`;
+    // Highlight current button
+    const b=document.getElementById('cpu-btn'+phase);
+    if(b){b.style.background=['rgba(248,113,113,.35)','rgba(251,146,60,.35)','rgba(52,211,153,.35)','rgba(129,140,248,.35)'][phase];b.disabled=true;}
+    cpuPhase++;
+    cpuRenderPipeline();
+    if(cpuPhase===4){
+      // Instruction complete
+      cpuInst++;cpuScore+=10;
+      const sc=document.getElementById('cpu-score');
+      if(sc)sc.textContent=`نقاط: ${cpuScore} | تعليمة: ${cpuInst}/5`;
+      setTimeout(cpuShowInst,1200);
+    }
+  } else {
+    // Wrong
+    cpuPipeline.push({phase,ok:false,label:['Fetch','Decode','Execute','Write-back'][phase]});
+    if(msg)msg.innerHTML=`<span style="color:#f87171">❌ خطأ! الخطوة الصحيحة الآن هي: ${['Fetch','Decode','Execute','Write-back'][cpuPhase]}</span>`;
+    cpuScore=Math.max(0,cpuScore-2);
+    cpuRenderPipeline();
+  }
+  const sc=document.getElementById('cpu-score');
+  if(sc)sc.textContent=`نقاط: ${cpuScore} | تعليمة: ${cpuInst}/5`;
+}
+function cpuRenderPipeline(){
+  const el=document.getElementById('cpu-pipeline');
+  if(!el)return;
+  const phases=['Fetch','Decode','Execute','Write'];
+  const colors=['#f87171','#fb923c','#34d399','#818cf8'];
+  el.innerHTML=phases.map((p,i)=>{
+    const done=i<cpuPhase;
+    const active=i===cpuPhase;
+    return `<div style="flex:1;text-align:center;padding:.3rem;border-radius:5px;
+      background:${done?colors[i]+'33':active?colors[i]+'15':'rgba(30,30,50,.5)'};
+      border:1px solid ${done||active?colors[i]:'#334155'};
+      color:${done||active?colors[i]:'#475569'};font-size:.72rem;font-weight:700;transition:.3s">
+      ${done?'✓ ':active?'▶ ':''}${p}
+    </div>`;
+  }).join('<div style="color:#475569;font-size:.8rem;align-self:center;padding:0 .15rem">→</div>');
+}
+function cpuEnd(){
+  cpuActive=false;
+  for(let i=0;i<4;i++){const b=document.getElementById('cpu-btn'+i);if(b)b.disabled=true;}
+  const inst=document.getElementById('cpu-inst');
+  if(inst)inst.innerHTML=`<b style="color:#fbbf24">🏆 ممتاز! أنجزت 5 تعليمات!</b><br><span style="color:#e2e8f0">نقاطك: ${cpuScore} — أتقنت دورة المعالج Fetch→Decode→Execute→Write-back</span>`;
+  const msg=document.getElementById('cpu-msg');if(msg)msg.textContent='';
+}
+function cpuStop(){
+  cpuActive=false;
+  for(let i=0;i<4;i++){const b=document.getElementById('cpu-btn'+i);if(b)b.disabled=true;}
+  const inst=document.getElementById('cpu-inst');if(inst)inst.textContent='تم الإيقاف. اضغط "ابدأ" من جديد.';
+}
+
 // ── render ──
 function render(){
   cleanupGames();
@@ -3561,6 +3853,7 @@ function initInteractives(){
   if(cur==='t1'){
     const inp=document.getElementById('cli-inp');
     if(inp)inp.focus();
+    hwInitCanvas();
     renderBootSteps();
     const bv=document.getElementById('bootCanvas');
     if(bv){const ctx=bv.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,bv.width,bv.height);}
