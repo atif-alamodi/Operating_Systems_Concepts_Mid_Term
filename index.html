@@ -1,0 +1,2970 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مفاهيم نظم التشغيل - دليل تفاعلي شامل</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#0a0f1e;color:#e2e8f0;font-family:system-ui,'Segoe UI',sans-serif;line-height:1.8}
+::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+.hdr{background:linear-gradient(135deg,#1a1a3e,#0a0f1e 60%,#0f1a0f);padding:1.6rem;text-align:center;border-bottom:2px solid #2d3a5e}
+.hdr h1{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#818cf8,#38bdf8,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr p{color:#94a3b8;font-size:.82rem;margin-top:.3rem}
+.tabs{display:flex;overflow-x:auto;background:#0d1117;border-bottom:2px solid #1f2937;position:sticky;top:0;z-index:100}
+.tab{flex:none;padding:.55rem .7rem;font-size:.65rem;font-weight:700;color:#64748b;background:none;border:none;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:.3s}
+.tab.on{color:#818cf8;border-bottom-color:#818cf8;background:rgba(129,140,248,.08)}
+.wrap{max-width:940px;margin:0 auto;padding:1rem}
+.sec{display:none}.sec.on{display:block}
+.card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:1.3rem;margin-bottom:1rem}
+h2{font-size:1.05rem;font-weight:800;margin-bottom:.8rem}
+h3{font-size:.9rem;font-weight:700;color:#a78bfa;margin:1.2rem 0 .5rem}
+.cb{border-right:4px solid #818cf8;background:rgba(129,140,248,.04);padding:.75rem;border-radius:0 8px 8px 0;margin:.5rem 0;font-size:.83rem}
+.cb.g{border-right-color:#34d399;background:rgba(52,211,153,.04)}
+.cb.o{border-right-color:#fb923c;background:rgba(251,146,60,.04)}
+.cb.y{border-right-color:#fbbf24;background:rgba(251,191,36,.04)}
+.cb.r{border-right-color:#f87171;background:rgba(248,113,113,.04)}
+.lb{font-weight:700;margin-bottom:.3rem;font-size:.88rem}
+.lb.pu{color:#818cf8}.lb.gr{color:#34d399}.lb.or{color:#fb923c}.lb.yl{color:#fbbf24}
+.ez{background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.18);border-radius:10px;padding:.7rem;margin:.5rem 0;font-size:.82rem;line-height:2}
+.ez::before{content:'🧒 تبسيط للمبتدئين:';display:block;color:#34d399;font-weight:800;font-size:.8rem;margin-bottom:.3rem}
+.tw{overflow-x:auto;margin:.5rem 0}
+table{width:100%;border-collapse:collapse;font-size:.78rem}
+th{background:rgba(129,140,248,.1);color:#818cf8;font-weight:700;padding:.45rem;border:1px solid #1f2937}
+td{padding:.38rem .42rem;border:1px solid #1f2937}
+.diagram{background:#0d1117;border:1px solid #1f2937;border-radius:12px;padding:.6rem;margin:.9rem 0;text-align:center;overflow-x:auto}
+.diagram svg{max-width:100%;height:auto}
+.qc{background:#111827;border:1px solid #1f2937;border-radius:10px;padding:.85rem;margin-bottom:.7rem}
+.qc h4{color:#818cf8;font-weight:700;font-size:.82rem;margin-bottom:.45rem}
+.qo{padding:.45rem .65rem;border:1px solid #1f2937;border-radius:8px;margin-bottom:.28rem;font-size:.8rem;cursor:pointer;transition:.2s}
+.qo:hover:not(.d){border-color:#818cf8;background:rgba(129,140,248,.05)}
+.qo.ok{border-color:#22c55e;background:rgba(34,197,94,.08);color:#34d399}
+.qo.no{border-color:#ef4444;background:rgba(239,68,68,.08);color:#fca5a5}
+.qo.d{cursor:default}
+.qe{margin-top:.35rem;padding:.45rem;border-radius:6px;font-size:.76rem;display:none}
+.qe.s{display:block}
+.qe.ok{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15);color:#34d399}
+.qe.no{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);color:#fca5a5}
+.sb{background:#111827;border:1px solid #1f2937;border-radius:10px;padding:.7rem;text-align:center;margin-bottom:.7rem}
+.sb .sn{font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fbbf24,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.rb{display:block;margin:.4rem auto;padding:.35rem 1.2rem;background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.25);border-radius:8px;cursor:pointer;font-weight:700;font-size:.78rem}
+.hl{color:#818cf8;font-weight:700}.hl2{color:#a78bfa;font-weight:700}.hl3{color:#34d399;font-weight:700}
+.badge{display:inline-block;padding:.15rem .4rem;border-radius:6px;font-size:.72rem;font-weight:700;margin:.1rem}
+.badge.pu{background:rgba(129,140,248,.15);color:#818cf8}
+.badge.gr{background:rgba(52,211,153,.15);color:#34d399}
+.badge.or{background:rgba(251,146,60,.15);color:#fb923c}
+.badge.re{background:rgba(248,113,113,.15);color:#f87171}
+.inter-box{background:#0d1117;border:1px solid #2d3a5e;border-radius:12px;padding:1rem;margin:.9rem 0}
+.inter-title{color:#38bdf8;font-size:.85rem;font-weight:800;margin-bottom:.6rem}
+.btn{padding:.35rem .85rem;border-radius:8px;border:none;cursor:pointer;font-size:.78rem;font-weight:700;transition:.2s;font-family:inherit;direction:rtl}
+.btn-pu{background:rgba(129,140,248,.18);color:#818cf8;border:1px solid rgba(129,140,248,.35)}
+.btn-pu:hover{background:rgba(129,140,248,.35)}
+.btn-gr{background:rgba(52,211,153,.18);color:#34d399;border:1px solid rgba(52,211,153,.35)}
+.btn-gr:hover{background:rgba(52,211,153,.35)}
+.btn-or{background:rgba(251,146,60,.18);color:#fb923c;border:1px solid rgba(251,146,60,.35)}
+.btn-or:hover{background:rgba(251,146,60,.35)}
+.btn-re{background:rgba(248,113,113,.18);color:#f87171;border:1px solid rgba(248,113,113,.35)}
+.btn-re:hover{background:rgba(248,113,113,.35)}
+.btn-yl{background:rgba(251,191,36,.18);color:#fbbf24;border:1px solid rgba(251,191,36,.35)}
+.btn-yl:hover{background:rgba(251,191,36,.35)}
+.btn-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.terminal{background:#000;border-radius:8px;padding:.7rem;font-family:'Courier New',monospace;font-size:.78rem}
+.terminal-bar{display:flex;gap:.35rem;margin-bottom:.5rem;align-items:center}
+.tb{width:11px;height:11px;border-radius:50%}
+.t-out{color:#e2e8f0;white-space:pre-wrap;min-height:80px;max-height:200px;overflow-y:auto;line-height:1.7}
+.t-in-row{display:flex;align-items:center;margin-top:.35rem;border-top:1px solid #1a1a1a;padding-top:.35rem}
+.t-prompt{color:#34d399;white-space:nowrap}
+.t-input{background:none;border:none;color:#e2e8f0;font-family:'Courier New',monospace;font-size:.78rem;flex:1;outline:none;direction:ltr;text-align:left;margin-left:.3rem}
+.tip{border:1px dashed rgba(251,191,36,.4);background:rgba(251,191,36,.04);border-radius:8px;padding:.55rem;margin:.5rem 0;font-size:.82rem}
+.warn{border-right:4px solid #fb923c;background:rgba(251,146,60,.05);padding:.75rem;border-radius:0 8px 8px 0;margin:.5rem 0;font-size:.82rem}
+.warn .wt{color:#fb923c;font-weight:700;margin-bottom:.2rem}
+.proc-node{cursor:pointer}
+.proc-node circle{transition:all .3s}
+.proc-node text{pointer-events:none}
+@keyframes pktFlow{0%{cx:165px;opacity:0}15%{opacity:1}85%{opacity:1}100%{cx:395px;opacity:0}}
+@keyframes pktFlow2{0%{cx:165px;opacity:0}15%{opacity:1}50%{opacity:1;cy:60px}85%{opacity:1}100%{cx:395px;opacity:0}}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>💻 مفاهيم نظم التشغيل — دليل تفاعلي شامل</h1>
+<p>8 أقسام | رسوم تفاعلية | محاكاة CLI/GUI | شجرة العمليات | الأنابيب | 27 سؤال + اختبار 40 سؤال</p>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="wrap" id="content"></div>
+<script>
+const tabs=[
+{id:'t1',icon:'🏠',label:'1: نظام التشغيل'},
+{id:'t2',icon:'🏗️',label:'2: الهيكل'},
+{id:'t3',icon:'⚙️',label:'3: العمليات'},
+{id:'t4',icon:'🔗',label:'4: IPC'},
+{id:'t5',icon:'🧠',label:'5: الذاكرة'},
+{id:'t6',icon:'💾',label:'6: I/O والملفات'},
+{id:'tq',icon:'👩‍🏫',label:'أسئلة الأستاذة (27)'},
+{id:'quiz',icon:'✅',label:'اختبار ذاتي (40)'}
+];
+let cur='t1';
+const tabsEl=document.getElementById('tabs');
+tabs.forEach(t=>{
+  const b=document.createElement('button');
+  b.className='tab'+(t.id===cur?' on':'');
+  b.textContent=t.icon+' '+t.label;
+  b.onclick=()=>{cur=t.id;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');render();window.scrollTo({top:0,behavior:'smooth'})};
+  b.id='tab-'+t.id;tabsEl.appendChild(b);
+});
+const S={};
+
+
+S.t1=`<div class="card">
+<h2 style="color:#818cf8">🏠 ما هو نظام التشغيل؟</h2>
+<div class="cb"><div class="lb pu">التعريف الرسمي</div>
+نظام التشغيل هو <span class="hl">برنامج وسيط</span> يجلس بين المستخدم وأجهزة الحاسب، يُتيح تشغيل التطبيقات وإدارة الموارد بكفاءة.<br>
+<b>أمثلة:</b> Windows · Linux · macOS · Android · iOS
+</div>
+<div class="ez">لما تضغط على لعبة في جوالك — الجوال لا يفهم "لعبة"، يفهم فقط أرقاماً (0 و1). نظام التشغيل هو الذي يترجم ضغطتك إلى لغة الجهاز. بدونه = الجهاز بلا فائدة مثل سيارة بدون محرك!</div>
+
+<h3>🖥️ تصور حقيقي: مكونات الحاسب من الداخل</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">الصورة أدناه توضح مكونات الحاسب الحقيقية وأين يعمل نظام التشغيل</p>
+<div class="diagram">
+<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+
+  <!-- Motherboard base -->
+  <rect x="10" y="10" width="740" height="400" rx="14" fill="#0d1117" stroke="#1e3a2a" stroke-width="3"/>
+  <rect x="10" y="10" width="740" height="400" rx="14" fill="none" stroke="#22543d" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="375" y="32" text-anchor="middle" fill="#22543d" font-size="11" font-weight="bold">اللوحة الرئيسية — Motherboard</text>
+
+  <!-- PCIe slot traces (green lines like real PCB) -->
+  <line x1="30" y1="380" x2="720" y2="380" stroke="#1a3a1a" stroke-width="2"/>
+  <line x1="30" y1="50" x2="720" y2="50" stroke="#1a3a1a" stroke-width="2"/>
+  <line x1="30" y1="50" x2="30" y2="380" stroke="#1a3a1a" stroke-width="2"/>
+  <line x1="720" y1="50" x2="720" y2="380" stroke="#1a3a1a" stroke-width="2"/>
+
+  <!-- CPU Socket area -->
+  <rect x="35" y="60" width="175" height="175" rx="10" fill="#111827" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="50" y="75" width="145" height="145" rx="6" fill="#1a1500" stroke="#fbbf24" stroke-width="1.5"/>
+  <!-- CPU chip -->
+  <rect x="65" y="90" width="115" height="115" rx="4" fill="#0f0f00" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="122" y="135" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">المعالج</text>
+  <text x="122" y="150" text-anchor="middle" fill="#fb923c" font-size="9">CPU</text>
+  <text x="122" y="165" text-anchor="middle" fill="#94a3b8" font-size="8">Core i7 / Ryzen</text>
+  <!-- CPU pin dots -->
+  <g fill="#fbbf24" opacity=".5">
+    <circle cx="78" cy="103" r="2"/><circle cx="90" cy="103" r="2"/><circle cx="102" cy="103" r="2"/>
+    <circle cx="78" cy="193" r="2"/><circle cx="90" cy="193" r="2"/><circle cx="102" cy="193" r="2"/>
+    <circle cx="68" cy="115" r="2"/><circle cx="68" cy="127" r="2"/><circle cx="68" cy="139" r="2"/>
+    <circle cx="175" cy="115" r="2"/><circle cx="175" cy="127" r="2"/><circle cx="175" cy="139" r="2"/>
+  </g>
+  <!-- CPU cores mini -->
+  <rect x="75" y="112" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
+  <text x="86" y="127" text-anchor="middle" fill="#fb923c" font-size="8">Core 1</text>
+  <rect x="102" y="112" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
+  <text x="113" y="127" text-anchor="middle" fill="#fb923c" font-size="8">Core 2</text>
+  <rect x="129" y="112" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
+  <text x="140" y="127" text-anchor="middle" fill="#fb923c" font-size="8">Core 3</text>
+  <rect x="75" y="140" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
+  <text x="86" y="155" text-anchor="middle" fill="#fb923c" font-size="8">Core 4</text>
+  <rect x="102" y="140" width="22" height="22" rx="2" fill="#221500" stroke="#fb923c" stroke-width="1"/>
+  <text x="113" y="155" text-anchor="middle" fill="#fb923c" font-size="8">Cache</text>
+  <rect x="129" y="140" width="22" height="22" rx="2" fill="#152215" stroke="#34d399" stroke-width="1"/>
+  <text x="140" y="155" text-anchor="middle" fill="#34d399" font-size="7">Register</text>
+  <text x="122" y="198" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">يُنفّذ كل الأوامر</text>
+  <text x="122" y="228" text-anchor="middle" fill="#94a3b8" font-size="8">⬆️ CPU Socket</text>
+
+  <!-- RAM Slots -->
+  <rect x="230" y="60" width="50" height="170" rx="6" fill="#0d1a2e" stroke="#818cf8" stroke-width="2"/>
+  <rect x="235" y="68" width="40" height="154" rx="4" fill="#0a1020" stroke="#818cf8" stroke-width="1"/>
+  <!-- RAM chips on stick -->
+  <g fill="#1e2a4a" stroke="#818cf8" stroke-width=".8">
+    <rect x="238" y="72" width="34" height="14" rx="2"/>
+    <rect x="238" y="90" width="34" height="14" rx="2"/>
+    <rect x="238" y="108" width="34" height="14" rx="2"/>
+    <rect x="238" y="126" width="34" height="14" rx="2"/>
+    <rect x="238" y="144" width="34" height="14" rx="2"/>
+    <rect x="238" y="162" width="34" height="14" rx="2"/>
+    <rect x="238" y="180" width="34" height="14" rx="2"/>
+  </g>
+  <text x="255" y="218" text-anchor="middle" fill="#818cf8" font-size="9" font-weight="bold">RAM</text>
+  <text x="255" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">16 GB</text>
+
+  <!-- Second RAM slot -->
+  <rect x="288" y="60" width="50" height="170" rx="6" fill="#0d1a2e" stroke="#818cf8" stroke-width="1.5"/>
+  <rect x="293" y="68" width="40" height="154" rx="4" fill="#0a1020" stroke="#818cf8" stroke-width="1"/>
+  <g fill="#1e2a4a" stroke="#818cf8" stroke-width=".8">
+    <rect x="296" y="72" width="34" height="14" rx="2"/>
+    <rect x="296" y="90" width="34" height="14" rx="2"/>
+    <rect x="296" y="108" width="34" height="14" rx="2"/>
+    <rect x="296" y="126" width="34" height="14" rx="2"/>
+    <rect x="296" y="144" width="34" height="14" rx="2"/>
+  </g>
+  <text x="313" y="218" text-anchor="middle" fill="#818cf8" font-size="9" font-weight="bold">RAM</text>
+  <text x="313" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">16 GB</text>
+
+  <!-- SSD/NVMe slot -->
+  <rect x="355" y="60" width="160" height="55" rx="8" fill="#0d1a1a" stroke="#34d399" stroke-width="2"/>
+  <rect x="363" y="68" width="144" height="39" rx="4" fill="#0a1515" stroke="#34d399" stroke-width="1"/>
+  <g fill="#1a2e2e" stroke="#34d399" stroke-width=".8">
+    <rect x="368" y="73" width="22" height="24" rx="2"/>
+    <rect x="395" y="73" width="22" height="24" rx="2"/>
+    <rect x="422" y="73" width="22" height="24" rx="2"/>
+    <rect x="449" y="73" width="22" height="24" rx="2"/>
+    <rect x="476" y="73" width="22" height="24" rx="2"/>
+  </g>
+  <text x="435" y="108" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">SSD NVMe — القرص الصلب السريع</text>
+  <text x="435" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">يُخزّن نظام التشغيل والملفات</text>
+
+  <!-- GPU slot -->
+  <rect x="355" y="135" width="340" height="80" rx="8" fill="#1a0d2e" stroke="#a78bfa" stroke-width="2"/>
+  <rect x="363" y="143" width="180" height="64" rx="4" fill="#120a22" stroke="#a78bfa" stroke-width="1"/>
+  <g fill="#1e1030" stroke="#a78bfa" stroke-width=".8">
+    <rect x="370" y="150" width="28" height="44" rx="2"/>
+    <rect x="403" y="150" width="28" height="44" rx="2"/>
+    <rect x="436" y="150" width="28" height="44" rx="2"/>
+    <rect x="469" y="150" width="28" height="44" rx="2"/>
+    <rect x="502" y="150" width="28" height="44" rx="2"/>
+  </g>
+  <!-- GPU fans -->
+  <circle cx="580" cy="175" r="28" fill="#150d20" stroke="#a78bfa" stroke-width="1.5"/>
+  <circle cx="580" cy="175" r="18" fill="#1a0d28" stroke="#818cf8" stroke-width="1"/>
+  <text x="580" y="179" text-anchor="middle" fill="#a78bfa" font-size="11">🌀</text>
+  <circle cx="650" cy="175" r="22" fill="#150d20" stroke="#a78bfa" stroke-width="1.5"/>
+  <circle cx="650" cy="175" r="14" fill="#1a0d28" stroke="#818cf8" stroke-width="1"/>
+  <text x="650" y="179" text-anchor="middle" fill="#a78bfa" font-size="10">🌀</text>
+  <text x="530" y="228" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">بطاقة الشاشة — GPU</text>
+  <text x="530" y="240" text-anchor="middle" fill="#94a3b8" font-size="8">تعالج الصور والألعاب والذكاء الاصطناعي</text>
+
+  <!-- Power connector -->
+  <rect x="35" y="255" width="90" height="60" rx="6" fill="#1a0a0a" stroke="#f87171" stroke-width="2"/>
+  <text x="80" y="278" text-anchor="middle" fill="#f87171" font-size="8" font-weight="bold">موصّل الطاقة</text>
+  <text x="80" y="292" text-anchor="middle" fill="#f87171" font-size="8">Power</text>
+  <text x="80" y="308" text-anchor="middle" fill="#94a3b8" font-size="7">ATX 24-pin</text>
+  <g fill="#330000" stroke="#f87171" stroke-width=".6">
+    <rect x="41" y="262" width="8" height="10" rx="1"/>
+    <rect x="53" y="262" width="8" height="10" rx="1"/>
+    <rect x="65" y="262" width="8" height="10" rx="1"/>
+    <rect x="77" y="262" width="8" height="10" rx="1"/>
+    <rect x="89" y="262" width="8" height="10" rx="1"/>
+    <rect x="101" y="262" width="8" height="10" rx="1"/>
+  </g>
+
+  <!-- BIOS chip -->
+  <rect x="145" y="255" width="68" height="40" rx="5" fill="#1a1500" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="179" y="270" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="bold">BIOS/UEFI</text>
+  <text x="179" y="284" text-anchor="middle" fill="#94a3b8" font-size="7">يُشغّل الكمبيوتر</text>
+  <text x="179" y="294" text-anchor="middle" fill="#94a3b8" font-size="7">عند الإقلاع</text>
+
+  <!-- USB/IO ports -->
+  <rect x="225" y="255" width="120" height="60" rx="6" fill="#0a0a1a" stroke="#38bdf8" stroke-width="2"/>
+  <text x="285" y="272" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">منافذ I/O</text>
+  <g fill="#0a1530" stroke="#38bdf8" stroke-width=".8">
+    <rect x="233" y="278" width="20" height="14" rx="2"/><text x="243" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">USB</text>
+    <rect x="258" y="278" width="20" height="14" rx="2"/><text x="268" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">USB</text>
+    <rect x="283" y="278" width="20" height="14" rx="2"/><text x="293" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">HDMI</text>
+    <rect x="308" y="278" width="28" height="14" rx="2"/><text x="322" y="289" text-anchor="middle" fill="#38bdf8" font-size="6">Ethernet</text>
+  </g>
+  <text x="285" y="310" text-anchor="middle" fill="#94a3b8" font-size="7">تتحكم بها طبقة I/O في OS</text>
+
+  <!-- OS Layer label -->
+  <rect x="355" y="255" width="340" height="100" rx="8" fill="rgba(129,140,248,.06)" stroke="rgba(129,140,248,.4)" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="525" y="278" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">🧠 نظام التشغيل يُدير كل هذا!</text>
+  <text x="525" y="298" text-anchor="middle" fill="#e2e8f0" font-size="9">يتحكم في CPU ← يُجدول المهام</text>
+  <text x="525" y="314" text-anchor="middle" fill="#e2e8f0" font-size="9">يُدير RAM ← يُوزّع الذاكرة</text>
+  <text x="525" y="330" text-anchor="middle" fill="#e2e8f0" font-size="9">يُخاطب SSD ← يحفظ الملفات</text>
+  <text x="525" y="346" text-anchor="middle" fill="#e2e8f0" font-size="9">يتحكم في GPU ← عرض الصور</text>
+
+  <!-- Data bus lines -->
+  <line x1="210" y1="150" x2="230" y2="150" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="338" y1="150" x2="355" y2="150" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
+  <text x="340" y="155" text-anchor="middle" fill="#fbbf24" font-size="7">BUS</text>
+
+  <!-- Legend -->
+  <rect x="35" y="335" width="290" height="55" rx="8" fill="rgba(0,0,0,.3)" stroke="#1f2937"/>
+  <text x="180" y="352" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">مفتاح الألوان</text>
+  <circle cx="50" cy="365" r="4" fill="#fbbf24"/><text x="58" y="368" fill="#fbbf24" font-size="8">المعالج CPU</text>
+  <circle cx="110" cy="365" r="4" fill="#818cf8"/><text x="118" y="368" fill="#818cf8" font-size="8">الذاكرة RAM</text>
+  <circle cx="170" cy="365" r="4" fill="#34d399"/><text x="178" y="368" fill="#34d399" font-size="8">القرص SSD</text>
+  <circle cx="230" cy="365" r="4" fill="#a78bfa"/><text x="238" y="368" fill="#a78bfa" font-size="8">الشاشة GPU</text>
+  <circle cx="50" cy="381" r="4" fill="#f87171"/><text x="58" y="384" fill="#f87171" font-size="8">الطاقة Power</text>
+  <circle cx="110" cy="381" r="4" fill="#38bdf8"/><text x="118" y="384" fill="#38bdf8" font-size="8">المنافذ I/O</text>
+  <circle cx="170" cy="381" r="4" fill="#fbbf24"/><text x="178" y="384" fill="#fbbf24" font-size="8">ناقل البيانات BUS</text>
+</svg>
+</div>
+
+
+<h3>🔌 محاكي إقلاع الكمبيوتر — شارك في تشغيل الجهاز!</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">اضغط "تشغيل" ثم انقر ▶ للانتقال بين مراحل الإقلاع وشاهد ما يحدث داخل الجهاز</p>
+<div class="inter-box">
+  <div class="inter-title">🖥️ محاكي إقلاع الكمبيوتر — اختر النظام أولاً</div>
+
+  <!-- OS Selector -->
+  <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem">
+    <span style="font-size:.78rem;color:#94a3b8;align-self:center">نظام التشغيل:</span>
+    <button class="btn" id="bos-linux" onclick="selectBootOS('linux')"
+      style="background:rgba(52,211,153,.25);color:#34d399;border:2px solid #34d399;font-size:.75rem">
+      🐧 Linux</button>
+    <button class="btn" id="bos-windows" onclick="selectBootOS('windows')"
+      style="background:rgba(56,189,248,.1);color:#38bdf8;border:1px solid #334155;font-size:.75rem">
+      🪟 Windows</button>
+    <button class="btn" id="bos-macos" onclick="selectBootOS('macos')"
+      style="background:rgba(167,139,250,.1);color:#a78bfa;border:1px solid #334155;font-size:.75rem">
+      🍎 macOS</button>
+    <button class="btn" id="bos-android" onclick="selectBootOS('android')"
+      style="background:rgba(251,146,60,.1);color:#fb923c;border:1px solid #334155;font-size:.75rem">
+      🤖 Android</button>
+  </div>
+  <div id="boot-os-info" style="font-size:.76rem;color:#34d399;margin-bottom:.5rem;background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.15);border-radius:6px;padding:.35rem .6rem">
+    🐧 Linux: GRUB → <b>vmlinuz (Linux Kernel)</b> → systemd → GNOME/KDE
+  </div>
+
+  <!-- Controls -->
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem">
+    <button class="btn btn-gr" onclick="bootStart()" id="btn-boot-start">⚡ تشغيل الجهاز</button>
+    <button class="btn btn-pu" onclick="bootNext()" id="btn-boot-next" disabled>▶ الخطوة التالية</button>
+    <button class="btn btn-yl" onclick="bootReset()">↺ إعادة</button>
+    <span id="boot-step-label" style="font-size:.78rem;color:#94a3b8">اضغط "تشغيل" للبدء</span>
+  </div>
+
+  <!-- Steps progress bar -->
+  <div id="boot-steps" style="display:flex;gap:.3rem;margin-bottom:.5rem;overflow-x:auto;padding:.2rem 0"></div>
+
+  <!-- Canvas -->
+  <canvas id="bootCanvas" width="580" height="240"
+    style="background:#000;border-radius:8px;max-width:100%;border:1px solid #1f2937"></canvas>
+
+  <!-- Info box -->
+  <div id="boot-info" style="margin-top:.4rem;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2);border-radius:8px;padding:.6rem;font-size:.8rem;min-height:50px">
+    <span style="color:#94a3b8">👆 اختر نظام التشغيل ثم اضغط "تشغيل"</span>
+  </div>
+</div>
+<h3>🎯 أهداف نظام التشغيل</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">أهداف نظام التشغيل الخمسة</text>
+  <!-- Goal boxes - 3 on top row, 2 on bottom -->
+  <rect x="18" y="35" width="200" height="70" rx="10" fill="rgba(129,140,248,.1)" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="118" y="60" text-anchor="middle" fill="#818cf8" font-size="18">⚡</text>
+  <text x="118" y="78" text-anchor="middle" fill="#818cf8" font-size="10" font-weight="bold">الاستفادة القصوى من الموارد</text>
+  <text x="118" y="94" text-anchor="middle" fill="#94a3b8" font-size="9">استخدام CPU والذاكرة بكفاءة</text>
+
+  <rect x="250" y="35" width="200" height="70" rx="10" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="350" y="60" text-anchor="middle" fill="#34d399" font-size="18">😊</text>
+  <text x="350" y="78" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">سهولة الاستخدام</text>
+  <text x="350" y="94" text-anchor="middle" fill="#94a3b8" font-size="9">واجهة سهلة بدون معرفة تقنية</text>
+
+  <rect x="482" y="35" width="200" height="70" rx="10" fill="rgba(251,146,60,.1)" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="582" y="60" text-anchor="middle" fill="#fb923c" font-size="18">🔒</text>
+  <text x="582" y="78" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">الأمان والحماية</text>
+  <text x="582" y="94" text-anchor="middle" fill="#94a3b8" font-size="9">حماية الملفات من الوصول غير المصرح</text>
+
+  <rect x="130" y="120" width="200" height="68" rx="10" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="230" y="144" text-anchor="middle" fill="#fbbf24" font-size="18">🔧</text>
+  <text x="230" y="162" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">اكتشاف الأخطاء</text>
+  <text x="230" y="178" text-anchor="middle" fill="#94a3b8" font-size="9">كشف المشكلات في المعالج والذاكرة</text>
+
+  <rect x="370" y="120" width="200" height="68" rx="10" fill="rgba(129,140,248,.1)" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="470" y="144" text-anchor="middle" fill="#818cf8" font-size="18">📊</text>
+  <text x="470" y="162" text-anchor="middle" fill="#818cf8" font-size="10" font-weight="bold">إدارة الموارد</text>
+  <text x="470" y="178" text-anchor="middle" fill="#94a3b8" font-size="9">توزيع الذاكرة والمعالج بين البرامج</text>
+</svg>
+</div>
+
+<h3>🖥️ أنواع أنظمة التشغيل</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">أنواع أنظمة التشغيل</text>
+  <!-- Row 1 -->
+  <rect x="18" y="38" width="200" height="100" rx="10" fill="rgba(56,189,248,.08)" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="118" y="62" text-anchor="middle" fill="#38bdf8" font-size="20">📦</text>
+  <text x="118" y="82" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">Batch Processing</text>
+  <text x="118" y="97" text-anchor="middle" fill="#e2e8f0" font-size="9">المعالجة الدفعية</text>
+  <text x="118" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">ينجز مهام دفعة دفعة</text>
+  <text x="118" y="126" text-anchor="middle" fill="#94a3b8" font-size="8.5">بدون تدخل المستخدم</text>
+
+  <rect x="250" y="38" width="200" height="100" rx="10" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="350" y="62" text-anchor="middle" fill="#34d399" font-size="20">⏰</text>
+  <text x="350" y="82" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">Time Sharing</text>
+  <text x="350" y="97" text-anchor="middle" fill="#e2e8f0" font-size="9">مشاركة الوقت ⭐</text>
+  <text x="350" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">يقسم وقت CPU</text>
+  <text x="350" y="126" text-anchor="middle" fill="#94a3b8" font-size="8.5">بين مستخدمين متعددين</text>
+
+  <rect x="482" y="38" width="200" height="100" rx="10" fill="rgba(251,146,60,.08)" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="582" y="62" text-anchor="middle" fill="#fb923c" font-size="20">⚡</text>
+  <text x="582" y="82" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">Real-Time OS</text>
+  <text x="582" y="97" text-anchor="middle" fill="#e2e8f0" font-size="9">الوقت الفعلي</text>
+  <text x="582" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">استجابة فورية</text>
+  <text x="582" y="126" text-anchor="middle" fill="#94a3b8" font-size="8.5">طيارات · مستشفيات · سيارات</text>
+
+  <!-- Row 2 -->
+  <rect x="18" y="155" width="200" height="100" rx="10" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="118" y="179" text-anchor="middle" fill="#fbbf24" font-size="20">🌐</text>
+  <text x="118" y="199" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Distributed OS</text>
+  <text x="118" y="214" text-anchor="middle" fill="#e2e8f0" font-size="9">الموزعة ⭐</text>
+  <text x="118" y="230" text-anchor="middle" fill="#94a3b8" font-size="8.5">توزيع الحمل</text>
+  <text x="118" y="245" text-anchor="middle" fill="#94a3b8" font-size="8.5">على أجهزة متعددة عبر الشبكة</text>
+
+  <rect x="250" y="155" width="200" height="100" rx="10" fill="rgba(129,140,248,.08)" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="350" y="179" text-anchor="middle" fill="#818cf8" font-size="20">🔄</text>
+  <text x="350" y="199" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">Multiprocessor OS</text>
+  <text x="350" y="214" text-anchor="middle" fill="#e2e8f0" font-size="9">المعالجات المتعددة</text>
+  <text x="350" y="230" text-anchor="middle" fill="#94a3b8" font-size="8.5">عدة معالجات في جهاز واحد</text>
+  <text x="350" y="245" text-anchor="middle" fill="#94a3b8" font-size="8.5">لتوزيع المهام وتسريع الأداء</text>
+
+  <rect x="482" y="155" width="200" height="100" rx="10" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="582" y="179" text-anchor="middle" fill="#34d399" font-size="20">🖥️</text>
+  <text x="582" y="199" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">واجهات المستخدم</text>
+  <text x="582" y="214" text-anchor="middle" fill="#e2e8f0" font-size="9">CLI / GUI / Touch ⭐</text>
+  <text x="582" y="230" text-anchor="middle" fill="#94a3b8" font-size="8.5">CLI = أوامر نصية</text>
+  <text x="582" y="245" text-anchor="middle" fill="#94a3b8" font-size="8.5">GUI = أيقونات رسومية</text>
+  <text x="582" y="260" text-anchor="middle" fill="#94a3b8" font-size="8.5">Touch = لمس الشاشة</text>
+</svg>
+</div>
+
+<h3>💻 واجهات المستخدم: تجربة تفاعلية</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">⬇️ جرّب الفرق بنفسك! اكتب أوامر في سطر الأوامر أو انقر في واجهة GUI</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.5rem 0">
+
+<!-- CLI Terminal -->
+<div class="inter-box">
+  <div class="inter-title">🖥️ CLI — سطر الأوامر</div>
+  <div class="terminal" id="cli-terminal">
+    <div class="terminal-bar">
+      <div class="tb" style="background:#ff5f57"></div>
+      <div class="tb" style="background:#ffbd2e"></div>
+      <div class="tb" style="background:#28c840"></div>
+      <span style="color:#666;font-size:.7rem;margin-right:auto">bash — terminal</span>
+    </div>
+    <div class="t-out" id="cli-out">مرحباً! اكتب أمراً في الأسفل (جرّب: ls، pwd، help)
+</div>
+    <div class="t-in-row">
+      <span class="t-prompt">user@os:~$&nbsp;</span>
+      <input class="t-input" id="cli-inp" placeholder="اكتب أمراً..." onkeydown="if(event.key==='Enter')cliExec()" autocomplete="off" spellcheck="false"/>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:#64748b;margin-top:.3rem">💡 جرّب: ls · pwd · whoami · mkdir · date · help</p>
+</div>
+
+<!-- GUI Desktop -->
+<div class="inter-box">
+  <div class="inter-title">🪟 GUI — الواجهة الرسومية</div>
+  <div id="gui-desktop" style="background:#1a1a2e;border-radius:8px;padding:.6rem;min-height:160px;position:relative">
+    <div style="background:#2d2d4e;border-radius:4px;height:18px;display:flex;align-items:center;padding:0 .4rem;margin-bottom:.5rem">
+      <span style="font-size:.65rem;color:#94a3b8">🗂️ سطح المكتب</span>
+      <div style="margin-right:auto;display:flex;gap:3px">
+        <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#ffbd2e"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem">
+      <div class="gui-icon" onclick="guiClick(this,'فتح مستعرض الملفات... عرض: المستندات، الصور، التنزيلات')" style="text-align:center;cursor:pointer;padding:.4rem;border-radius:6px;transition:.2s">
+        <div style="font-size:1.6rem">📁</div><div style="font-size:.6rem;color:#94a3b8">الملفات</div>
+      </div>
+      <div class="gui-icon" onclick="guiClick(this,'فتح المتصفح... تحميل الصفحة الرئيسية')" style="text-align:center;cursor:pointer;padding:.4rem;border-radius:6px;transition:.2s">
+        <div style="font-size:1.6rem">🌐</div><div style="font-size:.6rem;color:#94a3b8">المتصفح</div>
+      </div>
+      <div class="gui-icon" onclick="guiClick(this,'فتح الإعدادات... تحميل لوحة التحكم')" style="text-align:center;cursor:pointer;padding:.4rem;border-radius:6px;transition:.2s">
+        <div style="font-size:1.6rem">⚙️</div><div style="font-size:.6rem;color:#94a3b8">الإعدادات</div>
+      </div>
+      <div class="gui-icon" onclick="guiClick(this,'فتح محرر النصوص... مستند جديد')" style="text-align:center;cursor:pointer;padding:.4rem;border-radius:6px;transition:.2s">
+        <div style="font-size:1.6rem">📝</div><div style="font-size:.6rem;color:#94a3b8">المحرر</div>
+      </div>
+    </div>
+    <div id="gui-msg" style="margin-top:.5rem;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);border-radius:6px;padding:.4rem;font-size:.75rem;color:#818cf8;min-height:36px;display:flex;align-items:center">
+      👆 انقر على أي أيقونة لترى ما يحدث!
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:#64748b;margin-top:.3rem">💡 نفس النتيجة — لكن بدون كتابة أوامر!</p>
+</div>
+</div>
+
+<div class="tip" style="margin-top:.5rem">
+<b>⭐ الفرق الأساسي:</b> CLI = تكتب أوامر نصية مثل <code style="background:#111;padding:.1rem .3rem;border-radius:3px">ls -la</code> | GUI = تنقر بالماوس على أيقونات. النتيجة <b>نفسها</b> — الأسلوب مختلف!
+</div>
+
+<h3>📲 استدعاءات النظام (System Calls)</h3>
+<div class="cb"><div class="lb pu">ما هي System Calls؟</div>
+هي الطريقة التي تطلب بها التطبيقات خدمات من نظام التشغيل. مثال: إنشاء ملف، قراءة بيانات، إنشاء عملية جديدة.
+</div>
+<div class="diagram">
+<svg viewBox="0 0 700 185" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="20" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">كيف تعمل استدعاءات النظام؟</text>
+  <defs>
+    <marker id="arr-sc" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#818cf8"/></marker>
+    <marker id="arr-sc2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#fb923c"/></marker>
+  </defs>
+  <!-- App -->
+  <rect x="20" y="40" width="140" height="65" rx="8" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="2"/>
+  <text x="90" y="68" text-anchor="middle" fill="#34d399" font-size="20">💻</text>
+  <text x="90" y="85" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">التطبيق</text>
+  <text x="90" y="100" text-anchor="middle" fill="#94a3b8" font-size="8">"أريد إنشاء ملف!"</text>
+  <!-- Arrow 1 -->
+  <path d="M160 72 L250 72" stroke="#818cf8" stroke-width="2" marker-end="url(#arr-sc)"/>
+  <text x="205" y="64" text-anchor="middle" fill="#818cf8" font-size="8" font-weight="bold">system_call()</text>
+  <!-- OS -->
+  <rect x="250" y="34" width="200" height="78" rx="8" fill="rgba(129,140,248,.1)" stroke="#818cf8" stroke-width="2"/>
+  <text x="350" y="62" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">نظام التشغيل</text>
+  <text x="350" y="79" text-anchor="middle" fill="#94a3b8" font-size="8.5">✅ يتحقق من الصلاحيات</text>
+  <text x="350" y="94" text-anchor="middle" fill="#94a3b8" font-size="8.5">✅ ينفذ الطلب</text>
+  <text x="350" y="107" text-anchor="middle" fill="#94a3b8" font-size="8.5">✅ يُعيد النتيجة</text>
+  <!-- Arrow 2 -->
+  <path d="M450 72 L535 72" stroke="#fb923c" stroke-width="2" marker-end="url(#arr-sc2)"/>
+  <text x="492" y="64" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="bold">أمر للجهاز</text>
+  <!-- Hardware -->
+  <rect x="535" y="40" width="145" height="65" rx="8" fill="rgba(251,146,60,.1)" stroke="#fb923c" stroke-width="2"/>
+  <text x="612" y="68" text-anchor="middle" fill="#fb923c" font-size="22">💾</text>
+  <text x="612" y="85" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">العتاد</text>
+  <text x="612" y="100" text-anchor="middle" fill="#94a3b8" font-size="8">ينشئ الملف</text>
+  <!-- Parameters row -->
+  <rect x="20" y="130" width="660" height="48" rx="8" fill="rgba(251,191,36,.06)" stroke="rgba(251,191,36,.25)"/>
+  <text x="350" y="150" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">طرق تمرير المعاملات في System Calls:</text>
+  <text x="155" y="168" text-anchor="middle" fill="#34d399" font-size="9">📋 السجلات (Registers) ← الأسرع ⭐</text>
+  <text x="350" y="168" text-anchor="middle" fill="#818cf8" font-size="9">📊 كتل في الذاكرة (Block)</text>
+  <text x="545" y="168" text-anchor="middle" fill="#fb923c" font-size="9">📚 المكدس (Stack)</text>
+</svg>
+</div>
+</div>`;
+
+S.t2=`<div class="card">
+<h2 style="color:#38bdf8">🏗️ هيكل نظام التشغيل</h2>
+<div class="ez">هيكل نظام التشغيل = كيف بُني هذا البرنامج من الداخل؟ تماماً مثل المباني — يمكن بناؤها بطرق مختلفة: طابق واحد كبير، أو عدة طوابق منظمة، أو غرفة مركزية صغيرة مع خدمات خارجية.</div>
+
+<h3>🏢 أنواع الهياكل الثلاثة</h3>
+<div class="diagram">
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="380" y="22" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="bold">أنواع هياكل نظام التشغيل — مقارنة بصرية</text>
+
+  <!-- 1: Simple/Monolithic -->
+  <rect x="18" y="38" width="225" height="280" rx="10" fill="rgba(56,189,248,.06)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="130" y="60" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">① الهيكل البسيط</text>
+  <text x="130" y="75" text-anchor="middle" fill="#94a3b8" font-size="9">Simple / Monolithic</text>
+  <!-- layers stacked -->
+  <rect x="30" y="90" width="200" height="32" rx="5" fill="rgba(56,189,248,.2)" stroke="#38bdf8"/>
+  <text x="130" y="110" text-anchor="middle" fill="#e2e8f0" font-size="9" font-weight="bold">تطبيقات المستخدم</text>
+  <rect x="30" y="128" width="200" height="60" rx="5" fill="rgba(56,189,248,.35)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="130" y="148" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">نظام التشغيل كله</text>
+  <text x="130" y="163" text-anchor="middle" fill="#94a3b8" font-size="8.5">في طبقة واحدة ضخمة</text>
+  <text x="130" y="178" text-anchor="middle" fill="#94a3b8" font-size="8">إدارة ملفات+ذاكرة+CPU+I/O</text>
+  <rect x="30" y="194" width="200" height="32" rx="5" fill="rgba(56,189,248,.5)" stroke="#38bdf8"/>
+  <text x="130" y="214" text-anchor="middle" fill="#e2e8f0" font-size="9" font-weight="bold">العتاد (Hardware)</text>
+  <!-- verdict -->
+  <rect x="30" y="238" width="200" height="65" rx="6" fill="rgba(0,0,0,.3)"/>
+  <text x="130" y="258" text-anchor="middle" fill="#34d399" font-size="8.5">✅ سريع جداً</text>
+  <text x="130" y="273" text-anchor="middle" fill="#f87171" font-size="8.5">❌ صعب الصيانة</text>
+  <text x="130" y="288" text-anchor="middle" fill="#f87171" font-size="8.5">❌ إذا تعطّل جزء = انهار الكل</text>
+  <text x="130" y="305" text-anchor="middle" fill="#94a3b8" font-size="8">مثال: MS-DOS القديم</text>
+
+  <!-- 2: Layered -->
+  <rect x="268" y="38" width="225" height="280" rx="10" fill="rgba(52,211,153,.06)" stroke="#34d399" stroke-width="2"/>
+  <text x="380" y="60" text-anchor="middle" fill="#34d399" font-size="12" font-weight="bold">② الهيكل الطبقي</text>
+  <text x="380" y="75" text-anchor="middle" fill="#94a3b8" font-size="9">Layered Structure</text>
+  <!-- 5 layers -->
+  <rect x="280" y="90" width="200" height="24" rx="4" fill="rgba(52,211,153,.1)" stroke="#34d399"/>
+  <text x="380" y="106" text-anchor="middle" fill="#e2e8f0" font-size="8.5">طبقة 5: واجهة المستخدم (UI)</text>
+  <rect x="280" y="118" width="200" height="24" rx="4" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="380" y="134" text-anchor="middle" fill="#e2e8f0" font-size="8.5">طبقة 4: إدارة الملفات</text>
+  <rect x="280" y="146" width="200" height="24" rx="4" fill="rgba(52,211,153,.22)" stroke="#34d399"/>
+  <text x="380" y="162" text-anchor="middle" fill="#e2e8f0" font-size="8.5">طبقة 3: إدارة الذاكرة</text>
+  <rect x="280" y="174" width="200" height="24" rx="4" fill="rgba(52,211,153,.30)" stroke="#34d399"/>
+  <text x="380" y="190" text-anchor="middle" fill="#e2e8f0" font-size="8.5">طبقة 2: إدارة العمليات</text>
+  <rect x="280" y="202" width="200" height="24" rx="4" fill="rgba(52,211,153,.40)" stroke="#34d399"/>
+  <text x="380" y="218" text-anchor="middle" fill="#e2e8f0" font-size="8.5">طبقة 1: العتاد (Hardware)</text>
+  <!-- arrows between layers -->
+  <text x="380" y="242" text-anchor="middle" fill="#94a3b8" font-size="8">↕ كل طبقة تتحدث مع التي تليها فقط</text>
+  <rect x="280" y="248" width="200" height="55" rx="6" fill="rgba(0,0,0,.3)"/>
+  <text x="380" y="267" text-anchor="middle" fill="#34d399" font-size="8.5">✅ تصميم منظم وسهل الصيانة</text>
+  <text x="380" y="282" text-anchor="middle" fill="#34d399" font-size="8.5">✅ سهل تحديد الأخطاء</text>
+  <text x="380" y="297" text-anchor="middle" fill="#f87171" font-size="8.5">❌ أبطأ قليلاً (مرور عبر طبقات)</text>
+  <text x="380" y="312" text-anchor="middle" fill="#94a3b8" font-size="8">مثال: THE OS</text>
+
+  <!-- 3: Microkernel -->
+  <rect x="518" y="38" width="225" height="280" rx="10" fill="rgba(251,146,60,.06)" stroke="#fb923c" stroke-width="2"/>
+  <text x="630" y="60" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="bold">③ النواة المصغرة</text>
+  <text x="630" y="75" text-anchor="middle" fill="#94a3b8" font-size="9">Microkernel</text>
+  <!-- Kernel center -->
+  <ellipse cx="630" cy="162" rx="70" ry="40" fill="rgba(251,146,60,.2)" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="630" y="155" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">النواة الصغيرة</text>
+  <text x="630" y="170" text-anchor="middle" fill="#94a3b8" font-size="8">IPC + Memory + CPU</text>
+  <!-- Services around kernel -->
+  <rect x="527" y="90" width="70" height="28" rx="5" fill="rgba(129,140,248,.15)" stroke="#818cf8"/>
+  <text x="562" y="108" text-anchor="middle" fill="#818cf8" font-size="8.5">نظام ملفات</text>
+  <rect x="527" y="210" width="70" height="28" rx="5" fill="rgba(129,140,248,.15)" stroke="#818cf8"/>
+  <text x="562" y="228" text-anchor="middle" fill="#818cf8" font-size="8.5">برامج التشغيل</text>
+  <rect x="663" y="90" width="70" height="28" rx="5" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="698" y="108" text-anchor="middle" fill="#34d399" font-size="8.5">شبكة</text>
+  <rect x="663" y="210" width="70" height="28" rx="5" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="698" y="228" text-anchor="middle" fill="#34d399" font-size="8.5">أمان</text>
+  <!-- connecting lines -->
+  <line x1="562" y1="118" x2="575" y2="132" stroke="#818cf8" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="562" y1="210" x2="575" y2="195" stroke="#818cf8" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="698" y1="118" x2="685" y2="132" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="698" y1="210" x2="685" y2="195" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2"/>
+  <!-- verdict -->
+  <rect x="527" y="248" width="200" height="55" rx="6" fill="rgba(0,0,0,.3)"/>
+  <text x="630" y="267" text-anchor="middle" fill="#34d399" font-size="8.5">✅ أمان أعلى (خدمات منفصلة)</text>
+  <text x="630" y="282" text-anchor="middle" fill="#34d399" font-size="8.5">✅ سهل التوسع والتطوير</text>
+  <text x="630" y="297" text-anchor="middle" fill="#f87171" font-size="8.5">❌ أبطأ (IPC overhead)</text>
+  <text x="630" y="312" text-anchor="middle" fill="#94a3b8" font-size="8">مثال: macOS · QNX · Minix</text>
+</svg>
+</div>
+
+<h3>📱 أمثلة حقيقية: هياكل Android و iOS</h3>
+<div class="diagram">
+<svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="370" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">هياكل أنظمة التشغيل الحقيقية</text>
+  <!-- Android -->
+  <rect x="18" y="35" width="340" height="215" rx="10" fill="rgba(52,211,153,.06)" stroke="#34d399" stroke-width="2"/>
+  <text x="188" y="58" text-anchor="middle" fill="#34d399" font-size="12" font-weight="bold">🤖 Android</text>
+  <rect x="30" y="65" width="316" height="26" rx="4" fill="rgba(52,211,153,.25)" stroke="#34d399"/>
+  <text x="188" y="81" text-anchor="middle" fill="#e2e8f0" font-size="9">تطبيقات (Gmail, WhatsApp...)</text>
+  <rect x="30" y="95" width="316" height="26" rx="4" fill="rgba(52,211,153,.2)" stroke="#34d399"/>
+  <text x="188" y="111" text-anchor="middle" fill="#e2e8f0" font-size="9">إطار عمل Java + Android API</text>
+  <rect x="30" y="125" width="316" height="26" rx="4" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="188" y="141" text-anchor="middle" fill="#e2e8f0" font-size="9">مكتبات C/C++ + Dalvik/ART</text>
+  <rect x="30" y="155" width="316" height="26" rx="4" fill="rgba(52,211,153,.12)" stroke="#34d399"/>
+  <text x="188" y="171" text-anchor="middle" fill="#e2e8f0" font-size="9">HAL — Hardware Abstraction Layer</text>
+  <rect x="30" y="185" width="316" height="26" rx="4" fill="rgba(52,211,153,.35)" stroke="#34d399" stroke-width="2"/>
+  <text x="188" y="201" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">نواة Linux المعدّلة</text>
+  <text x="188" y="240" text-anchor="middle" fill="#94a3b8" font-size="8">قائم على Linux Kernel ← هيكل طبقي</text>
+
+  <!-- iOS -->
+  <rect x="382" y="35" width="340" height="215" rx="10" fill="rgba(56,189,248,.06)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="552" y="58" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">🍎 iOS / macOS</text>
+  <rect x="394" y="65" width="316" height="26" rx="4" fill="rgba(56,189,248,.25)" stroke="#38bdf8"/>
+  <text x="552" y="81" text-anchor="middle" fill="#e2e8f0" font-size="9">تطبيقات (Cocoa Touch Frameworks)</text>
+  <rect x="394" y="95" width="316" height="26" rx="4" fill="rgba(56,189,248,.2)" stroke="#38bdf8"/>
+  <text x="552" y="111" text-anchor="middle" fill="#e2e8f0" font-size="9">Core Services (Foundation, CFNetwork)</text>
+  <rect x="394" y="125" width="316" height="26" rx="4" fill="rgba(56,189,248,.15)" stroke="#38bdf8"/>
+  <text x="552" y="141" text-anchor="middle" fill="#e2e8f0" font-size="9">Core OS — Mach + BSD Layer</text>
+  <rect x="394" y="155" width="316" height="55" rx="4" fill="rgba(56,189,248,.35)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="552" y="178" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">XNU Kernel (Microkernel)</text>
+  <text x="552" y="195" text-anchor="middle" fill="#94a3b8" font-size="8.5">Mach (مصغّرة) + BSD components</text>
+  <text x="552" y="209" text-anchor="middle" fill="#94a3b8" font-size="8">نواة مصغرة = أمان أعلى</text>
+  <text x="552" y="240" text-anchor="middle" fill="#94a3b8" font-size="8">قائم على XNU ← هيكل نواة مصغرة</text>
+</svg>
+</div>
+
+<h3>🖥️ Unix — أول نظام تشغيل حديث</h3>
+<div class="cb"><div class="lb pu">لماذا Unix مهم؟</div>
+Unix هو الأساس الذي بُنيت عليه معظم أنظمة التشغيل الحديثة: Linux · macOS · Android · iOS. فهمه = فهم كيف تعمل هذه الأنظمة!
+</div>
+<div class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold">شجرة عائلة Unix — من أين جاءت أنظمة اليوم؟</text>
+  <defs><marker id="uy" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#fbbf24"/></marker></defs>
+  <!-- Unix root -->
+  <rect x="280" y="32" width="140" height="36" rx="8" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="350" y="54" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Unix (1969)</text>
+  <!-- branches -->
+  <line x1="350" y1="68" x2="150" y2="108" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#uy)"/>
+  <line x1="350" y1="68" x2="350" y2="108" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#uy)"/>
+  <line x1="350" y1="68" x2="560" y2="108" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#uy)"/>
+  <!-- BSD -->
+  <rect x="60" y="108" width="175" height="34" rx="7" fill="rgba(56,189,248,.15)" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="147" y="129" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">BSD (1977)</text>
+  <!-- System V -->
+  <rect x="265" y="108" width="170" height="34" rx="7" fill="rgba(251,146,60,.15)" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="350" y="129" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">System V</text>
+  <!-- GNU/Linux -->
+  <rect x="470" y="108" width="175" height="34" rx="7" fill="rgba(52,211,153,.15)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="557" y="129" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">GNU/Linux (1991)</text>
+  <!-- macOS iOS -->
+  <line x1="147" y1="142" x2="90" y2="168" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#uy)"/>
+  <rect x="18" y="168" width="145" height="28" rx="6" fill="rgba(56,189,248,.1)" stroke="#38bdf8"/>
+  <text x="90" y="186" text-anchor="middle" fill="#38bdf8" font-size="9">macOS / iOS (Apple)</text>
+  <!-- Android -->
+  <line x1="557" y1="142" x2="557" y2="168" stroke="#34d399" stroke-width="1.2" marker-end="url(#uy)"/>
+  <rect x="475" y="168" width="165" height="28" rx="6" fill="rgba(52,211,153,.1)" stroke="#34d399"/>
+  <text x="557" y="186" text-anchor="middle" fill="#34d399" font-size="9">Android / Ubuntu / RedHat</text>
+</svg>
+</div>
+</div>`;
+
+S.t3=`<div class="card">
+<h2 style="color:#fb923c">⚙️ العمليات (Processes)</h2>
+
+<div class="cb o"><div class="lb or">الفرق الأساسي: برنامج vs عملية</div>
+<b>البرنامج</b> = ملف ساكن على القرص لا يفعل شيئاً. مثل كتاب على رف.<br>
+<b>العملية</b> = البرنامج <u>قيد التنفيذ</u>. مثل شخص يقرأ الكتاب فعلاً!
+</div>
+<div class="ez">عندما تضغط على Chrome ← نظام التشغيل يأخذ الملف من القرص ويضعه في الذاكرة ويبدأ تنفيذه. هذه هي "العملية". كل تبويب في Chrome = عملية منفصلة!</div>
+
+<h3>🧠 ما تحتوي عليه العملية (PCB)</h3>
+<div class="diagram">
+<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="260" y="22" text-anchor="middle" fill="#fb923c" font-size="13" font-weight="bold">مكونات العملية في الذاكرة</text>
+  <defs><marker id="pa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#94a3b8"/></marker></defs>
+
+  <!-- PCB box -->
+  <rect x="10" y="35" width="195" height="235" rx="8" fill="rgba(56,189,248,.08)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="107" y="56" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">PCB — كتلة التحكم</text>
+  <text x="107" y="70" text-anchor="middle" fill="#94a3b8" font-size="8.5">Process Control Block</text>
+  <g font-size="9" fill="#e2e8f0" style="direction:ltr;unicode-bidi:embed">
+    <text x="22" y="92">🆔 معرّف العملية (PID)</text>
+    <text x="22" y="114">📍 حالة العملية (State)</text>
+    <text x="22" y="136">💻 قيم المعالج (Registers)</text>
+    <text x="22" y="158">🧠 معلومات الذاكرة</text>
+    <text x="22" y="180">📋 معلومات الجدولة</text>
+    <text x="22" y="202">📁 الملفات المفتوحة</text>
+    <text x="22" y="224">🔗 معلومات I/O</text>
+    <text x="22" y="246">👪 PID الأب (Parent)</text>
+  </g>
+  <!-- arrow -->
+  <path d="M205 165 L225 165" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#pa)"/>
+
+  <!-- Memory layout -->
+  <rect x="225" y="35" width="285" height="235" rx="8" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="367" y="56" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">الذاكرة (RAM)</text>
+
+  <!-- Stack - 55px height -->
+  <rect x="233" y="65" width="269" height="45" rx="5" fill="rgba(251,146,60,.2)" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="367" y="84" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">🔺 المكدس (Stack)</text>
+  <text x="367" y="101" text-anchor="middle" fill="#94a3b8" font-size="8.5">متغيرات محلية · عناوين الإرجاع · ينمو للأسفل</text>
+
+  <!-- Heap - 45px height -->
+  <rect x="233" y="118" width="269" height="44" rx="5" fill="rgba(129,140,248,.2)" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="367" y="137" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">📦 الكومة (Heap)</text>
+  <text x="367" y="153" text-anchor="middle" fill="#94a3b8" font-size="8.5">ذاكرة ديناميكية (malloc/new) · ينمو للأعلى</text>
+
+  <!-- Data - 44px height -->
+  <rect x="233" y="170" width="269" height="44" rx="5" fill="rgba(52,211,153,.2)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="367" y="189" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">📊 البيانات (Data)</text>
+  <text x="367" y="205" text-anchor="middle" fill="#94a3b8" font-size="8.5">المتغيرات العامة والثابتة (Global / Static)</text>
+
+  <!-- Code - 44px height -->
+  <rect x="233" y="222" width="269" height="40" rx="5" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="367" y="239" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">📜 النص البرمجي (Code)</text>
+  <text x="367" y="255" text-anchor="middle" fill="#94a3b8" font-size="8.5">تعليمات البرنامج الثابتة (Read-Only)</text>
+</svg>
+</div>
+<div class="cb y" style="margin-top:.3rem"><div class="lb yl">⭐ للاختبار — المكونات الأربعة</div>
+<b style="color:#fb923c">Stack</b> = متغيرات محلية وعناوين الإرجاع &nbsp;|&nbsp;
+<b style="color:#818cf8">Heap</b> = ذاكرة ديناميكية (malloc) &nbsp;|&nbsp;
+<b style="color:#34d399">Data</b> = متغيرات عامة &nbsp;|&nbsp;
+<b style="color:#fbbf24">Code</b> = تعليمات البرنامج<br>
+<b style="color:#38bdf8">PCB</b> = بطاقة هوية العملية كاملة · <b style="color:#38bdf8">PID</b> = رقم تعريف فريد لكل عملية
+</div>
+
+<h3>🔄 حالات العملية — تفاعلي</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">انقر على الأزرار لترى كيف تتحرك العملية بين الحالات المختلفة</p>
+<div class="inter-box">
+  <div class="inter-title">🎮 محاكي حالات العملية</div>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start">
+    <div>
+      <canvas id="stateCanvas" width="520" height="260" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+    </div>
+    <div style="min-width:160px">
+      <div style="font-size:.78rem;color:#94a3b8;margin-bottom:.4rem">الحالة الحالية:</div>
+      <div id="stateName" style="font-size:1rem;font-weight:800;color:#fbbf24;margin-bottom:.5rem">جديدة (New)</div>
+      <div id="stateDesc" style="font-size:.75rem;color:#e2e8f0;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:6px;padding:.5rem;margin-bottom:.6rem;min-height:60px">
+        تم إنشاء العملية للتو. تنتظر دخول قائمة الجاهزة.
+      </div>
+      <div class="btn-row" style="flex-direction:column">
+        <button class="btn btn-gr" onclick="procTrans('admit')">← أدخل للجاهزة</button>
+        <button class="btn btn-pu" onclick="procTrans('dispatch')">← شغّل (Dispatch)</button>
+        <button class="btn btn-yl" onclick="procTrans('block')">← توقف لـ I/O</button>
+        <button class="btn btn-gr" onclick="procTrans('resume')">← أكمل بعد I/O</button>
+        <button class="btn btn-or" onclick="procTrans('preempt')">← أخذ CPU منها</button>
+        <button class="btn btn-re" onclick="procTrans('exit')">← أنهِ العملية</button>
+        <button class="btn btn-yl" onclick="procTrans('reset')">↺ إعادة تشغيل</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>👨‍👧 شجرة العمليات — الأب والأبناء</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">انقر "Fork" لإنشاء عملية ابن · انقر على عملية لإنهائها · جرّب سيناريو "العملية اليتيمة"</p>
+<div class="inter-box">
+  <div class="inter-title">🌳 محاكي شجرة العمليات</div>
+  <div class="btn-row">
+    <button class="btn btn-gr" onclick="forkProcess()">🍴 Fork — أنشئ ابن</button>
+    <button class="btn btn-re" onclick="killParent()">💀 اقتل الأب (أيتام)</button>
+    <button class="btn btn-yl" onclick="resetTree()">↺ إعادة تشغيل</button>
+  </div>
+  <div id="pctree-info" style="font-size:.78rem;color:#fbbf24;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:6px;padding:.4rem;margin:.3rem 0;min-height:30px">
+    PID 1 (init) هو أبو كل العمليات. اضغط Fork لإنشاء عملية ابن!
+  </div>
+  <canvas id="treeCanvas" width="580" height="220" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+</div>
+
+
+<h3>🔄 محاكي تبديل السياق (Context Switch) — شاهد كيف ينتقل CPU</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">CPU واحد فقط — كيف يُنجز مهام كثيرة في آن واحد؟ انقر "تبديل" لترى ما يحدث!</p>
+<div class="inter-box">
+  <div class="inter-title">⚡ محاكي تبديل السياق (Context Switch)</div>
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem">
+    <button class="btn btn-pu" onclick="ctxSwitch()">⚡ تبديل السياق</button>
+    <button class="btn btn-yl" onclick="ctxReset()">↺ إعادة</button>
+    <span id="ctx-msg" style="font-size:.78rem;color:#fbbf24">اضغط "تبديل" لرؤية كيف ينتقل CPU بين العمليات</span>
+  </div>
+  <canvas id="ctxCanvas" width="580" height="210" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+</div>
+
+<h3>📊 جدولة العمليات — Round Robin تفاعلي</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">أضف عمليات بزمن تنفيذها، حدد الـ Quantum، ثم شاهد كيف يُوزّع CPU الوقت!</p>
+<div class="inter-box">
+  <div class="inter-title">🎯 محاكي جدولة العمليات — Round Robin</div>
+  <!-- Input row -->
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem">
+    <span style="font-size:.78rem;color:#94a3b8">اسم العملية:</span>
+    <input id="rr-name" value="P1" maxlength="4" style="width:48px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:6px;padding:.25rem .4rem;font-size:.8rem;text-align:center"/>
+    <span style="font-size:.78rem;color:#94a3b8">زمن التنفيذ (ms):</span>
+    <input id="rr-burst" type="number" value="5" min="1" max="20" style="width:52px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:6px;padding:.25rem .4rem;font-size:.8rem;text-align:center"/>
+    <button class="btn btn-gr" onclick="rrAdd()">➕ أضف عملية</button>
+    <span style="font-size:.78rem;color:#94a3b8;margin-right:.5rem">Quantum:</span>
+    <input id="rr-q" type="number" value="3" min="1" max="10" style="width:48px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:6px;padding:.25rem .4rem;font-size:.8rem;text-align:center"/>
+    <button class="btn btn-pu" onclick="rrRun()">▶ تشغيل</button>
+    <button class="btn btn-yl" onclick="rrReset()">↺ مسح</button>
+  </div>
+  <!-- Process list -->
+  <div id="rr-procs" style="display:flex;flex-wrap:wrap;gap:.3rem;min-height:28px;margin-bottom:.4rem"></div>
+  <!-- Gantt Chart canvas -->
+  <canvas id="rrCanvas" width="580" height="140" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+  <div id="rr-stats" style="font-size:.76rem;margin-top:.3rem;color:#94a3b8;min-height:20px"></div>
+</div>
+<h3>🌐 مثال عملي: Chrome والعمليات المتعددة</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">لماذا Chrome يفتح عملية لكل تبويب؟</text>
+  <defs><marker id="cr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#94a3b8"/></marker></defs>
+  <!-- Chrome main -->
+  <rect x="260" y="38" width="180" height="44" rx="8" fill="rgba(129,140,248,.15)" stroke="#818cf8" stroke-width="2"/>
+  <text x="350" y="58" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">🌐 Chrome الرئيسي</text>
+  <text x="350" y="73" text-anchor="middle" fill="#94a3b8" font-size="8">العملية الأم — PID: 1042</text>
+  <!-- Tabs -->
+  <line x1="310" y1="82" x2="130" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#cr)"/>
+  <line x1="330" y1="82" x2="270" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#cr)"/>
+  <line x1="370" y1="82" x2="430" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#cr)"/>
+  <line x1="390" y1="82" x2="570" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#cr)"/>
+  <!-- Tab processes -->
+  <rect x="40" y="115" width="180" height="48" rx="7" fill="rgba(52,211,153,.1)" stroke="#34d399"/>
+  <text x="130" y="136" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">📘 تبويب: YouTube</text>
+  <text x="130" y="150" text-anchor="middle" fill="#94a3b8" font-size="8">PID: 1043 — عملية مستقلة</text>
+  <rect x="230" y="115" width="175" height="48" rx="7" fill="rgba(56,189,248,.1)" stroke="#38bdf8"/>
+  <text x="318" y="136" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">📄 تبويب: Gmail</text>
+  <text x="318" y="150" text-anchor="middle" fill="#94a3b8" font-size="8">PID: 1044 — عملية مستقلة</text>
+  <rect x="415" y="115" width="175" height="48" rx="7" fill="rgba(251,146,60,.1)" stroke="#fb923c"/>
+  <text x="502" y="136" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">🎮 تبويب: لعبة</text>
+  <text x="502" y="150" text-anchor="middle" fill="#94a3b8" font-size="8">PID: 1045 — عملية مستقلة</text>
+  <rect x="598" y="115" width="90" height="48" rx="7" fill="rgba(251,191,36,.1)" stroke="#fbbf24"/>
+  <text x="643" y="136" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="bold">GPU Process</text>
+  <text x="643" y="150" text-anchor="middle" fill="#94a3b8" font-size="7">PID: 1046</text>
+  <!-- Benefit box -->
+  <rect x="18" y="178" width="664" height="46" rx="8" fill="rgba(52,211,153,.06)" stroke="rgba(52,211,153,.3)"/>
+  <text x="350" y="198" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">✅ لماذا عملية لكل تبويب؟</text>
+  <text x="350" y="215" text-anchor="middle" fill="#e2e8f0" font-size="9">الأمان: إذا تعطل تبويب واحد لا يتأثر الباقي | العزل: كل تبويب له ذاكرته المنفصلة | الأداء: توزيع على عدة أنوية CPU</text>
+</svg>
+</div>
+
+<div class="cb g"><div class="lb gr">⭐ أسئلة شائعة في الاختبار:</div>
+• <b>العملية اليتيمة (Orphan):</b> العملية الأب تنتهي قبل الابن ← الابن يُعاد تبنيه بواسطة init (PID=1)<br>
+• <b>Zombie Process:</b> العملية الابن انتهت لكن الأب لم يقرأ حالتها بعد ← تبقى في جدول العمليات<br>
+• <b>عداد البرنامج (Program Counter):</b> سجل يحدد عنوان التعليمة التالية التي ستُنفّذ
+</div>
+</div>`;
+
+S.t4=`<div class="card">
+<h2 style="color:#34d399">🔗 التواصل بين العمليات (IPC)</h2>
+
+<div class="ez">العمليات قد تحتاج للتحدث مع بعضها. مثل موظفين في مكتب — بعضهم يعمل بشكل مستقل وبعضهم يتشارك المهام. IPC هو طريقة تحدّثهم.</div>
+
+<h3>⚡ مستقلة vs متعاونة</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">عمليات مستقلة vs عمليات متعاونة</text>
+  <!-- Independent -->
+  <rect x="18" y="38" width="320" height="150" rx="10" fill="rgba(52,211,153,.07)" stroke="#34d399" stroke-width="2"/>
+  <text x="178" y="60" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">مستقلة (Independent)</text>
+  <rect x="40" y="72" width="80" height="50" rx="6" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="80" y="100" text-anchor="middle" fill="#34d399" font-size="20">📱</text>
+  <text x="80" y="115" text-anchor="middle" fill="#94a3b8" font-size="8">تطبيق A</text>
+  <rect x="218" y="72" width="80" height="50" rx="6" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="258" y="100" text-anchor="middle" fill="#34d399" font-size="20">📷</text>
+  <text x="258" y="115" text-anchor="middle" fill="#94a3b8" font-size="8">تطبيق B</text>
+  <!-- no connection line with X -->
+  <line x1="120" y1="97" x2="218" y2="97" stroke="#f87171" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="169" y="93" text-anchor="middle" fill="#f87171" font-size="14">✗</text>
+  <text x="178" y="140" text-anchor="middle" fill="#94a3b8" font-size="9">لا تؤثر ولا تتأثر ببعضها</text>
+  <text x="178" y="156" text-anchor="middle" fill="#94a3b8" font-size="8.5">كل عملية لها بياناتها المنفصلة تماماً</text>
+  <text x="178" y="172" text-anchor="middle" fill="#34d399" font-size="8.5">✅ أمان أعلى</text>
+  <!-- Cooperative -->
+  <rect x="362" y="38" width="320" height="150" rx="10" fill="rgba(129,140,248,.07)" stroke="#818cf8" stroke-width="2"/>
+  <text x="522" y="60" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">متعاونة (Cooperating)</text>
+  <rect x="384" y="72" width="80" height="50" rx="6" fill="rgba(129,140,248,.15)" stroke="#818cf8"/>
+  <text x="424" y="100" text-anchor="middle" fill="#818cf8" font-size="20">✏️</text>
+  <text x="424" y="115" text-anchor="middle" fill="#94a3b8" font-size="8">المحرر</text>
+  <defs><marker id="ic" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#818cf8"/></marker></defs>
+  <line x1="464" y1="97" x2="560" y2="97" stroke="#818cf8" stroke-width="2.5" marker-end="url(#ic)"/>
+  <text x="512" y="89" text-anchor="middle" fill="#818cf8" font-size="8" font-weight="bold">IPC</text>
+  <rect x="560" y="72" width="80" height="50" rx="6" fill="rgba(129,140,248,.15)" stroke="#818cf8"/>
+  <text x="600" y="100" text-anchor="middle" fill="#818cf8" font-size="20">🖨️</text>
+  <text x="600" y="115" text-anchor="middle" fill="#94a3b8" font-size="8">الطباعة</text>
+  <text x="522" y="140" text-anchor="middle" fill="#94a3b8" font-size="9">تتشارك البيانات والمهام</text>
+  <text x="522" y="156" text-anchor="middle" fill="#94a3b8" font-size="8.5">تحتاج لتنسيق وتزامن</text>
+  <text x="522" y="172" text-anchor="middle" fill="#818cf8" font-size="8.5">⚡ أداء أعلى للمهام المشتركة</text>
+</svg>
+</div>
+
+<h3>💡 أساليب IPC: ذاكرة مشتركة vs تمرير رسائل</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">طريقتا التواصل بين العمليات</text>
+  <defs>
+    <marker id="i1" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#fb923c"/></marker>
+    <marker id="i2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#34d399"/></marker>
+  </defs>
+  <!-- Shared Memory -->
+  <rect x="18" y="38" width="320" height="170" rx="10" fill="rgba(251,146,60,.07)" stroke="#fb923c" stroke-width="2"/>
+  <text x="178" y="58" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">① الذاكرة المشتركة (Shared Memory)</text>
+  <!-- Process A -->
+  <rect x="30" y="70" width="80" height="44" rx="6" fill="rgba(251,146,60,.2)" stroke="#fb923c"/>
+  <text x="70" y="88" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">عملية A</text>
+  <text x="70" y="103" text-anchor="middle" fill="#94a3b8" font-size="7.5">المنتج</text>
+  <!-- Shared region -->
+  <rect x="130" y="68" width="90" height="48" rx="6" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="175" y="88" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">منطقة</text>
+  <text x="175" y="101" text-anchor="middle" fill="#fbbf24" font-size="9">مشتركة</text>
+  <text x="175" y="114" text-anchor="middle" fill="#94a3b8" font-size="7">Shared Mem</text>
+  <!-- Process B -->
+  <rect x="240" y="70" width="80" height="44" rx="6" fill="rgba(251,146,60,.2)" stroke="#fb923c"/>
+  <text x="280" y="88" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">عملية B</text>
+  <text x="280" y="103" text-anchor="middle" fill="#94a3b8" font-size="7.5">المستهلك</text>
+  <line x1="110" y1="92" x2="130" y2="92" stroke="#fb923c" stroke-width="2" marker-end="url(#i1)"/>
+  <line x1="220" y1="92" x2="240" y2="92" stroke="#fb923c" stroke-width="2" marker-end="url(#i1)"/>
+  <text x="178" y="135" text-anchor="middle" fill="#34d399" font-size="8.5">✅ أسرع (بدون نسخ)</text>
+  <text x="178" y="150" text-anchor="middle" fill="#34d399" font-size="8.5">✅ مناسب للبيانات الكبيرة</text>
+  <text x="178" y="165" text-anchor="middle" fill="#f87171" font-size="8.5">❌ يحتاج تزامن (synchronization)</text>
+  <text x="178" y="180" text-anchor="middle" fill="#94a3b8" font-size="8">مثال: الإنتاج والاستهلاك (Producer-Consumer)</text>
+  <text x="178" y="198" text-anchor="middle" fill="#94a3b8" font-size="8">المنطقة المشتركة تُنشأ بـ shmget()</text>
+
+  <!-- Message Passing -->
+  <rect x="362" y="38" width="320" height="170" rx="10" fill="rgba(52,211,153,.07)" stroke="#34d399" stroke-width="2"/>
+  <text x="522" y="58" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">② تمرير الرسائل (Message Passing)</text>
+  <rect x="374" y="70" width="80" height="44" rx="6" fill="rgba(52,211,153,.2)" stroke="#34d399"/>
+  <text x="414" y="88" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">عملية A</text>
+  <text x="414" y="103" text-anchor="middle" fill="#94a3b8" font-size="7.5">send(msg)</text>
+  <!-- Message arrow -->
+  <rect x="466" y="78" width="55" height="28" rx="5" fill="rgba(52,211,153,.25)" stroke="#34d399"/>
+  <text x="493" y="93" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">📩 رسالة</text>
+  <line x1="454" y1="92" x2="466" y2="92" stroke="#34d399" stroke-width="2" marker-end="url(#i2)"/>
+  <line x1="521" y1="92" x2="535" y2="92" stroke="#34d399" stroke-width="2" marker-end="url(#i2)"/>
+  <rect x="535" y="70" width="130" height="44" rx="6" fill="rgba(52,211,153,.2)" stroke="#34d399"/>
+  <text x="600" y="88" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">عملية B</text>
+  <text x="600" y="103" text-anchor="middle" fill="#94a3b8" font-size="7.5">receive(msg)</text>
+  <text x="522" y="135" text-anchor="middle" fill="#34d399" font-size="8.5">✅ بدون ذاكرة مشتركة</text>
+  <text x="522" y="150" text-anchor="middle" fill="#34d399" font-size="8.5">✅ أبسط في التنسيق</text>
+  <text x="522" y="165" text-anchor="middle" fill="#f87171" font-size="8.5">❌ أبطأ (نسخ البيانات)</text>
+  <text x="522" y="180" text-anchor="middle" fill="#94a3b8" font-size="8">مثال: الشبكات والأنظمة الموزعة</text>
+  <text x="522" y="198" text-anchor="middle" fill="#94a3b8" font-size="8">send() + receive() هي الوظيفتان الأساسيتان</text>
+</svg>
+</div>
+
+<h3>📬 تمرير الرسائل: مباشر vs غير مباشر</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">التواصل المباشر vs غير المباشر</text>
+  <defs>
+    <marker id="dm" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#818cf8"/></marker>
+    <marker id="im" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#a78bfa"/></marker>
+  </defs>
+  <!-- Direct -->
+  <rect x="18" y="38" width="320" height="150" rx="10" fill="rgba(129,140,248,.07)" stroke="#818cf8" stroke-width="2"/>
+  <text x="178" y="58" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">مباشر (Direct)</text>
+  <rect x="30" y="70" width="90" height="44" rx="6" fill="rgba(129,140,248,.2)" stroke="#818cf8"/>
+  <text x="75" y="96" text-anchor="middle" fill="#818cf8" font-size="10">عملية A</text>
+  <line x1="120" y1="92" x2="215" y2="92" stroke="#818cf8" stroke-width="2.5" marker-end="url(#dm)"/>
+  <text x="167" y="84" text-anchor="middle" fill="#818cf8" font-size="9">send(B, msg)</text>
+  <rect x="215" y="70" width="110" height="44" rx="6" fill="rgba(129,140,248,.2)" stroke="#818cf8"/>
+  <text x="270" y="96" text-anchor="middle" fill="#818cf8" font-size="10">عملية B</text>
+  <text x="178" y="135" text-anchor="middle" fill="#94a3b8" font-size="8.5">كل عملية تحدد اسم العملية الأخرى</text>
+  <text x="178" y="150" text-anchor="middle" fill="#94a3b8" font-size="8">send(B, msg) + receive(A, msg)</text>
+  <text x="178" y="165" text-anchor="middle" fill="#94a3b8" font-size="8">رابط واحد بين كل زوج من العمليات</text>
+  <text x="178" y="180" text-anchor="middle" fill="#f87171" font-size="8.5">❌ صعب التعديل إذا تغير اسم العملية</text>
+
+  <!-- Indirect -->
+  <rect x="362" y="38" width="320" height="150" rx="10" fill="rgba(167,139,250,.07)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="522" y="58" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">غير مباشر (Indirect) ⭐</text>
+  <rect x="374" y="70" width="80" height="44" rx="6" fill="rgba(167,139,250,.2)" stroke="#a78bfa"/>
+  <text x="414" y="96" text-anchor="middle" fill="#a78bfa" font-size="10">عملية A</text>
+  <!-- Mailbox -->
+  <rect x="466" y="65" width="70" height="54" rx="8" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="501" y="86" text-anchor="middle" fill="#fbbf24" font-size="18">📮</text>
+  <text x="501" y="102" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="bold">صندوق</text>
+  <text x="501" y="112" text-anchor="middle" fill="#fbbf24" font-size="8">البريد</text>
+  <line x1="454" y1="92" x2="466" y2="92" stroke="#a78bfa" stroke-width="2" marker-end="url(#im)"/>
+  <line x1="536" y1="92" x2="545" y2="92" stroke="#a78bfa" stroke-width="2" marker-end="url(#im)"/>
+  <rect x="545" y="70" width="125" height="44" rx="6" fill="rgba(167,139,250,.2)" stroke="#a78bfa"/>
+  <text x="607" y="96" text-anchor="middle" fill="#a78bfa" font-size="10">عملية B</text>
+  <text x="522" y="135" text-anchor="middle" fill="#94a3b8" font-size="8.5">التواصل عبر صندوق بريد (Mailbox/Port)</text>
+  <text x="522" y="150" text-anchor="middle" fill="#94a3b8" font-size="8">send(mailbox_id, msg) + receive(mailbox_id)</text>
+  <text x="522" y="165" text-anchor="middle" fill="#34d399" font-size="8.5">✅ مرن — أي عملية يمكنها الاتصال</text>
+  <text x="522" y="180" text-anchor="middle" fill="#94a3b8" font-size="8">يمكن أن يتشارك صندوق بريد واحد عدة عمليات</text>
+</svg>
+</div>
+
+<h3>🚰 الأنابيب (Pipes) — تفاعلية</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">شاهد كيف تتدفق البيانات من عملية لأخرى عبر الأنابيب!</p>
+<div class="inter-box">
+  <div class="inter-title">🎮 محاكي الأنابيب — أرسل رسالتك عبر الأنبوب!</div>
+  <div class="btn-row">
+    <button class="btn btn-or" onclick="setPipeMode('ordinary')" id="btn-ord" style="border-width:2px">🔧 أنبوب عادي</button>
+    <button class="btn btn-pu" onclick="setPipeMode('named')" id="btn-named">📛 أنبوب مُسمّى</button>
+    <button class="btn btn-yl" onclick="resetPipe()">↺ إعادة</button>
+  </div>
+  <div id="pipe-info" style="font-size:.78rem;color:#fb923c;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2);border-radius:6px;padding:.4rem;margin:.3rem 0">
+    <b>الأنبوب العادي (Ordinary Pipe):</b> يتطلب علاقة أب-ابن | أحادي الاتجاه | يختفي عند انتهاء العمليات
+  </div>
+  <!-- Message input row -->
+  <div style="display:flex;gap:.5rem;align-items:center;margin:.4rem 0;background:#0a0f1e;border-radius:8px;padding:.5rem">
+    <span style="font-size:.78rem;color:#fb923c;white-space:nowrap">✏️ عملية A يرسل:</span>
+    <input id="pipe-msg-in" type="text" value="مرحبا من عملية A!" maxlength="30"
+      style="flex:1;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:6px;padding:.3rem .5rem;font-size:.8rem;font-family:inherit;direction:rtl"
+      onkeydown="if(event.key==='Enter')sendPipeMsg()"/>
+    <button class="btn btn-gr" onclick="sendPipeMsg()" style="white-space:nowrap">📨 إرسال</button>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:#94a3b8;margin-bottom:.3rem">
+    <span>📤 عملية A (المُرسِل)</span>
+    <span id="pipe-recv-label" style="color:#818cf8">📥 عملية B (المُستقبِل)</span>
+  </div>
+  <canvas id="pipeCanvas" width="580" height="230" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+  <div id="pipe-recv-box" style="background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.2);border-radius:6px;padding:.4rem;margin-top:.3rem;font-size:.8rem;min-height:32px;color:#34d399;display:none">
+    📥 استلمت عملية B: <span id="pipe-recv-text"></span>
+  </div>
+</div>
+
+
+<h3>🏭 مشكلة المنتج والمستهلك — تفاعلي</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">شاهد كيف يشترك برنامجان في نفس الذاكرة — وماذا يحدث بدون تزامن!</p>
+<div class="inter-box">
+  <div class="inter-title">🔄 المنتج والمستهلك (Producer-Consumer)</div>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem;align-items:center">
+    <button class="btn btn-gr" onclick="pcProduce()" id="btn-produce">📦 المنتج يُنتج</button>
+    <button class="btn btn-pu" onclick="pcConsume()" id="btn-consume">🛒 المستهلك يأخذ</button>
+    <button class="btn btn-or" onclick="pcToggleSync()" id="btn-sync" style="border-width:2px">🔒 التزامن: مُفعّل</button>
+    <button class="btn btn-yl" onclick="pcReset()">↺ إعادة</button>
+    <span id="pc-status" style="font-size:.78rem;color:#34d399">Buffer: 0 / 5 عناصر</span>
+  </div>
+  <!-- Buffer visualization -->
+  <div style="display:flex;gap:.4rem;margin:.4rem 0;align-items:center;justify-content:center">
+    <div style="text-align:center;font-size:.72rem;color:#34d399">
+      <div style="font-size:1.2rem">🏭</div>
+      <div>المنتج</div>
+      <div id="pc-prod-count" style="color:#94a3b8">أنتج: 0</div>
+    </div>
+    <div id="pc-buffer" style="display:flex;gap:3px;align-items:center;background:#0d1117;border:2px solid #334155;border-radius:8px;padding:.4rem;min-width:180px;height:48px">
+    </div>
+    <div style="text-align:center;font-size:.72rem;color:#818cf8">
+      <div style="font-size:1.2rem">🛒</div>
+      <div>المستهلك</div>
+      <div id="pc-cons-count" style="color:#94a3b8">استهلك: 0</div>
+    </div>
+  </div>
+  <div id="pc-log" style="background:#000;border-radius:6px;padding:.4rem;font-size:.72rem;font-family:monospace;max-height:80px;overflow-y:auto;color:#94a3b8">
+    انتظار العمليات...
+  </div>
+</div>
+<div class="cb y"><div class="lb yl">⭐ جدول المقارنة للاختبار</div>
+<div class="tw"><table>
+<tr><th>الخاصية</th><th>أنبوب عادي (Ordinary)</th><th>أنبوب مسمى (Named)</th></tr>
+<tr><td>العلاقة المطلوبة</td><td style="color:#f87171">أب-ابن (Parent-Child) ⭐</td><td style="color:#34d399">أي عمليتين</td></tr>
+<tr><td>الاتجاه</td><td>أحادي (Unidirectional)</td><td>ثنائي (Bidirectional)</td></tr>
+<tr><td>البقاء</td><td>يختفي بعد انتهاء العمليات</td><td style="color:#34d399">يبقى في النظام ⭐</td></tr>
+<tr><td>الاسم</td><td>بلا اسم</td><td>له اسم في نظام الملفات /tmp/pipe</td></tr>
+<tr><td>الاستخدام</td><td>cmd1 | cmd2 في Terminal</td><td>اتصال بين برامج مختلفة</td></tr>
+</table></div>
+</div>
+</div>`;
+
+S.t5=`<div class="card">
+<h2 style="color:#38bdf8">🧠 إدارة الذاكرة</h2>
+<div class="ez">الذاكرة في الكمبيوتر مثل مكتبك — لها رفوف ومساحات مختلفة السرعة والحجم. المعالج يبحث في أقرب رف أولاً (Registers)، ثم الثاني (Cache)، ثم الثالث (RAM)...</div>
+
+<h3>🏔️ هرم التخزين — انقر على كل مستوى لتعرف أكثر!</h3>
+<div class="inter-box">
+  <div class="inter-title">💡 هرم التخزين التفاعلي</div>
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start">
+    <!-- HTML div-based pyramid - 100% reliable clicks -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0;position:relative;padding:0 10px;min-width:240px">
+      <!-- Speed labels -->
+      <div style="position:absolute;right:0;top:10px;font-size:.65rem;color:#94a3b8;text-align:right;line-height:2">
+        🚀 أسرع<br>💰 أغلى<br>📦 أصغر
+      </div>
+      <div style="position:absolute;right:0;bottom:30px;font-size:.65rem;color:#94a3b8;text-align:right;line-height:2">
+        🐢 أبطأ<br>💵 أرخص<br>📦 أكبر
+      </div>
+      <!-- Pyramid levels -->
+      <div onclick="showMemLevel(0)" id="mld0"
+        style="width:88px;padding:.5rem 0;margin:2px 0;text-align:center;cursor:pointer;
+               background:rgba(248,113,113,.3);border:2px solid #f87171;border-radius:6px;
+               color:#f87171;font-size:.75rem;font-weight:800;transition:all .15s;user-select:none"
+        onmouseenter="this.style.filter='brightness(1.4)'" onmouseleave="this.style.filter=''">
+        ⚡ Registers
+      </div>
+      <div onclick="showMemLevel(1)" id="mld1"
+        style="width:140px;padding:.5rem 0;margin:2px 0;text-align:center;cursor:pointer;
+               background:rgba(251,146,60,.28);border:2px solid #fb923c;border-radius:6px;
+               color:#fb923c;font-size:.75rem;font-weight:800;transition:all .15s;user-select:none"
+        onmouseenter="this.style.filter='brightness(1.4)'" onmouseleave="this.style.filter=''">
+        🔶 Cache L1/L2/L3
+      </div>
+      <div onclick="showMemLevel(2)" id="mld2"
+        style="width:190px;padding:.5rem 0;margin:2px 0;text-align:center;cursor:pointer;
+               background:rgba(251,191,36,.22);border:2px solid #fbbf24;border-radius:6px;
+               color:#fbbf24;font-size:.75rem;font-weight:800;transition:all .15s;user-select:none"
+        onmouseenter="this.style.filter='brightness(1.4)'" onmouseleave="this.style.filter=''">
+        🟡 RAM — الذاكرة الرئيسية
+      </div>
+      <div onclick="showMemLevel(3)" id="mld3"
+        style="width:225px;padding:.5rem 0;margin:2px 0;text-align:center;cursor:pointer;
+               background:rgba(52,211,153,.18);border:2px solid #34d399;border-radius:6px;
+               color:#34d399;font-size:.75rem;font-weight:800;transition:all .15s;user-select:none"
+        onmouseenter="this.style.filter='brightness(1.4)'" onmouseleave="this.style.filter=''">
+        🟢 SSD / HDD — القرص الصلب
+      </div>
+      <div onclick="showMemLevel(4)" id="mld4"
+        style="width:258px;padding:.5rem 0;margin:2px 0;text-align:center;cursor:pointer;
+               background:rgba(129,140,248,.15);border:2px solid #818cf8;border-radius:6px;
+               color:#818cf8;font-size:.75rem;font-weight:800;transition:all .15s;user-select:none"
+        onmouseenter="this.style.filter='brightness(1.4)'" onmouseleave="this.style.filter=''">
+        🔵 تخزين الشبكة / Cloud
+      </div>
+      <p style="font-size:.65rem;color:#475569;margin-top:.4rem;text-align:center">👆 انقر على أي مستوى</p>
+    </div>
+    <div>
+      <div id="mem-info" style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.25);border-radius:10px;padding:.8rem;font-size:.82rem">
+        <div style="color:#818cf8;font-weight:800;font-size:.9rem;margin-bottom:.4rem" id="mem-name">اختر مستوى من الهرم</div>
+        <div id="mem-detail" style="color:#e2e8f0;line-height:2">
+          👆 انقر على أي مستوى في هرم التخزين لترى تفاصيله: السرعة، الحجم، التقنية المستخدمة، وأين تقع داخل الكمبيوتر.
+        </div>
+      </div>
+      <div id="mem-table" style="margin-top:.6rem;font-size:.76rem;display:none">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h3>🎮 لعبة تخصيص الذاكرة — شاهد التجزئة (Fragmentation)</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">خصّص ذاكرة للعمليات واحرر بعضها — شاهد كيف تنشأ التجزئة!</p>
+<div class="inter-box">
+  <div class="inter-title">📦 محاكي تخصيص الذاكرة</div>
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem">
+    <span style="font-size:.78rem;color:#94a3b8">خوارزمية:</span>
+    <button class="btn btn-gr" id="ma-ff" onclick="setMemAlgo('ff')" style="border-width:2px">First Fit</button>
+    <button class="btn btn-pu" id="ma-bf" onclick="setMemAlgo('bf')">Best Fit</button>
+    <button class="btn btn-or" id="ma-wf" onclick="setMemAlgo('wf')">Worst Fit</button>
+  </div>
+  <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem">
+    <button class="btn btn-gr" onclick="maAlloc(1)">➕ صغيرة (100MB)</button>
+    <button class="btn btn-yl" onclick="maAlloc(2)">➕ متوسطة (200MB)</button>
+    <button class="btn btn-or" onclick="maAlloc(3)">➕ كبيرة (300MB)</button>
+    <button class="btn btn-re" onclick="maFree()">🗑️ احرر عشوائية</button>
+    <button class="btn btn-yl" onclick="maReset()">↺ إعادة</button>
+  </div>
+  <!-- Memory grid -->
+  <div id="ma-grid" style="display:flex;flex-wrap:nowrap;gap:2px;height:55px;margin-bottom:.5rem;border:1px solid #1f2937;border-radius:8px;overflow:hidden;background:#0d1117;padding:4px"></div>
+  <!-- Legend -->
+  <div id="ma-legend" style="display:flex;gap:.5rem;flex-wrap:wrap;font-size:.72rem;margin-bottom:.3rem"></div>
+  <!-- Stats -->
+  <div id="ma-stats" style="font-size:.78rem;color:#94a3b8;background:rgba(0,0,0,.3);border-radius:6px;padding:.4rem;font-family:monospace"></div>
+</div>
+<h3>🧮 الذاكرة الافتراضية (Virtual Memory)</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="bold">كيف تعمل الذاكرة الافتراضية؟</text>
+  <defs>
+    <marker id="vm1" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#38bdf8"/></marker>
+    <marker id="vm2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#34d399"/></marker>
+  </defs>
+  <!-- Program view -->
+  <rect x="18" y="38" width="180" height="165" rx="8" fill="rgba(56,189,248,.08)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="108" y="58" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">نظرة التطبيق</text>
+  <text x="108" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">(Virtual Address Space)</text>
+  <g font-size="8.5" fill="#e2e8f0">
+    <rect x="30" y="78" width="140" height="20" rx="3" fill="rgba(56,189,248,.15)" stroke="#38bdf8"/>
+    <text x="100" y="92" text-anchor="middle" fill="#38bdf8">0x0000 Stack</text>
+    <rect x="30" y="100" width="140" height="20" rx="3" fill="rgba(56,189,248,.12)" stroke="#38bdf8"/>
+    <text x="100" y="114" text-anchor="middle" fill="#38bdf8">0x1000 Heap</text>
+    <rect x="30" y="122" width="140" height="20" rx="3" fill="rgba(56,189,248,.1)" stroke="#38bdf8"/>
+    <text x="100" y="136" text-anchor="middle" fill="#38bdf8">0x2000 Data</text>
+    <rect x="30" y="144" width="140" height="20" rx="3" fill="rgba(56,189,248,.08)" stroke="#38bdf8"/>
+    <text x="100" y="158" text-anchor="middle" fill="#38bdf8">0x3000 Code</text>
+  </g>
+  <text x="108" y="188" text-anchor="middle" fill="#34d399" font-size="8.5">يرى ذاكرة متواصلة كاملة</text>
+  <text x="108" y="200" text-anchor="middle" fill="#94a3b8" font-size="8">4 GB مثلاً</text>
+
+  <!-- Arrow with OS -->
+  <rect x="215" y="95" width="120" height="50" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24"/>
+  <text x="275" y="115" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">OS + MMU</text>
+  <text x="275" y="128" text-anchor="middle" fill="#94a3b8" font-size="8">يترجم العناوين</text>
+  <text x="275" y="140" text-anchor="middle" fill="#94a3b8" font-size="8">الافتراضية للحقيقية</text>
+  <path d="M198 120 L215 120" stroke="#38bdf8" stroke-width="2" marker-end="url(#vm1)"/>
+  <path d="M335 120 L350 120" stroke="#34d399" stroke-width="2" marker-end="url(#vm2)"/>
+
+  <!-- Physical RAM -->
+  <rect x="350" y="38" width="160" height="165" rx="8" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="2"/>
+  <text x="430" y="58" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">RAM الفعلية</text>
+  <text x="430" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">8 GB فقط مثلاً</text>
+  <rect x="362" y="78" width="136" height="22" rx="3" fill="rgba(52,211,153,.25)" stroke="#34d399"/>
+  <text x="430" y="93" text-anchor="middle" fill="#34d399" font-size="8.5">Page Frame 0: Code</text>
+  <rect x="362" y="102" width="136" height="22" rx="3" fill="rgba(52,211,153,.2)" stroke="#34d399"/>
+  <text x="430" y="117" text-anchor="middle" fill="#34d399" font-size="8.5">Page Frame 1: Data</text>
+  <rect x="362" y="126" width="136" height="22" rx="3" fill="rgba(251,191,36,.2)" stroke="#fbbf24"/>
+  <text x="430" y="141" text-anchor="middle" fill="#fbbf24" font-size="8.5">Page Frame 2: Heap</text>
+  <rect x="362" y="150" width="136" height="22" rx="3" fill="rgba(56,189,248,.2)" stroke="#38bdf8"/>
+  <text x="430" y="165" text-anchor="middle" fill="#38bdf8" font-size="8.5">Page Frame 3: Stack</text>
+  <text x="430" y="190" text-anchor="middle" fill="#94a3b8" font-size="8">الصفحات (Pages): 4KB كل منها</text>
+  <text x="430" y="202" text-anchor="middle" fill="#94a3b8" font-size="8">جدول الصفحات يربط بينها</text>
+
+  <!-- HDD overflow -->
+  <rect x="530" y="60" width="155" height="100" rx="8" fill="rgba(248,113,113,.08)" stroke="#f87171" stroke-width="2"/>
+  <text x="607" y="78" text-anchor="middle" fill="#f87171" font-size="9" font-weight="bold">HDD/SSD</text>
+  <text x="607" y="92" text-anchor="middle" fill="#94a3b8" font-size="8">Swap Space / Page File</text>
+  <text x="607" y="108" text-anchor="middle" fill="#f87171" font-size="18">💾</text>
+  <text x="607" y="132" text-anchor="middle" fill="#94a3b8" font-size="7.5">عندما تمتلئ RAM</text>
+  <text x="607" y="145" text-anchor="middle" fill="#94a3b8" font-size="7.5">OS يحرك الصفحات هنا</text>
+  <text x="607" y="158" text-anchor="middle" fill="#f87171" font-size="7.5">← هذا يُبطئ الكمبيوتر!</text>
+  <path d="M510 100 L530 100" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#vm1)"/>
+  <text x="520" y="95" text-anchor="middle" fill="#94a3b8" font-size="7">swap</text>
+
+  <!-- Result box -->
+
+</svg>
+</div>
+<div class="tip">
+<b>⭐ الذاكرة الافتراضية:</b> تُتيح للتطبيق استخدام ذاكرة أكبر من RAM الفعلية — OS يُخزّن الأجزاء غير المستخدمة مؤقتاً في القرص الصلب.
+</div>
+
+<h3>📦 التخصيص الثابت vs الديناميكي</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="22" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="bold">طريقتا تخصيص الذاكرة للعمليات</text>
+  <!-- Static -->
+  <rect x="18" y="38" width="320" height="170" rx="10" fill="rgba(129,140,248,.07)" stroke="#818cf8" stroke-width="2"/>
+  <text x="178" y="58" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">① التخصيص الثابت (Static Partitioning) ⭐</text>
+  <!-- Fixed partitions -->
+  <rect x="30" y="68" width="145" height="30" rx="4" fill="rgba(129,140,248,.3)" stroke="#818cf8"/>
+  <text x="102" y="87" text-anchor="middle" fill="#e2e8f0" font-size="9">قسم 1 — 50MB (محجوز)</text>
+  <rect x="180" y="68" width="145" height="30" rx="4" fill="rgba(129,140,248,.3)" stroke="#818cf8"/>
+  <text x="252" y="87" text-anchor="middle" fill="#e2e8f0" font-size="9">قسم 2 — 50MB (محجوز)</text>
+  <rect x="30" y="104" width="145" height="30" rx="4" fill="rgba(52,211,153,.3)" stroke="#34d399"/>
+  <text x="102" y="123" text-anchor="middle" fill="#34d399" font-size="9">عملية A — 30MB فعلياً</text>
+  <text x="102" y="135" text-anchor="middle" fill="#f87171" font-size="7.5">↑ 20MB مهدرة!</text>
+  <rect x="180" y="104" width="145" height="30" rx="4" fill="rgba(56,189,248,.3)" stroke="#38bdf8"/>
+  <text x="252" y="123" text-anchor="middle" fill="#38bdf8" font-size="9">عملية B — 45MB فعلياً</text>
+  <text x="252" y="135" text-anchor="middle" fill="#f87171" font-size="7.5">↑ 5MB مهدرة!</text>
+  <text x="178" y="162" text-anchor="middle" fill="#34d399" font-size="8.5">✅ سريع وبسيط</text>
+  <text x="178" y="177" text-anchor="middle" fill="#f87171" font-size="8.5">❌ هدر الذاكرة (Internal Fragmentation) ⭐</text>
+  <text x="178" y="194" text-anchor="middle" fill="#94a3b8" font-size="8">تُقسّم الذاكرة لأقسام ثابتة مسبقاً</text>
+
+  <!-- Dynamic -->
+  <rect x="362" y="38" width="320" height="170" rx="10" fill="rgba(52,211,153,.07)" stroke="#34d399" stroke-width="2"/>
+  <text x="522" y="58" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">② التخصيص الديناميكي (Dynamic)</text>
+  <rect x="374" y="68" width="90" height="30" rx="4" fill="rgba(52,211,153,.3)" stroke="#34d399"/>
+  <text x="419" y="87" text-anchor="middle" fill="#34d399" font-size="9">عملية A: 30MB</text>
+  <rect x="468" y="68" width="100" height="30" rx="4" fill="rgba(56,189,248,.3)" stroke="#38bdf8"/>
+  <text x="518" y="87" text-anchor="middle" fill="#38bdf8" font-size="9">عملية B: 45MB</text>
+  <rect x="572" y="68" width="98" height="30" rx="4" fill="rgba(251,146,60,.3)" stroke="#fb923c"/>
+  <text x="621" y="87" text-anchor="middle" fill="#fb923c" font-size="9">عملية C: 25MB</text>
+  <rect x="374" y="102" width="205" height="30" rx="4" fill="rgba(248,113,113,.2)" stroke="#f87171" stroke-dasharray="4,3"/>
+  <text x="476" y="121" text-anchor="middle" fill="#f87171" font-size="9">فراغ (Hole) — 50MB متاحة</text>
+  <text x="522" y="155" text-anchor="middle" fill="#34d399" font-size="8.5">✅ استخدام أفضل للذاكرة</text>
+  <text x="522" y="170" text-anchor="middle" fill="#f87171" font-size="8.5">❌ شذرات خارجية (External Fragmentation) ⭐</text>
+  <text x="522" y="185" text-anchor="middle" fill="#94a3b8" font-size="8">تُخصّص الذاكرة بحسب احتياج العملية الفعلي</text>
+  <text x="522" y="200" text-anchor="middle" fill="#94a3b8" font-size="8">First Fit / Best Fit / Worst Fit</text>
+</svg>
+</div>
+</div>`;
+
+S.t6=`<div class="card">
+<h2 style="color:#fb923c">💾 إدارة I/O والملفات</h2>
+
+<h3>⌨️ أجهزة الإدخال والإخراج</h3>
+<div class="diagram">
+<svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="370" y="22" text-anchor="middle" fill="#fb923c" font-size="13" font-weight="bold">أجهزة I/O — أين تتصل بالكمبيوتر؟</text>
+
+  <!-- Computer box center -->
+  <rect x="280" y="55" width="180" height="140" rx="10" fill="#111827" stroke="#818cf8" stroke-width="2.5"/>
+  <text x="370" y="80" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">الكمبيوتر</text>
+  <rect x="295" y="88" width="150" height="28" rx="5" fill="rgba(251,191,36,.15)" stroke="#fbbf24"/>
+  <text x="370" y="106" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">CPU + RAM</text>
+  <rect x="295" y="120" width="150" height="26" rx="5" fill="rgba(129,140,248,.15)" stroke="#818cf8"/>
+  <text x="370" y="137" text-anchor="middle" fill="#818cf8" font-size="9">ناقل البيانات (Bus)</text>
+  <rect x="295" y="150" width="150" height="26" rx="5" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="370" y="167" text-anchor="middle" fill="#34d399" font-size="9">وحدة تحكم I/O</text>
+
+  <!-- Block devices (left top) -->
+  <rect x="18" y="45" width="240" height="90" rx="8" fill="rgba(52,211,153,.07)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="138" y="62" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">أجهزة الكتل (Block) ⭐</text>
+  <text x="138" y="76" text-anchor="middle" fill="#94a3b8" font-size="8">تنقل بيانات على شكل كتل/بلوكات</text>
+  <text x="50" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">💾</text>
+  <text x="50" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">HDD/SSD</text>
+  <text x="105" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">📀</text>
+  <text x="105" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">DVD</text>
+  <text x="160" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">🔌</text>
+  <text x="160" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">USB</text>
+  <text x="215" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">💿</text>
+  <text x="215" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">Memory Card</text>
+  <!-- Line to computer -->
+  <line x1="258" y1="90" x2="280" y2="120" stroke="#34d399" stroke-width="2"/>
+
+  <!-- Character devices (left bottom) -->
+  <rect x="18" y="155" width="240" height="90" rx="8" fill="rgba(56,189,248,.07)" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="138" y="172" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">أجهزة الأحرف (Character) ⭐</text>
+  <text x="138" y="186" text-anchor="middle" fill="#94a3b8" font-size="8">تنقل البيانات حرفاً حرفاً</text>
+  <text x="50" y="215" text-anchor="middle" fill="#e2e8f0" font-size="20">⌨️</text>
+  <text x="50" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">Keyboard</text>
+  <text x="105" y="215" text-anchor="middle" fill="#e2e8f0" font-size="20">🖱️</text>
+  <text x="105" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">Mouse</text>
+  <text x="160" y="215" text-anchor="middle" fill="#e2e8f0" font-size="20">🖨️</text>
+  <text x="160" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">Printer</text>
+  <text x="215" y="215" text-anchor="middle" fill="#e2e8f0" font-size="20">📡</text>
+  <text x="215" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">Modem</text>
+  <!-- Line to computer -->
+  <line x1="258" y1="200" x2="280" y2="153" stroke="#38bdf8" stroke-width="2"/>
+
+  <!-- Output devices (right top) -->
+  <rect x="484" y="45" width="240" height="90" rx="8" fill="rgba(251,146,60,.07)" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="604" y="62" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">أجهزة الإخراج (Output)</text>
+  <text x="604" y="76" text-anchor="middle" fill="#94a3b8" font-size="8">تُخرج البيانات من الكمبيوتر</text>
+  <text x="532" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">🖥️</text>
+  <text x="532" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">Monitor</text>
+  <text x="580" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">🔊</text>
+  <text x="580" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">Speakers</text>
+  <text x="634" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">🖨️</text>
+  <text x="634" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">Printer</text>
+  <text x="688" y="105" text-anchor="middle" fill="#e2e8f0" font-size="20">💡</text>
+  <text x="688" y="120" text-anchor="middle" fill="#94a3b8" font-size="8">LED</text>
+  <line x1="484" y1="90" x2="460" y2="120" stroke="#fb923c" stroke-width="2"/>
+
+  <!-- DMA box (right bottom) -->
+  <rect x="484" y="155" width="240" height="90" rx="8" fill="rgba(167,139,250,.07)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="604" y="172" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="bold">DMA — الوصول المباشر للذاكرة ⭐</text>
+  <text x="604" y="186" text-anchor="middle" fill="#94a3b8" font-size="8">نقل البيانات بدون المرور بـ CPU</text>
+  <text x="604" y="210" text-anchor="middle" fill="#a78bfa" font-size="22">⚡</text>
+  <text x="604" y="232" text-anchor="middle" fill="#94a3b8" font-size="8">الجهاز يكتب مباشرة في RAM</text>
+  <text x="604" y="244" text-anchor="middle" fill="#94a3b8" font-size="7.5">يحرر CPU للعمل بمهام أخرى</text>
+  <line x1="484" y1="200" x2="460" y2="163" stroke="#a78bfa" stroke-width="2"/>
+</svg>
+</div>
+
+<h3>📄 نظام الملفات</h3>
+
+<h3>📂 متصفح نظام الملفات — تفاعلي</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">انتقل بين المجلدات، أنشئ وأحذف الملفات — تماماً كما يحدث في الحاسب!</p>
+<div class="inter-box">
+  <div class="inter-title">🗂️ محاكي نظام الملفات (Linux)</div>
+  <!-- Toolbar -->
+  <div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-bottom:.5rem">
+    <button class="btn btn-gr" onclick="fbCreate('file')">📄 ملف جديد</button>
+    <button class="btn btn-pu" onclick="fbCreate('dir')">📁 مجلد جديد</button>
+    <button class="btn btn-re" onclick="fbDelete()">🗑️ حذف المحدد</button>
+    <button class="btn btn-yl" onclick="fbUp()">⬆️ مجلد أعلى</button>
+    <code id="fb-path" style="background:#0d1117;border:1px solid #334155;border-radius:5px;padding:.2rem .5rem;font-size:.75rem;color:#34d399;flex:1;min-width:120px">/</code>
+  </div>
+  <!-- File list -->
+  <div id="fb-list" style="background:#0d1117;border:1px solid #1f2937;border-radius:8px;min-height:160px;max-height:200px;overflow-y:auto;font-family:monospace;font-size:.75rem"></div>
+  <!-- Status bar -->
+  <div id="fb-status" style="font-size:.72rem;color:#64748b;margin-top:.3rem;padding:.2rem .4rem;background:#0d1117;border-radius:4px">
+    inode: - | النوع: - | الحجم: -
+  </div>
+  <!-- Info -->
+  <div class="tip" style="margin-top:.4rem">
+    <b>⭐ كيف يعمل نظام الملفات:</b> كل ملف أو مجلد له رقم inode فريد | المجلد = جدول يربط الأسماء بأرقام inode | OS يبحث في جدول inode للوصول للبيانات
+  </div>
+</div>
+<div class="tw"><table>
+<tr><th>نوع الملف</th><th>الامتداد</th><th>الوصف</th><th>مثال</th></tr>
+<tr><td>ملف عادي</td><td>.txt .pdf .mp4</td><td>يحتوي بيانات المستخدم</td><td>مستند Word</td></tr>
+<tr><td><b style="color:#818cf8">دليل (Directory) ⭐</b></td><td>—</td><td>مجلد يحتوي ملفات أخرى</td><td>مجلد المستندات</td></tr>
+<tr><td>ملف خاص</td><td>/dev/...</td><td>يُمثّل جهازاً في Unix/Linux</td><td>/dev/sda (قرص)</td></tr>
+<tr><td>رابط رمزي</td><td>.lnk / symlink</td><td>اختصار يشير لملف آخر</td><td>Shortcut على سطح المكتب</td></tr>
+</table></div>
+
+<h3>🌳 هيكل الدليل (Directory Structure)</h3>
+<div class="diagram">
+<svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="370" y="22" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">شجرة الدليل في Linux/Unix</text>
+
+  <!-- Root -->
+  <rect x="320" y="35" width="100" height="36" rx="8" fill="rgba(52,211,153,.2)" stroke="#34d399" stroke-width="2.5"/>
+  <text x="370" y="50" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">📁 /</text>
+  <text x="370" y="65" text-anchor="middle" fill="#94a3b8" font-size="8">الجذر (root)</text>
+
+  <!-- Level 1 connections - vertical from root center bottom -->
+  <line x1="370" y1="71" x2="370" y2="88" stroke="#34d399" stroke-width="1.5"/>
+  <!-- Horizontal line connecting level 1 nodes -->
+  <line x1="80" y1="88" x2="660" y2="88" stroke="#34d399" stroke-width="1.5"/>
+  <!-- Vertical drops to level 1 boxes -->
+  <line x1="80" y1="88" x2="80" y2="105" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="220" y1="88" x2="220" y2="105" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="370" y1="88" x2="370" y2="105" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="520" y1="88" x2="520" y2="105" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="660" y1="88" x2="660" y2="105" stroke="#34d399" stroke-width="1.5"/>
+
+  <!-- Level 1 nodes -->
+  <rect x="30" y="105" width="100" height="34" rx="6" fill="rgba(56,189,248,.15)" stroke="#38bdf8"/>
+  <text x="80" y="120" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">📁 /home</text>
+  <text x="80" y="132" text-anchor="middle" fill="#94a3b8" font-size="7.5">مجلدات المستخدمين</text>
+
+  <rect x="170" y="105" width="100" height="34" rx="6" fill="rgba(251,146,60,.15)" stroke="#fb923c"/>
+  <text x="220" y="120" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">📁 /bin</text>
+  <text x="220" y="132" text-anchor="middle" fill="#94a3b8" font-size="7.5">البرامج الأساسية</text>
+
+  <rect x="320" y="105" width="100" height="34" rx="6" fill="rgba(251,191,36,.15)" stroke="#fbbf24"/>
+  <text x="370" y="120" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">📁 /etc</text>
+  <text x="370" y="132" text-anchor="middle" fill="#94a3b8" font-size="7.5">ملفات الإعداد</text>
+
+  <rect x="470" y="105" width="100" height="34" rx="6" fill="rgba(167,139,250,.15)" stroke="#a78bfa"/>
+  <text x="520" y="120" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">📁 /usr</text>
+  <text x="520" y="132" text-anchor="middle" fill="#94a3b8" font-size="7.5">برامج المستخدم</text>
+
+  <rect x="610" y="105" width="100" height="34" rx="6" fill="rgba(248,113,113,.15)" stroke="#f87171"/>
+  <text x="660" y="120" text-anchor="middle" fill="#f87171" font-size="9" font-weight="bold">📁 /tmp</text>
+  <text x="660" y="132" text-anchor="middle" fill="#94a3b8" font-size="7.5">الملفات المؤقتة</text>
+
+  <!-- Level 2 under /home - مجدي and ريما -->
+  <line x1="80" y1="139" x2="80" y2="158" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="38" y1="158" x2="122" y2="158" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="38" y1="158" x2="38" y2="174" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="122" y1="158" x2="122" y2="174" stroke="#38bdf8" stroke-width="1.5"/>
+
+  <rect x="8" y="174" width="60" height="32" rx="5" fill="rgba(56,189,248,.12)" stroke="#38bdf8"/>
+  <text x="38" y="188" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">👤 مجدي</text>
+  <text x="38" y="200" text-anchor="middle" fill="#94a3b8" font-size="7">/home/majdi</text>
+
+  <rect x="92" y="174" width="60" height="32" rx="5" fill="rgba(56,189,248,.12)" stroke="#38bdf8"/>
+  <text x="122" y="188" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">👤 ريما</text>
+  <text x="122" y="200" text-anchor="middle" fill="#94a3b8" font-size="7">/home/rima</text>
+
+  <!-- Level 3 under مجدي -->
+  <line x1="38" y1="206" x2="38" y2="222" stroke="#38bdf8" stroke-width="1.2"/>
+  <line x1="18" y1="222" x2="58" y2="222" stroke="#38bdf8" stroke-width="1.2"/>
+  <line x1="18" y1="222" x2="18" y2="237" stroke="#38bdf8" stroke-width="1.2"/>
+  <line x1="58" y1="222" x2="58" y2="237" stroke="#38bdf8" stroke-width="1.2"/>
+  <rect x="4" y="237" width="28" height="24" rx="4" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width=".8"/>
+  <text x="18" y="248" text-anchor="middle" fill="#94a3b8" font-size="6.5">📄 Docs</text>
+  <text x="18" y="258" text-anchor="middle" fill="#94a3b8" font-size="5.5">/home/majdi/docs</text>
+  <rect x="44" y="237" width="28" height="24" rx="4" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width=".8"/>
+  <text x="58" y="248" text-anchor="middle" fill="#94a3b8" font-size="6.5">🖼️ Pics</text>
+  <text x="58" y="258" text-anchor="middle" fill="#94a3b8" font-size="5.5">/home/majdi/pics</text>
+
+  <!-- Level 2 under /usr -->
+  <line x1="520" y1="139" x2="520" y2="158" stroke="#a78bfa" stroke-width="1.5"/>
+  <line x1="468" y1="158" x2="572" y2="158" stroke="#a78bfa" stroke-width="1.5"/>
+  <line x1="468" y1="158" x2="468" y2="174" stroke="#a78bfa" stroke-width="1.5"/>
+  <line x1="520" y1="158" x2="520" y2="174" stroke="#a78bfa" stroke-width="1.5"/>
+  <line x1="572" y1="158" x2="572" y2="174" stroke="#a78bfa" stroke-width="1.5"/>
+
+  <rect x="440" y="174" width="56" height="28" rx="5" fill="rgba(167,139,250,.12)" stroke="#a78bfa"/>
+  <text x="468" y="186" text-anchor="middle" fill="#a78bfa" font-size="7.5" font-weight="bold">📁 /bin</text>
+  <text x="468" y="196" text-anchor="middle" fill="#94a3b8" font-size="6.5">برامج</text>
+
+  <rect x="494" y="174" width="52" height="28" rx="5" fill="rgba(167,139,250,.12)" stroke="#a78bfa"/>
+  <text x="520" y="186" text-anchor="middle" fill="#a78bfa" font-size="7.5" font-weight="bold">📁 /lib</text>
+  <text x="520" y="196" text-anchor="middle" fill="#94a3b8" font-size="6.5">مكتبات</text>
+
+  <rect x="546" y="174" width="56" height="28" rx="5" fill="rgba(167,139,250,.12)" stroke="#a78bfa"/>
+  <text x="574" y="186" text-anchor="middle" fill="#a78bfa" font-size="7.5" font-weight="bold">📁 /share</text>
+  <text x="574" y="196" text-anchor="middle" fill="#94a3b8" font-size="6.5">بيانات</text>
+
+  <!-- Key info box -->
+  <rect x="170" y="200" width="300" height="90" rx="8" fill="rgba(251,191,36,.06)" stroke="rgba(251,191,36,.3)"/>
+  <text x="320" y="220" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">⭐ عمليات الملفات الأساسية للاختبار</text>
+  <text x="182" y="238" fill="#e2e8f0" font-size="8.5">📋 Create — إنشاء ملف</text>
+  <text x="182" y="253" fill="#e2e8f0" font-size="8.5">🗑️ Delete — حذف ملف</text>
+  <text x="182" y="268" fill="#e2e8f0" font-size="8.5">✍️ Write — كتابة البيانات</text>
+  <text x="305" y="238" fill="#e2e8f0" font-size="8.5">📖 Read — قراءة البيانات</text>
+  <text x="305" y="253" fill="#e2e8f0" font-size="8.5">📍 Seek — تحديد الموضع</text>
+  <text x="305" y="268" fill="#e2e8f0" font-size="8.5">🔁 Reposition — إعادة تحديد</text>
+</svg>
+</div>
+
+<div class="cb g"><div class="lb gr">⭐ DMA — الوصول المباشر للذاكرة</div>
+بدون DMA: الجهاز → CPU → RAM (CPU مشغول!)<br>
+مع DMA: الجهاز → RAM مباشرة (CPU حر للعمل بمهام أخرى) ← أسرع وأكفأ!
+</div>
+</div>`;
+
+S.tq=`<div class="card">
+<h2 style="color:#fbbf24">👩‍🏫 أسئلة الأستاذة (27 سؤال)</h2>
+<div class="tip">⭐ هذه الأسئلة هي الأكثر احتمالاً في الاختبار — راجعها جيداً!</div>
+
+<h3>📚 الموضوع 1: ما هو نظام التشغيل؟</h3>
+<div class="qc"><h4>س1: ما هو نظام التشغيل؟ وما وظيفته الأساسية؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+نظام التشغيل هو برنامج وسيط بين المستخدم وأجهزة الحاسب. وظيفته: إدارة موارد الجهاز (CPU، ذاكرة، I/O) وتوفير بيئة لتشغيل التطبيقات. أمثلة: Windows، Linux، macOS، Android.
+</div></div>
+
+<div class="qc"><h4>س2: ما هي أهداف نظام التشغيل؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+① <b>الاستفادة القصوى من الموارد</b> — استخدام CPU والذاكرة بكفاءة<br>
+② <b>سهولة الاستخدام</b> — توفير واجهة مريحة<br>
+③ <b>الأمان</b> — حماية الملفات والبيانات<br>
+④ <b>اكتشاف الأخطاء</b> — كشف المشكلات في العتاد والبرامج<br>
+⑤ <b>إدارة الموارد</b> — توزيع الذاكرة والمعالج بين البرامج
+</div></div>
+
+<div class="qc"><h4>س3: ما الفرق بين CLI و GUI؟ أعطِ مثالاً.</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>CLI</b> (Command Line Interface): واجهة نصية تتطلب كتابة أوامر — مثل Terminal في Linux.<br>
+<b>GUI</b> (Graphical User Interface): واجهة رسومية تعتمد على الأيقونات والماوس — مثل Windows 11.<br>
+كلاهما يؤدي نفس المهمة بطريقة مختلفة. CLI أقوى للمتخصصين، GUI أسهل للمستخدم العادي.
+</div></div>
+
+<div class="qc"><h4>س4: ما هي استدعاءات النظام (System Calls)؟ وما طرق تمرير معاملاتها؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+System Calls هي الطريقة التي تطلب بها التطبيقات خدمات من نظام التشغيل (مثل: إنشاء ملف، قراءة بيانات).<br>
+طرق تمرير المعاملات: ① السجلات (Registers) — الأسرع ⭐ ② كتل في الذاكرة (Block) ③ المكدس (Stack)
+</div></div>
+
+<div class="qc"><h4>س5: ما هي خدمات نظام التشغيل؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+① واجهة المستخدم (UI) ② تنفيذ البرامج ③ عمليات I/O ④ التواصل ⑤ <b>اكتشاف الأخطاء ⭐</b> ⑥ توزيع الموارد ⑦ الأمان والحماية
+</div></div>
+
+<h3>📚 الموضوع 2: هيكل نظام التشغيل</h3>
+<div class="qc"><h4>س6: ما أنواع هياكل نظام التشغيل الثلاثة؟ قارن بينها.</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>① الهيكل البسيط (Simple/Monolithic):</b> نظام التشغيل كله في طبقة واحدة. ✅ سريع ❌ صعب الصيانة. مثال: MS-DOS.<br>
+<b>② الهيكل الطبقي (Layered):</b> مقسّم لطبقات (5 طبقات). ✅ سهل الصيانة ❌ أبطأ.<br>
+<b>③ النواة المصغرة (Microkernel):</b> نواة صغيرة + خدمات خارجية. ✅ أمان ❌ أبطأ (IPC). مثال: macOS.
+</div></div>
+
+<div class="qc"><h4>س7: ما الفرق بين Android و iOS من حيث الهيكل؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>Android:</b> مبني على نواة Linux المعدّلة ← هيكل طبقي<br>
+<b>iOS/macOS:</b> مبني على XNU Kernel (Mach + BSD) ← نواة مصغرة ← أمان أعلى
+</div></div>
+
+<h3>📚 الموضوع 3: العمليات</h3>
+<div class="qc"><h4>س8: ما الفرق بين البرنامج والعملية؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>البرنامج:</b> ملف ثابت (passive) على القرص الصلب — لا يفعل شيئاً.<br>
+<b>العملية:</b> البرنامج قيد التنفيذ (active) في الذاكرة — تستهلك موارد.
+</div></div>
+
+<div class="qc"><h4>س9: ما هي حالات العملية؟ اذكرها مع شرح كل حالة.</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+① <b>New (جديدة):</b> تم إنشاؤها<br>
+② <b>Ready (جاهزة):</b> تنتظر دورها على CPU<br>
+③ <b>Running (تعمل):</b> المعالج يُنفّذها الآن<br>
+④ <b>Waiting (منتظرة):</b> تنتظر I/O أو حدثاً<br>
+⑤ <b>Terminated (منتهية):</b> انتهى تنفيذها
+</div></div>
+
+<div class="qc"><h4>س10: ما هو PCB؟ ماذا يحتوي؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+PCB (Process Control Block) = بطاقة هوية العملية. يحتوي: PID، حالة العملية، قيم المعالج (Registers)، معلومات الذاكرة، معلومات الجدولة، قائمة الملفات المفتوحة.
+</div></div>
+
+<div class="qc"><h4>س11: ما هي العملية اليتيمة (Orphan)؟ وما هو Zombie Process؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>Orphan:</b> عملية أبيها انتهى قبلها ← نظام التشغيل يُعيد تبنيها بواسطة init (PID=1).<br>
+<b>Zombie:</b> عملية انتهت لكن أبيها لم يقرأ حالتها ← تبقى في جدول العمليات كـ "zombie".
+</div></div>
+
+<h3>📚 الموضوع 4: التواصل بين العمليات IPC</h3>
+<div class="qc"><h4>س12: ما الفرق بين الذاكرة المشتركة وتمرير الرسائل؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>Shared Memory:</b> العمليتان تشتركان في منطقة ذاكرة مشتركة. ✅ سريع ❌ يحتاج تزامن.<br>
+<b>Message Passing:</b> العمليات تتواصل عبر رسائل (send/receive). ✅ أبسط ❌ أبطأ (نسخ).
+</div></div>
+
+<div class="qc"><h4>س13: ما الفرق بين التواصل المباشر وغير المباشر؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>مباشر:</b> send(B, msg) — تحدد اسم العملية مباشرة. رابط واحد لكل زوج.<br>
+<b>غير مباشر (Indirect) ⭐:</b> التواصل عبر صندوق بريد (Mailbox/Port). أكثر مرونة.
+</div></div>
+
+<div class="qc"><h4>س14: ما الفرق بين Ordinary Pipe وNamed Pipe؟ ⭐</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>Ordinary Pipe ⭐:</b> يتطلب علاقة أب-ابن | أحادي الاتجاه | يختفي عند انتهاء العمليات.<br>
+<b>Named Pipe ⭐:</b> لا يتطلب علاقة أب-ابن | ثنائي الاتجاه | يبقى في النظام له اسم (/tmp/pipe).
+</div></div>
+
+<div class="qc"><h4>س15: ما هي مشكلة Producer-Consumer؟ وكيف يحلها IPC؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+المشكلة: عملية المنتج تُنتج بيانات أسرع من عملية المستهلك (أو العكس).<br>
+الحل: استخدام Buffer مشترك + Semaphore للتزامن — عبر Shared Memory أو Message Passing.
+</div></div>
+
+<h3>📚 الموضوع 5: إدارة الذاكرة</h3>
+<div class="qc"><h4>س16: ما هو هرم التخزين؟ رتّبه من الأسرع للأبطأ.</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+من الأسرع للأبطأ: Registers ← Cache (L1/L2/L3) ← RAM ← SSD/HDD ← تخزين الشبكة<br>
+كلما كان أسرع = أصغر حجماً وأغلى ثمناً
+</div></div>
+
+<div class="qc"><h4>س17: ما هي الذاكرة الافتراضية (Virtual Memory)؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+تُتيح للتطبيق استخدام ذاكرة أكبر من RAM الفعلية. OS يُخزّن الأجزاء غير المستخدمة في القرص (Swap Space). يستخدم تقنية التصفيح (Paging) لتقسيم الذاكرة لصفحات (4KB).
+</div></div>
+
+<div class="qc"><h4>س18: ما هي Fragmentation؟ نوعاها؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>Internal Fragmentation:</b> هدر داخل القسم (الذاكرة المُخصصة أكبر من الاحتياج). يحدث في التخصيص الثابت.<br>
+<b>External Fragmentation:</b> فراغات متفرقة بين العمليات لا تكفي لعملية جديدة. يحدث في التخصيص الديناميكي.
+</div></div>
+
+<h3>📚 الموضوع 6: I/O والملفات</h3>
+<div class="qc"><h4>س19: ما الفرق بين Block Device و Character Device؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+<b>Block Device ⭐:</b> ينقل البيانات على شكل كتل (blocks). أمثلة: HDD، SSD، USB، DVD.<br>
+<b>Character Device ⭐:</b> ينقل البيانات حرفاً حرفاً (byte by byte). أمثلة: Keyboard، Mouse، Printer.
+</div></div>
+
+<div class="qc"><h4>س20: ما هو DMA؟ لماذا هو مهم؟</h4>
+<div class="cb"><div class="lb pu">الإجابة:</div>
+DMA (Direct Memory Access) = نقل البيانات مباشرة بين الجهاز والذاكرة بدون المرور بـ CPU. مهم لأنه يُحرّر CPU للعمل بمهام أخرى بدلاً من الانتظار.
+</div></div>
+
+<div class="qc"><h4>س21 — س27: أسئلة إضافية مهمة</h4>
+<div class="cb"><div class="lb pu">أسئلة سريعة:</div>
+<b>س21:</b> ما هو PID؟ = رقم تعريف العملية (Process ID) — فريد لكل عملية.<br>
+<b>س22:</b> ما هو عداد البرنامج (Program Counter)؟ = سجل يحتوي عنوان التعليمة التالية.<br>
+<b>س23:</b> ما هو Dispatch (الإرسال)؟ = انتقال العملية من Ready إلى Running.<br>
+<b>س24:</b> ما هو Preemption؟ = انتزاع CPU من عملية قيد التشغيل لإعطائه لأخرى.<br>
+<b>س25:</b> ما هو Context Switch؟ = حفظ حالة العملية الحالية وتحميل حالة عملية جديدة.<br>
+<b>س26:</b> ما هو Semaphore؟ = متغير للتزامن بين العمليات (منع التضارب).<br>
+<b>س27:</b> ما هو Deadlock؟ = توقف مجموعة عمليات كل منها تنتظر موارد محتجزة من الأخرى.
+</div></div>
+</div>`;
+
+S.quiz=`<div class="card">
+<h2 style="color:#34d399">✅ اختبار ذاتي شامل (40 سؤال)</h2>
+<div class="sb"><div class="sn" id="scr">0</div><div style="color:#94a3b8;font-size:.8rem">من 40 سؤال</div>
+<button class="rb" onclick="resetQuiz()">↺ إعادة الاختبار</button></div>
+<div id="qbox"></div></div>`;
+
+const QS=[
+{q:"ما هو نظام التشغيل؟",o:["برنامج تحرير النصوص","برنامج وسيط بين المستخدم والعتاد","برنامج للتصميم الجرافيكي","برنامج ألعاب"],c:1,e:"نظام التشغيل = برنامج وسيط بين المستخدم وأجهزة الحاسب. مثل: Windows, Linux, Android."},
+{q:"أي من الآتي ليس من أهداف نظام التشغيل؟",o:["الاستفادة القصوى من الموارد","سهولة الاستخدام","تصميم المواقع الإلكترونية","اكتشاف الأخطاء"],c:2,e:"تصميم المواقع ليس من أهداف OS. الأهداف: إدارة الموارد، سهولة الاستخدام، الأمان، اكتشاف الأخطاء."},
+{q:"CLI يعني...",o:["Command Language Interface","Command Line Interface","Computer Language Interface","Control Line Interface"],c:1,e:"CLI = Command Line Interface = واجهة سطر الأوامر حيث تكتب أوامر نصية."},
+{q:"GUI تعتمد على...",o:["الأوامر النصية فقط","لغة البرمجة","الأيقونات والماوس","الذاكرة المؤقتة"],c:2,e:"GUI = Graphical User Interface = واجهة رسومية تعتمد على الأيقونات والنقر بالماوس."},
+{q:"System Calls هي...",o:["أوامر لتشغيل الألعاب","طريقة التطبيقات لطلب خدمات من OS","برامج التحكم بالشبكة","إعدادات الشاشة"],c:1,e:"System Calls = الطريقة التي تطلب بها التطبيقات خدمات من نظام التشغيل (إنشاء ملف، قراءة بيانات...)."},
+{q:"أسرع طريقة لتمرير معاملات System Calls هي...",o:["Stack (المكدس)","Block في الذاكرة","Registers (السجلات)","الشبكة"],c:2,e:"السجلات (Registers) هي الأسرع لأنها تقع داخل المعالج مباشرة."},
+{q:"الهيكل البسيط (Simple Structure) يتميز بـ...",o:["تعدد الطبقات","نواة صغيرة مع خدمات خارجية","نظام التشغيل كله في طبقة واحدة","طبقات مستقلة"],c:2,e:"Monolithic/Simple = نظام التشغيل كله في طبقة واحدة ضخمة. سريع لكن صعب الصيانة."},
+{q:"النواة المصغرة (Microkernel) تتميز بـ...",o:["وضع كل شيء في طبقة واحدة","نواة صغيرة تحوي IPC والذاكرة والمعالج فقط","5 طبقات منظمة","الاعتماد على MS-DOS"],c:1,e:"Microkernel = نواة صغيرة جداً (IPC + Memory + CPU) وكل الخدمات الأخرى خارجها. أمان أعلى."},
+{q:"Android مبني على...",o:["XNU Kernel","نواة Windows","نواة Linux المعدّلة","Mach Kernel"],c:2,e:"Android مبني على نواة Linux المعدّلة بطبقات فوقها (HAL, Libraries, Framework)."},
+{q:"iOS و macOS مبنيان على...",o:["Linux Kernel","XNU Kernel (Mach + BSD)","Windows NT Kernel","MINIX Kernel"],c:1,e:"iOS و macOS مبنيان على XNU Kernel الذي يجمع بين Mach (microkernel) و BSD components."},
+{q:"الفرق بين البرنامج والعملية هو...",o:["لا فرق بينهما","البرنامج = ملف ثابت، العملية = برنامج قيد التنفيذ","العملية = ملف ثابت، البرنامج = قيد التنفيذ","البرنامج أسرع من العملية"],c:1,e:"البرنامج = passive (ملف على القرص). العملية = active (يُنفَّذ في الذاكرة)."},
+{q:"PCB يحتوي على...",o:["بيانات المستخدم فقط","PID وحالة العملية وقيم المعالج ومعلومات الذاكرة","كود البرنامج فقط","أوامر النظام"],c:1,e:"PCB (Process Control Block) = بطاقة هوية العملية: PID، الحالة، السجلات، الذاكرة، الجدولة، الملفات المفتوحة."},
+{q:"الترتيب الصحيح لحالات العملية هو...",o:["Running → Ready → New → Waiting → Terminated","New → Ready → Running → Waiting → Terminated","Terminated → Running → New","Waiting → New → Running"],c:1,e:"الترتيب: New (إنشاء) → Ready (انتظار CPU) → Running (تنفيذ) → Waiting (انتظار I/O) → Terminated."},
+{q:"Dispatch يعني...",o:["إنهاء العملية","انتقال العملية من Ready إلى Running","انتقال العملية من Running إلى Waiting","إنشاء عملية جديدة"],c:1,e:"Dispatch = جدول يُختار عملية من قائمة Ready وينقلها إلى Running (تُعطى CPU)."},
+{q:"Orphan Process هي...",o:["عملية لا تملك بيانات","عملية أبيها انتهى قبلها","عملية منتهية لم يقرأ أبيها حالتها","عملية تعمل بدون ذاكرة"],c:1,e:"Orphan = العملية الأب انتهت قبل الابن. OS يُعيد تبني الابن لـ init (PID=1)."},
+{q:"Zombie Process هي...",o:["عملية تعمل بشكل طبيعي","عملية مُخترقة","عملية انتهت لكن أبيها لم يقرأ حالتها","عملية تستهلك كل CPU"],c:2,e:"Zombie = العملية انتهت (exit) لكن الأب لم ينفذ wait() بعد ← تبقى في جدول العمليات."},
+{q:"عملية مستقلة (Independent) تعني...",o:["تعتمد على عمليات أخرى","لا تؤثر ولا تتأثر بالعمليات الأخرى","تستخدم Shared Memory","تستخدم IPC"],c:1,e:"Independent = عملية مستقلة تماماً، بياناتها منفصلة ولا تتشارك مع عمليات أخرى."},
+{q:"أي من الآتي أسرع في IPC؟",o:["Message Passing","تمرير الرسائل","Shared Memory (الذاكرة المشتركة)","الأنابيب المسماة"],c:2,e:"Shared Memory أسرع لأن العمليات تكتب وتقرأ مباشرة من نفس منطقة الذاكرة بدون نسخ."},
+{q:"التواصل غير المباشر (Indirect) يستخدم...",o:["اسم العملية مباشرة","صندوق البريد (Mailbox/Port)","عناوين الذاكرة","بروتوكول TCP"],c:1,e:"Indirect = يتواصل عبر Mailbox أو Port. أي عملية يمكنها إرسال/استقبال من نفس الصندوق."},
+{q:"الأنبوب العادي (Ordinary Pipe) يتطلب...",o:["أي عمليتين","شبكة محلية","علاقة أب-ابن بين العمليتين","اتصالاً بالإنترنت"],c:2,e:"Ordinary Pipe يتطلب Parent-Child relationship. يُستخدم مثلاً: ls | grep txt في Terminal."},
+{q:"الأنبوب المسمى (Named Pipe) يتميز بأنه...",o:["يتطلب علاقة أب-ابن","يختفي عند انتهاء العمليات","لا يتطلب أب-ابن ويبقى في النظام","أحادي الاتجاه فقط"],c:2,e:"Named Pipe: لا يتطلب Parent-Child | ثنائي الاتجاه | يبقى في نظام الملفات بعد انتهاء العمليات."},
+{q:"ترتيب هرم التخزين من الأسرع للأبطأ هو...",o:["RAM → Cache → Registers → HDD","Registers → Cache → RAM → HDD","HDD → RAM → Cache → Registers","Cache → Registers → RAM → HDD"],c:1,e:"الترتيب: Registers (أسرع) → Cache L1/L2/L3 → RAM → SSD/HDD → Cloud (أبطأ وأكبر وأرخص)."},
+{q:"الذاكرة الافتراضية (Virtual Memory) تُتيح...",o:["تسريع المعالج","استخدام ذاكرة أكبر من RAM الفعلية","تشغيل ألعاب بدون GPU","حماية البيانات"],c:1,e:"Virtual Memory تُتيح للتطبيق استخدام ذاكرة أكبر من RAM. OS يُخزّن الأجزاء غير المستخدمة في القرص (Swap)."},
+{q:"Internal Fragmentation تحدث في...",o:["التخصيص الديناميكي","تمرير الرسائل","التخصيص الثابت (Static Partitioning)","هرم الذاكرة"],c:2,e:"Internal Fragmentation = هدر داخل القسم (مساحة مخصصة أكبر من الاحتياج). يحدث في التخصيص الثابت."},
+{q:"External Fragmentation تحدث في...",o:["التخصيص الثابت","الذاكرة الافتراضية","التخصيص الديناميكي","Registers"],c:2,e:"External Fragmentation = فراغات متفرقة بين العمليات لا تكفي لعملية جديدة. يحدث في التخصيص الديناميكي."},
+{q:"Block Device ينقل البيانات...",o:["حرفاً حرفاً","على شكل كتل (blocks)","بالأشعة الضوئية","عبر الشبكة فقط"],c:1,e:"Block Device ينقل البيانات على شكل كتل. أمثلة: HDD, SSD, USB Flash, DVD."},
+{q:"Character Device ينقل البيانات...",o:["على شكل كتل","مشفرة فقط","حرفاً حرفاً (byte by byte)","بالبث المباشر"],c:2,e:"Character Device ينقل البيانات حرفاً حرفاً. أمثلة: Keyboard, Mouse, Printer."},
+{q:"DMA يعني...",o:["Digital Memory Access","Direct Memory Access","Dynamic Memory Allocation","Distributed Memory Algorithm"],c:1,e:"DMA = Direct Memory Access = نقل البيانات مباشرة بين الجهاز والذاكرة بدون المرور بـ CPU."},
+{q:"فائدة DMA الرئيسية هي...",o:["تسريع الشبكة","تحرير CPU من مهمة النقل","زيادة حجم الذاكرة","تشغيل برامج أكثر"],c:1,e:"DMA يُحرّر CPU ليعمل بمهام أخرى بينما ينقل الجهاز بياناته مباشرة إلى RAM."},
+{q:"في هيكل الدليل، / تعني...",o:["مجلد المستخدم","الدليل الجذر (root) في Linux","مجلد النظام","مجلد التطبيقات"],c:1,e:"/ = الدليل الجذر (root directory) في Linux/Unix. كل شيء يبدأ منه: /home, /bin, /etc..."},
+{q:"Context Switch يعني...",o:["تغيير لون الشاشة","تغيير الشبكة","حفظ حالة عملية وتحميل حالة عملية أخرى","تغيير حجم الذاكرة"],c:2,e:"Context Switch = حفظ PCB العملية الحالية ثم تحميل PCB عملية أخرى. يحدث عند التبديل بين العمليات."},
+{q:"Semaphore يُستخدم لـ...",o:["تسريع الشبكة","التزامن بين العمليات ومنع التضارب","حذف الملفات","إدارة الذاكرة الافتراضية"],c:1,e:"Semaphore = متغير يُستخدم للتزامن بين العمليات. يمنع التضارب عند الوصول للموارد المشتركة."},
+{q:"Deadlock يحدث عندما...",o:["يتوقف المعالج عن العمل","كل عملية تنتظر موارد محتجزة من عمليات أخرى","تمتلئ الذاكرة","ينقطع الإنترنت"],c:1,e:"Deadlock = طريق مسدود. كل عملية تحتجز موارد وتنتظر موارد من عملية أخرى ← توقف تام."},
+{q:"Unix ظهر في عام...",o:["1995","1981","1969","2000"],c:2,e:"Unix ظهر عام 1969 في Bell Labs. هو أساس معظم أنظمة التشغيل الحديثة: Linux, macOS, Android, iOS."},
+{q:"ما هو Program Counter؟",o:["عدد برامج النظام","سجل يحتوي عنوان التعليمة التالية","ذاكرة مؤقتة","قائمة البرامج المفتوحة"],c:1,e:"Program Counter = سجل في CPU يحتوي على عنوان التعليمة التالية التي ستُنفّذ. جزء مهم من PCB."},
+{q:"Stack في ذاكرة العملية يحتوي...",o:["تعليمات البرنامج","المتغيرات العامة","المتغيرات المحلية وعناوين الإرجاع","الذاكرة الديناميكية"],c:2,e:"Stack = يحتوي المتغيرات المحلية وعناوين الإرجاع. ينمو للأسفل."},
+{q:"Heap في ذاكرة العملية يحتوي...",o:["كود البرنامج","الذاكرة المُخصصة ديناميكياً (malloc)","المتغيرات الثابتة","سجلات CPU"],c:1,e:"Heap = ذاكرة مُخصصة ديناميكياً (malloc في C، new في C++/Java). ينمو للأعلى."},
+{q:"Preemption يعني...",o:["إنشاء عملية جديدة","انتزاع CPU من عملية قيد التشغيل","إنهاء العملية","نسخ الذاكرة"],c:1,e:"Preemption = انتزاع CPU من عملية Running لإعطائه لعملية أخرى. يُستخدم في جدولة العمليات."},
+{q:"في Shared Memory، المشكلة الرئيسية هي...",o:["بطء النقل","الحاجة للتزامن (Synchronization)","عدم إمكانية المشاركة","الحاجة للأنابيب"],c:1,e:"Shared Memory سريعة لكن تحتاج تزامناً دقيقاً لمنع race conditions (Semaphore أو Mutex)."},
+{q:"لماذا يفتح Chrome عملية لكل تبويب؟",o:["لتوفير الذاكرة","للأمان وعزل التبويبات","لتسريع التحميل","لتقليل استهلاك CPU"],c:1,e:"عملية لكل تبويب = عزل تام. إذا تعطل تبويب لا يؤثر على الباقي. أمان وموثوقية أعلى."},
+{q:"Time Sharing OS يعني...",o:["تشغيل برامج دفعة واحدة","تقسيم وقت CPU بين مستخدمين متعددين","تخزين البيانات بالوقت","مشاركة الذاكرة"],c:1,e:"Time Sharing = يُقسّم CPU لشرائح زمنية صغيرة ويُوزّعها على العمليات. يجعل الكمبيوتر يبدو وكأنه يعمل بالتوازي."}
+];
+
+
+// ── Boot Process Simulator ──
+const BOOT_STEPS=[
+  {id:'power',icon:'⚡',label:'Power On',color:'#fbbf24',
+   title:'زر التشغيل — Power Button',
+   desc:'الضغط على زر التشغيل يبدأ تدفق الكهرباء من مصدر الطاقة (PSU) إلى اللوحة الرئيسية وجميع المكونات.',
+   draw:(ctx,w,h,p)=>{
+     // PSU
+     ctx.fillStyle='rgba(251,191,36,.15)';ctx.strokeStyle='#fbbf24';ctx.lineWidth=2;
+     ctx.beginPath();ctx.roundRect(20,60,120,80,8);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#fbbf24';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+     ctx.fillText('⚡ مصدر الطاقة',80,100);ctx.fillText('PSU',80,115);
+     // Arrow
+     if(p>0.2){
+       const ax=140+p*120;
+       ctx.fillStyle='#fbbf24';ctx.strokeStyle='#fbbf24';ctx.lineWidth=3;
+       ctx.beginPath();ctx.moveTo(140,100);ctx.lineTo(Math.min(ax,280),100);ctx.stroke();
+       // sparks
+       if(p>0.5){
+         ctx.fillStyle='#fff';ctx.font='14px system-ui';
+         ctx.fillText('✨',160,90);ctx.fillText('✨',200,110);ctx.fillText('✨',240,88);
+       }
+     }
+     // Motherboard
+     ctx.fillStyle='rgba(52,211,153,.08)';ctx.strokeStyle='#34d399';ctx.lineWidth=2;
+     ctx.beginPath();ctx.roundRect(280,30,280,150,10);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#34d399';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+     ctx.fillText('🖥️ اللوحة الرئيسية',420,55);
+     // CPU CPU RAM
+     if(p>0.4){
+       const al=Math.min((p-0.4)/0.6,1);
+       ctx.globalAlpha=al;
+       ctx.fillStyle='rgba(251,191,36,.2)';ctx.strokeStyle='#fbbf24';ctx.lineWidth=1.5;
+       ctx.beginPath();ctx.roundRect(295,65,80,60,6);ctx.fill();ctx.stroke();
+       ctx.fillStyle='#fbbf24';ctx.font='9px system-ui';
+       ctx.fillText('CPU',335,100);
+       ctx.fillStyle='rgba(129,140,248,.2)';ctx.strokeStyle='#818cf8';
+       ctx.beginPath();ctx.roundRect(390,65,60,60,6);ctx.fill();ctx.stroke();
+       ctx.fillStyle='#818cf8';ctx.fillText('RAM',420,100);
+       ctx.fillStyle='rgba(52,211,153,.2)';ctx.strokeStyle='#34d399';
+       ctx.beginPath();ctx.roundRect(465,65,85,60,6);ctx.fill();ctx.stroke();
+       ctx.fillStyle='#34d399';ctx.fillText('SSD/HDD',507,100);
+       ctx.globalAlpha=1;
+     }
+     ctx.fillStyle='#64748b';ctx.font='8.5px system-ui';ctx.textAlign='center';
+     ctx.fillText('الكهرباء تتدفق لجميع المكونات...',280,210);
+   }
+  },
+  {id:'bios',icon:'🔍',label:'BIOS/POST',color:'#fb923c',
+   title:'BIOS — الاختبار الذاتي للإقلاع (POST)',
+   desc:'BIOS أول برنامج يعمل. يفحص جميع المكونات: هل CPU سليم؟ هل RAM موجودة؟ هل القرص متصل؟ هذا يُسمى POST (Power-On Self Test).',
+   draw:(ctx,w,h,p)=>{
+     // BIOS chip
+     ctx.fillStyle='rgba(251,191,36,.2)';ctx.strokeStyle='#fbbf24';ctx.lineWidth=2;
+     ctx.beginPath();ctx.roundRect(20,50,100,50,8);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#fbbf24';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+     ctx.fillText('BIOS/UEFI',70,75);ctx.fillText('Chip',70,88);
+     // Checks
+     const checks=[
+       {x:160,y:50,label:'CPU',ok:p>0.15,color:'#fbbf24'},
+       {x:250,y:50,label:'RAM',ok:p>0.35,color:'#818cf8'},
+       {x:340,y:50,label:'GPU',ok:p>0.5,color:'#a78bfa'},
+       {x:160,y:120,label:'SSD/HDD',ok:p>0.65,color:'#34d399'},
+       {x:250,y:120,label:'USB/IO',ok:p>0.8,color:'#38bdf8'},
+       {x:340,y:120,label:'Network',ok:p>0.9,color:'#fb923c'},
+     ];
+     checks.forEach(c=>{
+       const active=c.ok||p>0;
+       ctx.fillStyle=c.ok?c.color+'22':'rgba(30,30,50,.5)';
+       ctx.strokeStyle=c.ok?c.color:'#334155';ctx.lineWidth=active?2:1;
+       ctx.beginPath();ctx.roundRect(c.x,c.y,70,45,6);ctx.fill();ctx.stroke();
+       ctx.fillStyle=c.ok?c.color:'#475569';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+       ctx.fillText(c.label,c.x+35,c.y+22);
+       ctx.fillStyle=c.ok?'#34d399':'#f87171';ctx.font='12px system-ui';
+       ctx.fillText(c.ok?'✓':'?',c.x+35,c.y+38);
+     });
+     // Arrow from BIOS to checks
+     if(p>0.05){
+       ctx.strokeStyle='#fbbf24';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+       ctx.beginPath();ctx.moveTo(120,75);ctx.lineTo(155,75);ctx.stroke();
+       ctx.setLineDash([]);
+     }
+     ctx.fillStyle='#64748b';ctx.font='8.5px system-ui';ctx.textAlign='center';
+     ctx.fillText('BIOS يفحص المكونات واحداً واحداً (POST)...',280,190);
+     if(p>0.95)ctx.fillText('✅ جميع المكونات سليمة! جاهز للإقلاع',280,208);
+   }
+  },
+  {id:'boot',icon:'🥾',label:'Bootloader',color:'#818cf8',
+   title:'Bootloader — محمّل الإقلاع',
+   desc:'BIOS/UEFI يبحث عن Bootloader في القرص. Linux: GRUB2 | Windows: bootmgr | macOS: iBoot | Android: OEM Bootloader. كل منها يُحمّل نواة نظام التشغيل المناسبة إلى RAM.',
+   draw:(ctx,w,h,p)=>{
+     // HDD
+     ctx.fillStyle='rgba(52,211,153,.1)';ctx.strokeStyle='#34d399';ctx.lineWidth=2;
+     ctx.beginPath();ctx.roundRect(15,60,110,100,8);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#34d399';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+     ctx.fillText('💾 القرص الصلب',70,85);
+     ctx.fillStyle='rgba(52,211,153,.3)';ctx.strokeStyle='#34d399';ctx.lineWidth=1;
+     ctx.beginPath();ctx.roundRect(22,92,96,20,3);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#fbbf24';ctx.font='bold 8px system-ui';ctx.fillText('MBR - Bootloader',70,106);
+     ctx.fillStyle='rgba(30,40,30,.5)';
+     ctx.beginPath();ctx.roundRect(22,116,96,38,3);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#94a3b8';ctx.font='8px system-ui';ctx.fillText('بيانات المستخدم',70,140);
+     // Loading arrow
+     if(p>0.2){
+       const prog=Math.min((p-0.2)/0.8,1);
+       ctx.strokeStyle='#818cf8';ctx.lineWidth=3;
+       ctx.beginPath();ctx.moveTo(130,105);ctx.lineTo(130+prog*80,105);ctx.stroke();
+       ctx.fillStyle='#818cf8';ctx.font='8px system-ui';ctx.textAlign='center';
+       ctx.fillText('يُحمَّل إلى RAM',170,95);
+     }
+     // RAM
+     ctx.fillStyle='rgba(129,140,248,.1)';ctx.strokeStyle='#818cf8';ctx.lineWidth=2;
+     ctx.beginPath();ctx.roundRect(220,50,180,130,8);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#818cf8';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+     ctx.fillText('🧠 الذاكرة RAM',310,70);
+     if(p>0.5){
+       const a=Math.min((p-0.5)/0.5,1);
+       ctx.fillStyle=`rgba(251,191,36,${a*0.3})`;ctx.strokeStyle='#fbbf24';ctx.lineWidth=1.5;
+       ctx.beginPath();ctx.roundRect(230,78,160,30,4);ctx.fill();ctx.stroke();
+       ctx.fillStyle='#fbbf24';ctx.globalAlpha=a;ctx.font='9px system-ui';
+       ctx.fillText('🥾 Bootloader في RAM',310,97);ctx.globalAlpha=1;
+     }
+     if(p>0.75){
+       const a=Math.min((p-0.75)/0.25,1);
+       ctx.fillStyle=`rgba(56,189,248,${a*0.25})`;ctx.strokeStyle='#38bdf8';ctx.lineWidth=1.5;
+       ctx.beginPath();ctx.roundRect(230,115,160,55,4);ctx.fill();ctx.stroke();
+       ctx.fillStyle='#38bdf8';ctx.globalAlpha=a;ctx.font='9px system-ui';
+       ctx.fillText('⚙️ Kernel يُحمَّل...',310,145);ctx.globalAlpha=1;
+     }
+     // BIOS reads MBR
+     ctx.fillStyle='#64748b';ctx.font='8px system-ui';ctx.textAlign='center';
+     const BL={linux:'GRUB2 يقرأ /boot/vmlinuz',windows:'bootmgr يقرأ BCD ويُحمّل ntoskrnl',macos:'iBoot يُحمّل mach_kernel',android:'Fastboot يُحمّل zImage'};
+     ctx.fillText(BL[bootOS]||BL.linux,280,205);
+   }
+  },
+  {id:'kernel',icon:'⚙️',label:'Kernel',color:'#38bdf8',
+   title:'تحميل نواة نظام التشغيل (Kernel)',
+   desc:'النواة هي قلب نظام التشغيل. تُحمَّل في الذاكرة وتأخذ السيطرة الكاملة: تُعدّ برامج تشغيل الأجهزة، تُهيئ جدول العمليات، تُنشئ أول عملية.',
+   draw:(ctx,w,h,p)=>{
+     // OS-specific kernel info
+     const KI={
+       linux:  {name:'Linux Kernel',file:'vmlinuz-6.x',col:'#34d399',initName:'systemd',firstProc:'init/systemd (PID=1)',struct:'Monolithic'},
+       windows:{name:'Windows NT Kernel',file:'ntoskrnl.exe',col:'#38bdf8',initName:'smss.exe',firstProc:'smss.exe → winlogon.exe',struct:'Hybrid'},
+       macos:  {name:'XNU Kernel',file:'mach_kernel',col:'#a78bfa',initName:'launchd',firstProc:'launchd (PID=1)',struct:'Microkernel'},
+       android:{name:'Linux Kernel',file:'zImage / Image.gz',col:'#fb923c',initName:'Zygote',firstProc:'init → Zygote (Java VM)',struct:'Monolithic'},
+     };
+     const ki=KI[bootOS]||KI.linux;
+     // RAM box
+     ctx.fillStyle='rgba(56,189,248,.07)';ctx.strokeStyle='#38bdf8';ctx.lineWidth=2;
+     ctx.beginPath();ctx.roundRect(12,28,215,195,10);ctx.fill();ctx.stroke();
+     ctx.fillStyle='#38bdf8';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+     ctx.fillText('🧠 RAM',120,48);
+     // Kernel block (OS-colored)
+     ctx.fillStyle=ki.col+'33';ctx.strokeStyle=ki.col;ctx.lineWidth=2.5;
+     ctx.beginPath();ctx.roundRect(22,56,195,65,8);ctx.fill();ctx.stroke();
+     ctx.fillStyle=ki.col;ctx.font='bold 12px system-ui';ctx.textAlign='center';
+     ctx.fillText('⚙️ '+ki.name,120,80);
+     ctx.fillStyle='#94a3b8';ctx.font='8.5px monospace';
+     ctx.fillText(ki.file,120,95);
+     ctx.fillStyle='#64748b';ctx.font='8px system-ui';
+     ctx.fillText('هيكل: '+ki.struct,120,112);
+     // Kernel activities
+     const acts=[
+       {y:140,label:'تُهيّئ برامج تشغيل الأجهزة (Drivers)',at:0.15,col:'#34d399'},
+       {y:160,label:'تُنشئ جدول العمليات (Process Table)',at:0.35,col:'#818cf8'},
+       {y:180,label:'تُهيّئ نظام الملفات (File System)',at:0.55,col:'#fbbf24'},
+       {y:200,label:'تُشغّل: '+ki.firstProc,at:0.75,col:ki.col},
+     ];
+     acts.forEach(a=>{
+       if(p>=a.at){
+         const alpha=Math.min((p-a.at)/0.2,1);
+         ctx.globalAlpha=alpha;
+         ctx.fillStyle=a.col;ctx.font='bold 9px system-ui';ctx.textAlign='right';
+         ctx.fillText('✓',225,a.y);
+         ctx.fillStyle='#e2e8f0';ctx.font='8.5px system-ui';ctx.textAlign='right';
+         ctx.fillText(a.label,220,a.y);ctx.globalAlpha=1;
+       }
+     });
+     // First process box
+     if(p>0.75){
+       const a=Math.min((p-0.75)/0.25,1);
+       ctx.fillStyle=ki.col+'22';ctx.strokeStyle=ki.col;ctx.lineWidth=2;
+       ctx.globalAlpha=a;
+       ctx.beginPath();ctx.roundRect(250,55,310,120,10);ctx.fill();ctx.stroke();
+       ctx.fillStyle=ki.col;ctx.font='bold 11px system-ui';ctx.textAlign='center';
+       ctx.fillText('🌱 أول عملية في النظام',405,82);
+       ctx.fillStyle='#e2e8f0';ctx.font='bold 13px system-ui';
+       ctx.fillText(ki.initName,405,106);
+       ctx.fillStyle='#94a3b8';ctx.font='8.5px system-ui';
+       ctx.fillText('PID: 1',405,122);
+       ctx.fillStyle='#64748b';ctx.font='8px system-ui';
+       // OS-specific note
+       const notes={
+         linux:'تُشغّل جميع خدمات النظام',
+         windows:'تُطلق winlogon وشاشة تسجيل الدخول',
+         macos:'تُطلق خدمات Launchd Agents',
+         android:'تُهيئ Dalvik/ART Java VM'
+       };
+       ctx.fillText(notes[bootOS]||'',405,140);
+
+       // Arrow from kernel to init
+       ctx.strokeStyle=ki.col+'88';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+       ctx.beginPath();ctx.moveTo(218,90);ctx.lineTo(250,90);ctx.stroke();
+       ctx.setLineDash([]);
+       ctx.globalAlpha=1;
+     }
+     // Progress bar
+     const barW=Math.min(p,1)*540;
+     ctx.fillStyle='rgba(56,189,248,.12)';ctx.beginPath();ctx.roundRect(20,220,540,14,5);ctx.fill();
+     ctx.fillStyle=ki.col;ctx.beginPath();ctx.roundRect(20,220,barW,14,5);ctx.fill();
+     ctx.fillStyle='#fff';ctx.font='bold 8px system-ui';ctx.textAlign='center';
+     ctx.fillText(`تحميل ${ki.name}: ${Math.round(p*100)}%`,290,231);
+   }
+  },
+  {id:'init',icon:'🌱',label:'Init/Services',color:'#34d399',
+   title:'أول عملية وخدمات النظام',
+   desc:'أول عملية تُنشئها النواة (PID=1) تبدأ بتشغيل جميع خدمات النظام: الشبكة، الأمان، الطباعة... ثم تُهيئ بيئة المستخدم.',
+   draw:(ctx,w,h,p)=>{
+     // OS-specific init info
+     const II={
+       linux:  {name:'systemd',pid1:'PID: 1',col:'#34d399',
+                svcs:[{a:-70,l:'🌐 NetworkManager',c:'#818cf8',t:0.1},{a:-30,l:'🔒 SELinux/AppArmor',c:'#f87171',t:0.25},
+                       {a:10,l:'🔊 PulseAudio',c:'#fbbf24',t:0.4},{a:50,l:'💾 udisks2',c:'#38bdf8',t:0.55},
+                       {a:90,l:'🖨️ CUPS',c:'#fb923c',t:0.7},{a:130,l:'📡 wpa_supplicant',c:'#a78bfa',t:0.85}]},
+       windows:{name:'services.exe',pid1:'Session Manager',col:'#38bdf8',
+                svcs:[{a:-70,l:'🔵 svchost.exe',c:'#38bdf8',t:0.1},{a:-30,l:'🛡️ Windows Defender',c:'#f87171',t:0.25},
+                       {a:10,l:'🌐 Network Service',c:'#818cf8',t:0.4},{a:50,l:'🔊 AudioSrv',c:'#fbbf24',t:0.55},
+                       {a:90,l:'🖨️ Spooler',c:'#fb923c',t:0.7},{a:130,l:'⚙️ winlogon.exe',c:'#34d399',t:0.85}]},
+       macos:  {name:'launchd',pid1:'PID: 1',col:'#a78bfa',
+                svcs:[{a:-70,l:'🌐 configd',c:'#818cf8',t:0.1},{a:-30,l:'🔒 SecurityAgent',c:'#f87171',t:0.25},
+                       {a:10,l:'🔊 coreaudiod',c:'#fbbf24',t:0.4},{a:50,l:'📡 mDNSResponder',c:'#38bdf8',t:0.55},
+                       {a:90,l:'🍎 loginwindow',c:'#a78bfa',t:0.7},{a:130,l:'💾 diskarbitrationd',c:'#fb923c',t:0.85}]},
+       android:{name:'Zygote',pid1:'Java VM Fork Parent',col:'#fb923c',
+                svcs:[{a:-70,l:'📱 SurfaceFlinger',c:'#818cf8',t:0.1},{a:-30,l:'🔊 AudioFlinger',c:'#fbbf24',t:0.25},
+                       {a:10,l:'📡 ConnectivitySrv',c:'#34d399',t:0.4},{a:50,l:'🔋 BatteryService',c:'#38bdf8',t:0.55},
+                       {a:90,l:'📷 CameraService',c:'#a78bfa',t:0.7},{a:130,l:'🛡️ PackageManager',c:'#f87171',t:0.85}]},
+     };
+     const ii=II[bootOS]||II.linux;
+     // central init circle
+     ctx.fillStyle=ii.col+'33';ctx.strokeStyle=ii.col;ctx.lineWidth=2.5;
+     ctx.beginPath();ctx.arc(110,125,48,0,Math.PI*2);ctx.fill();ctx.stroke();
+     ctx.fillStyle=ii.col;ctx.font='bold 11px system-ui';ctx.textAlign='center';
+     ctx.fillText('🌱 '+ii.name,110,120);
+     ctx.fillStyle='#94a3b8';ctx.font='8.5px system-ui';ctx.fillText(ii.pid1,110,136);
+     // services
+     ii.svcs.forEach(s=>{
+       if(p<s.t)return;
+       const prog=Math.min((p-s.t)/0.15,1);
+       const rad=s.a*Math.PI/180;
+       const r=50;
+       const ex=110+Math.cos(rad)*145;
+       const ey=125+Math.sin(rad)*90;
+       ctx.strokeStyle=s.c+'77';ctx.lineWidth=1.5;
+       ctx.beginPath();
+       ctx.moveTo(110+Math.cos(rad)*r,125+Math.sin(rad)*r);
+       ctx.lineTo(110+Math.cos(rad)*(r+prog*95),125+Math.sin(rad)*(r+prog*55));
+       ctx.stroke();
+       if(prog>0.75){
+         const fa=Math.min((prog-0.75)/0.25,1);
+         ctx.globalAlpha=fa;
+         ctx.fillStyle=s.c+'22';ctx.strokeStyle=s.c;ctx.lineWidth=1;
+         ctx.beginPath();ctx.roundRect(ex-42,ey-14,84,28,5);ctx.fill();ctx.stroke();
+         ctx.fillStyle=s.c;ctx.font='8px system-ui';ctx.textAlign='center';
+         ctx.fillText(s.l,ex,ey+5);ctx.globalAlpha=1;
+       }
+     });
+     // footer
+     ctx.fillStyle='#64748b';ctx.font='8.5px system-ui';ctx.textAlign='center';
+     ctx.fillText(ii.name+' يُشغّل خدمات النظام واحدة تلو الأخرى',290,218);
+   }
+  },
+  {id:'desktop',icon:'🖥️',label:'جاهز!',color:'#a78bfa',
+   title:'✅ نظام التشغيل جاهز — سطح المكتب',
+   desc:'نظام التشغيل اكتمل تشغيله بنجاح! الآن يمكنك فتح التطبيقات وتصفح الإنترنت وتشغيل الألعاب. نظام التشغيل يُدير كل شيء في الخلفية بصمت.',
+   draw:(ctx,w,h,p)=>{
+     const a=Math.min(p*2.5,1);
+     ctx.globalAlpha=a;
+     // OS-specific desktop theme
+     const DT={
+       linux:  {bg1:'#1a2a1a',bg2:'#0d1117',bar:'rgba(52,211,153,.25)',col:'#34d399',name:'GNOME Shell / KDE Plasma',
+                icons:['📁','🌐','💻','📝','🎵','⚙️'],labels:['ملفات','Firefox','Terminal','محرر','موسيقى','إعدادات']},
+       windows:{bg1:'#0a1a2e',bg2:'#041025',bar:'rgba(56,189,248,.3)',col:'#38bdf8',name:'Windows Explorer',
+                icons:['📁','🌐','🎮','📊','🛡️','⚙️'],labels:['Explorer','Edge','Steam','Office','Defender','إعدادات']},
+       macos:  {bg1:'#1a0a2e',bg2:'#0a0d1a',bar:'rgba(167,139,250,.3)',col:'#a78bfa',name:'Finder / Aqua UI',
+                icons:['🔍','📁','🌐','🎵','📷','⚙️'],labels:['Spotlight','Finder','Safari','Music','Photos','System Pref.']},
+       android:{bg1:'#1a0a10',bg2:'#0d0a1a',bar:'rgba(251,146,60,.3)',col:'#fb923c',name:'Android Launcher',
+                icons:['📞','📷','🌐','📩','📱','⚙️'],labels:['الهاتف','Camera','Chrome','الرسائل','Play','الإعدادات']},
+     };
+     const dt=DT[bootOS]||DT.linux;
+     // Screen
+     const grd=ctx.createLinearGradient(50,20,530,220);
+     grd.addColorStop(0,dt.bg1);grd.addColorStop(1,dt.bg2);
+     ctx.fillStyle=grd;ctx.beginPath();ctx.roundRect(48,18,484,184,14);ctx.fill();
+     ctx.strokeStyle=dt.col;ctx.lineWidth=2.5;
+     ctx.beginPath();ctx.roundRect(48,18,484,184,14);ctx.stroke();
+     // Taskbar
+     ctx.fillStyle=dt.bar;
+     if(bootOS==='macos'){
+       // macOS: top menu bar
+       ctx.beginPath();ctx.roundRect(48,18,484,20,{upperLeft:14,upperRight:14,lowerLeft:0,lowerRight:0});ctx.fill();
+       ctx.fillStyle=dt.col;ctx.font='8px system-ui';ctx.textAlign='right';
+       ctx.fillText('🍎  Finder  File  Edit  View  Go  Window  Help',520,32);
+       ctx.textAlign='left';ctx.fillText(new Date().toLocaleTimeString('ar-SA'),56,32);
+     } else if(bootOS==='android'){
+       // Android: status bar top
+       ctx.beginPath();ctx.roundRect(48,18,484,18,{upperLeft:14,upperRight:14,lowerLeft:0,lowerRight:0});ctx.fill();
+       ctx.fillStyle=dt.col;ctx.font='8px system-ui';ctx.textAlign='center';
+       ctx.fillText('📶 📡 🔋  '+new Date().toLocaleTimeString('ar-SA'),290,30);
+       // bottom nav
+       ctx.fillStyle=dt.bar;ctx.beginPath();ctx.rect(48,188,484,14);ctx.fill();
+       ctx.fillStyle=dt.col;ctx.font='12px system-ui';ctx.textAlign='center';
+       ctx.fillText('◀  ●  ■',290,199);
+     } else {
+       // Windows/Linux: bottom taskbar
+       ctx.beginPath();ctx.rect(48,188,484,14);ctx.fill();
+       ctx.fillStyle=dt.col;ctx.font='8px system-ui';ctx.textAlign='right';
+       ctx.fillText(new Date().toLocaleTimeString('ar-SA'),524,198);
+       if(bootOS==='windows'){ctx.textAlign='left';ctx.fillStyle='#38bdf8';ctx.font='10px system-ui';ctx.fillText('⊞',56,199);}
+       else{ctx.textAlign='left';ctx.fillStyle='#34d399';ctx.font='9px system-ui';ctx.fillText('Applications',56,197);}
+     }
+     // Icons
+     const startY=bootOS==='macos'?48:42;
+     dt.icons.forEach((ic,i)=>{
+       const ix=90+i*74;
+       if(p*8>i+1){
+         const ia=Math.min((p*8-i-1),1);
+         ctx.globalAlpha=a*ia;
+         ctx.fillStyle='rgba(255,255,255,.04)';
+         ctx.beginPath();ctx.roundRect(ix-26,startY,52,58,bootOS==='android'?28:8);ctx.fill();
+         ctx.font='24px system-ui';ctx.textAlign='center';ctx.fillText(ic,ix,startY+32);
+         ctx.fillStyle='#e2e8f0';ctx.font='7px system-ui';
+         ctx.fillText(dt.labels[i],ix,startY+52);
+       }
+     });
+     ctx.globalAlpha=a;
+     ctx.fillStyle='#475569';ctx.font='8.5px system-ui';ctx.textAlign='center';
+     ctx.fillText('✅ '+dt.name+' جاهز — OS يُدير كل شيء في الخلفية',290,215);
+     ctx.globalAlpha=1;
+   }
+  }
+];
+
+let bootOS='linux';
+let bootStep=-1,bootAnim=null,bootProg=0;
+function selectBootOS(os){
+  bootOS=os;
+  bootReset();
+  // Update button styles
+  ['linux','windows','macos','android'].forEach(o=>{
+    const b=document.getElementById('bos-'+o);
+    if(!b)return;
+    const colors={linux:'#34d399',windows:'#38bdf8',macos:'#a78bfa',android:'#fb923c'};
+    const c=colors[o];
+    b.style.borderWidth=o===os?'2px':'1px';
+    b.style.background=o===os?c+'33':'rgba(30,30,50,.5)';
+  });
+  // Update OS info line
+  const infos={
+    linux:'🐧 Linux: GRUB2 → <b style="color:#34d399">Linux Kernel (vmlinuz)</b> → systemd (PID=1) → GNOME/KDE',
+    windows:'🪟 Windows: bootmgr → <b style="color:#38bdf8">NT Kernel (ntoskrnl.exe)</b> → smss.exe → Explorer',
+    macos:'🍎 macOS: iBoot → <b style="color:#a78bfa">XNU Kernel (Mach+BSD)</b> → launchd (PID=1) → Finder',
+    android:'🤖 Android: Fastboot → <b style="color:#fb923c">Linux Kernel (zImage)</b> → Zygote → Home Screen',
+  };
+  const el=document.getElementById('boot-os-info');
+  if(el)el.innerHTML=infos[os]||infos.linux;
+  // Update kernel step title dynamically
+  const kNames={linux:'Linux Kernel',windows:'Windows NT Kernel (ntoskrnl.exe)',macos:'XNU Kernel (Mach + BSD)',android:'Linux Kernel (معدّل لـ Android)'};
+  const kStep=BOOT_STEPS.find(s=>s.id==='kernel');
+  if(kStep)kStep.title='تحميل النواة: '+kNames[os];
+}
+function renderBootSteps(){
+  const el=document.getElementById('boot-steps');
+  if(!el)return;
+  el.innerHTML=BOOT_STEPS.map((s,i)=>`
+    <div style="flex:none;text-align:center;padding:.3rem .5rem;border-radius:6px;font-size:.7rem;
+      background:${i<=bootStep?s.color+'22':'rgba(30,30,50,.5)'};
+      border:1px solid ${i<=bootStep?s.color:'#334155'};
+      color:${i<=bootStep?s.color:'#475569'};transition:.3s">
+      <div style="font-size:1rem">${s.icon}</div>
+      <div style="font-weight:700">${s.label}</div>
+    </div>
+  `).join('');
+}
+function bootStart(){
+  if(bootAnim)clearInterval(bootAnim);
+  bootStep=-1;bootProg=0;
+  document.getElementById('btn-boot-start').disabled=true;
+  document.getElementById('btn-boot-next').disabled=false;
+  bootNext();
+}
+function bootNext(){
+  if(bootStep>=BOOT_STEPS.length-1){
+    bootReset();return;
+  }
+  if(bootAnim)clearInterval(bootAnim);
+  bootStep++;
+  bootProg=0;
+  renderBootSteps();
+  const step=BOOT_STEPS[bootStep];
+  // Update info
+  const info=document.getElementById('boot-info');
+  if(info)info.innerHTML=`<b style="color:${step.color}">${step.icon} ${step.title}</b><br><span style="color:#e2e8f0;font-size:.78rem">${step.desc}</span>`;
+  const lbl=document.getElementById('boot-step-label');
+  if(lbl)lbl.textContent=`المرحلة ${bootStep+1} من ${BOOT_STEPS.length}: ${step.label}`;
+  // Animate progress
+  const cv=document.getElementById('bootCanvas');
+  if(!cv)return;
+  bootAnim=setInterval(()=>{
+    bootProg=Math.min(bootProg+0.015,1);
+    const ctx=cv.getContext('2d');
+    ctx.clearRect(0,0,cv.width,cv.height);
+    // Dark background
+    ctx.fillStyle='#000';ctx.fillRect(0,0,cv.width,cv.height);
+    // subtle grid
+    ctx.strokeStyle='rgba(30,40,30,.3)';ctx.lineWidth=1;
+    for(let gx=0;gx<cv.width;gx+=30){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,cv.height);ctx.stroke();}
+    for(let gy=0;gy<cv.height;gy+=30){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(cv.width,gy);ctx.stroke();}
+    // Draw step
+    step.draw(ctx,cv.width,cv.height,bootProg);
+    if(bootProg>=1)clearInterval(bootAnim);
+  },16);
+}
+function bootReset(){
+  if(bootAnim)clearInterval(bootAnim);
+  bootStep=-1;bootProg=0;
+  document.getElementById('btn-boot-start').disabled=false;
+  document.getElementById('btn-boot-next').disabled=true;
+  const lbl=document.getElementById('boot-step-label');
+  if(lbl)lbl.textContent='اضغط "تشغيل" للبدء';
+  const info=document.getElementById('boot-info');
+  if(info)info.innerHTML='<span style="color:#94a3b8">👆 اضغط زر التشغيل لبدء محاكاة إقلاع الكمبيوتر...</span>';
+  renderBootSteps();
+  const cv=document.getElementById('bootCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.clearRect(0,0,cv.width,cv.height);ctx.fillStyle='#000';ctx.fillRect(0,0,cv.width,cv.height);}
+}
+
+
+// ── Context Switch Simulator ────────────────────────────────────────────
+let ctxCurrent=0, ctxSwitchCount=0;
+const CTX_PROCS=[
+  {name:'Chrome',pid:1042,color:'#818cf8',burst:5,reg:'PC=0x4A2F, SP=0xFF10, AX=42'},
+  {name:'Spotify',pid:2314,color:'#34d399',burst:3,reg:'PC=0x8B10, SP=0xFE80, AX=7'},
+  {name:'VS Code',pid:3801,color:'#fb923c',burst:8,reg:'PC=0x2C40, SP=0xFF50, AX=0'},
+];
+function drawCtxCanvas(){
+  const cv=document.getElementById('ctxCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  // CPU box center
+  ctx.fillStyle='rgba(251,191,36,.15)';ctx.strokeStyle='#fbbf24';ctx.lineWidth=3;
+  ctx.beginPath();ctx.roundRect(w/2-65,h/2-40,130,80,10);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#fbbf24';ctx.font='bold 11px system-ui';ctx.textAlign='center';
+  ctx.fillText('⚙️ CPU',w/2,h/2-15);
+  const cur=CTX_PROCS[ctxCurrent];
+  ctx.fillStyle=cur.color;ctx.font='10px system-ui';
+  ctx.fillText('يُنفّذ: '+cur.name,w/2,h/2+5);
+  ctx.fillStyle='#64748b';ctx.font='8px monospace';
+  ctx.fillText(cur.reg.split(',')[0],w/2,h/2+20);
+  // Process list on right
+  CTX_PROCS.forEach((p,i)=>{
+    const px=w-125,py=20+i*60;
+    const isActive=i===ctxCurrent;
+    ctx.fillStyle=isActive?p.color+'33':'rgba(20,20,40,.8)';
+    ctx.strokeStyle=isActive?p.color:'#1f2937';ctx.lineWidth=isActive?2:1;
+    ctx.beginPath();ctx.roundRect(px,py,110,50,8);ctx.fill();ctx.stroke();
+    ctx.fillStyle=isActive?p.color:'#64748b';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText(p.name+' (PID:'+p.pid+')',px+55,py+16);
+    ctx.fillStyle='#475569';ctx.font='7.5px monospace';
+    ctx.fillText('PC=... SP=... AX=...',px+55,py+28);
+    ctx.fillStyle=isActive?p.color:'#334155';ctx.font='7px system-ui';
+    ctx.fillText(isActive?'▶ يعمل':'⏸ جاهز',px+55,py+42);
+    // arrow from process to CPU
+    if(isActive){
+      ctx.strokeStyle=p.color;ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(px,py+25);ctx.lineTo(w/2+65,h/2);ctx.stroke();
+    }
+  });
+  // PCB save/load area on left
+  ctx.fillStyle='rgba(56,189,248,.08)';ctx.strokeStyle='#38bdf8';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.roundRect(10,30,120,150,8);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#38bdf8';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+  ctx.fillText('💾 PCB المحفوظة',70,50);
+  CTX_PROCS.forEach((p,i)=>{
+    if(i===ctxCurrent)return;
+    ctx.fillStyle=p.color+'22';ctx.strokeStyle=p.color;ctx.lineWidth=1;
+    ctx.beginPath();ctx.roundRect(18,58+i*38,104,32,5);ctx.fill();ctx.stroke();
+    ctx.fillStyle=p.color;ctx.font='8px system-ui';ctx.textAlign='center';
+    ctx.fillText(p.name,70,72+i*38);
+    ctx.fillStyle='#475569';ctx.font='7px monospace';
+    ctx.fillText(p.reg.split(',')[0],70,84+i*38);
+  });
+  // Switch count
+  ctx.fillStyle='#475569';ctx.font='8.5px system-ui';ctx.textAlign='center';
+  ctx.fillText('عدد تبديلات السياق: '+ctxSwitchCount,w/2,h-12);
+}
+function ctxSwitch(){
+  if(!document.getElementById('ctxCanvas'))return;
+  // Save current PCB, load next
+  const prev=CTX_PROCS[ctxCurrent];
+  ctxCurrent=(ctxCurrent+1)%CTX_PROCS.length;
+  const next=CTX_PROCS[ctxCurrent];
+  ctxSwitchCount++;
+  const msg=document.getElementById('ctx-msg');
+  if(msg)msg.textContent=`💾 حُفظ PCB للـ ${prev.name} → 📂 حُمّل PCB للـ ${next.name} ← CPU يُنفّذه الآن`;
+  drawCtxCanvas();
+}
+function ctxReset(){
+  ctxCurrent=0;ctxSwitchCount=0;
+  const msg=document.getElementById('ctx-msg');
+  if(msg)msg.textContent='اضغط "تبديل" لرؤية كيف ينتقل CPU بين العمليات';
+  drawCtxCanvas();
+}
+
+// ── Round Robin Scheduler ──────────────────────────────────────────────
+let rrProcs=[],rrColors=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24','#38bdf8','#a78bfa'],rrNextId=0;
+function rrAdd(){
+  const name=document.getElementById('rr-name')?.value||'P'+(rrNextId+1);
+  const burst=parseInt(document.getElementById('rr-burst')?.value)||5;
+  rrProcs.push({id:rrNextId,name,burst,color:rrColors[rrNextId%rrColors.length]});
+  rrNextId++;
+  // auto increment name
+  const inp=document.getElementById('rr-name');
+  if(inp)inp.value='P'+(rrNextId+1);
+  rrRenderProcs();
+}
+function rrRenderProcs(){
+  const el=document.getElementById('rr-procs');
+  if(!el)return;
+  el.innerHTML=rrProcs.map(p=>`<span style="background:${p.color}22;border:1px solid ${p.color};color:${p.color};border-radius:6px;padding:.2rem .5rem;font-size:.73rem;font-weight:700">${p.name}(${p.burst}ms)</span>`).join('');
+}
+function rrRun(){
+  if(!rrProcs.length){alert('أضف عمليات أولاً!');return;}
+  const cv=document.getElementById('rrCanvas');
+  if(!cv)return;
+  const q=parseInt(document.getElementById('rr-q')?.value)||3;
+  const ctx=cv.getContext('2d');
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);
+  // Simulate Round Robin
+  const rem=rrProcs.map(p=>({...p,rem:p.burst}));
+  const gantt=[];
+  let done=false;
+  while(!done){
+    done=true;
+    rem.forEach(p=>{
+      if(p.rem<=0)return;
+      done=false;
+      const run=Math.min(p.rem,q);
+      gantt.push({id:p.id,name:p.name,color:p.color,dur:run});
+      p.rem-=run;
+    });
+  }
+  // Draw Gantt chart
+  const totalTime=gantt.reduce((s,g)=>s+g.dur,0);
+  const scale=(cv.width-20)/totalTime;
+  const barH=36,barY=40;
+  ctx.fillStyle='#94a3b8';ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText('Gantt Chart — Round Robin (Quantum='+q+'ms)',cv.width/2,16);
+  // Time axis
+  ctx.strokeStyle='#334155';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(10,barY+barH+2);ctx.lineTo(cv.width-10,barY+barH+2);ctx.stroke();
+  let x=10,t=0;
+  gantt.forEach(g=>{
+    const w=g.dur*scale;
+    // bar
+    ctx.fillStyle=g.color+'55';ctx.strokeStyle=g.color;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(x,barY,w,barH,4);ctx.fill();ctx.stroke();
+    // label
+    ctx.fillStyle=g.color;ctx.font=`bold ${w>25?9:7}px system-ui`;ctx.textAlign='center';
+    ctx.fillText(g.name,x+w/2,barY+barH/2+4);
+    // time tick
+    ctx.fillStyle='#64748b';ctx.font='7px system-ui';ctx.textAlign='center';
+    ctx.fillText(t,x,barY+barH+12);
+    x+=w;t+=g.dur;
+  });
+  ctx.fillStyle='#64748b';ctx.font='7px system-ui';ctx.textAlign='center';
+  ctx.fillText(t,x,barY+barH+12);
+  // Process completion stats
+  let stats='',tx=10,tt=0;
+  const completion={};
+  gantt.forEach(g=>{tt+=g.dur;if(!completion[g.id]||g.id in completion)completion[g.id]=tt;});
+  const waited={};
+  rrProcs.forEach(p=>{waited[p.id]=(completion[p.id]||0)-p.burst;});
+  ctx.fillStyle='#94a3b8';ctx.font='8px system-ui';ctx.textAlign='right';
+  let infoY=barY+barH+30;
+  rrProcs.forEach(p=>{
+    ctx.fillStyle=p.color;ctx.textAlign='left';
+    ctx.fillText(`${p.name}: انتهى عند ${completion[p.id]||'?'}ms | انتظر ${waited[p.id]||0}ms`,12,infoY);
+    infoY+=14;
+  });
+  const avgWait=(Object.values(waited).reduce((a,b)=>a+b,0)/rrProcs.length).toFixed(1);
+  const statsEl=document.getElementById('rr-stats');
+  if(statsEl)statsEl.textContent=`متوسط وقت الانتظار: ${avgWait}ms | الوقت الكلي: ${totalTime}ms | عدد العمليات: ${rrProcs.length}`;
+}
+function rrReset(){
+  rrProcs=[];rrNextId=0;
+  rrRenderProcs();
+  const cv=document.getElementById('rrCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const s=document.getElementById('rr-stats');if(s)s.textContent='';
+  const ni=document.getElementById('rr-name');if(ni)ni.value='P1';
+}
+
+// ── Memory Allocation Game ────────────────────────────────────────────
+const MA_TOTAL=16; // 16 blocks x 100MB = 1600MB
+let maBlocks=Array(MA_TOTAL).fill(null);
+let maAlgo='ff', maProcId=0;
+const MA_COLORS=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24','#38bdf8','#a78bfa','#ec4899'];
+function setMemAlgo(a){
+  maAlgo=a;
+  ['ff','bf','wf'].forEach(x=>{
+    const b=document.getElementById('ma-'+x);
+    if(b)b.style.borderWidth=x===a?'2px':'1px';
+  });
+}
+function maFindBlocks(size){
+  // Find contiguous free blocks
+  const holes=[];
+  let i=0;
+  while(i<MA_TOTAL){
+    if(maBlocks[i]===null){
+      let j=i;while(j<MA_TOTAL&&maBlocks[j]===null)j++;
+      holes.push({start:i,len:j-i});i=j;
+    } else i++;
+  }
+  const fits=holes.filter(h=>h.len>=size);
+  if(!fits.length)return -1;
+  if(maAlgo==='ff')return fits[0].start;
+  if(maAlgo==='bf')return fits.sort((a,b)=>a.len-b.len)[0].start;
+  if(maAlgo==='wf')return fits.sort((a,b)=>b.len-a.len)[0].start;
+  return fits[0].start;
+}
+function maAlloc(size){
+  const start=maFindBlocks(size);
+  if(start===-1){maRenderStats('❌ لا توجد مساحة كافية! (External Fragmentation)');return;}
+  const col=MA_COLORS[maProcId%MA_COLORS.length];
+  const pname='P'+(maProcId+1);
+  for(let i=start;i<start+size;i++)maBlocks[i]={pid:maProcId,name:pname,color:col};
+  maProcId++;
+  maRender();
+}
+function maFree(){
+  const used=maBlocks.filter(b=>b!==null);
+  if(!used.length)return;
+  const victim=used[Math.floor(Math.random()*used.length)];
+  maBlocks=maBlocks.map(b=>b&&b.pid===victim.pid?null:b);
+  maRender();
+}
+function maReset(){
+  maBlocks=Array(MA_TOTAL).fill(null);maProcId=0;maRender();
+}
+function maRender(){
+  const g=document.getElementById('ma-grid');
+  if(!g)return;
+  const used=maBlocks.filter(Boolean).length;
+  const free=MA_TOTAL-used;
+  const frag=maCalcFrag();
+  g.innerHTML=maBlocks.map((b,i)=>`
+    <div style="flex:1;height:100%;border-radius:4px;
+      background:${b?b.color+'33':'rgba(30,40,30,.4)'};
+      border:1px solid ${b?b.color:'#1f2937'};
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      font-size:.55rem;font-weight:700;color:${b?b.color:'#334155'};
+      transition:.3s;cursor:default;min-width:0" title="${b?b.name+' (100MB)':'فارغ (100MB)'}">
+      ${b?b.name.slice(0,2):''}
+    </div>
+  `).join('');
+  // Legend
+  const legend=document.getElementById('ma-legend');
+  const procs={};
+  maBlocks.forEach(b=>{if(b)procs[b.pid]=b;});
+  if(legend)legend.innerHTML=Object.values(procs).map(p=>`
+    <span style="background:${p.color}22;border:1px solid ${p.color};color:${p.color};border-radius:4px;padding:.15rem .4rem;font-size:.7rem">${p.name}</span>
+  `).join('')+'<span style="background:rgba(30,40,30,.4);border:1px solid #1f2937;color:#475569;border-radius:4px;padding:.15rem .4rem;font-size:.7rem">فارغ</span>';
+  maRenderStats(`📊 المستخدم: ${used*100}MB / ${MA_TOTAL*100}MB | حر: ${free*100}MB | تجزئة خارجية: ${frag} فجوة${frag>1?'ات':''} | خوارزمية: ${maAlgo.toUpperCase()}`);
+}
+function maCalcFrag(){
+  let holes=0,prev=false;
+  maBlocks.forEach(b=>{
+    if(!b&&prev)holes++;
+    prev=!b;
+  });
+  return holes;
+}
+function maRenderStats(msg){
+  const s=document.getElementById('ma-stats');if(s)s.textContent=msg;
+}
+
+// ── File Browser ──────────────────────────────────────────────────────
+let fbFS={
+  '/':{type:'dir',children:['home','bin','etc','tmp'],inode:1,size:4096},
+  '/home':{type:'dir',children:['مجدي','ريما'],inode:2,size:4096},
+  '/home/مجدي':{type:'dir',children:['documents','pictures','hello.txt'],inode:10,size:4096},
+  '/home/مجدي/documents':{type:'dir',children:['report.pdf','notes.txt'],inode:11,size:4096},
+  '/home/مجدي/documents/report.pdf':{type:'file',inode:20,size:245760},
+  '/home/مجدي/documents/notes.txt':{type:'file',inode:21,size:1024},
+  '/home/مجدي/pictures':{type:'dir',children:['photo1.jpg'],inode:12,size:4096},
+  '/home/مجدي/pictures/photo1.jpg':{type:'file',inode:22,size:2048000},
+  '/home/مجدي/hello.txt':{type:'file',inode:13,size:512},
+  '/home/ريما':{type:'dir',children:['music'],inode:30,size:4096},
+  '/home/ريما/music':{type:'dir',children:['song.mp3'],inode:31,size:4096},
+  '/home/ريما/music/song.mp3':{type:'file',inode:32,size:5120000},
+  '/bin':{type:'dir',children:['ls','cp','mv','rm'],inode:40,size:4096},
+  '/bin/ls':{type:'file',inode:41,size:128000},
+  '/bin/cp':{type:'file',inode:42,size:95000},
+  '/bin/mv':{type:'file',inode:43,size:87000},
+  '/bin/rm':{type:'file',inode:44,size:76000},
+  '/etc':{type:'dir',children:['hosts','passwd'],inode:50,size:4096},
+  '/etc/hosts':{type:'file',inode:51,size:220},
+  '/etc/passwd':{type:'file',inode:52,size:1800},
+  '/tmp':{type:'dir',children:[],inode:60,size:4096},
+};
+let fbCwd='/',fbSelected=null,fbInodeNext=100;
+function fbRender(){
+  const el=document.getElementById('fb-list');
+  const pathEl=document.getElementById('fb-path');
+  if(!el||!pathEl)return;
+  pathEl.textContent=fbCwd;
+  const node=fbFS[fbCwd];
+  if(!node||node.type!=='dir'){el.innerHTML='<div style="color:#f87171;padding:.5rem">خطأ في المسار</div>';return;}
+  const rows=node.children.map(name=>{
+    const path=(fbCwd==='/'?'/':fbCwd+'/')+name;
+    const child=fbFS[path];
+    if(!child)return '';
+    const isDir=child.type==='dir';
+    const isSelected=fbSelected===path;
+    return `<div onclick="fbSelect('${path.replace(/'/g,"\\'")}',event)"
+      style="display:flex;align-items:center;gap:.5rem;padding:.25rem .6rem;cursor:pointer;
+        background:${isSelected?'rgba(129,140,248,.15)':'transparent'};
+        border-bottom:1px solid #0d1117;transition:.15s"
+      onmouseenter="if(this.style.background==='transparent')this.style.background='rgba(255,255,255,.03)'"
+      onmouseleave="if('${path}'!==fbSelected)this.style.background='transparent'">
+      <span>${isDir?'📁':'📄'}</span>
+      <span style="flex:1;color:${isDir?'#38bdf8':'#e2e8f0'};font-weight:${isDir?'700':'400'}">${name}</span>
+      <span style="color:#475569;font-size:.65rem">inode:${child.inode}</span>
+      <span style="color:#475569;font-size:.65rem">${isDir?'DIR':formatSize(child.size)}</span>
+    </div>`;
+  }).join('');
+  el.innerHTML=rows||'<div style="color:#475569;padding:.5rem;text-align:center">المجلد فارغ</div>';
+}
+function formatSize(bytes){
+  if(bytes>1e6)return (bytes/1e6).toFixed(1)+'MB';
+  if(bytes>1e3)return (bytes/1e3).toFixed(0)+'KB';
+  return bytes+'B';
+}
+function fbSelect(path,e){
+  fbSelected=path;
+  fbRender();
+  const node=fbFS[path];
+  if(!node)return;
+  const name=path.split('/').pop();
+  const st=document.getElementById('fb-status');
+  if(st)st.textContent=`inode: ${node.inode} | النوع: ${node.type==='dir'?'مجلد (directory)':'ملف (file)'} | الحجم: ${formatSize(node.size)} | المسار: ${path}`;
+  if(e&&e.detail===2&&node.type==='dir'){fbCwd=path;fbSelected=null;fbRender();}
+}
+function fbUp(){
+  if(fbCwd==='/'){return;}
+  const parts=fbCwd.split('/').filter(Boolean);
+  parts.pop();
+  fbCwd=parts.length?'/'+parts.join('/'):'/'
+  fbSelected=null;fbRender();
+}
+function fbCreate(type){
+  const name=prompt(type==='dir'?'اسم المجلد الجديد:':'اسم الملف الجديد:','new'+(type==='dir'?'-folder':'-file.txt'));
+  if(!name||!name.trim())return;
+  const path=(fbCwd==='/'?'/':fbCwd+'/')+name.trim();
+  if(fbFS[path]){alert('موجود مسبقاً!');return;}
+  fbFS[path]={type,children:type==='dir'?[]:undefined,inode:fbInodeNext++,size:type==='dir'?4096:0};
+  fbFS[fbCwd].children.push(name.trim());
+  fbRender();
+}
+function fbDelete(){
+  if(!fbSelected){alert('اختر ملفاً أو مجلداً أولاً!');return;}
+  const name=fbSelected.split('/').pop();
+  if(!confirm('حذف "'+name+'"؟'))return;
+  // Remove from parent
+  fbFS[fbCwd].children=fbFS[fbCwd].children.filter(c=>c!==name);
+  delete fbFS[fbSelected];
+  fbSelected=null;fbRender();
+}
+
+// ── Producer Consumer ────────────────────────────────────────────────────
+const PC_MAX=5;
+let pcBuffer=[],pcSync=true,pcProdCount=0,pcConsCount=0;
+function pcProduce(){
+  if(pcSync&&pcBuffer.length>=PC_MAX){
+    pcLog('🔒 Buffer ممتلئ — المنتج ينتظر (Blocked)','#f87171');return;
+  }
+  if(!pcSync&&pcBuffer.length>=PC_MAX){
+    pcLog('⚠️ Race Condition! المنتج يكتب فوق البيانات!','#f87171');
+    pcBuffer[Math.floor(Math.random()*PC_MAX)]={id:pcProdCount,col:'#f87171'};
+  } else {
+    pcBuffer.push({id:pcProdCount,col:pcSync?'#34d399':'#fb923c'});
+  }
+  pcProdCount++;
+  pcRender();
+  pcLog(`✅ المنتج أنتج عنصر #${pcProdCount} | Buffer: ${pcBuffer.length}/${PC_MAX}`,pcSync?'#34d399':'#fb923c');
+}
+function pcConsume(){
+  if(pcBuffer.length===0){
+    pcLog('🔒 Buffer فارغ — المستهلك ينتظر (Blocked)','#818cf8');return;
+  }
+  const item=pcBuffer.shift();
+  pcConsCount++;
+  pcRender();
+  pcLog(`🛒 المستهلك أخذ عنصر #${item.id} | Buffer: ${pcBuffer.length}/${PC_MAX}`,'#818cf8');
+}
+function pcToggleSync(){
+  pcSync=!pcSync;
+  const b=document.getElementById('btn-sync');
+  if(b){
+    b.textContent='🔒 التزامن: '+(pcSync?'مُفعّل':'مُعطّل ⚠️');
+    b.style.borderColor=pcSync?'#34d399':'#f87171';
+    b.style.color=pcSync?'#34d399':'#f87171';
+  }
+  pcLog(pcSync?'✅ التزامن مُفعّل — Semaphore يمنع التضارب':'⚠️ التزامن مُعطّل — Race Condition ممكن!',pcSync?'#34d399':'#f87171');
+}
+function pcReset(){
+  pcBuffer=[];pcProdCount=0;pcConsCount=0;
+  pcRender();
+  const log=document.getElementById('pc-log');if(log)log.innerHTML='انتظار العمليات...';
+}
+function pcRender(){
+  const buf=document.getElementById('pc-buffer');
+  if(buf){
+    // empty slots
+    const all=[];
+    for(let i=0;i<PC_MAX;i++){
+      const item=pcBuffer[i];
+      all.push(`<div style="width:28px;height:28px;border-radius:4px;border:1px solid ${item?item.col:'#334155'};
+        background:${item?item.col+'33':'rgba(30,30,50,.5)'};display:flex;align-items:center;justify-content:center;
+        font-size:.6rem;color:${item?item.col:'#334155'};font-weight:bold">${item?'#'+item.id:''}</div>`);
+    }
+    buf.innerHTML=all.join('');
+  }
+  const pc=document.getElementById('pc-prod-count');if(pc)pc.textContent='أنتج: '+pcProdCount;
+  const cc=document.getElementById('pc-cons-count');if(cc)cc.textContent='استهلك: '+pcConsCount;
+  const st=document.getElementById('pc-status');if(st)st.textContent='Buffer: '+pcBuffer.length+' / '+PC_MAX+' عناصر';
+}
+function pcLog(msg,col){
+  const el=document.getElementById('pc-log');
+  if(!el)return;
+  el.innerHTML=`<span style="color:${col||'#94a3b8'}">${msg}</span>\n`+el.innerHTML;
+}
+
+// ── render ──
+function render(){
+  const el=document.getElementById('content');
+  el.innerHTML='<div class="sec on" id="'+cur+'">'+S[cur]+'</div>';
+  if(cur==='quiz'){renderQuiz();}
+  setTimeout(()=>initInteractives(),50);
+}
+
+// ── quiz ──
+let score=0;
+function renderQuiz(){
+  score=0;document.getElementById('scr').textContent='0';
+  const box=document.getElementById('qbox');
+  box.innerHTML=QS.map((q,i)=>`<div class="qc" id="qc${i}">
+    <h4>س${i+1}: ${q.q}</h4>
+    ${q.o.map((o,j)=>`<div class="qo" onclick="pick(${i},${j})" id="qo${i}-${j}">${['أ','ب','ج','د'][j]}. ${o}</div>`).join('')}
+    <div class="qe" id="qe${i}"></div>
+  </div>`).join('');
+}
+function pick(qi,oi){
+  const q=QS[qi];
+  if(document.getElementById(`qo${qi}-0`).classList.contains('d'))return;
+  const isOk=oi===q.c;
+  if(isOk){score++;document.getElementById('scr').textContent=score;}
+  for(let j=0;j<q.o.length;j++){
+    const el=document.getElementById(`qo${qi}-${j}`);
+    el.classList.add('d');
+    if(j===q.c)el.classList.add('ok');
+    else if(j===oi&&!isOk)el.classList.add('no');
+  }
+  const ex=document.getElementById(`qe${qi}`);
+  ex.textContent='💡 '+q.e;
+  ex.className='qe s '+(isOk?'ok':'no');
+}
+function resetQuiz(){renderQuiz();}
+
+// ── CLI ──
+const cliFS={'~':['documents','pictures','downloads','notes.txt','readme.md'],
+  'documents':['report.pdf','resume.docx','budget.xlsx'],
+  'pictures':['photo1.jpg','photo2.png','vacation.zip']};
+let cliCwd='~';
+const cliCmds={
+  ls:()=>{const f=cliFS[cliCwd]||[];return f.length?f.join('  '):'(فارغ)';},
+  pwd:()=>'/home/user/'+cliCwd,
+  whoami:()=>'user',
+  date:()=>new Date().toLocaleString('ar-SA'),
+  clear:()=>{document.getElementById('cli-out').textContent='';return null;},
+  help:()=>'الأوامر المتاحة:\n  ls       - عرض محتويات المجلد\n  pwd      - عرض المسار الحالي\n  cd [dir] - تغيير المجلد\n  mkdir    - إنشاء مجلد\n  whoami   - اسم المستخدم\n  date     - التاريخ والوقت\n  clear    - مسح الشاشة\n  help     - هذه المساعدة',
+  mkdir:(a)=>{if(!a)return 'mkdir: اكتب اسم المجلد';if(!cliFS[cliCwd])cliFS[cliCwd]=[];cliFS[cliCwd].push(a+'/');return `تم إنشاء المجلد: ${a}`;},
+  cd:(a)=>{if(!a||a==='~'){cliCwd='~';return 'تم الانتقال إلى المجلد الرئيسي';}if(cliFS['~']?.includes(a)||cliFS[cliCwd]?.includes(a)){cliCwd=a;return `تم الانتقال إلى: ${a}`;}return `cd: ${a}: لا يوجد مثل هذا المجلد`;}
+};
+function cliExec(){
+  const inp=document.getElementById('cli-inp');
+  const out=document.getElementById('cli-out');
+  const raw=inp.value.trim();
+  if(!raw)return;
+  const [cmd,...args]=raw.split(/\s+/);
+  const arg=args.join(' ');
+  let result;
+  if(cliCmds[cmd])result=cliCmds[cmd](arg);
+  else result=`bash: ${cmd}: أمر غير معروف — جرّب 'help'`;
+  if(result!==null){
+    out.textContent+=(out.textContent?'\n':'')+'$ '+raw+'\n'+(result||'');
+    out.scrollTop=out.scrollHeight;
+  }
+  inp.value='';
+}
+function guiClick(el,msg){
+  document.querySelectorAll('.gui-icon').forEach(i=>i.style.background='');
+  el.style.background='rgba(129,140,248,.15)';
+  document.getElementById('gui-msg').innerHTML='⚙️ '+msg;
+}
+
+// ── Process state machine ──
+const STATES={
+  New:{x:60,y:125,color:'#34d399',label:'جديدة',desc:'تم إنشاء العملية للتو. تنتظر دخول قائمة الجاهزة.'},
+  Ready:{x:200,y:60,color:'#818cf8',label:'جاهزة',desc:'العملية في قائمة الانتظار. تنتظر دورها على المعالج.'},
+  Running:{x:340,y:125,color:'#fbbf24',label:'تعمل',desc:'المعالج يُنفّذها الآن. حالة واحدة فقط يمكنها التنفيذ.'},
+  Waiting:{x:200,y:195,color:'#fb923c',label:'منتظرة',desc:'توقفت لانتظار عملية I/O أو حدث خارجي.'},
+  Terminated:{x:470,y:125,color:'#f87171',label:'منتهية',desc:'انتهى تنفيذها. OS يحرر مواردها من الذاكرة.'}
+};
+const TRANS={
+  New:{admit:'Ready'},Ready:{dispatch:'Running'},Running:{block:'Waiting',exit:'Terminated',preempt:'Ready'},
+  Waiting:{resume:'Ready'},Terminated:{}
+};
+const TRANS_LABELS={admit:'Admit',dispatch:'Dispatch',block:'I/O Wait',exit:'Exit',preempt:'Preempt',resume:'I/O Done'};
+let pCur='New';
+function initStateCanvas(){
+  const cv=document.getElementById('stateCanvas');
+  if(!cv)return;
+  drawStates(cv);
+}
+function drawStates(cv){
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,cv.width,cv.height);
+  // Draw arrows between states
+  const arrows=[
+    ['New','Ready','Admit','#34d399'],['Ready','Running','Dispatch','#818cf8'],
+    ['Running','Waiting','I/O Wait','#fb923c'],['Waiting','Ready','I/O Done','#818cf8'],
+    ['Running','Terminated','Exit','#f87171'],['Running','Ready','Preempt','#fbbf24']
+  ];
+  arrows.forEach(([from,to,lbl,col])=>{
+    const s=STATES[from],t=STATES[to];
+    ctx.strokeStyle=col;ctx.lineWidth=1.5;
+    ctx.beginPath();
+    // offset arrows to avoid overlap
+    const dx=t.x-s.x,dy=t.y-s.y;
+    const len=Math.sqrt(dx*dx+dy*dy);
+    const nx=dx/len,ny=dy/len;
+    const ox=-ny*8,oy=nx*8;
+    const sx=s.x+nx*35+ox,sy=s.y+ny*35+oy;
+    const ex=t.x-nx*35+ox,ey=t.y-ny*35+oy;
+    ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);
+    ctx.stroke();
+    // arrowhead
+    const angle=Math.atan2(ey-sy,ex-sx);
+    ctx.fillStyle=col;ctx.beginPath();
+    ctx.moveTo(ex,ey);
+    ctx.lineTo(ex-12*Math.cos(angle-0.4),ey-12*Math.sin(angle-0.4));
+    ctx.lineTo(ex-12*Math.cos(angle+0.4),ey-12*Math.sin(angle+0.4));
+    ctx.closePath();ctx.fill();
+    // label
+    const mx=(sx+ex)/2+ox*0.5,my=(sy+ey)/2+oy*0.5;
+    ctx.fillStyle=col;ctx.font='9px system-ui';ctx.textAlign='center';
+    ctx.fillText(lbl,mx,my);
+  });
+  // Draw state circles
+  Object.entries(STATES).forEach(([name,s])=>{
+    const isActive=name===pCur;
+    ctx.beginPath();ctx.arc(s.x,s.y,30,0,Math.PI*2);
+    ctx.fillStyle=isActive?s.color+'33':'rgba(30,30,50,.7)';
+    ctx.fill();
+    ctx.strokeStyle=s.color;ctx.lineWidth=isActive?3:1.5;
+    ctx.stroke();
+    if(isActive){
+      ctx.beginPath();ctx.arc(s.x,s.y,35,0,Math.PI*2);
+      ctx.strokeStyle=s.color+'55';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+      ctx.stroke();ctx.setLineDash([]);
+    }
+    ctx.fillStyle='#e2e8f0';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText(s.label,s.x,s.y+3);
+    ctx.fillStyle=s.color;ctx.font='8px system-ui';
+    ctx.fillText(name,s.x,s.y+16);
+  });
+}
+function procTrans(action){
+  if(action==='reset'){pCur='New';}
+  else if(TRANS[pCur]&&TRANS[pCur][action]){pCur=TRANS[pCur][action];}
+  const cv=document.getElementById('stateCanvas');
+  if(cv)drawStates(cv);
+  const st=STATES[pCur];
+  const dn=document.getElementById('stateName');
+  const dd=document.getElementById('stateDesc');
+  if(dn)dn.textContent=st.label+' ('+pCur+')';
+  if(dn)dn.style.color=st.color;
+  if(dd)dd.textContent=st.desc;
+}
+
+// ── Parent-Child Tree ──
+let pcNodes=[{id:1,pid:null,name:'init',state:'running',x:290,y:30}];
+let pcNextPid=1000;
+function drawPCTree(){
+  const cv=document.getElementById('treeCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,cv.width,cv.height);
+  // Layout: group by parent
+  const layout=layoutTree(pcNodes);
+  // Draw edges
+  layout.forEach(n=>{
+    if(n.pid!==null){
+      const parent=layout.find(p=>p.id===n.pid);
+      if(parent){
+        ctx.strokeStyle=n.state==='zombie'?'#f87171':n.state==='orphan'?'#fb923c':'#475569';
+        ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+        ctx.beginPath();ctx.moveTo(parent.dx,parent.dy+22);ctx.lineTo(n.dx,n.dy-22);ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+  });
+  // Draw nodes
+  layout.forEach(n=>{
+    const colors={running:'#34d399',zombie:'#f87171',orphan:'#fb923c',dead:'#475569'};
+    const col=colors[n.state]||'#818cf8';
+    ctx.beginPath();ctx.roundRect(n.dx-45,n.dy-20,90,40,8);
+    ctx.fillStyle='rgba(17,24,39,.9)';ctx.fill();
+    ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle=col;ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText(`PID: ${n.id}`,n.dx,n.dy-5);
+    ctx.fillStyle='#e2e8f0';ctx.font='8px system-ui';
+    ctx.fillText(n.name,n.dx,n.dy+8);
+    ctx.fillStyle=col;ctx.font='7px system-ui';
+    ctx.fillText('['+n.state+']',n.dx,n.dy+20);
+  });
+}
+function layoutTree(nodes){
+  const result=[];
+  const levels={};
+  nodes.forEach(n=>{
+    const depth=getDepth(n,nodes);
+    if(!levels[depth])levels[depth]=[];
+    levels[depth].push({...n});
+  });
+  const maxDepth=Math.max(...Object.keys(levels).map(Number));
+  Object.entries(levels).forEach(([d,ns])=>{
+    const y=30+Number(d)*70;
+    const step=580/(ns.length+1);
+    ns.forEach((n,i)=>{n.dx=(i+1)*step;n.dy=y;result.push(n);});
+  });
+  return result;
+}
+function getDepth(node,nodes,d=0){
+  if(!node.pid)return d;
+  const p=nodes.find(n=>n.id===node.pid);
+  return p?getDepth(p,nodes,d+1):d;
+}
+function forkProcess(){
+  if(pcNodes.length>=12){document.getElementById('pctree-info').textContent='الشجرة وصلت للحد الأقصى (12 عملية)!';return;}
+  const running=pcNodes.filter(n=>n.state==='running');
+  if(!running.length){document.getElementById('pctree-info').textContent='لا توجد عملية تعمل! لا يمكن Fork.';return;}
+  const parent=running[Math.floor(Math.random()*running.length)];
+  const child={id:pcNextPid++,pid:parent.id,name:'child_'+pcNextPid,state:'running'};
+  pcNodes.push(child);
+  document.getElementById('pctree-info').textContent=`✅ Fork! العملية ${parent.id} أنشأت ابناً بـ PID ${child.id}`;
+  drawPCTree();
+}
+function killParent(){
+  const parents=pcNodes.filter(n=>pcNodes.some(c=>c.pid===n.id)&&n.state==='running');
+  if(!parents.length){document.getElementById('pctree-info').textContent='لا يوجد أب له أبناء لإنهائه!';return;}
+  const parent=parents[0];
+  parent.state='dead';
+  const orphans=pcNodes.filter(n=>n.pid===parent.id&&n.state==='running');
+  orphans.forEach(o=>{o.state='orphan';o.pid=1;});
+  document.getElementById('pctree-info').textContent=`💀 العملية ${parent.id} ماتت! أبناؤها (${orphans.map(o=>o.id).join(',')}) أصبحوا يتامى — تبنّاهم init(1)`;
+  drawPCTree();
+}
+function resetTree(){
+  pcNodes=[{id:1,pid:null,name:'init',state:'running'}];
+  pcNextPid=1000;
+  document.getElementById('pctree-info').textContent='تمت إعادة التشغيل. اضغط Fork لإنشاء عمليات جديدة.';
+  drawPCTree();
+}
+
+// ── Pipe Animation ──
+let pipeMode='ordinary',pipeAnim=null;
+function initPipeCanvas(){
+  const cv=document.getElementById('pipeCanvas');
+  if(!cv)return;
+  drawPipe(cv);
+}
+function drawPipe(cv){
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,cv.width,cv.height);
+  const w=cv.width,h=cv.height;
+  const named=pipeMode==='named';
+  const colA=named?'#a78bfa':'#fb923c';
+  const colB=named?'#34d399':'#818cf8';
+  const colPipe=named?'#818cf8':'#fb923c';
+  const pipeY=85; // center of pipe row
+
+  // ── Process A ──
+  ctx.fillStyle='rgba(17,24,39,.95)';ctx.strokeStyle=colA;ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.roundRect(12,pipeY-40,115,80,10);ctx.fill();ctx.stroke();
+  ctx.fillStyle=colA;ctx.font='bold 11px system-ui';ctx.textAlign='center';
+  ctx.fillText('⚙️ عملية A',70,pipeY-18);
+  ctx.fillStyle='#94a3b8';ctx.font='8.5px system-ui';
+  ctx.fillText(named?'أي عملية':'الأب (Parent)',70,pipeY);
+  ctx.fillStyle=colA;ctx.font='bold 9px monospace';
+  ctx.fillText('send( msg )',70,pipeY+20);
+
+  // ── Pipe tube ──
+  const px1=140,px2=430;
+  // tube shadow
+  ctx.fillStyle='rgba(20,30,20,.6)';ctx.strokeStyle=colPipe+'55';ctx.lineWidth=1;
+  ctx.beginPath();ctx.roundRect(px1,pipeY-16,px2-px1,32,6);ctx.fill();ctx.stroke();
+  // tube gradient overlay
+  const grd=ctx.createLinearGradient(px1,0,px2,0);
+  grd.addColorStop(0,colPipe+'33');grd.addColorStop(0.5,colPipe+'55');grd.addColorStop(1,colPipe+'33');
+  ctx.fillStyle=grd;ctx.beginPath();ctx.roundRect(px1,pipeY-16,px2-px1,32,6);ctx.fill();
+  // tube border
+  ctx.strokeStyle=colPipe;ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(px1,pipeY-16,px2-px1,32,6);ctx.stroke();
+  // tube label
+  ctx.fillStyle=colPipe;ctx.font='bold 11px system-ui';ctx.textAlign='center';
+  ctx.fillText(named?'📛 الأنبوب المسمّى (Named Pipe)':'🔧 الأنبوب العادي (Ordinary Pipe)',285,pipeY+4);
+  // sub label
+  ctx.fillStyle='#64748b';ctx.font='8px system-ui';
+  ctx.fillText(named?'/tmp/mypipe':'أحادي الاتجاه',285,pipeY+17);
+
+  // ── Process B ──
+  ctx.fillStyle='rgba(17,24,39,.95)';ctx.strokeStyle=colB;ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.roundRect(443,pipeY-40,115,80,10);ctx.fill();ctx.stroke();
+  ctx.fillStyle=colB;ctx.font='bold 11px system-ui';ctx.textAlign='center';
+  ctx.fillText('⚙️ عملية B',500,pipeY-18);
+  ctx.fillStyle='#94a3b8';ctx.font='8.5px system-ui';
+  ctx.fillText(named?'أي عملية':'الابن (Child)',500,pipeY);
+  ctx.fillStyle=colB;ctx.font='bold 9px monospace';
+  ctx.fillText('receive( msg )',500,pipeY+20);
+
+  // ── Named pipe: bidirectional arrow ──
+  if(named){
+    ctx.strokeStyle='rgba(52,211,153,.5)';ctx.lineWidth=1.5;ctx.setLineDash([5,3]);
+    ctx.beginPath();ctx.moveTo(443,pipeY+36);ctx.lineTo(155,pipeY+36);ctx.stroke();
+    ctx.setLineDash([]);
+    // arrowheads
+    ctx.fillStyle='rgba(52,211,153,.7)';
+    ctx.beginPath();ctx.moveTo(155,pipeY+36);ctx.lineTo(163,pipeY+31);ctx.lineTo(163,pipeY+41);ctx.fill();
+    ctx.fillStyle='#34d399';ctx.font='8px system-ui';ctx.textAlign='center';
+    ctx.fillText('↔ ثنائي الاتجاه: B يمكنه الإرسال لـ A أيضاً',300,pipeY+50);
+  }
+
+  // ── Legend at bottom ──
+  const ly=named?h-68:h-68;
+  const legends=named?
+    [['#a78bfa','عملية A: أي عملية (لا يشترط أب-ابن)'],
+     ['#34d399','عملية B: أي عملية (مرونة كاملة)'],
+     ['#818cf8','الأنبوب يبقى في النظام بعد انتهاء العمليات'],
+     ['#38bdf8','ثنائي الاتجاه: كلا الطرفين يرسل ويستقبل']]:
+    [['#fb923c','عملية A = الأب (Parent) ⭐'],
+     ['#818cf8','عملية B = الابن (Child) ⭐'],
+     ['#f87171','يتطلب علاقة Parent-Child ⭐'],
+     ['#fbbf24','أحادي الاتجاه فقط (A → B)']];
+  // 2x2 grid legend
+  ctx.font='8.5px system-ui';ctx.textAlign='right';
+  legends.forEach(([c,t],i)=>{
+    const col2=i%2,row=Math.floor(i/2);
+    const lx=col2===0?250:w-10;
+    const lby=ly+row*18;
+    ctx.fillStyle=c;ctx.beginPath();ctx.arc(lx-ctx.measureText(t).width-10,lby,4,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#94a3b8';ctx.fillText(t,lx,lby+4);
+  });
+}
+function sendPipeMsg(){
+  const inp=document.getElementById('pipe-msg-in');
+  const msg=(inp?inp.value.trim():'بيانات')+'';
+  if(!msg)return;
+  if(pipeAnim)return;
+  const cv=document.getElementById('pipeCanvas');
+  if(!cv)return;
+  document.getElementById('pipe-recv-box').style.display='none';
+  pktArr=[{x:140,msg,t:Date.now(),done:false}];
+  pipeAnim=setInterval(()=>animPipeMsg(cv,msg),16);
+}
+function animPipeMsg(cv,msg){
+  const now=Date.now();
+  drawPipe(cv);
+  const ctx=cv.getContext('2d');
+  const col=pipeMode==='named'?'#818cf8':'#fb923c';
+  const elapsed=(now-pktArr[0].t)/1400;
+  if(elapsed<1){
+    const px=140+elapsed*(430-140);
+    // packet bubble
+    const tw=ctx.measureText(msg).width+14;
+    ctx.fillStyle=col+'cc';ctx.beginPath();ctx.roundRect(px-tw/2,85-12,tw,22,6);ctx.fill();
+    ctx.fillStyle='#000';ctx.font='bold 8px system-ui';ctx.textAlign='center';
+    ctx.fillText(msg.length>14?msg.slice(0,13)+'…':msg,px,85+3);
+  } else {
+    clearInterval(pipeAnim);pipeAnim=null;drawPipe(cv);
+    // show received
+    const box=document.getElementById('pipe-recv-box');
+    const txt=document.getElementById('pipe-recv-text');
+    if(box&&txt){box.style.display='block';txt.textContent='"'+msg+'"';}
+  }
+}
+let pktArr=[];
+// sendPipeData kept for backward compat but sendPipeMsg is primary
+function sendPipeData(){sendPipeMsg();}
+function setPipeMode(m){
+  pipeMode=m;
+  document.getElementById('btn-ord').style.borderWidth=m==='ordinary'?'2px':'1px';
+  document.getElementById('btn-named').style.borderWidth=m==='named'?'2px':'1px';
+  const info=document.getElementById('pipe-info');
+  if(m==='ordinary')info.innerHTML='<b>الأنبوب العادي (Ordinary Pipe):</b> يتطلب علاقة أب-ابن ⭐ | أحادي الاتجاه | يختفي عند انتهاء العمليات';
+  else info.innerHTML='<b style="color:#818cf8">الأنبوب المسمّى (Named Pipe):</b> لا يتطلب أب-ابن | ثنائي الاتجاه ⭐ | يبقى في نظام الملفات حتى بعد انتهاء العمليات';
+  if(pipeAnim){clearInterval(pipeAnim);pipeAnim=null;}
+  const cv=document.getElementById('pipeCanvas');
+  if(cv)drawPipe(cv);
+}
+function resetPipe(){
+  if(pipeAnim){clearInterval(pipeAnim);pipeAnim=null;}
+  pktArr=[];
+  const cv=document.getElementById('pipeCanvas');
+  if(cv)drawPipe(cv);
+}
+
+// ── Memory Hierarchy ──
+const memData=[
+  {id:'ml1',name:'السجلات (Registers)',color:'#f87171',speed:'< 1 نانوثانية ⚡⚡⚡',size:'< 1 KB',cost:'جداً مرتفع',location:'داخل المعالج مباشرة',tech:'أسرع عنصر في الكمبيوتر. يحتفظ بالبيانات الجاري معالجتها حالياً. Program Counter و Stack Pointer مثلاً.'},
+  {id:'ml2',name:'ذاكرة Cache',color:'#fb923c',speed:'1 - 10 نانوثانية ⚡⚡',size:'1 MB - 32 MB',cost:'مرتفع',location:'داخل أو قرب المعالج',tech:'Cache L1 (أسرع، أصغر) → L2 → L3 (أكبر وأبطأ). تحتفظ بالبيانات الأكثر استخداماً لتسريع الوصول.'},
+  {id:'ml3',name:'ذاكرة RAM',color:'#fbbf24',speed:'50 - 100 نانوثانية ⚡',size:'4 GB - 128 GB',cost:'معتدل',location:'شرائح منفصلة على اللوحة الرئيسية',tech:'الذاكرة الرئيسية. تحتفظ بالبرامج والبيانات الجاري تنفيذها. متطايرة (Volatile) = تُمحى عند الإطفاء.'},
+  {id:'ml4',name:'القرص الصلب SSD/HDD',color:'#34d399',speed:'0.1 - 10 ميلي ثانية 🐢',size:'256 GB - 4 TB',cost:'منخفض',location:'داخل وحدة النظام',tech:'تخزين دائم (Non-Volatile). يبقى حتى بعد الإطفاء. SSD أسرع من HDD بـ 10-100 مرة.'},
+  {id:'ml5',name:'تخزين الشبكة / Cloud',color:'#818cf8',speed:'مئات الميلي ثانية 🐢🐢',size:'لا حدود تقريباً',cost:'منخفض جداً',location:'خوادم بعيدة عبر الإنترنت',tech:'Google Drive, OneDrive, AWS S3. الأبطأ لكن الأرخص والأضخم. يصل عبر الشبكة.'}
+];
+function initMemHierarchy(){
+  document.querySelectorAll('#ml1,#ml2,#ml3,#ml4,#ml5').forEach((el,i)=>{
+    if(!el)return;
+    el.style.cursor='pointer';
+    el.addEventListener('click',()=>showMemLevel(i));
+  });
+}
+function showMemLevel(i){
+  // Highlight selected level
+  for(let j=0;j<5;j++){
+    const d=document.getElementById('mld'+j);
+    if(d)d.style.boxShadow=j===i?'0 0 0 3px white':'none';
+  }
+  const d=memData[i];
+  document.getElementById('mem-name').textContent=d.name;
+  document.getElementById('mem-name').style.color=d.color;
+  document.getElementById('mem-detail').innerHTML=
+    `<span style="color:${d.color}">⚡ السرعة:</span> ${d.speed}<br>
+     <span style="color:${d.color}">📦 الحجم:</span> ${d.size}<br>
+     <span style="color:${d.color}">💰 التكلفة:</span> ${d.cost}<br>
+     <span style="color:${d.color}">📍 الموقع:</span> ${d.location}<br>
+     <span style="color:#94a3b8;font-size:.75rem">${d.tech}</span>`;
+}
+
+// ── initInteractives ──
+function initInteractives(){
+  if(cur==='t1'){
+    const inp=document.getElementById('cli-inp');
+    if(inp)inp.focus();
+    renderBootSteps();
+    const bv=document.getElementById('bootCanvas');
+    if(bv){const ctx=bv.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,bv.width,bv.height);}
+  }
+  if(cur==='t3'){
+    initStateCanvas();drawPCTree();
+    drawCtxCanvas();
+    const rrCv=document.getElementById('rrCanvas');
+    if(rrCv){const ctx=rrCv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,rrCv.width,rrCv.height);}
+    rrRenderProcs();
+  }
+  if(cur==='t4'){initPipeCanvas();pcRender();}
+  if(cur==='t5'){maReset();}
+  if(cur==='t6'){fbRender();}
+}
+
+render();
+</script>
+</body>
+</html>
