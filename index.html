@@ -54,7 +54,8 @@ td{padding:.38rem .42rem;border:1px solid #1f2937}
 .badge.gr{background:rgba(52,211,153,.15);color:#34d399}
 .badge.or{background:rgba(251,146,60,.15);color:#fb923c}
 .badge.re{background:rgba(248,113,113,.15);color:#f87171}
-.inter-box{background:#0d1117;border:1px solid #2d3a5e;border-radius:12px;padding:1rem;margin:.9rem 0}
+.inter-box{background:#0d1117;border:2px solid #ef4444;border-radius:12px;padding:1.1rem 1rem .9rem;margin:1.1rem 0;position:relative}
+.inter-box::before{content:'🎮 تفاعلي — شارك وجرّب!';position:absolute;top:-11px;right:14px;background:#ef4444;color:#fff;font-size:.62rem;font-weight:800;padding:1px 9px;border-radius:4px;white-space:nowrap;z-index:1;letter-spacing:.3px}
 .inter-title{color:#38bdf8;font-size:.85rem;font-weight:800;margin-bottom:.6rem}
 .btn{padding:.35rem .85rem;border-radius:8px;border:none;cursor:pointer;font-size:.78rem;font-weight:700;transition:.2s;font-family:inherit;direction:rtl}
 .btn-pu{background:rgba(129,140,248,.18);color:#818cf8;border:1px solid rgba(129,140,248,.35)}
@@ -100,6 +101,7 @@ const tabs=[
 {id:'t4',icon:'🔗',label:'4: IPC'},
 {id:'t5',icon:'🧠',label:'5: الذاكرة'},
 {id:'t6',icon:'💾',label:'6: I/O والملفات'},
+{id:'tg',icon:'🎮',label:'ألعاب تعليمية'},
 {id:'tq',icon:'👩‍🏫',label:'أسئلة الأستاذة (27)'},
 {id:'quiz',icon:'✅',label:'اختبار ذاتي (40)'}
 ];
@@ -1636,6 +1638,96 @@ S.quiz=`<div class="card">
 <button class="rb" onclick="resetQuiz()">↺ إعادة الاختبار</button></div>
 <div id="qbox"></div></div>`;
 
+
+S.tg=`<div class="card">
+<h2 style="color:#f87171">🎮 ألعاب تعليمية — راجع المنهج بالمرح!</h2>
+<div class="tip" style="border-color:#f87171;background:rgba(248,113,113,.04)">
+🏆 5 ألعاب تفاعلية تغطي كامل مفاهيم نظم التشغيل — العب وتعلم في نفس الوقت!
+</div>
+
+<!-- ════════ GAME 1: Boot Sequence ════════ -->
+<div class="inter-box" style="margin-top:1.2rem">
+<div class="inter-title">⚡ لعبة 1 — رتّب مراحل الإقلاع!</div>
+<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">انقر على المراحل بالترتيب الصحيح من الأول للأخير: من لحظة الضغط على زر التشغيل حتى سطح المكتب</p>
+<div id="bs-score" style="font-size:.78rem;color:#fbbf24;margin-bottom:.4rem">النقاط: 0 | الصح: 0 | الخطأ: 0</div>
+<div id="bs-cards" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem"></div>
+<div id="bs-done" style="display:flex;gap:.4rem;flex-wrap:wrap;min-height:42px;background:rgba(52,211,153,.05);border:1px dashed rgba(52,211,153,.3);border-radius:8px;padding:.3rem;margin-bottom:.4rem">
+  <span style="font-size:.72rem;color:#334155;align-self:center">الترتيب الصحيح ←</span>
+</div>
+<div class="btn-row">
+  <button class="btn btn-gr" onclick="bsStart()">🔀 خلط جديد</button>
+  <button class="btn btn-yl" onclick="bsReset()">↺ إعادة</button>
+</div>
+<div id="bs-msg" style="font-size:.78rem;min-height:22px;margin-top:.3rem"></div>
+</div>
+
+<!-- ════════ GAME 2: Concept Match ════════ -->
+<div class="inter-box" style="margin-top:1.2rem">
+<div class="inter-title">🃏 لعبة 2 — طابق المفهوم مع تعريفه!</div>
+<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">انقر على المصطلح ثم على تعريفه المناسب — أسرع 8 مطابقات تفوز!</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+  <div id="cm-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | متبقي: 8</div>
+  <div id="cm-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱ 60s</div>
+  <button class="btn btn-gr" onclick="cmStart()">▶ ابدأ</button>
+</div>
+<div id="cm-board" style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem"></div>
+<div id="cm-msg" style="font-size:.78rem;min-height:20px;margin-top:.3rem;color:#34d399"></div>
+</div>
+
+<!-- ════════ GAME 3: True/False Blitz ════════ -->
+<div class="inter-box" style="margin-top:1.2rem">
+<div class="inter-title">⚡ لعبة 3 — صح أم خطأ؟ (Blitz!)</div>
+<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">8 ثوانٍ لكل سؤال — صح أم خطأ؟ 15 سؤال عن نظم التشغيل</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+  <div id="tf-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 / 15</div>
+  <div id="tf-timer" style="font-size:1.1rem;color:#f87171;font-weight:900">⏱</div>
+  <div id="tf-num" style="font-size:.75rem;color:#94a3b8">السؤال: -</div>
+</div>
+<div id="tf-q" style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:8px;padding:.7rem;font-size:.85rem;margin-bottom:.5rem;min-height:48px;text-align:center;color:#e2e8f0">
+  اضغط "ابدأ" للبدء!
+</div>
+<div style="display:flex;gap:.6rem;justify-content:center;margin-bottom:.4rem">
+  <button class="btn btn-gr" id="btn-true" onclick="tfAnswer(true)" disabled style="font-size:1rem;padding:.5rem 2rem">✅ صح</button>
+  <button class="btn btn-re" id="btn-false" onclick="tfAnswer(false)" disabled style="font-size:1rem;padding:.5rem 2rem">❌ خطأ</button>
+</div>
+<div class="btn-row"><button class="btn btn-pu" onclick="tfStart()">▶ ابدأ</button></div>
+<div id="tf-feedback" style="font-size:.78rem;min-height:20px;margin-top:.2rem;text-align:center"></div>
+</div>
+
+<!-- ════════ GAME 4: OS Type Detective ════════ -->
+<div class="inter-box" style="margin-top:1.2rem">
+<div class="inter-title">🕵️ لعبة 4 — حدّد نوع نظام التشغيل!</div>
+<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">اقرأ الوصف وحدد هل هو: Batch / Time Sharing / Real-Time / Distributed / Multiprocessor</p>
+<div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+  <div id="os-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | جولة: 0/10</div>
+  <button class="btn btn-gr" onclick="osStart()">▶ ابدأ</button>
+</div>
+<div id="os-scenario" style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:.7rem;font-size:.85rem;min-height:52px;margin-bottom:.4rem;color:#e2e8f0;text-align:center">
+  اضغط "ابدأ" لبدء اللعبة!
+</div>
+<div id="os-choices" style="display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;margin-bottom:.4rem"></div>
+<div id="os-msg" style="font-size:.78rem;min-height:20px;text-align:center"></div>
+</div>
+
+<!-- ════════ GAME 5: Memory Survivor ════════ -->
+<div class="inter-box" style="margin-top:1.2rem">
+<div class="inter-title">🧠 لعبة 5 — أنقذ الذاكرة! (Memory Survivor)</div>
+<p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">العمليات تصل باستمرار وتحتاج ذاكرة — اضغط "احرر" قبل امتلاء الذاكرة! لكل 10 ثوانٍ تعيش تحصل على نقطة</p>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+  <div id="ms-score" style="font-size:.78rem;color:#fbbf24">نقاط: 0 | مستوى: 1</div>
+  <div id="ms-timer" style="font-size:.85rem;color:#f87171;font-weight:800">⏱ 0s</div>
+  <div class="btn-row" style="margin:0">
+    <button class="btn btn-gr" onclick="msStart()">▶ ابدأ</button>
+    <button class="btn btn-re" onclick="msFree()">🗑️ احرر عملية</button>
+    <button class="btn btn-yl" onclick="msStop()">⏹ إيقاف</button>
+  </div>
+</div>
+<canvas id="msCanvas" width="580" height="130" style="background:#0a0f1e;border-radius:8px;max-width:100%;border:1px solid #1f2937"></canvas>
+<div id="ms-msg" style="font-size:.78rem;min-height:20px;margin-top:.3rem;color:#34d399;text-align:center"></div>
+</div>
+
+</div>`;
+
 const QS=[
 {q:"ما هو نظام التشغيل؟",o:["برنامج تحرير النصوص","برنامج وسيط بين المستخدم والعتاد","برنامج للتصميم الجرافيكي","برنامج ألعاب"],c:1,e:"نظام التشغيل = برنامج وسيط بين المستخدم وأجهزة الحاسب. مثل: Windows, Linux, Android."},
 {q:"أي من الآتي ليس من أهداف نظام التشغيل؟",o:["الاستفادة القصوى من الموارد","سهولة الاستخدام","تصميم المواقع الإلكترونية","اكتشاف الأخطاء"],c:2,e:"تصميم المواقع ليس من أهداف OS. الأهداف: إدارة الموارد، سهولة الاستخدام، الأمان، اكتشاف الأخطاء."},
@@ -1955,68 +2047,204 @@ const BOOT_STEPS=[
    title:'✅ نظام التشغيل جاهز — سطح المكتب',
    desc:'نظام التشغيل اكتمل تشغيله بنجاح! الآن يمكنك فتح التطبيقات وتصفح الإنترنت وتشغيل الألعاب. نظام التشغيل يُدير كل شيء في الخلفية بصمت.',
    draw:(ctx,w,h,p)=>{
-     const a=Math.min(p*2.5,1);
+     const a=Math.min(p*2,1);
      ctx.globalAlpha=a;
-     // OS-specific desktop theme
-     const DT={
-       linux:  {bg1:'#1a2a1a',bg2:'#0d1117',bar:'rgba(52,211,153,.25)',col:'#34d399',name:'GNOME Shell / KDE Plasma',
-                icons:['📁','🌐','💻','📝','🎵','⚙️'],labels:['ملفات','Firefox','Terminal','محرر','موسيقى','إعدادات']},
-       windows:{bg1:'#0a1a2e',bg2:'#041025',bar:'rgba(56,189,248,.3)',col:'#38bdf8',name:'Windows Explorer',
-                icons:['📁','🌐','🎮','📊','🛡️','⚙️'],labels:['Explorer','Edge','Steam','Office','Defender','إعدادات']},
-       macos:  {bg1:'#1a0a2e',bg2:'#0a0d1a',bar:'rgba(167,139,250,.3)',col:'#a78bfa',name:'Finder / Aqua UI',
-                icons:['🔍','📁','🌐','🎵','📷','⚙️'],labels:['Spotlight','Finder','Safari','Music','Photos','System Pref.']},
-       android:{bg1:'#1a0a10',bg2:'#0d0a1a',bar:'rgba(251,146,60,.3)',col:'#fb923c',name:'Android Launcher',
-                icons:['📞','📷','🌐','📩','📱','⚙️'],labels:['الهاتف','Camera','Chrome','الرسائل','Play','الإعدادات']},
-     };
-     const dt=DT[bootOS]||DT.linux;
-     // Screen
-     const grd=ctx.createLinearGradient(50,20,530,220);
-     grd.addColorStop(0,dt.bg1);grd.addColorStop(1,dt.bg2);
-     ctx.fillStyle=grd;ctx.beginPath();ctx.roundRect(48,18,484,184,14);ctx.fill();
-     ctx.strokeStyle=dt.col;ctx.lineWidth=2.5;
-     ctx.beginPath();ctx.roundRect(48,18,484,184,14);ctx.stroke();
-     // Taskbar
-     ctx.fillStyle=dt.bar;
-     if(bootOS==='macos'){
-       // macOS: top menu bar
-       ctx.beginPath();ctx.roundRect(48,18,484,20,{upperLeft:14,upperRight:14,lowerLeft:0,lowerRight:0});ctx.fill();
-       ctx.fillStyle=dt.col;ctx.font='8px system-ui';ctx.textAlign='right';
-       ctx.fillText('🍎  Finder  File  Edit  View  Go  Window  Help',520,32);
-       ctx.textAlign='left';ctx.fillText(new Date().toLocaleTimeString('ar-SA'),56,32);
-     } else if(bootOS==='android'){
-       // Android: status bar top
-       ctx.beginPath();ctx.roundRect(48,18,484,18,{upperLeft:14,upperRight:14,lowerLeft:0,lowerRight:0});ctx.fill();
-       ctx.fillStyle=dt.col;ctx.font='8px system-ui';ctx.textAlign='center';
-       ctx.fillText('📶 📡 🔋  '+new Date().toLocaleTimeString('ar-SA'),290,30);
-       // bottom nav
-       ctx.fillStyle=dt.bar;ctx.beginPath();ctx.rect(48,188,484,14);ctx.fill();
-       ctx.fillStyle=dt.col;ctx.font='12px system-ui';ctx.textAlign='center';
-       ctx.fillText('◀  ●  ■',290,199);
-     } else {
-       // Windows/Linux: bottom taskbar
-       ctx.beginPath();ctx.rect(48,188,484,14);ctx.fill();
-       ctx.fillStyle=dt.col;ctx.font='8px system-ui';ctx.textAlign='right';
-       ctx.fillText(new Date().toLocaleTimeString('ar-SA'),524,198);
-       if(bootOS==='windows'){ctx.textAlign='left';ctx.fillStyle='#38bdf8';ctx.font='10px system-ui';ctx.fillText('⊞',56,199);}
-       else{ctx.textAlign='left';ctx.fillStyle='#34d399';ctx.font='9px system-ui';ctx.fillText('Applications',56,197);}
-     }
-     // Icons
-     const startY=bootOS==='macos'?48:42;
-     dt.icons.forEach((ic,i)=>{
-       const ix=90+i*74;
-       if(p*8>i+1){
-         const ia=Math.min((p*8-i-1),1);
-         ctx.globalAlpha=a*ia;
-         ctx.fillStyle='rgba(255,255,255,.04)';
-         ctx.beginPath();ctx.roundRect(ix-26,startY,52,58,bootOS==='android'?28:8);ctx.fill();
-         ctx.font='24px system-ui';ctx.textAlign='center';ctx.fillText(ic,ix,startY+32);
-         ctx.fillStyle='#e2e8f0';ctx.font='7px system-ui';
-         ctx.fillText(dt.labels[i],ix,startY+52);
+     const now=new Date();
+     const tStr=now.toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});
+     const dStr=now.toLocaleDateString('ar-SA',{weekday:'short',month:'short',day:'numeric'});
+     if(bootOS==='windows'){
+       // ── Windows 11 ──────────────────────────────────────────────
+       // Wallpaper: blue gradient like Windows 11
+       const wg=ctx.createLinearGradient(50,18,530,202);
+       wg.addColorStop(0,'#0a2a6e');wg.addColorStop(.5,'#1a4aae');wg.addColorStop(1,'#0d1a5e');
+       ctx.fillStyle=wg;ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.fill();
+       ctx.strokeStyle='#4a8fff';ctx.lineWidth=2;
+       ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.stroke();
+       // Desktop icons (top-left)
+       const dIcons=[['📁','This PC'],['🗑️','Recycle'],['🌐','Network'],['📝','Notes']];
+       dIcons.forEach((ic,i)=>{
+         if(p*5<i+1)return;
+         const ix=75+i*0,iy=30+i*32;
+         ctx.font='16px system-ui';ctx.textAlign='left';ctx.fillText(ic[0],ix,iy+15);
+         ctx.fillStyle='#e2e8f0';ctx.font='7px system-ui';ctx.fillText(ic[1],ix+20,iy+15);
+         ctx.fillStyle='white';
+       });
+       // Taskbar (bottom, acrylic blur style)
+       const tbH=36,tbY=202-tbH;
+       ctx.fillStyle='rgba(0,0,0,.75)';ctx.beginPath();ctx.roundRect(50,tbY,480,tbH,{lowerLeft:12,lowerRight:12});ctx.fill();
+       // Start button (⊞ centered)
+       if(p>.3){
+         ctx.fillStyle='rgba(255,255,255,.1)';ctx.beginPath();ctx.roundRect(270,tbY+6,24,24,6);ctx.fill();
+         ctx.fillStyle='#60cdff';ctx.font='bold 14px system-ui';ctx.textAlign='center';ctx.fillText('⊞',282,tbY+22);
        }
-     });
-     ctx.globalAlpha=a;
-     ctx.fillStyle='#475569';ctx.font='8.5px system-ui';ctx.textAlign='center';
-     ctx.fillText('✅ '+dt.name+' جاهز — OS يُدير كل شيء في الخلفية',290,215);
+       // Search bar
+       if(p>.45){
+         ctx.fillStyle='rgba(255,255,255,.08)';ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1;
+         ctx.beginPath();ctx.roundRect(300,tbY+8,100,20,4);ctx.fill();ctx.stroke();
+         ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='8px system-ui';ctx.textAlign='left';
+         ctx.fillText('🔍  ابحث...',304,tbY+21);
+       }
+       // Taskbar icons
+       if(p>.55){
+         ['📁','🌐','📧','🎵'].forEach((ic,i)=>{
+           ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText(ic,420+i*22,tbY+22);
+         });
+       }
+       // System tray
+       if(p>.65){
+         ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='7px system-ui';ctx.textAlign='right';
+         ctx.fillText('📶  🔊  🔋',524,tbY+16);
+         ctx.fillStyle='white';ctx.font='bold 8px system-ui';
+         ctx.fillText(tStr,520,tbY+28);
+       }
+       // Windows logo watermark
+       ctx.fillStyle='rgba(255,255,255,.04)';ctx.font='80px system-ui';ctx.textAlign='center';
+       if(p>.2)ctx.fillText('⊞',290,140);
+       ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='8px system-ui';ctx.textAlign='center';
+       ctx.fillText('Windows 11 — Microsoft NT Kernel — Explorer.exe جاهز',290,215);
+
+     } else if(bootOS==='linux'){
+       // ── Linux Ubuntu GNOME ───────────────────────────────────────
+       // Ubuntu wallpaper: purple to orange
+       const lg=ctx.createLinearGradient(50,18,530,202);
+       lg.addColorStop(0,'#2d0e3f');lg.addColorStop(.6,'#5e1f7e');lg.addColorStop(1,'#c9490f');
+       ctx.fillStyle=lg;ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.fill();
+       ctx.strokeStyle='#e95420';ctx.lineWidth=2;
+       ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.stroke();
+       // GNOME Top bar
+       if(p>.2){
+         ctx.fillStyle='rgba(0,0,0,.7)';ctx.beginPath();ctx.roundRect(50,18,480,22,{upperLeft:12,upperRight:12});ctx.fill();
+         ctx.fillStyle='white';ctx.font='bold 8px system-ui';ctx.textAlign='left';ctx.fillText('Activities',60,33);
+         ctx.textAlign='center';ctx.fillText(dStr+'  '+tStr,290,33);
+         ctx.textAlign='right';ctx.fillText('📶  🔋  🔊  ⚙️',524,33);
+       }
+       // Left dock (Ubuntu style)
+       if(p>.35){
+         ctx.fillStyle='rgba(0,0,0,.6)';ctx.beginPath();ctx.roundRect(55,48,34,130,10);ctx.fill();
+         ['📁','🌐','💻','📧','🎵','⚙️'].forEach((ic,i)=>{
+           if(p*7<i+2)return;
+           ctx.font='16px system-ui';ctx.textAlign='center';ctx.fillText(ic,72,68+i*20);
+         });
+       }
+       // Terminal window open
+       if(p>.6){
+         const fa=Math.min((p-.6)/.4,1);ctx.globalAlpha=a*fa;
+         ctx.fillStyle='rgba(10,10,10,.92)';ctx.strokeStyle='#444';ctx.lineWidth=1.5;
+         ctx.beginPath();ctx.roundRect(110,50,250,100,8);ctx.fill();ctx.stroke();
+         // Terminal title bar
+         ctx.fillStyle='#333';ctx.beginPath();ctx.roundRect(110,50,250,18,{upperLeft:8,upperRight:8});ctx.fill();
+         ctx.fillStyle='#aaa';ctx.font='8px system-ui';ctx.textAlign='center';ctx.fillText('Terminal — bash',235,62);
+         ctx.fillStyle='#ef4444';ctx.beginPath();ctx.arc(122,59,4,0,Math.PI*2);ctx.fill();
+         ctx.fillStyle='#fbbf24';ctx.beginPath();ctx.arc(133,59,4,0,Math.PI*2);ctx.fill();
+         ctx.fillStyle='#34d399';ctx.beginPath();ctx.arc(144,59,4,0,Math.PI*2);ctx.fill();
+         // Terminal content
+         ctx.fillStyle='#34d399';ctx.font='8px monospace';ctx.textAlign='left';
+         ctx.fillText('user@ubuntu:~$ systemctl start gnome',118,82);
+         ctx.fillText('user@ubuntu:~$ ls /home',118,96);
+         ctx.fillStyle='#94a3b8';ctx.fillText('مجدي/  ريما/',118,110);
+         ctx.fillStyle='#34d399';ctx.fillText('user@ubuntu:~$ █',118,124);
+         ctx.globalAlpha=a;
+       }
+       ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='8px system-ui';ctx.textAlign='center';
+       ctx.fillText('Ubuntu Linux — GNOME Shell — systemd (PID=1) — جاهز',290,215);
+
+     } else if(bootOS==='macos'){
+       // ── macOS ────────────────────────────────────────────────────
+       // macOS Big Sur/Sonoma wallpaper: blue sky gradient
+       const mg=ctx.createLinearGradient(50,18,530,202);
+       mg.addColorStop(0,'#1a5fb4');mg.addColorStop(.4,'#3584e4');mg.addColorStop(.8,'#62a0ea');mg.addColorStop(1,'#99c1f1');
+       ctx.fillStyle=mg;ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.fill();
+       ctx.strokeStyle='#86aecb';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.stroke();
+       // macOS Menu bar (frosted glass)
+       if(p>.2){
+         ctx.fillStyle='rgba(255,255,255,.25)';ctx.beginPath();ctx.roundRect(50,18,480,22,{upperLeft:12,upperRight:12});ctx.fill();
+         ctx.fillStyle='rgba(0,0,0,.8)';ctx.font='bold 8px system-ui';ctx.textAlign='left';
+         ctx.fillText('🍎  Finder  File  Edit  View  Go  Window  Help',60,33);
+         ctx.textAlign='right';ctx.fillText('📶  🔋  🔊  '+tStr,523,33);
+       }
+       // Finder window
+       if(p>.4){
+         const fa=Math.min((p-.4)/.6,1);ctx.globalAlpha=a*fa;
+         // Window shadow
+         ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.roundRect(104,47,280,115,10);ctx.fill();
+         // Window background
+         ctx.fillStyle='#f2f2f0';ctx.strokeStyle='#ccc';ctx.lineWidth=1;
+         ctx.beginPath();ctx.roundRect(102,45,280,115,10);ctx.fill();ctx.stroke();
+         // Title bar
+         ctx.fillStyle='#d8d8d5';ctx.beginPath();ctx.roundRect(102,45,280,26,{upperLeft:10,upperRight:10});ctx.fill();
+         ctx.fillStyle='#ef4444';ctx.beginPath();ctx.arc(116,58,5,0,Math.PI*2);ctx.fill();
+         ctx.fillStyle='#fbbf24';ctx.beginPath();ctx.arc(130,58,5,0,Math.PI*2);ctx.fill();
+         ctx.fillStyle='#34d399';ctx.beginPath();ctx.arc(144,58,5,0,Math.PI*2);ctx.fill();
+         ctx.fillStyle='#333';ctx.font='9px system-ui';ctx.textAlign='center';ctx.fillText('Finder',242,62);
+         // Sidebar
+         ctx.fillStyle='rgba(200,200,200,.6)';ctx.beginPath();ctx.rect(102,71,70,89);ctx.fill();
+         ctx.fillStyle='#555';ctx.font='7.5px system-ui';ctx.textAlign='left';
+         ['🏠 Home','📁 Documents','🖥️ Desktop','💾 Downloads','🌐 Network'].forEach((l,i)=>ctx.fillText(l,107,84+i*16));
+         // Main area
+         ctx.fillStyle='white';ctx.fillRect(172,71,210,89);
+         ['📄 report.pdf','🎵 playlist.m3u','🖼️ photo.jpg','📝 readme.md'].forEach((f,i)=>{
+           ctx.font='8px system-ui';ctx.fillText(f,178,87+i*18);
+         });
+         ctx.globalAlpha=a;
+       }
+       // macOS Dock
+       if(p>.55){
+         const dy=196;
+         ctx.fillStyle='rgba(255,255,255,.2)';ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;
+         ctx.beginPath();ctx.roundRect(140,dy-2,260,22,11);ctx.fill();ctx.stroke();
+         ['📁','🌐','📧','🎵','📷','⚙️','🗑️'].forEach((ic,i)=>{
+           if(p*9<i+4)return;
+           ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText(ic,157+i*34,dy+15);
+         });
+       }
+       ctx.fillStyle='rgba(0,0,0,.5)';ctx.font='8px system-ui';ctx.textAlign='center';
+       ctx.fillText('macOS — XNU Kernel (Mach+BSD) — launchd — Finder جاهز',290,215);
+
+     } else if(bootOS==='android'){
+       // ── Android ──────────────────────────────────────────────────
+       // Android wallpaper: Material You dynamic color (teal-purple)
+       const ag=ctx.createLinearGradient(50,18,530,202);
+       ag.addColorStop(0,'#004d6d');ag.addColorStop(.5,'#1a6e8e');ag.addColorStop(1,'#0a3a5e');
+       ctx.fillStyle=ag;ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.fill();
+       ctx.strokeStyle='#4dd0e1';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(50,18,480,184,12);ctx.stroke();
+       // Status bar
+       if(p>.15){
+         ctx.fillStyle='rgba(0,0,0,.4)';ctx.beginPath();ctx.roundRect(50,18,480,20,{upperLeft:12,upperRight:12});ctx.fill();
+         ctx.fillStyle='white';ctx.font='8px system-ui';ctx.textAlign='left';ctx.fillText(tStr,58,31);
+         ctx.textAlign='right';ctx.fillText('📶  📡  🔋',524,31);
+       }
+       // Date + Clock widget
+       if(p>.3){
+         ctx.fillStyle='rgba(255,255,255,.12)';ctx.beginPath();ctx.roundRect(165,42,230,55,16);ctx.fill();
+         ctx.fillStyle='white';ctx.font='bold 22px system-ui';ctx.textAlign='center';ctx.fillText(tStr,280,72);
+         ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='9px system-ui';ctx.fillText(dStr,280,86);
+       }
+       // Google search bar
+       if(p>.45){
+         ctx.fillStyle='rgba(255,255,255,.15)';ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;
+         ctx.beginPath();ctx.roundRect(120,103,320,26,13);ctx.fill();ctx.stroke();
+         ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='9px system-ui';ctx.textAlign='center';ctx.fillText('🔍  ابحث هنا أو أدخل عنواناً',280,120);
+       }
+       // App icons grid
+       if(p>.55){
+         const apps=[['📞','الهاتف'],['📩','الرسائل'],['📷','Camera'],['🌐','Chrome'],
+                     ['📧','Gmail'],['🗺️','Maps'],['🎵','Music'],['📺','YouTube']];
+         apps.forEach((app,i)=>{
+           if(p*10<i+4)return;
+           const ix=110+i%4*85,iy=140+Math.floor(i/4)*38;
+           ctx.fillStyle='rgba(255,255,255,.12)';ctx.beginPath();ctx.roundRect(ix-18,iy-18,36,36,12);ctx.fill();
+           ctx.font='18px system-ui';ctx.textAlign='center';ctx.fillText(app[0],ix,iy+6);
+           ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='6.5px system-ui';ctx.fillText(app[1],ix,iy+23);
+         });
+       }
+       // Nav bar
+       if(p>.7){
+         ctx.fillStyle='rgba(0,0,0,.4)';ctx.beginPath();ctx.rect(50,190,480,12);ctx.fill();
+         ctx.fillStyle='white';ctx.font='10px system-ui';ctx.textAlign='center';ctx.fillText('◀   ●   ■',290,200);
+       }
+       ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='8px system-ui';ctx.textAlign='center';
+       ctx.fillText('Android — Linux Kernel — Zygote — Home Screen جاهز',290,215);
+     }
      ctx.globalAlpha=1;
    }
   }
@@ -2526,6 +2754,377 @@ function pcLog(msg,col){
   el.innerHTML=`<span style="color:${col||'#94a3b8'}">${msg}</span>\n`+el.innerHTML;
 }
 
+
+// ════════════════════════════════════════════════════════════════
+// GAME 1: Boot Sequence Sorter
+// ════════════════════════════════════════════════════════════════
+const BS_ORDER=['Power On','BIOS/POST','Bootloader','Kernel','Init/Services','Desktop'];
+const BS_COLORS=['#fbbf24','#fb923c','#818cf8','#38bdf8','#34d399','#a78bfa'];
+let bsShuffled=[],bsNext=0,bsScore=0,bsRight=0,bsWrong=0;
+function bsStart(){
+  bsShuffled=[...BS_ORDER].sort(()=>Math.random()-.5);
+  bsNext=0;bsScore=0;bsRight=0;bsWrong=0;
+  bsRender();
+  document.getElementById('bs-done').innerHTML='<span style="font-size:.72rem;color:#334155;align-self:center">الترتيب الصحيح ←</span>';
+  document.getElementById('bs-msg').textContent='';
+  bsUpdateScore();
+}
+function bsRender(){
+  const el=document.getElementById('bs-cards');
+  if(!el)return;
+  el.innerHTML=bsShuffled.map((s,i)=>`
+    <div onclick="bsPick(${i})" data-i="${i}"
+      style="padding:.35rem .7rem;background:rgba(129,140,248,.1);border:2px solid rgba(129,140,248,.3);
+             border-radius:8px;cursor:pointer;font-size:.78rem;font-weight:700;color:#e2e8f0;
+             transition:all .15s;user-select:none"
+      onmouseenter="this.style.borderColor='#818cf8';this.style.background='rgba(129,140,248,.25)'"
+      onmouseleave="this.style.borderColor='rgba(129,140,248,.3)';this.style.background='rgba(129,140,248,.1)'">
+      ${s}
+    </div>
+  `).join('');
+}
+function bsPick(i){
+  const name=bsShuffled[i];
+  const correct=BS_ORDER[bsNext];
+  const msg=document.getElementById('bs-msg');
+  const done=document.getElementById('bs-done');
+  const col=BS_COLORS[bsNext];
+  if(name===correct){
+    bsRight++;bsScore+=10;bsNext++;
+    // Move card to done
+    done.innerHTML+=`<div style="padding:.3rem .6rem;background:${col}22;border:2px solid ${col};border-radius:6px;font-size:.74rem;color:${col};font-weight:700">${BS_ORDER.indexOf(name)+1}. ${name}</div>`;
+    bsShuffled.splice(i,1);
+    if(msg)msg.innerHTML=`<span style="color:#34d399">✅ صح! +10 نقطة</span>`;
+    bsRender();
+    if(bsNext===BS_ORDER.length){
+      if(msg)msg.innerHTML=`<span style="color:#fbbf24">🏆 ممتاز! أكملت الترتيب الصحيح! نقاطك: ${bsScore}</span>`;
+    }
+  } else {
+    bsWrong++;bsScore=Math.max(0,bsScore-5);
+    if(msg)msg.innerHTML=`<span style="color:#f87171">❌ خطأ! المرحلة الصحيحة الآن هي: "${correct}" (-5 نقاط)</span>`;
+    // Flash the wrong card red
+    const cards=document.getElementById('bs-cards');
+    const wrongEl=cards?.children[i];
+    if(wrongEl){wrongEl.style.borderColor='#ef4444';wrongEl.style.background='rgba(239,68,68,.2)';setTimeout(()=>bsRender(),600);}
+  }
+  bsUpdateScore();
+}
+function bsUpdateScore(){
+  const el=document.getElementById('bs-score');
+  if(el)el.textContent=`النقاط: ${bsScore} | الصح: ${bsRight} | الخطأ: ${bsWrong}`;
+}
+function bsReset(){bsShuffled=[];bsNext=0;bsScore=0;bsRight=0;bsWrong=0;
+  const c=document.getElementById('bs-cards');if(c)c.innerHTML='';
+  const d=document.getElementById('bs-done');if(d)d.innerHTML='<span style="font-size:.72rem;color:#334155;align-self:center">الترتيب الصحيح ←</span>';
+  const m=document.getElementById('bs-msg');if(m)m.textContent='';
+  bsUpdateScore();
+}
+
+// ════════════════════════════════════════════════════════════════
+// GAME 2: Concept Match
+// ════════════════════════════════════════════════════════════════
+const CM_PAIRS=[
+  {term:'نظام التشغيل',def:'وسيط بين المستخدم وعتاد الحاسب'},
+  {term:'PCB',def:'بطاقة هوية العملية — تحتوي PID والحالة'},
+  {term:'Kernel',def:'النواة — قلب نظام التشغيل'},
+  {term:'Deadlock',def:'طريق مسدود — عمليات تنتظر بعضها'},
+  {term:'DMA',def:'نقل البيانات مباشرة بدون CPU'},
+  {term:'Virtual Memory',def:'ذاكرة أكبر من RAM الفعلية'},
+  {term:'Semaphore',def:'متغير للتزامن بين العمليات'},
+  {term:'Context Switch',def:'حفظ وتحميل PCB عند تبديل العملية'},
+];
+let cmSelected=null,cmMatched=0,cmScore=0,cmTimer=null,cmTime=60;
+function cmStart(){
+  cmSelected=null;cmMatched=0;cmScore=0;cmTime=60;
+  if(cmTimer)clearInterval(cmTimer);
+  cmRender();
+  cmTimer=setInterval(()=>{
+    cmTime--;
+    const t=document.getElementById('cm-timer');
+    if(t)t.textContent=`⏱ ${cmTime}s`;
+    t.style.color=cmTime<15?'#f87171':'#fbbf24';
+    if(cmTime<=0){clearInterval(cmTimer);cmEnd();}
+  },1000);
+}
+function cmRender(){
+  const board=document.getElementById('cm-board');
+  if(!board)return;
+  // Mix terms and defs
+  const items=[
+    ...CM_PAIRS.map((p,i)=>({id:'t'+i,type:'term',text:p.term,pair:i})),
+    ...CM_PAIRS.map((p,i)=>({id:'d'+i,type:'def',text:p.def,pair:i})),
+  ].sort(()=>Math.random()-.5);
+  board.innerHTML=items.map(it=>`
+    <div id="cm-${it.id}" onclick="cmPick('${it.id}',${it.pair},'${it.type}')"
+      style="padding:.4rem .5rem;background:rgba(56,189,248,.08);border:1.5px solid rgba(56,189,248,.2);
+             border-radius:7px;cursor:pointer;font-size:.73rem;color:#e2e8f0;text-align:center;
+             transition:.15s;line-height:1.5;user-select:none"
+      onmouseenter="if(!this.dataset.done)this.style.borderColor='#38bdf8'"
+      onmouseleave="if(!this.dataset.done&&this.id!==cmSelectedId)this.style.borderColor='rgba(56,189,248,.2)'">
+      ${it.text}
+    </div>
+  `).join('');
+}
+let cmSelectedId='',cmSelectedPair=-1;
+function cmPick(id,pair,type){
+  const el=document.getElementById('cm-'+id);
+  if(!el||el.dataset.done)return;
+  if(cmSelectedId===''){
+    cmSelectedId=id;cmSelectedPair=pair;
+    el.style.borderColor='#fbbf24';el.style.background='rgba(251,191,36,.15)';
+  } else if(cmSelectedId===id){
+    el.style.borderColor='rgba(56,189,248,.2)';el.style.background='rgba(56,189,248,.08)';
+    cmSelectedId='';cmSelectedPair=-1;
+  } else {
+    // Check match
+    const prev=document.getElementById('cm-'+cmSelectedId);
+    if(pair===cmSelectedPair&&id!==cmSelectedId){
+      // Match!
+      cmMatched++;cmScore+=10;
+      [el,prev].forEach(e=>{e.style.borderColor='#34d399';e.style.background='rgba(52,211,153,.2)';e.style.color='#34d399';e.dataset.done='1';e.onclick=null;});
+      const msg=document.getElementById('cm-msg');if(msg)msg.innerHTML='<span style="color:#34d399">✅ مطابقة صحيحة! +10</span>';
+      if(cmMatched===CM_PAIRS.length){clearInterval(cmTimer);cmEnd();}
+    } else {
+      // Wrong
+      [el,prev].forEach(e=>{e.style.borderColor='#ef4444';e.style.background='rgba(239,68,68,.15)';});
+      setTimeout(()=>{
+        [el,prev].forEach(e=>{if(!e.dataset.done){e.style.borderColor='rgba(56,189,248,.2)';e.style.background='rgba(56,189,248,.08)';}});
+      },700);
+      const msg=document.getElementById('cm-msg');if(msg)msg.innerHTML='<span style="color:#f87171">❌ ليست مطابقة — حاول مجدداً</span>';
+    }
+    cmSelectedId='';cmSelectedPair=-1;
+    const sc=document.getElementById('cm-score');
+    if(sc)sc.textContent=`نقاط: ${cmScore} | متبقي: ${CM_PAIRS.length-cmMatched}`;
+  }
+}
+function cmEnd(){
+  const msg=document.getElementById('cm-msg');
+  if(msg)msg.innerHTML=`<span style="color:#fbbf24">🏆 انتهت اللعبة! نقاطك: ${cmScore} | مطابقات: ${cmMatched}/${CM_PAIRS.length}</span>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// GAME 3: True/False Blitz
+// ════════════════════════════════════════════════════════════════
+const TF_QS=[
+  {q:'نظام التشغيل هو وسيط بين المستخدم وعتاد الحاسب',a:true},
+  {q:'GUI أسرع من CLI في معالجة الأوامر',a:false,e:'CLI عادةً أسرع لأنه أقل استهلاكاً للموارد'},
+  {q:'Ordinary Pipe يتطلب علاقة أب-ابن بين العمليتين',a:true},
+  {q:'Named Pipe يختفي بعد انتهاء العمليات',a:false,e:'Named Pipe يبقى في نظام الملفات'},
+  {q:'Deadlock يمكن حله بمجرد انتظار العمليات',a:false,e:'Deadlock يحتاج تدخل OS — إنهاء عملية أو انتزاع مورد'},
+  {q:'PCB يحتوي PID وحالة العملية وقيم المعالج',a:true},
+  {q:'Virtual Memory تُتيح ذاكرة أكبر من RAM الفعلية',a:true},
+  {q:'Internal Fragmentation تحدث في التخصيص الديناميكي',a:false,e:'تحدث في التخصيص الثابت (Static Partitioning)'},
+  {q:'DMA ينقل البيانات بدون المرور بـ CPU',a:true},
+  {q:'Microkernel أسرع من Monolithic Kernel',a:false,e:'Monolithic أسرع لأنه يعمل كله في Kernel Space'},
+  {q:'Block Device ينقل البيانات حرفاً حرفاً',a:false,e:'Block Device ينقل على شكل كتل — Character Device ينقل حرفاً حرفاً'},
+  {q:'Stack في الذاكرة يينمو للأسفل',a:true},
+  {q:'init عملية أبيها هو OS نفسه (PID=1)',a:true},
+  {q:'Shared Memory أبطأ من Message Passing',a:false,e:'Shared Memory أسرع لأن لا توجد نسخ للبيانات'},
+  {q:'Context Switch يعني حفظ PCB الحالي وتحميل PCB جديد',a:true},
+];
+let tfIdx=0,tfScore=0,tfTimer=null,tfTime=8,tfActive=false;
+function tfStart(){
+  tfIdx=0;tfScore=0;tfActive=true;tfTime=8;
+  if(tfTimer)clearInterval(tfTimer);
+  const bt=document.getElementById('btn-true'),bf=document.getElementById('btn-false');
+  if(bt)bt.disabled=false;if(bf)bf.disabled=false;
+  tfShowQ();
+}
+function tfShowQ(){
+  if(tfIdx>=TF_QS.length){tfEnd();return;}
+  const q=TF_QS[tfIdx];
+  const qEl=document.getElementById('tf-q');if(qEl)qEl.textContent=q.q;
+  const nEl=document.getElementById('tf-num');if(nEl)nEl.textContent=`السؤال: ${tfIdx+1}/${TF_QS.length}`;
+  document.getElementById('tf-feedback').textContent='';
+  tfTime=8;
+  if(tfTimer)clearInterval(tfTimer);
+  tfTimer=setInterval(()=>{
+    tfTime--;
+    const t=document.getElementById('tf-timer');
+    if(t){t.textContent=`⏱ ${tfTime}s`;t.style.color=tfTime<4?'#f87171':'#fbbf24';}
+    if(tfTime<=0){clearInterval(tfTimer);tfAnswer(null);}
+  },1000);
+}
+function tfAnswer(ans){
+  if(!tfActive)return;
+  clearInterval(tfTimer);
+  const q=TF_QS[tfIdx];
+  const fb=document.getElementById('tf-feedback');
+  const sc=document.getElementById('tf-score');
+  if(ans===null){
+    if(fb)fb.innerHTML='<span style="color:#f87171">⏰ انتهى الوقت!</span>';
+  } else if(ans===q.a){
+    tfScore++;
+    if(fb)fb.innerHTML='<span style="color:#34d399">✅ صح! +1 نقطة</span>';
+  } else {
+    if(fb)fb.innerHTML=`<span style="color:#f87171">❌ خطأ!${q.e?' '+q.e:''}</span>`;
+  }
+  if(sc)sc.textContent=`نقاط: ${tfScore} / ${TF_QS.length}`;
+  tfIdx++;
+  setTimeout(tfShowQ,1200);
+}
+function tfEnd(){
+  tfActive=false;if(tfTimer)clearInterval(tfTimer);
+  const bt=document.getElementById('btn-true'),bf=document.getElementById('btn-false');
+  if(bt)bt.disabled=true;if(bf)bf.disabled=true;
+  const q=document.getElementById('tf-q');
+  const star=tfScore>=12?'🏆':tfScore>=8?'🥈':tfScore>=5?'🥉':'📚';
+  if(q)q.textContent=`${star} انتهت اللعبة! نتيجتك: ${tfScore} / ${TF_QS.length} — ${tfScore>=12?'ممتاز!':tfScore>=8?'جيد جداً!':tfScore>=5?'جيد — راجع المفاهيم':'تحتاج مراجعة أكثر'}`;
+  document.getElementById('tf-feedback').textContent='';
+}
+
+// ════════════════════════════════════════════════════════════════
+// GAME 4: OS Type Detective
+// ════════════════════════════════════════════════════════════════
+const OS_SCENARIOS=[
+  {s:'مصنع يُعالج طلبات الرواتب دفعة واحدة كل آخر شهر بدون تدخل بشري',a:'Batch',e:'Batch Processing = معالجة دفعية بدون تفاعل مستخدم'},
+  {s:'نظام يتيح لـ 50 طالباً العمل على نفس الخادم في نفس الوقت',a:'Time Sharing',e:'Time Sharing = مشاركة وقت CPU بين مستخدمين متعددين'},
+  {s:'نظام تحكم في طائرة — يجب الاستجابة خلال ميلي ثانية',a:'Real-Time',e:'Real-Time OS = استجابة فورية حتمية (Deterministic)'},
+  {s:'نظام يوزع المهام على 100 جهاز عبر الإنترنت',a:'Distributed',e:'Distributed OS = توزيع الحمل على أجهزة متعددة عبر الشبكة'},
+  {s:'جهاز يحتوي 8 معالجات يعملون معاً في نفس المهمة',a:'Multiprocessor',e:'Multiprocessor = عدة CPU في نفس الجهاز'},
+  {s:'جهاز طبي لمراقبة ضربات القلب — يجب أن يُنبّه فوراً عند أي خطر',a:'Real-Time',e:'Real-Time OS يُستخدم في التطبيقات الحرجة كالأجهزة الطبية'},
+  {s:'نظام يجمع بيانات المبيعات من جميع الفروع ثم يحللها مرة واحدة',a:'Batch',e:'معالجة البيانات دفعة واحدة = Batch Processing'},
+  {s:'Windows على جهازك — أنت وحيد لكن يمكنك تشغيل عدة برامج',a:'Time Sharing',e:'Time Sharing يوهمك بالتشغيل المتزامن بتقسيم وقت CPU'},
+  {s:'نظام Google يوزع بحثك على آلاف الخوادم في الدول',a:'Distributed',e:'Google Cloud = Distributed OS على نطاق واسع'},
+  {s:'حاسب علمي لمحاكاة الطقس يستخدم 64 معالجاً متوازياً',a:'Multiprocessor',e:'Supercomputer = Multiprocessor OS'},
+];
+const OS_TYPES=['Batch','Time Sharing','Real-Time','Distributed','Multiprocessor'];
+const OS_COLORS={'Batch':'#818cf8','Time Sharing':'#34d399','Real-Time':'#f87171','Distributed':'#fbbf24','Multiprocessor':'#fb923c'};
+let osIdx=0,osScore=0,osActive=false;
+function osStart(){
+  osIdx=0;osScore=0;osActive=true;
+  const shuffled=[...OS_SCENARIOS].sort(()=>Math.random()-.5);
+  osQueue=shuffled.slice(0,10);
+  osShowQ();
+}
+let osQueue=[];
+function osShowQ(){
+  if(osIdx>=osQueue.length){osEnd();return;}
+  const sc=osQueue[osIdx];
+  document.getElementById('os-scenario').textContent=sc.s;
+  document.getElementById('os-msg').textContent='';
+  document.getElementById('os-score').textContent=`نقاط: ${osScore} | جولة: ${osIdx+1}/10`;
+  const ch=document.getElementById('os-choices');
+  if(ch)ch.innerHTML=OS_TYPES.map(t=>`
+    <button onclick="osPick('${t}')"
+      style="padding:.35rem .8rem;background:${OS_COLORS[t]}22;border:2px solid ${OS_COLORS[t]};
+             border-radius:8px;cursor:pointer;font-size:.78rem;font-weight:700;color:${OS_COLORS[t]};
+             transition:.15s;font-family:inherit"
+      onmouseenter="this.style.background='${OS_COLORS[t]}44'"
+      onmouseleave="this.style.background='${OS_COLORS[t]}22'">
+      ${t}
+    </button>
+  `).join('');
+}
+function osPick(type){
+  if(!osActive)return;
+  const sc=osQueue[osIdx];
+  const msg=document.getElementById('os-msg');
+  if(type===sc.a){
+    osScore+=10;
+    if(msg)msg.innerHTML=`<span style="color:#34d399">✅ صح! +10 — ${sc.e}</span>`;
+  } else {
+    if(msg)msg.innerHTML=`<span style="color:#f87171">❌ خطأ! الجواب: ${sc.a} — ${sc.e}</span>`;
+  }
+  osIdx++;
+  document.getElementById('os-score').textContent=`نقاط: ${osScore} | جولة: ${osIdx}/10`;
+  setTimeout(osShowQ,1800);
+}
+function osEnd(){
+  osActive=false;
+  document.getElementById('os-scenario').innerHTML=`<b style="color:#fbbf24">🏆 انتهت اللعبة! نقاطك: ${osScore}/100</b>`;
+  document.getElementById('os-choices').innerHTML='';
+  document.getElementById('os-msg').textContent='';
+}
+
+// ════════════════════════════════════════════════════════════════
+// GAME 5: Memory Survivor
+// ════════════════════════════════════════════════════════════════
+const MS_MAX=12;
+let msBlocks=[],msScore=0,msLevel=1,msInterval=null,msTimer=null,msTime=0,msRunning=false;
+const MS_PROC_SIZES={small:1,medium:2,large:3};
+const MS_NAMES=['Chrome','VSCode','Excel','Zoom','Firefox','Photoshop','Steam','Discord','Spotify','Teams'];
+const MS_COLS=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24','#38bdf8','#a78bfa','#ec4899','#06b6d4','#84cc16'];
+let msProcId=0;
+function msStart(){
+  msBlocks=[];msScore=0;msLevel=1;msProcId=0;msTime=0;msRunning=true;
+  if(msInterval)clearInterval(msInterval);
+  if(msTimer)clearInterval(msTimer);
+  msTimer=setInterval(()=>{
+    msTime++;
+    const t=document.getElementById('ms-timer');
+    if(t)t.textContent=`⏱ ${msTime}s`;
+    if(msTime%10===0){msScore++;msLevel=Math.floor(msTime/20)+1;msUpdateUI();}
+  },1000);
+  // Add processes periodically, faster each level
+  msInterval=setInterval(()=>{
+    if(!msRunning)return;
+    const size=Math.random()<.5?1:Math.random()<.6?2:3;
+    const free=MS_MAX-msBlocks.reduce((s,b)=>s+b.size,0);
+    if(free<size){
+      // Game over
+      msRunning=false;clearInterval(msInterval);clearInterval(msTimer);
+      const msg=document.getElementById('ms-msg');
+      if(msg)msg.innerHTML=`<span style="color:#f87171">💥 امتلأت الذاكرة! (Internal Fragmentation) — نقاطك: ${msScore} | نجت لـ ${msTime} ثانية</span>`;
+      return;
+    }
+    msBlocks.push({id:msProcId,name:MS_NAMES[msProcId%MS_NAMES.length],size,col:MS_COLS[msProcId%MS_COLS.length]});
+    msProcId++;
+    msUpdateUI();
+  },Math.max(1500-msLevel*200,600));
+  msUpdateUI();
+}
+function msFree(){
+  if(!msRunning||!msBlocks.length)return;
+  msBlocks.shift();msScore+=2;msUpdateUI();
+  const msg=document.getElementById('ms-msg');
+  if(msg)msg.innerHTML='<span style="color:#34d399">✅ تم تحرير عملية! +2 نقطة</span>';
+}
+function msStop(){msRunning=false;if(msInterval)clearInterval(msInterval);if(msTimer)clearInterval(msTimer);}
+function msUpdateUI(){
+  const cv=document.getElementById('msCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);
+  // Memory bar
+  const barW=cv.width-30,barY=30,barH=40;
+  ctx.fillStyle='rgba(30,40,30,.5)';ctx.strokeStyle='#334155';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.roundRect(15,barY,barW,barH,6);ctx.fill();ctx.stroke();
+  // Draw blocks
+  const usedBlocks=msBlocks.reduce((s,b)=>s+b.size,0);
+  let bx=15;
+  msBlocks.forEach(b=>{
+    const bw=(b.size/MS_MAX)*barW;
+    ctx.fillStyle=b.col+'44';ctx.strokeStyle=b.col;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(bx,barY+2,bw-2,barH-4,4);ctx.fill();ctx.stroke();
+    ctx.fillStyle=b.col;ctx.font='bold 8px system-ui';ctx.textAlign='center';
+    ctx.fillText(b.name.slice(0,6),bx+bw/2,barY+22);
+    ctx.fillStyle='#94a3b8';ctx.font='7px system-ui';
+    ctx.fillText(b.size*100+'MB',bx+bw/2,barY+34);
+    bx+=bw;
+  });
+  // Free space
+  const freeW=barW-bx+15;
+  if(freeW>10){
+    ctx.fillStyle='rgba(52,211,153,.08)';ctx.strokeStyle='rgba(52,211,153,.3)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.roundRect(bx,barY+2,freeW-2,barH-4,4);ctx.fill();ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#334155';ctx.font='8px system-ui';ctx.textAlign='center';
+    ctx.fillText('حر: '+(MS_MAX-usedBlocks)*100+'MB',bx+freeW/2,barY+24);
+  }
+  // Labels
+  ctx.fillStyle='#94a3b8';ctx.font='8.5px system-ui';ctx.textAlign='right';
+  ctx.fillText(`RAM: ${usedBlocks*100}MB / ${MS_MAX*100}MB مستخدم`,cv.width-12,barY+barH+20);
+  // Danger level bar
+  const danger=usedBlocks/MS_MAX;
+  const dangerColor=danger>.8?'#f87171':danger>.5?'#fbbf24':'#34d399';
+  ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.roundRect(15,barY+barH+8,barW,8,3);ctx.fill();
+  ctx.fillStyle=dangerColor;ctx.beginPath();ctx.roundRect(15,barY+barH+8,barW*danger,8,3);ctx.fill();
+  ctx.fillStyle=dangerColor;ctx.font='7.5px system-ui';ctx.textAlign='left';
+  ctx.fillText(danger>.8?'⚠️ خطر! الذاكرة تكاد تمتلئ!':danger>.5?'⚡ تحذير: أكثر من نصف الذاكرة مستخدمة':'✅ الذاكرة بخير',18,barY+barH+30);
+  const sc=document.getElementById('ms-score');
+  if(sc)sc.textContent=`نقاط: ${msScore} | مستوى: ${msLevel} | عمليات: ${msBlocks.length}`;
+}
+
 // ── render ──
 function render(){
   const el=document.getElementById('content');
@@ -2962,6 +3561,7 @@ function initInteractives(){
   if(cur==='t4'){initPipeCanvas();pcRender();}
   if(cur==='t5'){maReset();}
   if(cur==='t6'){fbRender();}
+  if(cur==='tg'){bsStart();}
 }
 
 render();
