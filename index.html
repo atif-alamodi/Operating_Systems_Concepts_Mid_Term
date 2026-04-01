@@ -2765,8 +2765,8 @@ function bsStart(){
   bsShuffled=[...BS_ORDER].sort(()=>Math.random()-.5);
   bsNext=0;bsScore=0;bsRight=0;bsWrong=0;
   bsRender();
-  document.getElementById('bs-done').innerHTML='<span style="font-size:.72rem;color:#334155;align-self:center">الترتيب الصحيح ←</span>';
-  document.getElementById('bs-msg').textContent='';
+  const _bsd=document.getElementById('bs-done');if(_bsd)_bsd.innerHTML='<span style="font-size:.72rem;color:#334155;align-self:center">الترتيب الصحيح ←</span>';
+  const _bsm=document.getElementById('bs-msg');if(_bsm)_bsm.textContent='';
   bsUpdateScore();
 }
 function bsRender(){
@@ -2881,12 +2881,12 @@ function cmPick(id,pair,type){
     if(pair===cmSelectedPair&&id!==cmSelectedId){
       // Match!
       cmMatched++;cmScore+=10;
-      [el,prev].forEach(e=>{e.style.borderColor='#34d399';e.style.background='rgba(52,211,153,.2)';e.style.color='#34d399';e.dataset.done='1';e.onclick=null;});
+      [el,prev].filter(Boolean).forEach(e=>{e.style.borderColor='#34d399';e.style.background='rgba(52,211,153,.2)';e.style.color='#34d399';e.dataset.done='1';e.onclick=null;});
       const msg=document.getElementById('cm-msg');if(msg)msg.innerHTML='<span style="color:#34d399">✅ مطابقة صحيحة! +10</span>';
       if(cmMatched===CM_PAIRS.length){clearInterval(cmTimer);cmEnd();}
     } else {
       // Wrong
-      [el,prev].forEach(e=>{e.style.borderColor='#ef4444';e.style.background='rgba(239,68,68,.15)';});
+      [el,prev].filter(Boolean).forEach(e=>{e.style.borderColor='#ef4444';e.style.background='rgba(239,68,68,.15)';});
       setTimeout(()=>{
         [el,prev].forEach(e=>{if(!e.dataset.done){e.style.borderColor='rgba(56,189,248,.2)';e.style.background='rgba(56,189,248,.08)';}});
       },700);
@@ -2935,7 +2935,7 @@ function tfShowQ(){
   const q=TF_QS[tfIdx];
   const qEl=document.getElementById('tf-q');if(qEl)qEl.textContent=q.q;
   const nEl=document.getElementById('tf-num');if(nEl)nEl.textContent=`السؤال: ${tfIdx+1}/${TF_QS.length}`;
-  document.getElementById('tf-feedback').textContent='';
+  const _tff=document.getElementById('tf-feedback');if(_tff)_tff.textContent='';
   tfTime=8;
   if(tfTimer)clearInterval(tfTimer);
   tfTimer=setInterval(()=>{
@@ -2961,7 +2961,7 @@ function tfAnswer(ans){
   }
   if(sc)sc.textContent=`نقاط: ${tfScore} / ${TF_QS.length}`;
   tfIdx++;
-  setTimeout(tfShowQ,1200);
+  if(document.getElementById('tf-q'))setTimeout(tfShowQ,1200);
 }
 function tfEnd(){
   tfActive=false;if(tfTimer)clearInterval(tfTimer);
@@ -2970,7 +2970,7 @@ function tfEnd(){
   const q=document.getElementById('tf-q');
   const star=tfScore>=12?'🏆':tfScore>=8?'🥈':tfScore>=5?'🥉':'📚';
   if(q)q.textContent=`${star} انتهت اللعبة! نتيجتك: ${tfScore} / ${TF_QS.length} — ${tfScore>=12?'ممتاز!':tfScore>=8?'جيد جداً!':tfScore>=5?'جيد — راجع المفاهيم':'تحتاج مراجعة أكثر'}`;
-  document.getElementById('tf-feedback').textContent='';
+  const _tffe=document.getElementById('tf-feedback');if(_tffe)_tffe.textContent='';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -3001,9 +3001,9 @@ let osQueue=[];
 function osShowQ(){
   if(osIdx>=osQueue.length){osEnd();return;}
   const sc=osQueue[osIdx];
-  document.getElementById('os-scenario').textContent=sc.s;
-  document.getElementById('os-msg').textContent='';
-  document.getElementById('os-score').textContent=`نقاط: ${osScore} | جولة: ${osIdx+1}/10`;
+  const _oss=document.getElementById('os-scenario');if(_oss)_oss.textContent=sc.s;
+  const _osm=document.getElementById('os-msg');if(_osm)_osm.textContent='';
+  const _osc=document.getElementById('os-score');if(_osc)_osc.textContent=`نقاط: ${osScore} | جولة: ${osIdx+1}/10`;
   const ch=document.getElementById('os-choices');
   if(ch)ch.innerHTML=OS_TYPES.map(t=>`
     <button onclick="osPick('${t}')"
@@ -3027,14 +3027,14 @@ function osPick(type){
     if(msg)msg.innerHTML=`<span style="color:#f87171">❌ خطأ! الجواب: ${sc.a} — ${sc.e}</span>`;
   }
   osIdx++;
-  document.getElementById('os-score').textContent=`نقاط: ${osScore} | جولة: ${osIdx}/10`;
-  setTimeout(osShowQ,1800);
+  const _osc2=document.getElementById('os-score');if(_osc2)_osc2.textContent=`نقاط: ${osScore} | جولة: ${osIdx}/10`;
+  if(document.getElementById('os-scenario'))setTimeout(osShowQ,1800);
 }
 function osEnd(){
   osActive=false;
-  document.getElementById('os-scenario').innerHTML=`<b style="color:#fbbf24">🏆 انتهت اللعبة! نقاطك: ${osScore}/100</b>`;
-  document.getElementById('os-choices').innerHTML='';
-  document.getElementById('os-msg').textContent='';
+  const _ose=document.getElementById('os-scenario');if(_ose)_ose.innerHTML=`<b style="color:#fbbf24">🏆 انتهت اللعبة! نقاطك: ${osScore}/100</b>`;
+  const _osch=document.getElementById('os-choices');if(_osch)_osch.innerHTML='';
+  const _osmm=document.getElementById('os-msg');if(_osmm)_osmm.textContent='';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -3123,10 +3123,25 @@ function msUpdateUI(){
   ctx.fillText(danger>.8?'⚠️ خطر! الذاكرة تكاد تمتلئ!':danger>.5?'⚡ تحذير: أكثر من نصف الذاكرة مستخدمة':'✅ الذاكرة بخير',18,barY+barH+30);
   const sc=document.getElementById('ms-score');
   if(sc)sc.textContent=`نقاط: ${msScore} | مستوى: ${msLevel} | عمليات: ${msBlocks.length}`;
+  if(!document.getElementById('msCanvas')&&msRunning){msStop();}
 }
 
+
+function cleanupGames(){
+  // Stop all game timers when leaving games tab
+  if(typeof cmTimer!=='undefined'&&cmTimer){clearInterval(cmTimer);cmTimer=null;}
+  if(typeof tfTimer!=='undefined'&&tfTimer){clearInterval(tfTimer);tfTimer=null;}
+  if(typeof msInterval!=='undefined'&&msInterval){clearInterval(msInterval);msInterval=null;}
+  if(typeof msTimer!=='undefined'&&msTimer){clearInterval(msTimer);msTimer=null;}
+  // Reset volatile state
+  if(typeof tfActive!=='undefined')tfActive=false;
+  if(typeof osActive!=='undefined')osActive=false;
+  if(typeof msRunning!=='undefined')msRunning=false;
+  if(typeof cmSelectedId!=='undefined'){cmSelectedId='';cmSelectedPair=-1;}
+}
 // ── render ──
 function render(){
+  cleanupGames();
   const el=document.getElementById('content');
   el.innerHTML='<div class="sec on" id="'+cur+'">'+S[cur]+'</div>';
   if(cur==='quiz'){renderQuiz();}
@@ -3136,7 +3151,7 @@ function render(){
 // ── quiz ──
 let score=0;
 function renderQuiz(){
-  score=0;document.getElementById('scr').textContent='0';
+  score=0;const _scr=document.getElementById('scr');if(_scr)_scr.textContent='0';
   const box=document.getElementById('qbox');
   box.innerHTML=QS.map((q,i)=>`<div class="qc" id="qc${i}">
     <h4>س${i+1}: ${q.q}</h4>
@@ -3171,7 +3186,7 @@ const cliCmds={
   pwd:()=>'/home/user/'+cliCwd,
   whoami:()=>'user',
   date:()=>new Date().toLocaleString('ar-SA'),
-  clear:()=>{document.getElementById('cli-out').textContent='';return null;},
+  clear:()=>{const _co=document.getElementById('cli-out');if(_co)_co.textContent='';return null;},
   help:()=>'الأوامر المتاحة:\n  ls       - عرض محتويات المجلد\n  pwd      - عرض المسار الحالي\n  cd [dir] - تغيير المجلد\n  mkdir    - إنشاء مجلد\n  whoami   - اسم المستخدم\n  date     - التاريخ والوقت\n  clear    - مسح الشاشة\n  help     - هذه المساعدة',
   mkdir:(a)=>{if(!a)return 'mkdir: اكتب اسم المجلد';if(!cliFS[cliCwd])cliFS[cliCwd]=[];cliFS[cliCwd].push(a+'/');return `تم إنشاء المجلد: ${a}`;},
   cd:(a)=>{if(!a||a==='~'){cliCwd='~';return 'تم الانتقال إلى المجلد الرئيسي';}if(cliFS['~']?.includes(a)||cliFS[cliCwd]?.includes(a)){cliCwd=a;return `تم الانتقال إلى: ${a}`;}return `cd: ${a}: لا يوجد مثل هذا المجلد`;}
@@ -3195,7 +3210,7 @@ function cliExec(){
 function guiClick(el,msg){
   document.querySelectorAll('.gui-icon').forEach(i=>i.style.background='');
   el.style.background='rgba(129,140,248,.15)';
-  document.getElementById('gui-msg').innerHTML='⚙️ '+msg;
+  const _gm=document.getElementById('gui-msg');if(_gm)_gm.innerHTML='⚙️ '+msg;
 }
 
 // ── Process state machine ──
@@ -3348,7 +3363,7 @@ function forkProcess(){
   const parent=running[Math.floor(Math.random()*running.length)];
   const child={id:pcNextPid++,pid:parent.id,name:'child_'+pcNextPid,state:'running'};
   pcNodes.push(child);
-  document.getElementById('pctree-info').textContent=`✅ Fork! العملية ${parent.id} أنشأت ابناً بـ PID ${child.id}`;
+  const _pi1=document.getElementById('pctree-info');if(_pi1)_pi1.textContent=`✅ Fork! العملية ${parent.id} أنشأت ابناً بـ PID ${child.id}`;
   drawPCTree();
 }
 function killParent(){
@@ -3358,13 +3373,13 @@ function killParent(){
   parent.state='dead';
   const orphans=pcNodes.filter(n=>n.pid===parent.id&&n.state==='running');
   orphans.forEach(o=>{o.state='orphan';o.pid=1;});
-  document.getElementById('pctree-info').textContent=`💀 العملية ${parent.id} ماتت! أبناؤها (${orphans.map(o=>o.id).join(',')}) أصبحوا يتامى — تبنّاهم init(1)`;
+  const _pi2=document.getElementById('pctree-info');if(_pi2)_pi2.textContent=`💀 العملية ${parent.id} ماتت! أبناؤها (${orphans.map(o=>o.id).join(',')}) أصبحوا يتامى — تبنّاهم init(1)`;
   drawPCTree();
 }
 function resetTree(){
   pcNodes=[{id:1,pid:null,name:'init',state:'running'}];
   pcNextPid=1000;
-  document.getElementById('pctree-info').textContent='تمت إعادة التشغيل. اضغط Fork لإنشاء عمليات جديدة.';
+  const _pi3=document.getElementById('pctree-info');if(_pi3)_pi3.textContent='تمت إعادة التشغيل. اضغط Fork لإنشاء عمليات جديدة.';
   drawPCTree();
 }
 
@@ -3464,7 +3479,7 @@ function sendPipeMsg(){
   if(pipeAnim)return;
   const cv=document.getElementById('pipeCanvas');
   if(!cv)return;
-  document.getElementById('pipe-recv-box').style.display='none';
+  const _prb=document.getElementById('pipe-recv-box');if(_prb)_prb.style.display='none';
   pktArr=[{x:140,msg,t:Date.now(),done:false}];
   pipeAnim=setInterval(()=>animPipeMsg(cv,msg),16);
 }
@@ -3494,8 +3509,8 @@ let pktArr=[];
 function sendPipeData(){sendPipeMsg();}
 function setPipeMode(m){
   pipeMode=m;
-  document.getElementById('btn-ord').style.borderWidth=m==='ordinary'?'2px':'1px';
-  document.getElementById('btn-named').style.borderWidth=m==='named'?'2px':'1px';
+  const _bo=document.getElementById('btn-ord');if(_bo)_bo.style.borderWidth=m==='ordinary'?'2px':'1px';
+  const _bn=document.getElementById('btn-named');if(_bn)_bn.style.borderWidth=m==='named'?'2px':'1px';
   const info=document.getElementById('pipe-info');
   if(m==='ordinary')info.innerHTML='<b>الأنبوب العادي (Ordinary Pipe):</b> يتطلب علاقة أب-ابن ⭐ | أحادي الاتجاه | يختفي عند انتهاء العمليات';
   else info.innerHTML='<b style="color:#818cf8">الأنبوب المسمّى (Named Pipe):</b> لا يتطلب أب-ابن | ثنائي الاتجاه ⭐ | يبقى في نظام الملفات حتى بعد انتهاء العمليات';
@@ -3532,9 +3547,8 @@ function showMemLevel(i){
     if(d)d.style.boxShadow=j===i?'0 0 0 3px white':'none';
   }
   const d=memData[i];
-  document.getElementById('mem-name').textContent=d.name;
-  document.getElementById('mem-name').style.color=d.color;
-  document.getElementById('mem-detail').innerHTML=
+  const _mn=document.getElementById('mem-name');if(_mn){_mn.textContent=d.name;_mn.style.color=d.color;}
+  const _md=document.getElementById('mem-detail');if(_md)_md.innerHTML=
     `<span style="color:${d.color}">⚡ السرعة:</span> ${d.speed}<br>
      <span style="color:${d.color}">📦 الحجم:</span> ${d.size}<br>
      <span style="color:${d.color}">💰 التكلفة:</span> ${d.cost}<br>
