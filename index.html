@@ -101,6 +101,10 @@ const tabs=[
 {id:'t4',icon:'🔗',label:'4: IPC'},
 {id:'t5',icon:'🧠',label:'5: الذاكرة'},
 {id:'t6',icon:'💾',label:'6: I/O والملفات'},
+{id:'t7',icon:'🧵',label:'7: الخيوط'},
+{id:'t8',icon:'🔐',label:'8: المزامنة'},
+{id:'t9',icon:'📊',label:'9: جدولة CPU'},
+{id:'t10',icon:'💀',label:'10: الجمود'},
 {id:'tg',icon:'🎮',label:'ألعاب تعليمية'},
 {id:'tq',icon:'👩‍🏫',label:'أسئلة الأستاذة (27)'},
 {id:'quiz',icon:'✅',label:'اختبار ذاتي (40)'}
@@ -125,6 +129,70 @@ S.t1=`<div class="card">
 </div>
 <div class="ez">لما تضغط على لعبة في جوالك — الجوال لا يفهم "لعبة"، يفهم فقط أرقاماً (0 و1). نظام التشغيل هو الذي يترجم ضغطتك إلى لغة الجهاز. بدونه = الجهاز بلا فائدة مثل سيارة بدون محرك!</div>
 
+
+<h3>📱 الأنظمة المحمولة (Mobile Systems) ⭐</h3>
+<div class="cb g"><div class="lb gr">Mobile Systems — الهاتف الذكي وأجهزة الساعة</div>
+أنظمة التشغيل المصممة للهواتف الذكية والأجهزة اللوحية والساعات الذكية.<br><br>
+<b>الخصائص الأساسية:</b><br>
+• تعمل على معالجات منخفضة استهلاك الطاقة<br>
+• تتميز بواجهات سهلة الاستخدام (اللمس والصوت)<br>
+• تدعم تطبيقات متنوعة: ألعاب، شبكات اجتماعية، خدمات<br>
+• تتصل بالشبكات السحابية وتتبادل البيانات أثناء التنقل<br>
+• أمثلة: <b>Android</b> (مبني على Linux Kernel) و <b>iOS</b> (مبني على XNU/Darwin)
+</div>
+
+<h3>⚡ أنواع المقاطعة: ISR و Trap و Interrupt Vector</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="20" text-anchor="middle" fill="#f87171" font-size="13" font-weight="bold">3 طرق تولّد المقاطعة</text>
+  <!-- Type 1: Hardware Interrupt -->
+  <rect x="15" y="35" width="200" height="130" rx="10" fill="rgba(248,113,113,.08)" stroke="#f87171" stroke-width="2"/>
+  <text x="115" y="60" text-anchor="middle" fill="#f87171" font-size="11" font-weight="bold">1. Hardware Interrupt</text>
+  <text x="115" y="78" text-anchor="middle" fill="#94a3b8" font-size="8.5">مقاطعة العتاد</text>
+  <text x="22" y="100" fill="#e2e8f0" font-size="8">⌨️ ضغطة مفتاح</text>
+  <text x="22" y="116" fill="#e2e8f0" font-size="8">💾 اكتمال I/O</text>
+  <text x="22" y="132" fill="#e2e8f0" font-size="8">⏱️ Timer المنبّه</text>
+  <text x="22" y="150" fill="#e2e8f0" font-size="8">📡 وصول حزمة شبكة</text>
+  <text x="115" y="162" text-anchor="middle" fill="#f87171" font-size="7.5">مصدر: الجهاز الخارجي</text>
+  <!-- Type 2: Trap -->
+  <rect x="250" y="35" width="200" height="130" rx="10" fill="rgba(251,146,60,.08)" stroke="#fb923c" stroke-width="2"/>
+  <text x="350" y="60" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">2. Trap / Exception</text>
+  <text x="350" y="78" text-anchor="middle" fill="#94a3b8" font-size="8.5">مقاطعة برمجية</text>
+  <text x="257" y="100" fill="#e2e8f0" font-size="8">➗ القسمة على صفر</text>
+  <text x="257" y="116" fill="#e2e8f0" font-size="8">🚫 وصول لذاكرة محمية</text>
+  <text x="257" y="132" fill="#e2e8f0" font-size="8">📞 System Call (INT)</text>
+  <text x="257" y="148" fill="#e2e8f0" font-size="8">💥 Stack Overflow</text>
+  <text x="350" y="162" text-anchor="middle" fill="#fb923c" font-size="7.5">مصدر: البرنامج نفسه</text>
+  <!-- Type 3: ISR -->
+  <rect x="485" y="35" width="200" height="130" rx="10" fill="rgba(129,140,248,.08)" stroke="#818cf8" stroke-width="2"/>
+  <text x="585" y="60" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">3. ISR + Interrupt Vector</text>
+  <text x="585" y="78" text-anchor="middle" fill="#94a3b8" font-size="8.5">معالج المقاطعة</text>
+  <text x="492" y="100" fill="#e2e8f0" font-size="8">📋 Interrupt Vector Table</text>
+  <text x="492" y="116" fill="#e2e8f0" font-size="8">   جدول يحتوي عناوين ISR</text>
+  <text x="492" y="132" fill="#e2e8f0" font-size="8">⚙️ كل نوع مقاطعة → ISR خاص</text>
+  <text x="492" y="148" fill="#e2e8f0" font-size="8">🔄 ينفّذ ثم يعود للبرنامج</text>
+  <text x="585" y="162" text-anchor="middle" fill="#818cf8" font-size="7.5">مصدر: OS يُدير الجميع</text>
+</svg>
+</div>
+
+<h3>📊 الجدول الزمني للمقاطعة (Interrupt Timeline)</h3>
+<div class="inter-box">
+  <div class="inter-title">⏱️ الجدول الزمني — كيف يتعامل CPU مع المقاطعة</div>
+  <p style="font-size:.78rem;color:#94a3b8;margin-bottom:.4rem">اضغط "تشغيل" لمشاهدة تسلسل أحداث المقاطعة من طلب I/O حتى العودة للبرنامج</p>
+  <div class="btn-row">
+    <button class="btn btn-gr" onclick="timelineStart()">▶ تشغيل</button>
+    <button class="btn btn-yl" onclick="timelineReset()">↺ إعادة</button>
+  </div>
+  <canvas id="timelineCanvas" width="600" height="180" style="background:#0a0f1e;border-radius:8px;max-width:100%;margin-top:.5rem"></canvas>
+  <div id="timeline-info" style="font-size:.75rem;color:#94a3b8;margin-top:.3rem;min-height:20px;text-align:center"></div>
+</div>
+
+<div class="cb y"><div class="lb yl">⭐ للاختبار — نقاط المقاطعة</div>
+• <b>Interrupt Vector</b> = جدول يحتوي عناوين جميع ISRs — CPU يبحث فيه عند كل مقاطعة<br>
+• <b>ISR (Interrupt Service Routine)</b> = الكود الذي يُنفَّذ عند كل نوع مقاطعة<br>
+• <b>Trap / Exception</b> = مقاطعة برمجية داخلية — System Call هي Trap مقصود<br>
+• عند المقاطعة: CPU ① يُنهي التعليمة الحالية ② يحفظ PC في Stack ③ ينتقل للـ ISR ④ يعود
+</div>
 <h3>🖥️ مكونات الحاسب — انقر على أي مكوّن لتعرف دوره!</h3>
 <p style="font-size:.8rem;color:#94a3b8;margin-bottom:.4rem">اللوحة الرئيسية (Motherboard) تربط جميع المكونات — انقر على كل مكوّن لتعرف كيف يتعامل معه نظام التشغيل</p>
 <div class="inter-box" style="padding:.6rem">
@@ -523,7 +591,24 @@ Unix هو الأساس الذي بُنيت عليه معظم أنظمة التش
   <text x="557" y="186" text-anchor="middle" fill="#34d399" font-size="9">Android / Ubuntu / RedHat</text>
 </svg>
 </div>
-</div>`;
+</div>
+<h3>📋 مقارنة: System Calls في Windows و Unix ⭐</h3>
+<div class="tw"><table>
+<tr><th>النوع</th><th>Windows</th><th>Unix / Linux</th></tr>
+<tr><td>التحكم في العملية</td><td><code>CreateProcess() / ExitProcess() / WaitForSingleObject()</code></td><td><code>fork() / exit() / wait()</code></td></tr>
+<tr><td>إدارة الملفات</td><td><code>CreateFile() / ReadFile() / WriteFile()</code></td><td><code>open() / read() / write()</code></td></tr>
+<tr><td>إدارة الأجهزة</td><td><code>SetConsoleMode() / ReadConsole()</code></td><td><code>ioctl() / read()</code></td></tr>
+<tr><td>معلومات النظام</td><td><code>GetCurrentProcessID() / SetTimer() / Sleep()</code></td><td><code>getpid() / alarm() / sleep()</code></td></tr>
+<tr><td>التواصل</td><td><code>CreatePipe() / CreateFileMapping()</code></td><td><code>pipe() / shm_open()</code></td></tr>
+<tr><td>الحماية</td><td><code>SetFileSecurity()</code></td><td><code>chmod() / umask()</code></td></tr>
+</table></div>
+<div class="cb y"><div class="lb yl">⭐ ملخص T2 للاختبار</div>
+• <b>Monolithic:</b> كل شيء في Kernel | <b>Layered:</b> طبقات منظمة | <b>Microkernel:</b> Kernel صغير<br>
+• <b>Unix:</b> System Programs + Kernel | <b>Android:</b> Linux Kernel + Libraries + Framework + Apps<br>
+• <b>System Calls:</b> 6 أنواع: Process / File / Device / Information / Communications / Protection<br>
+• <b>Debugging:</b> core dump (فشل العملية) + crash dump (فشل النظام) + Profiling
+</div>
+`;
 
 S.t3=`<div class="card">
 <h2 style="color:#fb923c">⚙️ العمليات (Processes)</h2>
@@ -908,6 +993,61 @@ S.t4=`<div class="card">
     انتظار العمليات...
   </div>
 </div>
+
+<h3>🔄 المزامنة في تمرير الرسائل: Synchronous vs Asynchronous</h3>
+<div class="tw"><table>
+<tr><th>النوع</th><th>الإرسال</th><th>الاستقبال</th><th>الاستخدام</th></tr>
+<tr><td><b style="color:#38bdf8">Synchronous (متوقف)</b></td><td>المرسل ينتظر حتى يُستلم</td><td>المستقبل ينتظر الرسالة</td><td>عندما يجب التأكد من الاستلام</td></tr>
+<tr><td><b style="color:#34d399">Asynchronous (غير متوقف)</b></td><td>المرسل يُرسل ويواصل</td><td>المستقبل يأخذ حين يريد</td><td>الأداء العالي والتوازي</td></tr>
+</table></div>
+
+<h3>📦 أنواع التخزين المؤقت للرسائل (Buffering)</h3>
+<div class="tw"><table>
+<tr><th>النوع</th><th>السعة</th><th>ماذا يحدث عند الامتلاء؟</th></tr>
+<tr><td><b style="color:#f87171">Zero Capacity</b></td><td>0 رسائل</td><td>المرسل ينتظر حتى يُستلم (Rendezvous)</td></tr>
+<tr><td><b style="color:#fbbf24">Bounded Capacity</b></td><td>N رسائل</td><td>المرسل ينتظر حتى تتوفر مساحة</td></tr>
+<tr><td><b style="color:#34d399">Unbounded Capacity</b></td><td>لا حدود</td><td>المرسل لا ينتظر أبداً</td></tr>
+</table></div>
+
+<h3>🌐 أنظمة العميل-الخادم (Client-Server Systems)</h3>
+<div class="cb"><div class="lb pu">1. المقابس (Sockets) ⭐</div>
+نقطة نهاية للتواصل بين عمليتين عبر الشبكة. تتكون من: <b>عنوان IP</b> + <b>رقم منفذ (Port)</b>.<br>
+مثال: <code>161.25.19.8:1625</code> = جهاز 161.25.19.8 على المنفذ 1625<br>
+المنافذ تحت 1024 = Well-Known Ports (محجوزة للخدمات القياسية مثل HTTP:80)<br>
+127.0.0.1 = Loopback (يُشير لنفس الجهاز)
+</div>
+<div class="cb g"><div class="lb gr">2. استدعاء الإجراء عن بُعد (RPC)</div>
+Remote Procedure Call = يتيح لبرنامج استدعاء دالة موجودة على جهاز آخر عبر الشبكة كأنها محلية.<br>
+يستخدم Stubs (وكلاء) لتجميد المعاملات (Marshaling) وإرسالها عبر الشبكة.
+</div>
+<div class="cb o"><div class="lb or">3. استدعاء الأسلوب عن بُعد (RMI)</div>
+Remote Method Invocation = نسخة Java من RPC. يتيح لكائن Java استدعاء أساليب كائن Java آخر على جهاز مختلف.
+</div>
+
+<div class="inter-box">
+  <div class="inter-title">🌐 محاكي الـ Sockets — كيف يتواصل عميل وخادم</div>
+  <div class="btn-row">
+    <button class="btn btn-gr" onclick="socketDemo('connect')">🔌 اتصال العميل</button>
+    <button class="btn btn-pu" onclick="socketDemo('send')">📤 أرسل رسالة</button>
+    <button class="btn btn-or" onclick="socketDemo('recv')">📥 استقبل الرد</button>
+    <button class="btn btn-yl" onclick="socketDemo('close')">❌ أغلق الاتصال</button>
+    <button class="btn btn-yl" onclick="socketReset()">↺</button>
+  </div>
+  <canvas id="socketCanvas" width="580" height="160" style="background:#0a0f1e;border-radius:8px;max-width:100%;margin-top:.4rem"></canvas>
+  <div id="socket-log" style="background:#000;border-radius:5px;padding:.3rem;font-size:.7rem;font-family:monospace;max-height:60px;overflow-y:auto;color:#94a3b8;margin-top:.3rem">انتظار...</div>
+</div>
+
+<h3>🔧 الأنابيب المسماة (Named Pipes) ⭐</h3>
+<div class="tw"><table>
+<tr><th>الخاصية</th><th>Ordinary Pipes (عادية)</th><th>Named Pipes (مسماة)</th></tr>
+<tr><td>علاقة الاتصال</td><td>أب-ابن فقط</td><td style="color:#34d399">أي عمليتين ⭐</td></tr>
+<tr><td>الاتجاه</td><td>أحادي (Unidirectional)</td><td style="color:#34d399">ثنائي (Bidirectional) ⭐</td></tr>
+<tr><td>الاستمرارية</td><td>تُحذف عند إغلاق العملية</td><td style="color:#34d399">تبقى بعد انتهاء العمليات ⭐</td></tr>
+<tr><td>الشبكة</td><td>نفس الجهاز فقط</td><td style="color:#34d399">يمكن عبر الشبكة ⭐</td></tr>
+<tr><td>الترتيب</td><td>FIFO (أول داخل أول خارج)</td><td>FIFO</td></tr>
+<tr><td>الإنشاء</td><td>في الكود فقط</td><td>ملف خاص في نظام الملفات</td></tr>
+</table></div>
+<div class="ez">Named Pipes = FIFOs: تُنشئها كـ ملف خاص في Unix/Linux بأمر <code>mkfifo</code>. أي عملية تعرف اسمها يمكنها الاتصال. Worker service ← Named Pipe ← Another App</div>
 <div class="cb y"><div class="lb yl">⭐ جدول المقارنة للاختبار</div>
 <div class="tw"><table>
 <tr><th>الخاصية</th><th>أنبوب عادي (Ordinary)</th><th>أنبوب مسمى (Named)</th></tr>
@@ -1013,6 +1153,215 @@ S.t5=`<div class="card">
   <!-- Stats -->
   <div id="ma-stats" style="font-size:.78rem;color:#94a3b8;background:rgba(0,0,0,.3);border-radius:6px;padding:.4rem;font-family:monospace"></div>
 </div>
+
+
+<h3>💾 أنواع الذاكرة الرئيسية: RAM vs ROM</h3>
+<div class="tw"><table>
+<tr><th>الخاصية</th><th>RAM — ذاكرة الوصول العشوائي</th><th>ROM — ذاكرة القراءة فقط</th></tr>
+<tr><td>الكتابة / القراءة</td><td style="color:#34d399">قراءة وكتابة ⭐</td><td>قراءة فقط</td></tr>
+<tr><td>التطايرية</td><td style="color:#f87171">متطايرة (تُمحى عند الإطفاء) ⚠️</td><td style="color:#34d399">غير متطايرة (دائمة) ✅</td></tr>
+<tr><td>الاستخدام</td><td>تخزين البرامج الجارية والبيانات المؤقتة</td><td>Firmware — تعليمات إقلاع النظام</td></tr>
+<tr><td>السرعة</td><td style="color:#34d399">أسرع</td><td>أبطأ نسبياً</td></tr>
+<tr><td>التعديل</td><td>قابل للتعديل دائماً</td><td>يحتاج عملية خاصة (EEPROM)</td></tr>
+<tr><td>مثال</td><td>DDR4/DDR5 في حاسوبك</td><td>BIOS/UEFI Chip على اللوحة الأم</td></tr>
+</table></div>
+
+<h3>⚡ Context Switching — التبديل السياقي وتأثيره على الأداء</h3>
+<div class="cb o"><div class="lb or">مفهوم Context Switching في إدارة الذاكرة</div>
+عندما يكون هناك عمليات متعددة تحتاج CPU والذاكرة في نفس الوقت:<br>
+① يقوم OS بحفظ حالة العملية الحالية (السجلات، عدادات، مواقع البيانات)<br>
+② ثم استئنافها لاحقاً بالضبط من حيث توقفت<br><br>
+<b>التأثير على الأداء:</b><br>
+• زمن التبديل = <b>Overhead</b> — لا يقوم النظام بأي عمل مفيد خلاله<br>
+• كلما زاد عدد التبديلات، قل الأداء الفعلي للنظام<br>
+• هذا يعني: كلما كان عدد العمليات المتزامنة أكبر، زاد Overhead
+</div>
+<div class="inter-box">
+  <div class="inter-title">⚡ محاكي Context Switch — شاهد تأثير Overhead على الأداء</div>
+  <p style="font-size:.78rem;color:#94a3b8;margin-bottom:.4rem">زِد عدد العمليات واشاهد كيف يزيد Overhead ويقل وقت العمل الفعلي</p>
+  <div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem">
+    <label style="font-size:.78rem;color:#94a3b8">عدد العمليات:</label>
+    <input type="range" id="ctx-procs" min="1" max="8" value="3" oninput="ctxUpdate()" style="width:120px">
+    <span id="ctx-proc-val" style="color:#fbbf24;font-weight:bold;min-width:20px">3</span>
+    <label style="font-size:.78rem;color:#94a3b8;margin-right:.5rem">زمن التبديل:</label>
+    <input type="range" id="ctx-overhead" min="5" max="40" value="15" oninput="ctxUpdate()" style="width:120px">
+    <span id="ctx-oh-val" style="color:#f87171;font-weight:bold;min-width:40px">15%</span>
+  </div>
+  <canvas id="ctxCanvas" width="580" height="150" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+  <div id="ctx-info" style="font-size:.78rem;margin-top:.35rem;text-align:center;min-height:18px"></div>
+</div>
+<h3>📊 مقارنة: الذاكرة الرئيسية vs التخزين الثانوي</h3>
+<div class="tw"><table>
+<tr><th>العنصر</th><th>الذاكرة الرئيسية (Main Memory / RAM)</th><th>التخزين الثانوي (Secondary Storage)</th></tr>
+<tr><td>السرعة</td><td style="color:#34d399">عالية جداً ⚡</td><td>أقل نسبياً 🐢</td></tr>
+<tr><td>التكلفة / GB</td><td style="color:#f87171">مرتفعة 💰</td><td style="color:#34d399">منخفضة 💵</td></tr>
+<tr><td>السعة</td><td>صغيرة نسبياً (GBs)</td><td style="color:#34d399">كبيرة جداً (TBs)</td></tr>
+<tr><td>النوع</td><td style="color:#f87171">متطايرة — تُمحى عند إطفاء الجهاز ⚠️</td><td style="color:#34d399">غير متطايرة — محفوظة دائماً ✅</td></tr>
+<tr><td>الاستخدام</td><td>تخزين مؤقت للبرامج قيد التنفيذ</td><td>تخزين دائم للملفات والبرامج</td></tr>
+</table></div>
+
+<h3>💾 التخزين المؤقت (Caching) ⭐</h3>
+<div class="cb"><div class="lb gr">كيف يعمل Cache؟</div>
+عند الحاجة لبيانات، يبحث النظام أولاً في Cache:<br>
+<b>① Cache Hit:</b> البيانات موجودة في Cache ← يستخدمها مباشرة (سريع جداً!)<br>
+<b>② Cache Miss:</b> البيانات غير موجودة ← يجلبها من المصدر الأبطأ ويُخزّنها في Cache للمرة القادمة
+</div>
+<div class="diagram">
+<svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="18" text-anchor="middle" fill="#34d399" font-size="12" font-weight="bold">هرمية التخزين المؤقت: CPU → Cache → RAM → Disk</text>
+  <g>
+    <!-- CPU -->
+    <rect x="10" y="32" width="100" height="60" rx="8" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2"/>
+    <text x="60" y="58" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">⚙️ CPU</text>
+    <text x="60" y="75" text-anchor="middle" fill="#94a3b8" font-size="7.5">يطلب بيانات</text>
+    <!-- Arrow -->
+    <path d="M110 62 L150 62" stroke="#fbbf24" stroke-width="2" marker-end="url(#fa)"/>
+    <text x="130" y="55" text-anchor="middle" fill="#fbbf24" font-size="7">طلب</text>
+    <!-- Cache -->
+    <rect x="155" y="32" width="130" height="60" rx="8" fill="rgba(248,113,113,.15)" stroke="#f87171" stroke-width="2"/>
+    <text x="220" y="52" text-anchor="middle" fill="#f87171" font-size="10" font-weight="bold">🔴 Cache Memory</text>
+    <text x="220" y="67" text-anchor="middle" fill="#94a3b8" font-size="7.5">1-10 نانوثانية | MBs</text>
+    <text x="220" y="82" text-anchor="middle" fill="#34d399" font-size="7">⭐ Hit Rate مرتفع = سريع!</text>
+    <!-- Arrow -->
+    <path d="M285 62 L325 62" stroke="#34d399" stroke-width="2" marker-end="url(#fa)"/>
+    <text x="305" y="55" text-anchor="middle" fill="#34d399" font-size="7">Miss→</text>
+    <!-- RAM -->
+    <rect x="330" y="32" width="130" height="60" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+    <text x="395" y="52" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">🟡 RAM</text>
+    <text x="395" y="67" text-anchor="middle" fill="#94a3b8" font-size="7.5">50-100 نانوثانية | GBs</text>
+    <!-- Arrow -->
+    <path d="M460 62 L500 62" stroke="#94a3b8" stroke-width="2" marker-end="url(#fa)"/>
+    <text x="480" y="55" text-anchor="middle" fill="#94a3b8" font-size="7">Miss→</text>
+    <!-- Disk -->
+    <rect x="505" y="32" width="130" height="60" rx="8" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="2"/>
+    <text x="570" y="52" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">🟢 SSD/HDD</text>
+    <text x="570" y="67" text-anchor="middle" fill="#94a3b8" font-size="7.5">milliseconds | TBs</text>
+    <defs><marker id="fa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#94a3b8"/></marker></defs>
+  </g>
+</svg>
+</div>
+
+<h3>🗂️ التقسيم (Segmentation) ⭐</h3>
+<div class="cb"><div class="lb pu">ما هو Segmentation؟</div>
+تقسيم الذاكرة لأجزاء منطقية متغيرة الحجم تسمى Segments — كل Segment يمثل جزءاً منطقياً من البرنامج (Code, Stack, Data, Heap).
+</div>
+<div class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="20" text-anchor="middle" fill="#818cf8" font-size="12" font-weight="bold">Segmentation — كيف تُقسَّم الذاكرة لأجزاء منطقية</text>
+  <!-- Program logical view -->
+  <rect x="10" y="30" width="180" height="155" rx="8" fill="rgba(129,140,248,.06)" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="100" y="50" text-anchor="middle" fill="#818cf8" font-size="10" font-weight="bold">البرنامج (المنظور المنطقي)</text>
+  <rect x="20" y="58" width="160" height="28" rx="4" fill="rgba(248,113,113,.2)" stroke="#f87171" stroke-width="1"/>
+  <text x="100" y="75" text-anchor="middle" fill="#f87171" font-size="9">Code Segment (0)</text>
+  <rect x="20" y="90" width="160" height="28" rx="4" fill="rgba(52,211,153,.2)" stroke="#34d399" stroke-width="1"/>
+  <text x="100" y="107" text-anchor="middle" fill="#34d399" font-size="9">Stack Segment (1)</text>
+  <rect x="20" y="122" width="160" height="28" rx="4" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1"/>
+  <text x="100" y="139" text-anchor="middle" fill="#fbbf24" font-size="9">Heap Segment (2)</text>
+  <rect x="20" y="154" width="160" height="24" rx="4" fill="rgba(129,140,248,.2)" stroke="#818cf8" stroke-width="1"/>
+  <text x="100" y="169" text-anchor="middle" fill="#818cf8" font-size="9">Data Segment (3)</text>
+  <!-- Arrow -->
+  <text x="280" y="118" text-anchor="middle" fill="#94a3b8" font-size="9">Segment Table</text>
+  <rect x="220" y="50" width="120" height="140" rx="6" fill="rgba(30,40,60,.5)" stroke="#334155" stroke-width="1.5"/>
+  <g font-size="8" fill="#94a3b8" text-anchor="middle">
+    <text x="280" y="68">Seg | Base | Limit</text>
+    <line x1="222" y1="72" x2="338" y2="72" stroke="#334155" stroke-width="1"/>
+    <text x="280" y="88" fill="#f87171">0 | 4000 | 400</text>
+    <text x="280" y="106" fill="#34d399">1 | 6300 | 100</text>
+    <text x="280" y="124" fill="#fbbf24">2 | 4300 | 300</text>
+    <text x="280" y="142" fill="#818cf8">3 | 3200 | 580</text>
+  </g>
+  <!-- RAM -->
+  <rect x="420" y="30" width="260" height="155" rx="8" fill="rgba(56,189,248,.06)" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="550" y="50" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">RAM الفعلية</text>
+  <rect x="430" y="58" width="240" height="22" rx="3" fill="rgba(129,140,248,.2)" stroke="#818cf8"/>
+  <text x="550" y="73" text-anchor="middle" fill="#818cf8" font-size="8">3200: Data Segment</text>
+  <rect x="430" y="84" width="240" height="22" rx="3" fill="rgba(248,113,113,.2)" stroke="#f87171"/>
+  <text x="550" y="99" text-anchor="middle" fill="#f87171" font-size="8">4000: Code Segment</text>
+  <rect x="430" y="110" width="240" height="22" rx="3" fill="rgba(251,191,36,.2)" stroke="#fbbf24"/>
+  <text x="550" y="125" text-anchor="middle" fill="#fbbf24" font-size="8">4300: Heap Segment</text>
+  <rect x="430" y="136" width="240" height="22" rx="3" fill="rgba(52,211,153,.2)" stroke="#34d399"/>
+  <text x="550" y="151" text-anchor="middle" fill="#34d399" font-size="8">6300: Stack Segment</text>
+  <!-- Arrows -->
+  <path d="M340 75 L420 95" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <path d="M340 105 L420 147" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <path d="M340 130 L420 121" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <path d="M340 150 L420 64" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="4,2"/>
+</svg>
+</div>
+<div class="tw"><table>
+<tr><th>الخاصية</th><th>Segmentation</th></tr>
+<tr><td>حجم الأجزاء</td><td>متغير — حسب الحاجة</td></tr>
+<tr><td>المنظور</td><td>منطقي — Code, Stack, Data, Heap</td></tr>
+<tr><td>التجزئة الخارجية</td><td>تحدث (فراغات بين Segments)</td></tr>
+<tr><td>الوصول</td><td>Segment Table: (رقم Segment + Offset)</td></tr>
+</table></div>
+
+<h3>📄 التصفيح (Paging) ⭐⭐ الأهم!</h3>
+<div class="cb y"><div class="lb yl">ما هو Paging؟</div>
+تقسيم الذاكرة الفعلية لأجزاء متساوية الحجم تسمى <b>Frames</b>، وتقسيم المنطقي للعملية لأجزاء متساوية تسمى <b>Pages</b>.<br>
+الحجم عادةً = 4 KB. <b>Page Table</b> يربط كل Page بـ Frame في RAM.
+</div>
+<div class="diagram">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="18" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">Paging — كيف تُترجَم العناوين المنطقية للفعلية</text>
+  <!-- Logical address -->
+  <rect x="10" y="30" width="150" height="170" rx="8" fill="rgba(251,191,36,.06)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="85" y="50" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">العملية (Pages)</text>
+  <text x="85" y="65" text-anchor="middle" fill="#94a3b8" font-size="8">(منطقية - 4KB كل page)</text>
+  <rect x="20" y="72" width="130" height="22" rx="3" fill="rgba(248,113,113,.2)" stroke="#f87171"/>
+  <text x="85" y="87" text-anchor="middle" fill="#f87171" font-size="8.5">Page 0 (logical)</text>
+  <rect x="20" y="97" width="130" height="22" rx="3" fill="rgba(52,211,153,.2)" stroke="#34d399"/>
+  <text x="85" y="112" text-anchor="middle" fill="#34d399" font-size="8.5">Page 1 (logical)</text>
+  <rect x="20" y="122" width="130" height="22" rx="3" fill="rgba(129,140,248,.2)" stroke="#818cf8"/>
+  <text x="85" y="137" text-anchor="middle" fill="#818cf8" font-size="8.5">Page 2 (logical)</text>
+  <rect x="20" y="147" width="130" height="22" rx="3" fill="rgba(251,146,60,.2)" stroke="#fb923c"/>
+  <text x="85" y="162" text-anchor="middle" fill="#fb923c" font-size="8.5">Page 3 (logical)</text>
+  <!-- Page Table -->
+  <rect x="200" y="30" width="130" height="170" rx="8" fill="rgba(30,40,60,.5)" stroke="#334155" stroke-width="1.5"/>
+  <text x="265" y="50" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Page Table</text>
+  <text x="265" y="65" text-anchor="middle" fill="#64748b" font-size="8">(يُحفظ في Kernel)</text>
+  <g font-size="8.5" text-anchor="middle">
+    <text x="265" y="82" fill="#94a3b8">Page → Frame</text>
+    <line x1="202" y1="86" x2="328" y2="86" stroke="#334155"/>
+    <text x="265" y="100" fill="#f87171">0 → Frame 5</text>
+    <text x="265" y="118" fill="#34d399">1 → Frame 2</text>
+    <text x="265" y="136" fill="#818cf8">2 → Frame 7</text>
+    <text x="265" y="154" fill="#fb923c">3 → Frame 1</text>
+  </g>
+  <!-- Arrows -->
+  <path d="M160 83 L200 95" stroke="#f87171" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <path d="M160 108 L200 113" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <path d="M160 133 L200 131" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <path d="M160 158 L200 149" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Physical RAM -->
+  <rect x="380" y="30" width="300" height="170" rx="8" fill="rgba(56,189,248,.06)" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="530" y="50" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">RAM الفعلية (Frames)</text>
+  <text x="530" y="65" text-anchor="middle" fill="#94a3b8" font-size="8">(قد تكون غير متجاورة)</text>
+  <rect x="390" y="72" width="280" height="18" rx="2" fill="rgba(251,146,60,.2)" stroke="#fb923c"/><text x="530" y="84" text-anchor="middle" fill="#fb923c" font-size="7.5">Frame 1 ← Page 3</text>
+  <rect x="390" y="92" width="280" height="18" rx="2" fill="rgba(52,211,153,.2)" stroke="#34d399"/><text x="530" y="104" text-anchor="middle" fill="#34d399" font-size="7.5">Frame 2 ← Page 1</text>
+  <rect x="390" y="112" width="280" height="18" rx="2" fill="rgba(200,200,200,.08)"/><text x="530" y="124" text-anchor="middle" fill="#334155" font-size="7.5">Frame 3 (حر)</text>
+  <rect x="390" y="132" width="280" height="18" rx="2" fill="rgba(200,200,200,.08)"/><text x="530" y="144" text-anchor="middle" fill="#334155" font-size="7.5">Frame 4 (حر)</text>
+  <rect x="390" y="152" width="280" height="18" rx="2" fill="rgba(248,113,113,.2)" stroke="#f87171"/><text x="530" y="164" text-anchor="middle" fill="#f87171" font-size="7.5">Frame 5 ← Page 0</text>
+  <rect x="390" y="172" width="280" height="18" rx="2" fill="rgba(200,200,200,.08)"/><text x="530" y="184" text-anchor="middle" fill="#334155" font-size="7.5">Frame 6 (حر)</text>
+  <!-- Arrows Page Table to Frames -->
+  <path d="M330 95 L390 79" stroke="#f87171" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <path d="M330 113 L390 101" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <path d="M330 131 L390 161" stroke="#f87171" stroke-width="1.5" stroke-dasharray="3,2" opacity=".3"/>
+  <path d="M330 149 L390 176" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="3,2"/>
+</svg>
+</div>
+<div class="cb g"><div class="lb gr">⭐ مزايا Paging</div>
+① لا تجزئة خارجية (كل Frame نفس الحجم)<br>
+② العملية لا تحتاج ذاكرة متجاورة<br>
+③ أساس Virtual Memory — يمكن تخزين Pages غير المستخدمة في القرص (Swap)
+</div>
+<div class="tw"><table>
+<tr><th>الخاصية</th><th>Segmentation</th><th>Paging</th></tr>
+<tr><td>حجم الأجزاء</td><td>متغير</td><td style="color:#34d399">ثابت (4KB) ⭐</td></tr>
+<tr><td>التجزئة الخارجية</td><td>تحدث</td><td style="color:#34d399">لا تحدث ⭐</td></tr>
+<tr><td>التجزئة الداخلية</td><td>لا تحدث</td><td>قد تحدث (آخر Page)</td></tr>
+<tr><td>المنظور</td><td>منطقي (Code/Stack...)</td><td>مادي (أجزاء متساوية)</td></tr>
+</table></div>
 <h3>🧮 الذاكرة الافتراضية (Virtual Memory)</h3>
 <div class="diagram">
 <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
@@ -1119,7 +1468,17 @@ S.t5=`<div class="card">
   <text x="522" y="200" text-anchor="middle" fill="#94a3b8" font-size="8">First Fit / Best Fit / Worst Fit</text>
 </svg>
 </div>
-</div>`;
+</div></div><div class="cb y"><div class="lb yl">⭐ ملخص الموضوع الخامس — نقاط الاختبار</div>
+<b>أنواع الذاكرة:</b> RAM (متطايرة، قراءة/كتابة) vs ROM (غير متطايرة، للـ Firmware)<br>
+<b>هرمية التخزين:</b> Cache (ns) ← RAM (ms) ← SSD (ms) ← HDD (s)<br>
+<b>Caching:</b> Cache Hit = استخدام فوري | Cache Miss = جلب من مصدر أبطأ<br>
+<b>DMA:</b> نقل البيانات مباشرة بين الجهاز والذاكرة دون CPU في كل خطوة<br>
+<b>Fragmentation:</b> داخلية (داخل القسم) + خارجية (بين الأقسام) = يبطئ النظام<br>
+<b>Segmentation:</b> تقسيم منطقي متغير الحجم | Code, Stack, Data, Heap<br>
+<b>Paging:</b> تقسيم متساوي (4KB) | Pages ← Page Table → Frames | لا تجزئة خارجية<br>
+<b>Context Switch Overhead:</b> كلما زاد عدد العمليات/التبديلات = قل الأداء الفعلي
+</div>
+`;
 
 S.t6=`<div class="card">
 <h2 style="color:#fb923c">💾 إدارة I/O والملفات</h2>
@@ -1348,6 +1707,407 @@ S.t6=`<div class="card">
 <div class="cb g"><div class="lb gr">⭐ DMA — الوصول المباشر للذاكرة</div>
 بدون DMA: الجهاز → CPU → RAM (CPU مشغول!)<br>
 مع DMA: الجهاز → RAM مباشرة (CPU حر للعمل بمهام أخرى) ← أسرع وأكفأ!
+</div>
+</div>`;
+
+
+// ══════════════════════════════════════════════════════
+// MODULE 7: THREADS
+// ══════════════════════════════════════════════════════
+S.t7=`<div class="card">
+<h2 style="color:#a78bfa">🧵 الموضوع السابع: الخيوط (Threads)</h2>
+
+<div class="cb o"><div class="lb or">الفرق الجوهري: عملية vs خيط</div>
+<b>العملية (Process)</b> = وحدة مستقلة تماماً، لها ذاكرتها الخاصة، PID خاص، موارد منفصلة.<br>
+<b>الخيط (Thread)</b> = وحدة تنفيذ داخل العملية، يشترك مع الخيوط الأخرى في نفس الذاكرة والموارد.
+</div>
+<div class="ez">تخيّل Chrome: العملية الواحدة تشغّل عدة خيوط في آنٍ واحد — خيط يرسم الصفحة، آخر يُحمّل الصور، ثالث يستقبل البيانات من الشبكة. كلها داخل نفس الذاكرة = أسرع من إنشاء عملية جديدة لكل مهمة!</div>
+
+<h3>🔬 مكونات الخيط وما يشاركه</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="20" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="bold">ما يملكه الخيط وحده vs ما يشاركه مع الخيوط الأخرى</text>
+  <defs><marker id="ta" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#94a3b8"/></marker></defs>
+
+  <!-- Process box -->
+  <rect x="10" y="30" width="680" height="220" rx="10" fill="rgba(167,139,250,.06)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="350" y="50" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">العملية (Process) — الحاوية الكبيرة</text>
+
+  <!-- Shared area -->
+  <rect x="30" y="60" width="300" height="175" rx="8" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="180" y="80" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">✅ مشترك بين جميع الخيوط</text>
+  <g font-size="9" fill="#e2e8f0">
+    <text x="45" y="102">📦 Code Segment — الكود البرمجي</text>
+    <text x="45" y="122">📊 Data Segment — المتغيرات العامة</text>
+    <text x="45" y="142">📂 الملفات المفتوحة (File Descriptors)</text>
+    <text x="45" y="162">🔗 Signals — إشارات النظام</text>
+    <text x="45" y="182">🌍 Address Space — فضاء العناوين</text>
+    <text x="45" y="202">💾 Heap — الذاكرة الديناميكية</text>
+  </g>
+  <text x="180" y="225" text-anchor="middle" fill="#34d399" font-size="8">⭐ لهذا إنشاء الخيوط أسرع من العمليات</text>
+
+  <!-- Per-thread area -->
+  <rect x="360" y="60" width="310" height="175" rx="8" fill="rgba(167,139,250,.08)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="515" y="80" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="bold">🔒 خاص بكل خيط</text>
+  <!-- 3 thread columns -->
+  <rect x="370" y="92" width="85" height="128" rx="5" fill="rgba(167,139,250,.15)" stroke="#a78bfa" stroke-width="1"/>
+  <text x="412" y="110" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">Thread 1</text>
+  <g font-size="7.5" fill="#94a3b8" text-anchor="middle">
+    <text x="412" y="128">Stack</text><text x="412" y="142">Registers</text>
+    <text x="412" y="156">PC</text><text x="412" y="170">State</text>
+    <text x="412" y="184">Thread ID</text>
+  </g>
+  <rect x="462" y="92" width="85" height="128" rx="5" fill="rgba(167,139,250,.15)" stroke="#a78bfa" stroke-width="1"/>
+  <text x="504" y="110" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">Thread 2</text>
+  <g font-size="7.5" fill="#94a3b8" text-anchor="middle">
+    <text x="504" y="128">Stack</text><text x="504" y="142">Registers</text>
+    <text x="504" y="156">PC</text><text x="504" y="170">State</text>
+    <text x="504" y="184">Thread ID</text>
+  </g>
+  <rect x="554" y="92" width="105" height="128" rx="5" fill="rgba(167,139,250,.15)" stroke="#a78bfa" stroke-width="1"/>
+  <text x="606" y="110" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">Thread 3</text>
+  <g font-size="7.5" fill="#94a3b8" text-anchor="middle">
+    <text x="606" y="128">Stack</text><text x="606" y="142">Registers</text>
+    <text x="606" y="156">PC</text><text x="606" y="170">State</text>
+    <text x="606" y="184">Thread ID</text>
+  </g>
+  <text x="515" y="225" text-anchor="middle" fill="#a78bfa" font-size="8">كل خيط له Stack مستقل وعداد برنامج خاص</text>
+</svg>
+</div>
+
+<h3>⚖️ مقارنة: عملية vs خيط</h3>
+<div class="tw"><table>
+<tr><th>الخاصية</th><th>العملية (Process)</th><th>الخيط (Thread)</th></tr>
+<tr><td>وقت الإنشاء</td><td>بطيء نسبياً</td><td style="color:#34d399">سريع جداً ⭐</td></tr>
+<tr><td>الذاكرة</td><td>منفصلة تماماً</td><td style="color:#34d399">مشتركة مع باقي الخيوط ⭐</td></tr>
+<tr><td>التواصل</td><td>يحتاج IPC (معقد)</td><td style="color:#34d399">مباشر عبر الذاكرة المشتركة ⭐</td></tr>
+<tr><td>الأمان</td><td style="color:#34d399">عزل كامل ⭐</td><td>خطر التعارض (Race Condition)</td></tr>
+<tr><td>تبديل السياق</td><td>ثقيل (Context Switch كامل)</td><td style="color:#34d399">خفيف ⭐</td></tr>
+<tr><td>الاستخدام</td><td>Chrome tabs، عمليات منفصلة</td><td>تطبيقات متعددة المهام</td></tr>
+</table></div>
+
+<h3>🏭 أنواع الخيوط: User-Level vs Kernel-Level</h3>
+<div class="cb"><div class="lb pu">User-Level Threads</div>
+تُدار بواسطة مكتبة في User Space — OS لا يعلم بها. أسرع لكن إذا حُجب خيط = حُجبت العملية كلها.
+</div>
+<div class="cb g"><div class="lb gr">Kernel-Level Threads</div>
+OS يعلم بها ويُدارها مباشرة. أبطأ في الإنشاء لكن إذا حُجب خيط = باقي الخيوط تكمل عملها.
+</div>
+
+<div class="inter-box">
+  <div class="inter-title">🎮 محاكي الخيوط — شاهد 3 خيوط تعمل معاً!</div>
+  <p style="font-size:.78rem;color:#94a3b8;margin-bottom:.5rem">عملية واحدة تشغّل 3 خيوط في آنٍ واحد — انقر "تشغيل" ثم شاهد كيف يُنجزون مهامهم بالتوازي</p>
+  <div class="btn-row">
+    <button class="btn btn-pu" onclick="threadStart()">▶ تشغيل</button>
+    <button class="btn btn-yl" onclick="threadReset()">↺ إعادة</button>
+    <button class="btn btn-re" onclick="threadStop()">⏹ إيقاف</button>
+  </div>
+  <canvas id="threadCanvas" width="580" height="200" style="background:#0a0f1e;border-radius:8px;max-width:100%;margin-top:.5rem"></canvas>
+  <div id="thread-info" style="font-size:.76rem;color:#94a3b8;margin-top:.3rem;min-height:18px;text-align:center"></div>
+</div>
+
+<div class="cb y"><div class="lb yl">⭐ للاختبار — نقاط مهمة</div>
+• كل عملية تبدأ بخيط واحد على الأقل (Main Thread)<br>
+• الخيوط داخل نفس العملية تتشارك: Code, Data, Heap, Files<br>
+• كل خيط له Stack وRegisters وPC خاصان<br>
+• مشكلة الخيوط = Race Condition عند الوصول للذاكرة المشتركة → الحل: Synchronization
+</div>
+</div>`;
+
+// ══════════════════════════════════════════════════════
+// MODULE 8: PROCESS SYNCHRONIZATION
+// ══════════════════════════════════════════════════════
+S.t8=`<div class="card">
+<h2 style="color:#f87171">🔐 الموضوع الثامن: مزامنة العمليات</h2>
+
+<div class="cb r"><div class="lb" style="color:#f87171">لماذا نحتاج المزامنة؟</div>
+عندما تصل عدة عمليات أو خيوط لنفس البيانات في آنٍ واحد — قد تُفسَد البيانات! هذا يُسمى <b>Race Condition</b>.
+</div>
+<div class="ez">مثال: عمليتان A و B تقرآن Счётчик=5 معاً وتزيدانه بـ1. A تكتب 6، ثم B تكتب 6 — النتيجة الصحيحة كانت 7! هذا هو Race Condition.</div>
+
+<h3>🚦 مشكلة القسم الحرج (Critical Section Problem)</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="20" text-anchor="middle" fill="#f87171" font-size="13" font-weight="bold">هيكل القسم الحرج</text>
+  <defs><marker id="ca" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6,3.5 z" fill="#f87171"/></marker></defs>
+  <!-- Process code block -->
+  <rect x="180" y="32" width="340" height="178" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <rect x="188" y="40" width="324" height="30" rx="4" fill="rgba(52,211,153,.15)" stroke="#34d399"/>
+  <text x="350" y="59" text-anchor="middle" fill="#34d399" font-size="9">Entry Section — طلب الدخول (يحصل على القفل)</text>
+  <rect x="188" y="76" width="324" height="50" rx="4" fill="rgba(248,113,113,.2)" stroke="#f87171" stroke-width="2"/>
+  <text x="350" y="97" text-anchor="middle" fill="#f87171" font-size="11" font-weight="bold">🔒 CRITICAL SECTION</text>
+  <text x="350" y="115" text-anchor="middle" fill="#94a3b8" font-size="9">الكود الذي يصل للموارد المشتركة — خيط واحد فقط!</text>
+  <rect x="188" y="132" width="324" height="30" rx="4" fill="rgba(251,191,36,.15)" stroke="#fbbf24"/>
+  <text x="350" y="151" text-anchor="middle" fill="#fbbf24" font-size="9">Exit Section — الإفراج عن القفل</text>
+  <rect x="188" y="168" width="324" height="34" rx="4" fill="rgba(30,40,60,.5)" stroke="#334155"/>
+  <text x="350" y="188" text-anchor="middle" fill="#64748b" font-size="9">Remainder Section — باقي الكود العادي</text>
+  <!-- Labels -->
+  <text x="50" y="78" fill="#34d399" font-size="8.5" text-anchor="middle">يطلب</text>
+  <text x="50" y="92" fill="#34d399" font-size="8.5" text-anchor="middle">الدخول</text>
+  <path d="M75 75 L188 90" stroke="#34d399" stroke-width="1.5" marker-end="url(#ca)"/>
+  <text x="620" y="112" fill="#f87171" font-size="8.5" text-anchor="middle">منطقة</text>
+  <text x="620" y="126" fill="#f87171" font-size="8.5" text-anchor="middle">حرجة!</text>
+  <path d="M600 115 L512 105" stroke="#f87171" stroke-width="1.5" marker-end="url(#ca)"/>
+</svg>
+</div>
+
+<div class="cb"><div class="lb pu">شروط الحل الصحيح (3 شروط أساسية) ⭐</div>
+① <b>Mutual Exclusion (الإقصاء المتبادل):</b> عملية واحدة فقط داخل القسم الحرج في أي وقت<br>
+② <b>Progress (التقدم):</b> إذا كان القسم الحرج فارغاً، يجب السماح لعملية بالدخول فوراً<br>
+③ <b>Bounded Waiting (الانتظار المحدود):</b> لا عملية تنتظر للأبد — لا يوجد Starvation
+</div>
+
+<h3>🔒 أدوات المزامنة</h3>
+<div class="tw"><table>
+<tr><th>الأداة</th><th>كيف تعمل</th><th>الاستخدام</th></tr>
+<tr><td><b style="color:#f87171">Mutex</b></td><td>قفل ثنائي (مقفل/مفتوح) — صاحبه فقط يفتحه</td><td>حماية مورد واحد</td></tr>
+<tr><td><b style="color:#818cf8">Semaphore</b></td><td>عداد — P() تُنقص، V() تُزيد</td><td>إدارة موارد متعددة</td></tr>
+<tr><td><b style="color:#34d399">Monitor</b></td><td>هيكل برمجي عالي المستوى يتضمن mutex ضمنياً</td><td>Java synchronized</td></tr>
+<tr><td><b style="color:#fbbf24">Spinlock</b></td><td>العملية تنتظر في حلقة (busy waiting)</td><td>الأنوية المتعددة</td></tr>
+</table></div>
+
+<div class="inter-box">
+  <div class="inter-title">⚡ محاكي Race Condition — شاهد الخطر ثم الحل!</div>
+  <p style="font-size:.78rem;color:#94a3b8;margin-bottom:.4rem">عداد مشترك بين عمليتين — شاهد ماذا يحدث بدون مزامنة وماذا يحدث معها</p>
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem">
+    <button class="btn btn-re" onclick="raceRun(false)">⚡ بدون مزامنة (Race!)</button>
+    <button class="btn btn-gr" onclick="raceRun(true)">🔒 مع Mutex (آمن)</button>
+    <button class="btn btn-yl" onclick="raceReset()">↺ إعادة</button>
+    <span style="font-size:.76rem;color:#94a3b8">العداد الصحيح = 1000</span>
+  </div>
+  <canvas id="raceCanvas" width="580" height="180" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+  <div id="race-result" style="font-size:.8rem;text-align:center;margin-top:.3rem;min-height:22px"></div>
+</div>
+
+<h3>💀 Deadlock في المزامنة</h3>
+<div class="cb r"><div class="lb" style="color:#f87171">الديدلوك عند المزامنة</div>
+عملية A تمسك Mutex1 وتنتظر Mutex2 ← عملية B تمسك Mutex2 وتنتظر Mutex1 ← كلاهما ينتظر الآخر = Deadlock!
+</div>
+
+<h3>🏭 مشكلة المنتج والمستهلك (Producer-Consumer) ⭐</h3>
+<div class="cb g"><div class="lb gr">الحل بالـ Semaphore</div>
+<code style="color:#34d399;font-size:.78rem">
+mutex = 1 (للإقصاء المتبادل)<br>
+full = 0 (عدد العناصر في Buffer)<br>
+empty = N (عدد الفراغات في Buffer)<br><br>
+Producer: P(empty) → P(mutex) → أضف → V(mutex) → V(full)<br>
+Consumer: P(full) → P(mutex) → خذ → V(mutex) → V(empty)
+</code>
+</div>
+
+<div class="inter-box">
+  <div class="inter-title">🏭 محاكي المنتج والمستهلك مع Semaphore</div>
+  <div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem">
+    <button class="btn btn-gr" onclick="pcProduce()" id="btn-produce">📦 أنتج</button>
+    <button class="btn btn-pu" onclick="pcConsume()" id="btn-consume">🛒 استهلك</button>
+    <button class="btn btn-or" onclick="pcToggleSync()" id="btn-sync" style="border-width:2px">🔒 تزامن: مُفعّل</button>
+    <button class="btn btn-yl" onclick="pcReset()">↺</button>
+    <span id="pc-status" style="font-size:.74rem;color:#34d399">Buffer: 0/5</span>
+  </div>
+  <div style="display:flex;gap:.5rem;align-items:center;justify-content:center;margin-bottom:.3rem">
+    <div style="text-align:center;font-size:.7rem;color:#34d399"><div style="font-size:1.1rem">🏭</div>أنتج: <span id="pc-prod-count">0</span></div>
+    <div id="pc-buffer" style="display:flex;gap:3px;background:#0d1117;border:2px solid #334155;border-radius:7px;padding:.35rem;min-width:160px;height:42px;align-items:center"></div>
+    <div style="text-align:center;font-size:.7rem;color:#818cf8"><div style="font-size:1.1rem">🛒</div>استهلك: <span id="pc-cons-count">0</span></div>
+  </div>
+  <div id="pc-log" style="background:#000;border-radius:5px;padding:.35rem;font-size:.68rem;font-family:monospace;max-height:70px;overflow-y:auto;color:#94a3b8">انتظار...</div>
+</div>
+
+<div class="cb y"><div class="lb yl">⭐ للاختبار</div>
+• <b>Race Condition</b> = نتيجة غير متوقعة بسبب تنفيذ متزامن بدون تزامن<br>
+• <b>Critical Section</b> = الجزء الذي يصل لموارد مشتركة — يحتاج حمايةً<br>
+• <b>Mutual Exclusion</b> = شرط أساسي: خيط واحد فقط في CS في وقتٍ واحد<br>
+• <b>Starvation</b> = عملية تنتظر إلى الأبد لأن الأولويات تُعطيها دائماً لغيرها<br>
+• <b>Mutex vs Semaphore:</b> Mutex = قفل لمورد واحد | Semaphore = عداد لموارد متعددة
+</div>
+</div>`;
+
+// ══════════════════════════════════════════════════════
+// MODULE 9: CPU SCHEDULING
+// ══════════════════════════════════════════════════════
+S.t9=`<div class="card">
+<h2 style="color:#38bdf8">📊 الموضوع التاسع: جدولة وحدة المعالجة المركزية</h2>
+
+<div class="cb"><div class="lb pu">لماذا نحتاج الجدولة؟</div>
+CPU واحدة لكن عمليات كثيرة — الجدولة تُقرر: أي عملية تأخذ CPU الآن؟ ولكم من الوقت؟
+</div>
+
+<h3>📋 معايير تقييم خوارزميات الجدولة ⭐</h3>
+<div class="tw"><table>
+<tr><th>المعيار</th><th>التعريف</th><th>الهدف</th></tr>
+<tr><td><b>CPU Utilization</b></td><td>نسبة وقت استخدام CPU</td><td style="color:#34d399">تعظيم ↑</td></tr>
+<tr><td><b>Throughput</b></td><td>عدد العمليات المنجزة لكل وحدة زمن</td><td style="color:#34d399">تعظيم ↑</td></tr>
+<tr><td><b>Turnaround Time</b></td><td>الوقت من بداية العملية لنهايتها</td><td style="color:#f87171">تقليل ↓</td></tr>
+<tr><td><b>Waiting Time</b></td><td>وقت انتظار العملية في Ready Queue</td><td style="color:#f87171">تقليل ↓</td></tr>
+<tr><td><b>Response Time</b></td><td>وقت أول استجابة</td><td style="color:#f87171">تقليل ↓</td></tr>
+</table></div>
+
+<h3>🎮 محاكي خوارزميات الجدولة — تفاعلي</h3>
+<p style="font-size:.8rem;color:#94a3b8;margin-bottom:.5rem">أضف عمليات، اختر الخوارزمية، شاهد Gantt Chart ومقارنة النتائج</p>
+<div class="inter-box">
+  <div class="inter-title">📊 محاكي جدولة CPU الشامل</div>
+  <!-- Process input -->
+  <div style="display:grid;grid-template-columns:auto auto auto auto 1fr;gap:.4rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap">
+    <span style="font-size:.74rem;color:#94a3b8">اسم:</span>
+    <input id="sch-name" value="P1" maxlength="3" style="width:44px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:5px;padding:.25rem .35rem;font-size:.78rem;text-align:center"/>
+    <span style="font-size:.74rem;color:#94a3b8">وصول:</span>
+    <input id="sch-arr" type="number" value="0" min="0" max="20" style="width:48px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:5px;padding:.25rem .35rem;font-size:.78rem;text-align:center"/>
+    <span style="font-size:.74rem;color:#94a3b8">تنفيذ:</span>
+    <input id="sch-burst" type="number" value="5" min="1" max="20" style="width:48px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:5px;padding:.25rem .35rem;font-size:.78rem;text-align:center"/>
+    <span style="font-size:.74rem;color:#94a3b8">أولوية:</span>
+    <input id="sch-prio" type="number" value="1" min="1" max="10" style="width:44px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:5px;padding:.25rem .35rem;font-size:.78rem;text-align:center"/>
+    <button class="btn btn-gr" onclick="schAdd()">➕ أضف</button>
+  </div>
+  <!-- Algorithm selector -->
+  <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.5rem">
+    <span style="font-size:.74rem;color:#94a3b8;align-self:center">خوارزمية:</span>
+    <button class="btn btn-pu" id="sch-fcfs" onclick="schSetAlgo('FCFS')" style="border-width:2px">FCFS</button>
+    <button class="btn btn-gr" id="sch-sjf" onclick="schSetAlgo('SJF')">SJF</button>
+    <button class="btn btn-or" id="sch-pri" onclick="schSetAlgo('Priority')">Priority</button>
+    <button class="btn btn-yl" id="sch-rr" onclick="schSetAlgo('RR')">Round Robin</button>
+    <span style="font-size:.74rem;color:#94a3b8;align-self:center">Quantum:</span>
+    <input id="sch-q" type="number" value="3" min="1" max="10" style="width:44px;background:#111827;border:1px solid #334155;color:#e2e8f0;border-radius:5px;padding:.25rem .35rem;font-size:.78rem;text-align:center"/>
+    <button class="btn btn-pu" onclick="schRun()">▶ تشغيل</button>
+    <button class="btn btn-yl" onclick="schReset()">↺ مسح</button>
+  </div>
+  <!-- Process tags -->
+  <div id="sch-procs" style="display:flex;flex-wrap:wrap;gap:.3rem;min-height:24px;margin-bottom:.4rem"></div>
+  <!-- Gantt canvas -->
+  <canvas id="schCanvas" width="580" height="160" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+  <!-- Stats -->
+  <div id="sch-stats" style="font-size:.75rem;margin-top:.4rem;color:#94a3b8;font-family:monospace;min-height:20px"></div>
+  <!-- Algorithm explanation -->
+  <div id="sch-explain" style="margin-top:.3rem;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:7px;padding:.5rem;font-size:.78rem;color:#e2e8f0;min-height:40px"></div>
+</div>
+
+<h3>📖 شرح كل خوارزمية</h3>
+<div class="cb"><div class="lb pu">1. FCFS — First Come First Served</div>
+<b>أبسط خوارزمية:</b> من يأتي أولاً يُنفَّذ أولاً. لا preemption.<br>
+<b>المشكلة:</b> Convoy Effect — عملية طويلة تُبطئ الجميع خلفها.<br>
+<b>مثال:</b> P1=24ms, P2=3ms, P3=3ms → متوسط انتظار = (0+24+27)/3 = 17ms كبير!
+</div>
+<div class="cb g"><div class="lb gr">2. SJF — Shortest Job First</div>
+<b>أقل متوسط انتظار:</b> العملية الأقصر تُنفَّذ أولاً.<br>
+<b>المشكلة:</b> Starvation — العمليات الطويلة قد تنتظر إلى الأبد.<br>
+<b>نوعان:</b> Non-preemptive و Preemptive (= SRTF - Shortest Remaining Time First) ⭐
+</div>
+<div class="cb o"><div class="lb or">3. Priority Scheduling</div>
+<b>لكل عملية أولوية:</b> الأعلى أولوية يُنفَّذ أولاً.<br>
+<b>المشكلة:</b> Starvation للأولويات المنخفضة.<br>
+<b>الحل:</b> Aging = زيادة أولوية العملية كلما انتظرت أكثر.
+</div>
+<div class="cb y"><div class="lb yl">4. Round Robin (RR) ⭐ الأهم!</div>
+<b>الأعدل:</b> كل عملية تأخذ Quantum ثم تُعاد للقائمة.<br>
+<b>مناسب لـ:</b> Time-Sharing Systems والأنظمة التفاعلية.<br>
+<b>Quantum صغير</b> = أفضل Response Time لكن context switch أكثر.<br>
+<b>Quantum كبير</b> = يشبه FCFS.
+</div>
+
+<div class="tw"><table>
+<tr><th>الخوارزمية</th><th>Preemptive?</th><th>المشكلة</th><th>الأفضل لـ</th></tr>
+<tr><td>FCFS</td><td>لا</td><td>Convoy Effect</td><td>Batch Systems</td></tr>
+<tr><td>SJF</td><td>كلاهما</td><td>Starvation</td><td>أقل متوسط انتظار</td></tr>
+<tr><td>Priority</td><td>كلاهما</td><td>Starvation</td><td>أنظمة الوقت الفعلي</td></tr>
+<tr><td><b style="color:#38bdf8">Round Robin ⭐</b></td><td>نعم</td><td>Context Switch كثير</td><td>Time-Sharing</td></tr>
+</table></div>
+</div>`;
+
+// ══════════════════════════════════════════════════════
+// MODULE 10: DEADLOCK
+// ══════════════════════════════════════════════════════
+S.t10=`<div class="card">
+<h2 style="color:#f87171">💀 الموضوع العاشر: الجمود (Deadlock)</h2>
+
+<div class="cb r"><div class="lb" style="color:#f87171">ما هو الجمود؟</div>
+مجموعة عمليات في حالة انتظار دائمة — كل منها تنتظر موارد محتجزة لدى عملية أخرى في نفس المجموعة. لا أحد يتقدم = توقف تام!
+</div>
+<div class="ez">مثال واقعي: عاطف وأحمد في اجتماع. عاطف يمسك ورقة A وينتظر ورقة B من أحمد. أحمد يمسك ورقة B وينتظر ورقة A من عاطف. كلاهما ينتظر إلى الأبد!</div>
+
+<h3>☠️ شروط Coffman الأربعة — يجب توفرها جميعاً ⭐⭐</h3>
+<div class="diagram">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,Arial">
+  <text x="350" y="20" text-anchor="middle" fill="#f87171" font-size="13" font-weight="bold">شروط حدوث الجمود — Coffman Conditions</text>
+  <rect x="10" y="34" width="160" height="100" rx="10" fill="rgba(248,113,113,.1)" stroke="#f87171" stroke-width="2"/>
+  <text x="90" y="60" text-anchor="middle" fill="#f87171" font-size="20">🔒</text>
+  <text x="90" y="82" text-anchor="middle" fill="#f87171" font-size="10" font-weight="bold">1. Mutual Exclusion</text>
+  <text x="90" y="98" text-anchor="middle" fill="#94a3b8" font-size="8.5">المورد لا يمكن</text>
+  <text x="90" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">مشاركته بين العمليات</text>
+  <text x="90" y="125" text-anchor="middle" fill="#fbbf24" font-size="7.5">مثل: Printer</text>
+
+  <rect x="185" y="34" width="160" height="100" rx="10" fill="rgba(251,146,60,.1)" stroke="#fb923c" stroke-width="2"/>
+  <text x="265" y="60" text-anchor="middle" fill="#fb923c" font-size="20">🤲</text>
+  <text x="265" y="82" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">2. Hold and Wait</text>
+  <text x="265" y="98" text-anchor="middle" fill="#94a3b8" font-size="8.5">عملية تمسك موارد</text>
+  <text x="265" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">وتنتظر موارد أخرى</text>
+  <text x="265" y="125" text-anchor="middle" fill="#fbbf24" font-size="7.5">تمسك A وتنتظر B</text>
+
+  <rect x="360" y="34" width="160" height="100" rx="10" fill="rgba(129,140,248,.1)" stroke="#818cf8" stroke-width="2"/>
+  <text x="440" y="60" text-anchor="middle" fill="#818cf8" font-size="20">🚫</text>
+  <text x="440" y="82" text-anchor="middle" fill="#818cf8" font-size="10" font-weight="bold">3. No Preemption</text>
+  <text x="440" y="98" text-anchor="middle" fill="#94a3b8" font-size="8.5">لا يمكن انتزاع المورد</text>
+  <text x="440" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">قسراً من العملية</text>
+  <text x="440" y="125" text-anchor="middle" fill="#fbbf24" font-size="7.5">العملية تُحرره بنفسها</text>
+
+  <rect x="535" y="34" width="155" height="100" rx="10" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="2"/>
+  <text x="612" y="60" text-anchor="middle" fill="#34d399" font-size="20">🔄</text>
+  <text x="612" y="82" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">4. Circular Wait</text>
+  <text x="612" y="98" text-anchor="middle" fill="#94a3b8" font-size="8.5">انتظار دائري: A تنتظر B</text>
+  <text x="612" y="112" text-anchor="middle" fill="#94a3b8" font-size="8.5">B تنتظر C → C تنتظر A</text>
+  <text x="612" y="125" text-anchor="middle" fill="#fbbf24" font-size="7.5">الحلقة المغلقة</text>
+
+  <rect x="10" y="148" width="680" height="60" rx="8" fill="rgba(248,113,113,.06)" stroke="rgba(248,113,113,.3)"/>
+  <text x="350" y="168" text-anchor="middle" fill="#f87171" font-size="10" font-weight="bold">💡 الجمود يحدث فقط عند توفر الشروط الأربعة معاً</text>
+  <text x="350" y="185" text-anchor="middle" fill="#e2e8f0" font-size="9">منع أي شرط واحد = منع الجمود تماماً!</text>
+  <text x="350" y="200" text-anchor="middle" fill="#94a3b8" font-size="8.5">كسر Circular Wait: رقّم الموارد وطلب دائماً بالترتيب التصاعدي ← يكسر الحلقة</text>
+</svg>
+</div>
+
+<h3>🎮 محاكي الجمود — شاهد كيف يحدث ومنعه!</h3>
+<div class="inter-box">
+  <div class="inter-title">💀 محاكي الجمود التفاعلي</div>
+  <p style="font-size:.78rem;color:#94a3b8;margin-bottom:.4rem">3 عمليات و3 موارد — كل عملية تطلب مورداً وتمسك آخر. هل ستحدث الحلقة؟</p>
+  <div class="btn-row">
+    <button class="btn btn-re" onclick="dlSimulate(true)">💀 محاكاة جمود</button>
+    <button class="btn btn-gr" onclick="dlSimulate(false)">✅ بدون جمود</button>
+    <button class="btn btn-yl" onclick="dlReset()">↺ إعادة</button>
+  </div>
+  <canvas id="dlCanvas" width="580" height="220" style="background:#0a0f1e;border-radius:8px;max-width:100%;margin-top:.4rem"></canvas>
+  <div id="dl-info" style="font-size:.78rem;margin-top:.3rem;min-height:30px;padding:.4rem;border-radius:6px;background:rgba(0,0,0,.3)"></div>
+</div>
+
+<h3>🛡️ التعامل مع الجمود: 4 مناهج</h3>
+<div class="cb"><div class="lb pu">① المنع (Prevention) ⭐</div>
+اجعل أحد شروط Coffman مستحيل التحقق. مثال: رقّم الموارد وطلبها دائماً بترتيب تصاعدي = يكسر Circular Wait.
+</div>
+<div class="cb g"><div class="lb gr">② التجنب (Avoidance) — Banker's Algorithm ⭐</div>
+قبل منح المورد، تحقق: هل ستبقى في حالة آمنة (Safe State)؟ إذا لا = ارفض الطلب.<br>
+<b>Safe State</b> = يوجد ترتيب تنفيذ يسمح لجميع العمليات بالإنهاء.
+</div>
+<div class="cb o"><div class="lb or">③ الكشف والتعافي (Detection & Recovery)</div>
+اسمح بالجمود ثم اكشفه دورياً. التعافي: أنهِ عملية (Abort) أو انتزع موردها (Preempt).
+</div>
+<div class="cb r"><div class="lb" style="color:#f87171">④ التجاهل (Ignorance) — Ostrich Algorithm</div>
+افترض أن الجمود نادر جداً = تجاهله. تستخدمه معظم أنظمة التشغيل العامة (Windows، Linux).
+</div>
+
+<h3>🏦 Banker's Algorithm — مثال</h3>
+<div class="inter-box">
+  <div class="inter-title">🏦 Banker's Algorithm — هل النظام في حالة آمنة؟</div>
+  <p style="font-size:.78rem;color:#94a3b8;margin-bottom:.4rem">اضغط "تحقق" ليجد النظام Sequence آمن يُنهي جميع العمليات</p>
+  <div class="btn-row">
+    <button class="btn btn-gr" onclick="bankerCheck()">🏦 تحقق من Safe State</button>
+    <button class="btn btn-yl" onclick="bankerReset()">↺ مثال آخر</button>
+  </div>
+  <div id="banker-table" style="margin:.4rem 0;font-size:.75rem;overflow-x:auto"></div>
+  <canvas id="bankerCanvas" width="580" height="120" style="background:#0a0f1e;border-radius:8px;max-width:100%"></canvas>
+  <div id="banker-result" style="font-size:.78rem;margin-top:.3rem;min-height:24px;text-align:center"></div>
+</div>
+
+<div class="cb y"><div class="lb yl">⭐ للاختبار — أهم نقاط الجمود</div>
+• <b>Deadlock</b> = 4 شروط Coffman تتحقق معاً<br>
+• <b>منع الجمود</b> = اجعل شرطاً واحداً مستحيلاً<br>
+• <b>Banker's Algorithm</b> = يتحقق من Safe State قبل منح الموارد<br>
+• <b>Safe State</b> = يوجد ترتيب تنفيذ ينهي جميع العمليات<br>
+• <b>Starvation ≠ Deadlock</b>: Starvation = عملية تنتظر طويلاً لكنها ستُنفَّذ في النهاية
 </div>
 </div>`;
 
@@ -4123,6 +4883,676 @@ function semReset(){semVal=1;semStates=['ready','ready','ready'];
 // UPDATE initInteractives for new games
 // ═══════════════════════════════════════════════════════════
 
+
+// ══════════════════════════════════════════════════════
+// MODULE 7: Thread Simulator
+// ══════════════════════════════════════════════════════
+let threadAnim=null, threadProgs=[0,0,0], threadActive=false;
+const THREAD_TASKS=[
+  {name:'Thread 1\nتحميل الصور',col:'#a78bfa',task:'image_loader'},
+  {name:'Thread 2\nاستقبال البيانات',col:'#34d399',task:'network_recv'},
+  {name:'Thread 3\nرسم الواجهة',col:'#fb923c',task:'ui_renderer'},
+];
+function threadStart(){
+  threadActive=true;threadProgs=[0,0,0];
+  if(threadAnim)clearInterval(threadAnim);
+  threadAnim=setInterval(()=>{
+    if(!threadActive)return;
+    const cv=document.getElementById('threadCanvas');
+    if(!cv){threadStop();return;}
+    // Advance each thread at different speeds
+    const speeds=[0.008,0.012,0.006];
+    threadProgs=threadProgs.map((p,i)=>Math.min(p+speeds[i]+(Math.random()*.005),1));
+    threadDraw(cv);
+    if(threadProgs.every(p=>p>=1)){
+      clearInterval(threadAnim);
+      const info=document.getElementById('thread-info');
+      if(info)info.innerHTML='<span style="color:#34d399">✅ جميع الخيوط أنهت مهامها بالتوازي!</span>';
+    }
+  },30);
+}
+function threadDraw(cv){
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  // Shared memory box
+  ctx.fillStyle='rgba(167,139,250,.08)';ctx.strokeStyle='#a78bfa55';ctx.lineWidth=1;
+  ctx.beginPath();ctx.roundRect(w-150,20,140,h-40,8);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#a78bfa';ctx.font='bold 8.5px system-ui';ctx.textAlign='center';
+  ctx.fillText('الذاكرة المشتركة',w-80,40);
+  ctx.fillStyle='#64748b';ctx.font='7px system-ui';
+  ctx.fillText('Code + Data + Heap',w-80,55);
+  // CPU slots
+  const cpuY=70;
+  THREAD_TASKS.forEach((t,i)=>{
+    const p=threadProgs[i];
+    const ty=20+i*58;
+    // Thread box
+    ctx.fillStyle=p>=1?t.col+'33':'rgba(20,20,50,.8)';
+    ctx.strokeStyle=p>0?t.col:'#334155';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(10,ty,200,50,7);ctx.fill();ctx.stroke();
+    // Thread name
+    const lines=t.name.split('\n');
+    ctx.fillStyle=p>0?t.col:'#64748b';ctx.font='bold 8.5px system-ui';ctx.textAlign='center';
+    ctx.fillText(lines[0],110,ty+18);
+    ctx.fillStyle='#94a3b8';ctx.font='7.5px system-ui';
+    ctx.fillText(lines[1],110,ty+30);
+    // Progress bar
+    ctx.fillStyle='rgba(30,40,30,.5)';ctx.beginPath();ctx.roundRect(20,ty+36,180,8,3);ctx.fill();
+    ctx.fillStyle=p>=1?'#34d399':t.col;ctx.beginPath();ctx.roundRect(20,ty+36,180*p,8,3);ctx.fill();
+    ctx.fillStyle=p>=1?'#34d399':t.col;ctx.font='7px system-ui';ctx.textAlign='right';
+    ctx.fillText(p>=1?'✓ مكتمل!':Math.round(p*100)+'%',202,ty+44);
+    // Arrow to shared memory
+    if(p>0.3){
+      ctx.strokeStyle=t.col+'66';ctx.lineWidth=1;ctx.setLineDash([3,2]);
+      ctx.beginPath();ctx.moveTo(210,ty+25);ctx.lineTo(w-155,ty+25);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    // CPU working indicator
+    if(p>0&&p<1){
+      ctx.fillStyle=t.col;ctx.font='11px system-ui';ctx.textAlign='center';
+      ctx.fillText('⚡',220+i*25,ty+28);
+    }
+  });
+  // Timeline
+  const tlY=h-18;
+  ctx.strokeStyle='#334155';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(10,tlY);ctx.lineTo(w-160,tlY);ctx.stroke();
+  ctx.fillStyle='#475569';ctx.font='7.5px system-ui';ctx.textAlign='center';
+  const tmax=Math.max(...threadProgs);
+  ctx.fillText(`⏱ التقدم: ${Math.round(tmax*100)}%`,100,tlY+12);
+}
+function threadStop(){
+  threadActive=false;
+  if(threadAnim)clearInterval(threadAnim);
+}
+function threadReset(){
+  threadStop();threadProgs=[0,0,0];
+  const cv=document.getElementById('threadCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const info=document.getElementById('thread-info');if(info)info.textContent='';
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE 8: Race Condition Simulator
+// ══════════════════════════════════════════════════════
+let raceAnim=null;
+function raceRun(safe){
+  if(raceAnim)clearInterval(raceAnim);
+  const cv=document.getElementById('raceCanvas');
+  if(!cv)return;
+  const target=1000,steps=80;
+  let stepI=0;
+  const counters=[0,0]; // A progress, B progress
+  let shared=0, lost=0;
+  raceAnim=setInterval(()=>{
+    stepI++;
+    const progressA=Math.min(stepI/steps,1);
+    const progressB=Math.min((stepI-5)/steps,1);
+    if(!safe){
+      // Simulate race: both read same value sometimes
+      const readA=Math.floor(shared);
+      const readB=Math.floor(shared);
+      if(Math.random()<0.3){shared=readA+1;}
+      else if(Math.random()<0.5){shared=readB+1;}
+      else shared++;
+    } else {
+      // With mutex: sequential increments
+      shared=Math.min(shared+13,target);
+    }
+    counters[0]=progressA*target;
+    counters[1]=Math.max(0,progressB)*target;
+    // Draw
+    const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+    ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+    // Title
+    ctx.fillStyle=safe?'#34d399':'#f87171';
+    ctx.font='bold 10px system-ui';ctx.textAlign='center';
+    ctx.fillText(safe?'🔒 مع Mutex — نتيجة صحيحة':'⚡ بدون مزامنة — Race Condition!',w/2,20);
+    // Process A
+    ctx.fillStyle='rgba(129,140,248,.15)';ctx.strokeStyle='#818cf8';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(10,30,200,50,7);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#818cf8';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText('عملية A',110,52);
+    ctx.fillStyle='#94a3b8';ctx.font='8px monospace';
+    ctx.fillText('read → inc → write',110,68);
+    // Process B
+    ctx.fillStyle='rgba(52,211,153,.15)';ctx.strokeStyle='#34d399';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(220,30,200,50,7);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#34d399';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText('عملية B',320,52);
+    ctx.fillStyle='#94a3b8';ctx.font='8px monospace';
+    ctx.fillText('read → inc → write',320,68);
+    // Mutex lock visual
+    if(safe){
+      ctx.fillStyle='rgba(52,211,153,.2)';ctx.strokeStyle='#34d399';ctx.lineWidth=2;
+      ctx.beginPath();ctx.roundRect(430,30,130,50,7);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#34d399';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+      ctx.fillText('🔒 Mutex',495,52);
+      ctx.fillStyle='#94a3b8';ctx.font='7.5px system-ui';
+      ctx.fillText('يمنع التزامن',495,66);
+    }
+    // Shared counter
+    ctx.fillStyle=safe?'rgba(52,211,153,.15)':'rgba(248,113,113,.15)';
+    ctx.strokeStyle=safe?'#34d399':'#f87171';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(150,95,280,55,10);ctx.fill();ctx.stroke();
+    ctx.fillStyle=safe?'#34d399':'#f87171';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+    ctx.fillText('Counter المشترك',290,115);
+    ctx.fillStyle='#e2e8f0';ctx.font='bold 16px monospace';
+    ctx.fillText(Math.round(shared),290,138);
+    // Expected
+    ctx.fillStyle='#64748b';ctx.font='7.5px system-ui';
+    ctx.fillText('القيمة المتوقعة: '+target,w-80,h-5);
+    if(stepI>=steps+10){
+      clearInterval(raceAnim);raceAnim=null;
+      const r=document.getElementById('race-result');
+      if(r){
+        const actual=Math.round(shared);
+        if(safe)r.innerHTML=`<span style="color:#34d399">✅ صحيح! Counter = ${actual} = ${target} — Mutex حمى البيانات</span>`;
+        else r.innerHTML=`<span style="color:#f87171">❌ خطأ! Counter = ${actual} بدلاً من ${target} — ضُيّع ${target-actual} عملية تحديث!</span>`;
+      }
+    }
+  },40);
+}
+function raceReset(){
+  if(raceAnim)clearInterval(raceAnim);raceAnim=null;
+  const cv=document.getElementById('raceCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const r=document.getElementById('race-result');if(r)r.textContent='';
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE 9: CPU Scheduling Simulator
+// ══════════════════════════════════════════════════════
+let schProcs=[],schAlgo='FCFS',schColors=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24','#38bdf8'],schNextId=0;
+function schAdd(){
+  const name=document.getElementById('sch-name')?.value||'P'+(schNextId+1);
+  const arr=parseInt(document.getElementById('sch-arr')?.value||'0');
+  const burst=parseInt(document.getElementById('sch-burst')?.value||'5');
+  const prio=parseInt(document.getElementById('sch-prio')?.value||'1');
+  schProcs.push({id:schNextId,name,arr,burst,prio,col:schColors[schNextId%schColors.length]});
+  schNextId++;
+  const ni=document.getElementById('sch-name');if(ni)ni.value='P'+(schNextId+1);
+  schRenderProcs();
+}
+function schRenderProcs(){
+  const el=document.getElementById('sch-procs');
+  if(!el)return;
+  el.innerHTML=schProcs.map((p,i)=>`
+    <span style="background:${p.col}22;border:1px solid ${p.col};color:${p.col};border-radius:5px;padding:.15rem .4rem;font-size:.7rem;font-weight:700;cursor:pointer"
+      onclick="schRemove(${i})" title="انقر للحذف">
+      ${p.name} [وصول:${p.arr} تنفيذ:${p.burst} أولوية:${p.prio}] ✕
+    </span>`).join('');
+}
+function schRemove(i){schProcs.splice(i,1);schRenderProcs();}
+function schSetAlgo(a){
+  schAlgo=a;
+  ['fcfs','sjf','pri','rr'].forEach(x=>{const b=document.getElementById('sch-'+x);if(b)b.style.borderWidth='1px';});
+  const map={FCFS:'fcfs',SJF:'sjf',Priority:'pri',RR:'rr'};
+  const b=document.getElementById('sch-'+map[a]);if(b)b.style.borderWidth='2px';
+  const explanations={
+    FCFS:'<b style="color:#818cf8">FCFS — First Come First Served:</b> من يأتي أولاً يُنفَّذ أولاً. بسيط لكن يعاني من Convoy Effect.',
+    SJF:'<b style="color:#34d399">SJF — Shortest Job First:</b> الأقصر أولاً = أقل متوسط انتظار. لكن Starvation للعمليات الطويلة.',
+    Priority:'<b style="color:#fb923c">Priority Scheduling:</b> الأعلى أولوية أولاً (1=عالي). مشكلة Starvation للأولويات المنخفضة.',
+    RR:'<b style="color:#fbbf24">Round Robin:</b> كل عملية تأخذ Quantum ثم تُعاد للقائمة. الأعدل! مناسب لـ Time-Sharing.'
+  };
+  const ex=document.getElementById('sch-explain');if(ex)ex.innerHTML=explanations[a]||'';
+}
+function schRun(){
+  if(!schProcs.length){
+    const ex=document.getElementById('sch-explain');
+    if(ex)ex.innerHTML='<span style="color:#f87171">أضف عمليات أولاً!</span>';
+    return;
+  }
+  const q=parseInt(document.getElementById('sch-q')?.value||'3');
+  let gantt=[];
+  const procs=schProcs.map(p=>({...p,rem:p.burst,finish:0,wait:0,turnaround:0}));
+  let t=0;
+  if(schAlgo==='FCFS'){
+    const sorted=[...procs].sort((a,b)=>a.arr-b.arr||a.id-b.id);
+    sorted.forEach(p=>{t=Math.max(t,p.arr);gantt.push({name:p.name,col:p.col,start:t,dur:p.burst});t+=p.burst;p.finish=t;p.turnaround=t-p.arr;p.wait=p.turnaround-p.burst;});
+  } else if(schAlgo==='SJF'){
+    const rem=[...procs];let done=0;
+    while(done<procs.length){
+      const avail=rem.filter(p=>p.rem>0&&p.arr<=t);
+      if(!avail.length){t++;continue;}
+      const p=avail.sort((a,b)=>a.rem-b.rem)[0];
+      gantt.push({name:p.name,col:p.col,start:t,dur:p.rem});
+      t+=p.rem;p.finish=t;p.turnaround=t-p.arr;p.wait=p.turnaround-p.burst;p.rem=0;done++;
+    }
+  } else if(schAlgo==='Priority'){
+    const rem=[...procs];let done=0;
+    while(done<procs.length){
+      const avail=rem.filter(p=>p.rem>0&&p.arr<=t);
+      if(!avail.length){t++;continue;}
+      const p=avail.sort((a,b)=>a.prio-b.prio)[0];
+      gantt.push({name:p.name,col:p.col,start:t,dur:p.rem});
+      t+=p.rem;p.finish=t;p.turnaround=t-p.arr;p.wait=p.turnaround-p.burst;p.rem=0;done++;
+    }
+  } else if(schAlgo==='RR'){
+    const rem=[...procs].map(p=>({...p,rem:p.burst}));
+    const queue=[];let done=0;let nextArr=0;
+    const addArrivals=(time)=>{rem.filter(p=>p.arr<=time&&p.rem>0&&!queue.find(q=>q.id===p.id)).forEach(p=>{if(!queue.find(q=>q.id===p.id))queue.push(p);});};
+    addArrivals(0);
+    while(done<procs.length){
+      if(!queue.length){t++;addArrivals(t);continue;}
+      const p=queue.shift();const run=Math.min(p.rem,q);
+      gantt.push({name:p.name,col:p.col,start:t,dur:run});t+=run;p.rem-=run;
+      addArrivals(t);
+      if(p.rem>0)queue.push(p);
+      else{p.finish=t;const orig=procs.find(x=>x.id===p.id);if(orig){orig.finish=t;orig.turnaround=t-orig.arr;orig.wait=orig.turnaround-orig.burst;}done++;}
+    }
+  }
+  // Draw Gantt
+  const cv=document.getElementById('schCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  const totalTime=gantt.reduce((s,g)=>s+g.dur,0)||1;
+  const scale=(w-20)/totalTime;
+  ctx.fillStyle='#94a3b8';ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText(`Gantt Chart — ${schAlgo}${schAlgo==='RR'?' (Q='+q+')':''}`,w/2,15);
+  // Bars
+  let gx=10;
+  gantt.forEach(g=>{
+    const bw=g.dur*scale;
+    ctx.fillStyle=g.col+'55';ctx.strokeStyle=g.col;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(gx,25,bw-1,40,4);ctx.fill();ctx.stroke();
+    if(bw>20){ctx.fillStyle=g.col;ctx.font=`bold ${bw>30?9:7}px system-ui`;ctx.textAlign='center';ctx.fillText(g.name,gx+bw/2,49);}
+    // Time labels
+    ctx.fillStyle='#64748b';ctx.font='7px system-ui';ctx.textAlign='center';ctx.fillText(g.start,gx,70);
+    gx+=bw;
+  });
+  ctx.fillStyle='#64748b';ctx.font='7px system-ui';ctx.textAlign='center';ctx.fillText(totalTime,gx,70);
+  // Per-process stats
+  let infoY=85;
+  procs.forEach(p=>{
+    if(!p.finish)return;
+    ctx.fillStyle=p.col;ctx.font='8px system-ui';ctx.textAlign='left';
+    ctx.fillText(`${p.name}: انتهى=${p.finish}  انتظار=${p.wait}  Turnaround=${p.turnaround}`,12,infoY);
+    infoY+=14;
+  });
+  // Averages
+  const validProcs=procs.filter(p=>p.finish);
+  if(validProcs.length){
+    const avgW=(validProcs.reduce((s,p)=>s+p.wait,0)/validProcs.length).toFixed(1);
+    const avgT=(validProcs.reduce((s,p)=>s+p.turnaround,0)/validProcs.length).toFixed(1);
+    const statsEl=document.getElementById('sch-stats');
+    if(statsEl)statsEl.innerHTML=`<b style="color:#fbbf24">متوسط وقت الانتظار: ${avgW}ms</b> &nbsp;|&nbsp; <b style="color:#38bdf8">متوسط Turnaround: ${avgT}ms</b> &nbsp;|&nbsp; العمليات: ${validProcs.length}`;
+  }
+}
+function schReset(){
+  schProcs=[];schNextId=0;schRenderProcs();
+  const cv=document.getElementById('schCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const s=document.getElementById('sch-stats');if(s)s.textContent='';
+  const ni=document.getElementById('sch-name');if(ni)ni.value='P1';
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE 10: Deadlock Simulator + Banker's Algorithm
+// ══════════════════════════════════════════════════════
+function dlSimulate(withDeadlock){
+  const cv=document.getElementById('dlCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  const procs=[{name:'P1',col:'#818cf8'},{name:'P2',col:'#34d399'},{name:'P3',col:'#fb923c'}];
+  const res=[{name:'R1'},{name:'R2'},{name:'R3'}];
+  // positions
+  const px=[80,290,500],py=[h/2,h/2,h/2];
+  const rx=[150,290,430],ry=[60,60,60];
+  // Draw resources (top)
+  res.forEach((r,i)=>{
+    ctx.fillStyle='rgba(251,191,36,.15)';ctx.strokeStyle='#fbbf24';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(rx[i]-30,ry[i]-18,60,36,8);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#fbbf24';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    ctx.fillText(r.name,rx[i],ry[i]+5);
+  });
+  // Draw processes (middle)
+  procs.forEach((p,i)=>{
+    ctx.fillStyle=p.col+'22';ctx.strokeStyle=p.col;ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(px[i],py[i],32,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle=p.col;ctx.font='bold 10px system-ui';ctx.textAlign='center';
+    ctx.fillText(p.name,px[i],py[i]+4);
+  });
+  // Draw edges
+  const drawArrow=(x1,y1,x2,y2,col,label)=>{
+    ctx.strokeStyle=col;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+    const angle=Math.atan2(y2-y1,x2-x1);
+    ctx.fillStyle=col;ctx.beginPath();
+    ctx.moveTo(x2,y2);ctx.lineTo(x2-10*Math.cos(angle-0.4),y2-10*Math.sin(angle-0.4));
+    ctx.lineTo(x2-10*Math.cos(angle+0.4),y2-10*Math.sin(angle+0.4));ctx.closePath();ctx.fill();
+    if(label){const mx=(x1+x2)/2,my=(y1+y2)/2;ctx.fillStyle=col;ctx.font='7px system-ui';ctx.textAlign='center';ctx.fillText(label,mx+8,my-5);}
+  };
+  if(withDeadlock){
+    // P1 holds R1, waits R2
+    // P2 holds R2, waits R3
+    // P3 holds R3, waits R1 (circular!)
+    drawArrow(rx[0],ry[0]+18,px[0],py[0]-32,'#34d399','يمسك R1');
+    drawArrow(px[0],py[0]-32,rx[1]-30,ry[1]+18,'#f87171','ينتظر R2');
+    drawArrow(rx[1],ry[1]+18,px[1],py[1]-32,'#34d399','يمسك R2');
+    drawArrow(px[1],py[1]-32,rx[2]+30,ry[2]+18,'#f87171','ينتظر R3');
+    drawArrow(rx[2],ry[2]+18,px[2],py[2]-32,'#34d399','يمسك R3');
+    drawArrow(px[2],py[2]-32,rx[0]-30,ry[0]+18,'#f87171','ينتظر R1');
+    // Deadlock label
+    ctx.fillStyle='rgba(248,113,113,.2)';ctx.strokeStyle='#f87171';ctx.lineWidth=2;ctx.setLineDash([5,3]);
+    ctx.beginPath();ctx.ellipse(w/2,h/2-20,200,80,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#f87171';ctx.font='bold 12px system-ui';ctx.textAlign='center';
+    ctx.fillText('💀 DEADLOCK!',w/2,h-15);
+    const info=document.getElementById('dl-info');
+    if(info)info.innerHTML='<b style="color:#f87171">💀 حدث الجمود!</b> P1→ينتظر R2 (عند P2) → P2 ينتظر R3 (عند P3) → P3 ينتظر R1 (عند P1) = <b>حلقة مغلقة!</b>';
+  } else {
+    // P1 holds R1 uses R2
+    // P2 holds R2 finished
+    // P3 waits no circular
+    drawArrow(rx[0],ry[0]+18,px[0],py[0]-32,'#34d399','يمسك R1');
+    drawArrow(rx[1],ry[1]+18,px[1],py[1]-32,'#34d399','يمسك R2');
+    drawArrow(px[2],py[2]-32,rx[2]-30,ry[2]+18,'#818cf8','ينتظر R3');
+    ctx.fillStyle='#34d399';ctx.font='bold 11px system-ui';ctx.textAlign='center';
+    ctx.fillText('✅ لا جمود — لا توجد حلقة دائرية',w/2,h-15);
+    const info=document.getElementById('dl-info');
+    if(info)info.innerHTML='<b style="color:#34d399">✅ لا جمود!</b> P3 تنتظر R3 لكن لا توجد حلقة مغلقة — R3 ستُحرَّر عندما تنتهي عملية تمسكها.';
+  }
+}
+function dlReset(){
+  const cv=document.getElementById('dlCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const info=document.getElementById('dl-info');if(info)info.textContent='';
+}
+
+// ══════════════════════════════════════════════════════
+// Banker's Algorithm
+// ══════════════════════════════════════════════════════
+let bankerData={
+  processes:['P0','P1','P2','P3','P4'],
+  allocated:[[0,1,0],[2,0,0],[3,0,2],[2,1,1],[0,0,2]],
+  maximum:[[7,5,3],[3,2,2],[9,0,2],[2,2,2],[4,3,3]],
+  available:[3,3,2]
+};
+let bankerIdx=0;
+const BANKER_EXAMPLES=[
+  {processes:['P0','P1','P2','P3','P4'],allocated:[[0,1,0],[2,0,0],[3,0,2],[2,1,1],[0,0,2]],maximum:[[7,5,3],[3,2,2],[9,0,2],[2,2,2],[4,3,3]],available:[3,3,2]},
+  {processes:['P0','P1','P2'],allocated:[[1,0,0],[0,1,0],[0,0,1]],maximum:[[2,1,1],[1,2,0],[1,1,3]],available:[1,1,1]},
+  {processes:['P0','P1','P2'],allocated:[[2,1,1],[1,1,0],[1,0,1]],maximum:[[3,2,2],[2,2,1],[2,1,2]],available:[0,0,0]},
+];
+function bankerReset(){
+  bankerIdx=(bankerIdx+1)%BANKER_EXAMPLES.length;
+  bankerData={...BANKER_EXAMPLES[bankerIdx]};
+  document.getElementById('banker-result').textContent='';
+  const cv=document.getElementById('bankerCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  bankerRenderTable();
+}
+function bankerRenderTable(){
+  const el=document.getElementById('banker-table');
+  if(!el)return;
+  const n=bankerData.processes.length,m=bankerData.available.length;
+  const need=bankerData.processes.map((_,i)=>bankerData.maximum[i].map((v,j)=>v-bankerData.allocated[i][j]));
+  el.innerHTML=`
+    <table style="width:100%;font-size:.72rem;border-collapse:collapse">
+      <tr style="background:rgba(129,140,248,.1)">
+        <th style="border:1px solid #1f2937;padding:.3rem;color:#818cf8">العملية</th>
+        ${['A','B','C'].slice(0,m).map(r=>`<th style="border:1px solid #1f2937;padding:.3rem;color:#fb923c">Alloc ${r}</th>`).join('')}
+        ${['A','B','C'].slice(0,m).map(r=>`<th style="border:1px solid #1f2937;padding:.3rem;color:#fbbf24">Max ${r}</th>`).join('')}
+        ${['A','B','C'].slice(0,m).map(r=>`<th style="border:1px solid #1f2937;padding:.3rem;color:#f87171">Need ${r}</th>`).join('')}
+      </tr>
+      ${bankerData.processes.map((p,i)=>`
+        <tr>
+          <td style="border:1px solid #1f2937;padding:.25rem;color:#818cf8;font-weight:700">${p}</td>
+          ${bankerData.allocated[i].map(v=>`<td style="border:1px solid #1f2937;padding:.25rem;text-align:center;color:#fb923c">${v}</td>`).join('')}
+          ${bankerData.maximum[i].map(v=>`<td style="border:1px solid #1f2937;padding:.25rem;text-align:center;color:#fbbf24">${v}</td>`).join('')}
+          ${need[i].map(v=>`<td style="border:1px solid #1f2937;padding:.25rem;text-align:center;color:#f87171">${v}</td>`).join('')}
+        </tr>`).join('')}
+      <tr style="background:rgba(52,211,153,.08)">
+        <td style="border:1px solid #1f2937;padding:.25rem;color:#34d399;font-weight:700">Available</td>
+        ${bankerData.available.map(v=>`<td colspan="3" style="border:1px solid #1f2937;padding:.25rem;text-align:center;color:#34d399;font-weight:700">${v}</td>`).join('')}
+      </tr>
+    </table>`;
+}
+function bankerCheck(){
+  const n=bankerData.processes.length,m=bankerData.available.length;
+  const need=bankerData.processes.map((_,i)=>bankerData.maximum[i].map((v,j)=>v-bankerData.allocated[i][j]));
+  const work=[...bankerData.available];
+  const finish=new Array(n).fill(false);
+  const seq=[];
+  for(let iter=0;iter<n*n;iter++){
+    for(let i=0;i<n;i++){
+      if(!finish[i]&&need[i].every((v,j)=>v<=work[j])){
+        work.forEach((_,j)=>{work[j]+=bankerData.allocated[i][j];});
+        finish[i]=true;seq.push(i);break;
+      }
+    }
+  }
+  const safe=finish.every(Boolean);
+  // Draw result on canvas
+  const cv=document.getElementById('bankerCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle=safe?'#34d399':'#f87171';ctx.font='bold 11px system-ui';ctx.textAlign='center';
+  ctx.fillText(safe?'✅ Safe State — يوجد Safe Sequence':'❌ Unsafe State — لا يوجد Safe Sequence',w/2,25);
+  if(safe&&seq.length){
+    const seqNames=seq.map(i=>bankerData.processes[i]);
+    ctx.fillStyle='#e2e8f0';ctx.font='10px system-ui';ctx.textAlign='center';
+    ctx.fillText('Safe Sequence: '+seqNames.join(' → '),w/2,50);
+    // Draw sequence steps
+    const stepW=(w-30)/(seqNames.length);
+    seqNames.forEach((p,i)=>{
+      const cols=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24'];
+      ctx.fillStyle=cols[i%cols.length]+'33';ctx.strokeStyle=cols[i%cols.length];ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.roundRect(15+i*stepW,62,stepW-4,45,6);ctx.fill();ctx.stroke();
+      ctx.fillStyle=cols[i%cols.length];ctx.font='bold 9px system-ui';ctx.textAlign='center';
+      ctx.fillText(p,15+i*stepW+stepW/2,80);
+      ctx.fillStyle='#94a3b8';ctx.font='7px system-ui';
+      ctx.fillText('تُنجز',15+i*stepW+stepW/2,93);
+      if(i<seqNames.length-1){ctx.fillStyle='#475569';ctx.font='12px system-ui';ctx.fillText('→',15+(i+1)*stepW-3,85);}
+    });
+  }
+  const result=document.getElementById('banker-result');
+  if(result){
+    if(safe)result.innerHTML=`<span style="color:#34d399">✅ حالة آمنة! الـ Safe Sequence: ${seq.map(i=>bankerData.processes[i]).join(' → ')} — يمكن إنهاء جميع العمليات</span>`;
+    else result.innerHTML='<span style="color:#f87171">❌ حالة غير آمنة — خطر الجمود! لا يوجد ترتيب يُنهي جميع العمليات بالموارد المتاحة</span>';
+  }
+}
+
+
+// ══════════════════════════════════════════════════════
+// Interrupt Timeline Simulator
+// ══════════════════════════════════════════════════════
+let tlAnim=null,tlStep=0;
+const TL_STEPS=[
+  {t:0,label:'CPU يُنفّذ البرنامج الأصلي',cpu:'running',io:'idle'},
+  {t:40,label:'البرنامج يطلب عملية I/O (قراءة من قرص)',cpu:'running',io:'idle'},
+  {t:80,label:'I/O device يبدأ النقل (CPU يكمل عمله)',cpu:'running',io:'transferring'},
+  {t:160,label:'I/O اكتمل! يُرسل Interrupt للـ CPU',cpu:'running',io:'interrupt'},
+  {t:200,label:'CPU ينتهي من تعليمته الحالية',cpu:'finishing',io:'idle'},
+  {t:240,label:'CPU يحفظ Context ويعالج ISR',cpu:'isr',io:'idle'},
+  {t:300,label:'ISR تنتهي — CPU يعود للبرنامج الأصلي',cpu:'running',io:'idle'},
+];
+function timelineStart(){
+  tlStep=0;
+  if(tlAnim)clearInterval(tlAnim);
+  const cv=document.getElementById('timelineCanvas');
+  if(!cv)return;
+  tlAnim=setInterval(()=>{
+    if(!document.getElementById('timelineCanvas')){clearInterval(tlAnim);return;}
+    tlDrawStep(cv,tlStep);
+    const info=document.getElementById('timeline-info');
+    if(info&&TL_STEPS[tlStep])info.textContent=`الخطوة ${tlStep+1}: ${TL_STEPS[tlStep].label}`;
+    tlStep++;
+    if(tlStep>=TL_STEPS.length){clearInterval(tlAnim);}
+  },900);
+}
+function tlDrawStep(cv,step){
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  if(step>=TL_STEPS.length)step=TL_STEPS.length-1;
+  const now=TL_STEPS[step];
+  // Time axis
+  const txY=h-25;
+  ctx.strokeStyle='#334155';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(20,txY);ctx.lineTo(w-20,txY);ctx.stroke();
+  // CPU row
+  ctx.fillStyle='#fbbf24';ctx.font='bold 9px system-ui';ctx.textAlign='right';
+  ctx.fillText('CPU:',55,50);
+  ctx.fillText('I/O Device:',55,100);
+  // Draw timeline bars
+  const totalW=w-80;
+  const phases=[
+    {start:0,end:0.15,type:'run',row:'cpu',label:''},
+    {start:0.15,end:0.35,type:'run',row:'cpu',label:''},
+    {start:0.35,end:0.6,type:'run',row:'cpu',label:''},
+    {start:0.6,end:0.7,type:'wait',row:'cpu',label:'finish'},
+    {start:0.7,end:0.85,type:'isr',row:'cpu',label:'ISR'},
+    {start:0.85,end:1.0,type:'run',row:'cpu',label:''},
+    // I/O
+    {start:0.15,end:0.55,type:'transfer',row:'io',label:'Transferring'},
+    {start:0.55,end:0.65,type:'interrupt',row:'io',label:'⚡ IRQ'},
+  ];
+  const rowY={cpu:30,io:80};
+  const colors={run:'#34d399',wait:'#fbbf24',isr:'#f87171',transfer:'#818cf8',interrupt:'#fb923c'};
+  phases.forEach(ph=>{
+    const p=Math.min(step/TL_STEPS.length,1);
+    const visEnd=Math.min(ph.end,p);
+    if(visEnd<=ph.start)return;
+    const x=60+ph.start*totalW,bw=(visEnd-ph.start)*totalW;
+    const y=rowY[ph.row];
+    ctx.fillStyle=colors[ph.type]+'55';ctx.strokeStyle=colors[ph.type];ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(x,y,bw,30,4);ctx.fill();ctx.stroke();
+    if(bw>35&&ph.label){ctx.fillStyle=colors[ph.type];ctx.font='7.5px system-ui';ctx.textAlign='center';ctx.fillText(ph.label,x+bw/2,y+18);}
+  });
+  // Time markers
+  [0,0.15,0.35,0.55,0.65,0.85,1.0].forEach(t=>{
+    const x=60+t*totalW;
+    ctx.strokeStyle='#475569';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x,txY-5);ctx.lineTo(x,txY+5);ctx.stroke();
+  });
+  ctx.fillStyle='#64748b';ctx.font='8px system-ui';ctx.textAlign='center';
+  ctx.fillText('I/O Request',60+0.15*totalW,txY+16);
+  ctx.fillText('IRQ',60+0.55*totalW,txY+16);
+  ctx.fillText('ISR',60+0.65*totalW,txY+16);
+  ctx.fillText('Resume',60+0.85*totalW,txY+16);
+  // Legend
+  ctx.fillStyle='#34d399';ctx.font='8px system-ui';ctx.textAlign='left';
+  ctx.fillText('■ Running',65,h-7);
+  ctx.fillStyle='#f87171';ctx.fillText('■ ISR',145,h-7);
+  ctx.fillStyle='#818cf8';ctx.fillText('■ I/O Transfer',195,h-7);
+  ctx.fillStyle='#fb923c';ctx.fillText('■ Interrupt',305,h-7);
+}
+function timelineReset(){
+  tlStep=0;if(tlAnim)clearInterval(tlAnim);
+  const cv=document.getElementById('timelineCanvas');
+  if(cv){const ctx=cv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,cv.width,cv.height);}
+  const i=document.getElementById('timeline-info');if(i)i.textContent='';
+}
+
+// ══════════════════════════════════════════════════════
+// Socket Simulator
+// ══════════════════════════════════════════════════════
+let socketState='idle';
+function socketDemo(action){
+  const cv=document.getElementById('socketCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+  const log=document.getElementById('socket-log');
+  // Client (left) and Server (right)
+  const drawHost=(x,y,label,ip,col,active)=>{
+    ctx.fillStyle=active?col+'33':'rgba(20,20,50,.7)';ctx.strokeStyle=active?col:'#334155';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(x-60,y-25,120,50,8);ctx.fill();ctx.stroke();
+    ctx.fillStyle=col;ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.fillText(label,x,y-5);
+    ctx.fillStyle='#64748b';ctx.font='7.5px monospace';ctx.fillText(ip,x,y+12);
+  };
+  const actions_map={
+    idle:{cl:false,srv:false,arrow:null,msg:'اضغط "اتصال العميل" للبدء'},
+    connect:{cl:true,srv:true,arrow:{x1:150,y1:80,x2:430,y2:80,label:'SYN / SYN-ACK / ACK (3-way handshake)',col:'#34d399'},msg:'✅ اتصال TCP مُنشأ! (3-way handshake: SYN → SYN-ACK → ACK)'},
+    send:{cl:true,srv:true,arrow:{x1:150,y1:80,x2:430,y2:80,label:'📤 HTTP GET /index.html',col:'#38bdf8'},msg:'📤 العميل أرسل طلب HTTP'},
+    recv:{cl:true,srv:true,arrow:{x1:430,y1:80,x2:150,y2:80,label:'📥 HTTP 200 OK + البيانات',col:'#818cf8'},msg:'📥 الخادم أرسل الرد (200 OK)'},
+    close:{cl:false,srv:false,arrow:{x1:150,y1:80,x2:430,y2:80,label:'FIN → ACK (إغلاق الاتصال)',col:'#f87171'},msg:'❌ الاتصال أُغلق'},
+  };
+  socketState=action;
+  const a=actions_map[action]||actions_map.idle;
+  drawHost(150,80,'💻 Client','192.168.1.10:52341','#34d399',a.cl);
+  drawHost(430,80,'🖥️ Server','161.25.19.8:80','#818cf8',a.srv);
+  if(a.arrow){
+    const arr=a.arrow;
+    ctx.strokeStyle=arr.col;ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(arr.x1,arr.y1);ctx.lineTo(arr.x2,arr.y2);ctx.stroke();
+    const angle=Math.atan2(arr.y2-arr.y1,arr.x2-arr.x1);
+    const ex=arr.x2,ey=arr.y2;
+    ctx.fillStyle=arr.col;ctx.beginPath();
+    ctx.moveTo(ex,ey);ctx.lineTo(ex-12*Math.cos(angle-0.4),ey-12*Math.sin(angle-0.4));
+    ctx.lineTo(ex-12*Math.cos(angle+0.4),ey-12*Math.sin(angle+0.4));ctx.closePath();ctx.fill();
+    ctx.fillStyle=arr.col;ctx.font='8px system-ui';ctx.textAlign='center';
+    ctx.fillText(arr.label,(arr.x1+arr.x2)/2,arr.y1-12);
+  }
+  // Port diagram
+  ctx.fillStyle='#64748b';ctx.font='8px system-ui';ctx.textAlign='center';
+  ctx.fillText('Socket = IP + Port | Well-known Ports < 1024 | 127.0.0.1 = Loopback',w/2,h-8);
+  if(log)log.innerHTML=`<span style="color:#fbbf24">${a.msg}</span>\n`+(log.innerHTML||'');
+}
+function socketReset(){
+  socketState='idle';socketDemo('idle');
+  const l=document.getElementById('socket-log');if(l)l.innerHTML='انتظار...';
+}
+
+
+// ══════════════════════════════════════════════════════
+// Context Switch Overhead Visualizer
+// ══════════════════════════════════════════════════════
+function ctxUpdate(){
+  const np=parseInt(document.getElementById('ctx-procs')?.value||3);
+  const oh=parseInt(document.getElementById('ctx-overhead')?.value||15);
+  const nvEl=document.getElementById('ctx-proc-val');if(nvEl)nvEl.textContent=np;
+  const ohEl=document.getElementById('ctx-oh-val');if(ohEl)ohEl.textContent=oh+'%';
+  const cv=document.getElementById('ctxCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');const w=cv.width,h=cv.height;
+  ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,w,h);
+
+  const cols=['#818cf8','#34d399','#fb923c','#f87171','#fbbf24','#38bdf8','#a78bfa','#e879f9'];
+  const rowH=28,startY=18,barX=80,barW=w-90;
+  const switchW=Math.round(barW*oh/100/Math.max(np-1,1));
+  const workW=Math.round((barW-switchW*Math.max(np-1,1))/np);
+
+  // Draw each process row
+  let curX=barX;
+  for(let i=0;i<np;i++){
+    const col=cols[i%cols.length];
+    const y=startY+i*rowH;
+    // Label
+    ctx.fillStyle=col;ctx.font='8px system-ui';ctx.textAlign='right';
+    ctx.fillText(`P${i+1}`,76,y+rowH/2+3);
+    // Work period
+    ctx.fillStyle=col+'44';ctx.strokeStyle=col;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.roundRect(curX,y,workW,rowH-4,4);ctx.fill();ctx.stroke();
+    ctx.fillStyle=col;ctx.font='bold 8px system-ui';ctx.textAlign='center';
+    if(workW>25)ctx.fillText('عمل مفيد',curX+workW/2,y+rowH/2+3);
+    // Context switch overhead
+    if(i<np-1){
+      ctx.fillStyle='rgba(248,113,113,.3)';ctx.strokeStyle='#f87171';ctx.lineWidth=1;
+      ctx.beginPath();ctx.roundRect(curX+workW,y,switchW,rowH-4,3);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#f87171';ctx.font='7px system-ui';ctx.textAlign='center';
+      if(switchW>20)ctx.fillText('CS!',curX+workW+switchW/2,y+rowH/2+3);
+      curX+=workW+switchW;
+    }
+  }
+  // Timeline
+  const tlY=startY+np*rowH+5;
+  ctx.strokeStyle='#334155';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(barX,tlY);ctx.lineTo(w-10,tlY);ctx.stroke();
+
+  // Stats
+  const totalWork=workW*np;
+  const totalSwitch=switchW*(np-1);
+  const efficiency=Math.round(totalWork/(totalWork+totalSwitch)*100);
+  const infoEl=document.getElementById('ctx-info');
+  if(infoEl){
+    infoEl.innerHTML=`<span style="color:#34d399">وقت العمل الفعلي: ${efficiency}%</span> &nbsp;|&nbsp; <span style="color:#f87171">Overhead التبديل: ${100-efficiency}%</span> &nbsp;|&nbsp; <span style="color:#94a3b8">${np} عملية × تبديل ${oh}%</span>`;
+  }
+}
+
 // ── render ──
 function render(){
   cleanupGames();
@@ -4547,6 +5977,7 @@ function initInteractives(){
     if(inp)inp.focus();
     hwInitCanvas();
     renderBootSteps();
+    timelineReset();
     const bv=document.getElementById('bootCanvas');
     if(bv){const ctx=bv.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,bv.width,bv.height);}
   }
@@ -4557,9 +5988,13 @@ function initInteractives(){
     if(rrCv){const ctx=rrCv.getContext('2d');ctx.fillStyle='#0a0f1e';ctx.fillRect(0,0,rrCv.width,rrCv.height);}
     rrRenderProcs();
   }
-  if(cur==='t4'){initPipeCanvas();pcRender();}
-  if(cur==='t5'){maReset();}
+  if(cur==='t4'){initPipeCanvas();pcRender();socketReset();}
+  if(cur==='t5'){setTimeout(()=>ctxUpdate(),100);maReset();}
   if(cur==='t6'){fbRender();}
+  if(cur==='t7'){threadReset();}
+  if(cur==='t8'){raceReset();setTimeout(()=>pcRender(),50);}
+  if(cur==='t9'){schSetAlgo('FCFS');setTimeout(()=>{const c=document.getElementById('schCanvas');if(c){const x=c.getContext('2d');x.fillStyle='#0a0f1e';x.fillRect(0,0,c.width,c.height);}},50);}
+  if(cur==='t10'){dlReset();setTimeout(()=>{bankerRenderTable();},50);}
   if(cur==='tg'){bsStart();setTimeout(()=>{semDraw();},100);}
   if(cur==='t6'){fbRender();irqReset();}
 }
